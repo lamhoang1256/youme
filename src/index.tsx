@@ -3,6 +3,8 @@ import ReactDOM from "react-dom/client";
 import App from "App";
 import "assets/styles/main.scss";
 import { GlobalStyle } from "assets/styles/GlobalStyle";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(

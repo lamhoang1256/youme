@@ -112,3 +112,10 @@ export interface MovieDetail {
   updateInfo?: any;
   year: number;
 }
+
+export interface LeaderBoard {
+  cover: string;
+  domainType: number;
+  id: string;
+  title: string;
+}

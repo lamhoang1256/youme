@@ -1,7 +1,7 @@
 import axiosClient from "apis/axiosClient";
 import configAPI from "apis/configAPI";
 import { useEffect, useState } from "react";
-import { HomeSection } from "interfaces/api";
+import { HomeSection, LeaderBoard } from "interfaces/api";
 import styled from "styled-components";
 import Banner from "module/home/Banner";
 import Popular from "module/home/Popular";
@@ -22,15 +22,23 @@ const StyledWrapperLayout = styled.div`
 
 const Home = () => {
   const [banners, setBanners] = useState<HomeSection[]>([]);
+  const [leaderBoards, setLeaderBoards] = useState<LeaderBoard[]>([]);
 
   const fetchData = async () => {
     try {
       const response = await axiosClient.get(configAPI.getHome(0));
-      // const response1 = await axiosClient.get(
-      //   "https://ga-mobile-api.loklok.tv/cms/app/search/v2/searchLeaderboard",
-      // );
-      // console.log(response1.data.data);
       setBanners(response.data.data.recommendItems);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchLeaderBoard = async () => {
+    try {
+      const response = await axiosClient.get(
+        "https://ga-mobile-api.loklok.tv/cms/app/search/v1/searchLeaderboard",
+      );
+      setLeaderBoards(response.data.data.list);
     } catch (error) {
       console.log(error);
     }
@@ -38,6 +46,7 @@ const Home = () => {
 
   useEffect(() => {
     fetchData();
+    fetchLeaderBoard();
   }, []);
 
   return (
@@ -45,7 +54,7 @@ const Home = () => {
       <Banner banners={banners} />
       <StyledWrapperLayout className="container">
         <div className="wrapper-main">
-          <Popular />
+          <Popular leaderBoards={leaderBoards} />
         </div>
         <div className="wrapper-side">Side</div>
       </StyledWrapperLayout>

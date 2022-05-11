@@ -5,6 +5,9 @@ html {
 * {
   margin: 0;
   padding: 0;
+  // fix react slick at Popular.tsx
+  min-height: 0;
+  min-width: 0;
 }
 *,
 *:before,
