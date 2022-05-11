@@ -1,24 +1,10 @@
-import axiosClient from "apis/axiosClient";
-import configAPI from "apis/configAPI";
 import { useEffect, useState } from "react";
 import { HomeSection, LeaderBoard } from "interfaces/api";
-import styled from "styled-components";
-import Banner from "module/home/Banner";
-import Popular from "module/home/Popular";
-
-const StyledHome = styled.div``;
-const StyledWrapperLayout = styled.div`
-  display: flex;
-  gap: 40px;
-  padding-top: 50px;
-  min-height: 100vh;
-  .wrapper-main {
-    flex: 1;
-  }
-  .wrapper-side {
-    width: 300px;
-  }
-`;
+import axiosClient from "apis/axiosClient";
+import configAPI from "apis/configAPI";
+import HomeBanner from "./module/HomeBanner/HomeBanner";
+import HomePopular from "./module/HomePopular/HomePopular";
+import { StyledHome, StyledWrapperLayout } from "./Home.style";
 
 const Home = () => {
   const [banners, setBanners] = useState<HomeSection[]>([]);
@@ -51,10 +37,10 @@ const Home = () => {
 
   return (
     <StyledHome>
-      <Banner banners={banners} />
+      <HomeBanner banners={banners} />
       <StyledWrapperLayout className="container">
         <div className="wrapper-main">
-          <Popular leaderBoards={leaderBoards} />
+          <HomePopular leaderBoards={leaderBoards} />
         </div>
         <div className="wrapper-side">Side</div>
       </StyledWrapperLayout>

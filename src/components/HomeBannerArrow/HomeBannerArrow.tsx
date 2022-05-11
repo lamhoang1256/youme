@@ -1,17 +1,5 @@
 import { ReactNode } from "react";
-import styled from "styled-components";
-
-const StyledIcon = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  img {
-    width: 20px;
-    height: 20px;
-  }
-`;
+import { StyledIcon } from "./HomeBannerArrow.style";
 
 interface ButtonProps {
   className: string;

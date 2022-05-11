@@ -1,56 +1,13 @@
-import styled from "styled-components";
 import Slider from "react-slick";
 import { HomeSection } from "interfaces/api";
-import { ButtonArrow } from "components/button/ButtonArrowBanner";
-
-const StyledSlider = styled.div`
-  margin-top: 40px !important;
-  height: 250px;
-  .slick-slider {
-    height: 100%;
-  }
-  .slick-slide {
-    margin: 0 26px;
-  }
-  .slick-list {
-    height: 100%;
-    overflow-x: hidden;
-  }
-  .slick-slide > div > div {
-    outline: none;
-    border: none;
-  }
-  .slick-prev,
-  .slick-next {
-    display: block;
-    background: var(--primary-color);
-    width: 40px;
-    height: 40px;
-    z-index: 100;
-    border-radius: 100rem;
-    &::before {
-      display: none;
-    }
-  }
-`;
-
-const StyledBanner = styled.div`
-  position: relative;
-  height: 250px;
-  overflow-x: hidden;
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px;
-  }
-`;
+import { ButtonArrow } from "components/HomeBannerArrow/HomeBannerArrow";
+import { StyledBanner, StyledSlider } from "./HomeBanner.style";
 
 interface BannerProps {
   banners: HomeSection[];
 }
 
-const Banner = ({ banners }: BannerProps) => {
+const HomeBanner = ({ banners }: BannerProps) => {
   const settings = {
     dots: false,
     infinite: true,
@@ -68,6 +25,7 @@ const Banner = ({ banners }: BannerProps) => {
       </ButtonArrow>
     ),
   };
+
   return (
     <StyledSlider className="container">
       <Slider {...settings}>
@@ -81,4 +39,4 @@ const Banner = ({ banners }: BannerProps) => {
   );
 };
 
-export default Banner;
+export default HomeBanner;
