@@ -2,13 +2,6 @@ import IonIcon from "@reacticons/ionicons";
 import styled from "styled-components";
 
 const StyledHeader = styled.header`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
-  background-image: linear-gradient(to bottom, #141a32 1%, rgba(20, 26, 50, 0) 100%);
-  height: 160px;
   .header-container {
     height: 100px;
     display: flex;

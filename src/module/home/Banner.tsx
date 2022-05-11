@@ -3,43 +3,48 @@ import Slider from "react-slick";
 import { HomeSection } from "interfaces/api";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { ButtonArrow } from "components/button/ButtonArrowBanner";
 
 const StyledSlider = styled.div`
-  overflow: hidden;
+  margin-top: 40px !important;
+  height: 250px;
+  .slick-slider {
+    height: 100%;
+  }
+  .slick-slide {
+    margin: 0 26px;
+  }
+  .slick-list {
+    height: 100%;
+    overflow-x: hidden;
+  }
+  .slick-slide > div > div {
+    outline: none;
+    border: none;
+  }
+  .slick-prev,
+  .slick-next {
+    display: block;
+    background: var(--primary-color);
+    width: 40px;
+    height: 40px;
+    z-index: 100;
+    border-radius: 100rem;
+    &::before {
+      display: none;
+    }
+  }
 `;
 
 const StyledBanner = styled.div`
   position: relative;
-  height: 500px;
+  height: 250px;
   overflow-x: hidden;
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-  }
-  .overplay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), #151515);
-  }
-  .content {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    h2 {
-      color: var(--white);
-      font-size: 7rem;
-    }
-    button {
-      padding: 14px 40px;
-      border-radius: 30px;
-      color: var(--white);
-      background-color: var(--primary-color);
-    }
+    border-radius: 10px;
   }
 `;
 
@@ -49,23 +54,28 @@ interface BannerProps {
 
 const Banner = ({ banners }: BannerProps) => {
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 1,
+    slidesToShow: 3,
     slidesToScroll: 1,
+    prevArrow: (
+      <ButtonArrow onClick={undefined} style={undefined} className="">
+        <img src="http://localhost:3000/images/arrow-left.png" alt="Prev" />
+      </ButtonArrow>
+    ),
+    nextArrow: (
+      <ButtonArrow onClick={undefined} style={undefined} className="">
+        <img src="http://localhost:3000/images/arrow-right.png" alt="Next" />
+      </ButtonArrow>
+    ),
   };
   return (
-    <StyledSlider>
+    <StyledSlider className="container">
       <Slider {...settings}>
         {banners[0]?.recommendContentVOList.map((banner) => (
           <StyledBanner key={banner.id}>
             <img src={banner.imageUrl} alt="Banner" />
-            <div className="overplay" />
-            <div className="content">
-              <h2>{banner.title}</h2>
-              <button type="button">Watch now</button>
-            </div>
           </StyledBanner>
         ))}
       </Slider>
