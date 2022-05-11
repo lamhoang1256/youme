@@ -10,6 +10,6 @@ export const GlobalStyle = createGlobalStyle`
   .container{
     width: 100%;
     max-width: var(--max-width-container);
-    margin: 0 auto;
+    margin:0 auto;
   }
 `;
