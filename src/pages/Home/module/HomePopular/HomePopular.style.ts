@@ -2,12 +2,15 @@ import styled from "styled-components";
 
 export const StyledPopularList = styled.div`
   width: 100%;
-  height: 210px;
+  height: 220px;
   h3 {
     margin-bottom: 14px;
   }
   .slick-arrow {
     display: none !important;
+  }
+  .slick-slider {
+    margin-left: -15px;
   }
   .slick-dots {
     li.slick-active {
@@ -26,14 +29,22 @@ export const StyledPopularList = styled.div`
       display: none;
     }
   }
+  @media screen and (max-width: 767.98px) {
+    .slick-slide {
+      margin: 0;
+    }
+    .slick-slider {
+      margin-left: 0;
+    }
+  }
 `;
 
 export const StyledPopularCard = styled.div`
-  width: 260px;
-  height: 210px;
+  height: 100%;
+  padding: 0 15px;
   img {
     width: 100%;
-    height: 150px;
+    height: 160px;
     border-radius: 8px;
     object-fit: cover;
   }
@@ -46,5 +57,14 @@ export const StyledPopularCard = styled.div`
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     white-space: normal;
+  }
+  @media screen and (max-width: 767.98px) {
+    width: 100%;
+    img {
+      height: 180px;
+    }
+  }
+  @media screen and (max-width: 540px) {
+    padding: 0;
   }
 `;

@@ -8,15 +8,13 @@ const Header = () => {
         <div className="header-container ">
           <div className="header-logo">LOGO</div>
           <ul className="menu">
-            {Array(4)
-              .fill(0)
-              .map((item) => (
-                <li className="menu-item" key={item}>
-                  <a href="#!" className="menu-link">
-                    Home
-                  </a>
-                </li>
-              ))}
+            {[0, 1, 2, 3].map((item) => (
+              <li className="menu-item" key={item}>
+                <a href="#!" className="menu-link">
+                  Home
+                </a>
+              </li>
+            ))}
           </ul>
           <div className="header-action">
             <div className="header-search">

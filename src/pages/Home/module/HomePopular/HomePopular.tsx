@@ -9,10 +9,33 @@ interface HomePopularProps {
 const HomePopular = ({ leaderBoards }: HomePopularProps) => {
   const settings = {
     dots: true,
-    infinite: false,
+    infinite: true,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 800,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 720,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 540,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
   return (
@@ -20,8 +43,8 @@ const HomePopular = ({ leaderBoards }: HomePopularProps) => {
       <h3>Popular Movie</h3>
       <Slider {...settings}>
         {leaderBoards.map((leaderBoard) => (
-          <div>
-            <StyledPopularCard key={leaderBoard.id}>
+          <div key={leaderBoard.id}>
+            <StyledPopularCard>
               <img src={leaderBoard.cover} alt="Top Movie" />
               <p>{leaderBoard.title}</p>
             </StyledPopularCard>
