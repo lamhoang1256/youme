@@ -3,9 +3,6 @@ import styled from "styled-components";
 export const StyledSlider = styled.div`
   margin-top: 40px !important;
   height: 250px;
-  .slick-slider {
-    height: 100%;
-  }
   .slick-slide {
     margin: 0 26px;
   }
@@ -19,14 +16,22 @@ export const StyledSlider = styled.div`
   }
   .slick-prev,
   .slick-next {
-    display: block;
-    background: var(--primary-color);
     width: 40px;
     height: 40px;
     z-index: 100;
-    border-radius: 100rem;
     &::before {
       display: none;
+    }
+  }
+  @media screen and (max-width: 1023.98px) {
+    padding: 0 20px;
+    .slick-slide {
+      margin: 0 16px;
+    }
+  }
+  @media screen and (max-width: 767.98px) {
+    .slick-slide {
+      margin: 0px;
     }
   }
 `;

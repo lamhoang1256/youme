@@ -6,8 +6,4 @@ export const StyledIcon = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
-  img {
-    width: 20px;
-    height: 20px;
-  }
 `;
