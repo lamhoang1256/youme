@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import Slider from "react-slick";
 import { HomeSection } from "interfaces/api";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import { ButtonArrow } from "components/button/ButtonArrowBanner";
 
 const StyledSlider = styled.div`
