@@ -1,3 +1,12 @@
+export interface Banners {
+  id: number;
+  imgUrl: string;
+  isNeedLogin: boolean;
+  jumpParam: string;
+  jumpType: string;
+  title: string;
+}
+
 export interface HomeSection {
   bannerProportion?: any;
   blockGroupNum?: any;

@@ -1,10 +1,11 @@
 import Slider from "react-slick";
-import { HomeSection } from "interfaces/api";
+import { Banners } from "interfaces/api";
 import { ButtonArrow } from "components/HomeBannerArrow/HomeBannerArrow";
-import { StyledBanner, StyledSlider } from "./HomeBanner.style";
+import { Link } from "react-router-dom";
+import { StyledBanner } from "./HomeBanner.style";
 
 interface BannerProps {
-  banners: HomeSection[];
+  banners: Banners[];
 }
 
 const HomeBanner = ({ banners }: BannerProps) => {
@@ -12,56 +13,31 @@ const HomeBanner = ({ banners }: BannerProps) => {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 1,
     slidesToScroll: 1,
     prevArrow: (
       <ButtonArrow onClick={undefined} style={undefined} className="">
-        <img src={`${process.env.REACT_APP_PUBLIC}images/arrow-back.svg`} alt="Prev" />
+        <img src={`${process.env.REACT_APP_PUBLIC}/images/arrow-back.svg`} alt="Prev" />
       </ButtonArrow>
     ),
     nextArrow: (
       <ButtonArrow onClick={undefined} style={undefined} className="">
-        <img src={`${process.env.REACT_APP_PUBLIC}images/arrow-next.svg`} alt="Next" />
+        <img src={`${process.env.REACT_APP_PUBLIC}/images/arrow-next.svg`} alt="Next" />
       </ButtonArrow>
     ),
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          infinite: true,
-        },
-      },
-      {
-        breakpoint: 760,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          // initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
   };
 
   return (
     <div className="container">
-      <StyledSlider>
+      <StyledBanner>
         <Slider {...settings}>
-          {banners[0]?.recommendContentVOList.map((banner) => (
-            <StyledBanner key={banner.id}>
-              <img src={banner.imageUrl} alt="Banner" />
-            </StyledBanner>
+          {banners.map((banner) => (
+            <Link to={`/detail/${banner.id}`} key={banner.id}>
+              <img className="banner" src={banner.imgUrl} alt="Banner" />
+            </Link>
           ))}
         </Slider>
-      </StyledSlider>
+      </StyledBanner>
     </div>
   );
 };

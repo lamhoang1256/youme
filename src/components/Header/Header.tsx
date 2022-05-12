@@ -1,4 +1,5 @@
 import IonIcon from "@reacticons/ionicons";
+import { Link } from "react-router-dom";
 import { StyledHeader } from "./Header.style";
 
 const Header = () => {
@@ -6,7 +7,9 @@ const Header = () => {
     <StyledHeader>
       <div className="container">
         <div className="header-container ">
-          <div className="header-logo">LOGO</div>
+          <Link to="/" className="header-logo">
+            LOGO
+          </Link>
           <ul className="menu">
             {[0, 1, 2, 3].map((item) => (
               <li className="menu-item" key={item}>

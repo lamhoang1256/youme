@@ -1,18 +1,15 @@
 import styled from "styled-components";
 
-export const StyledSlider = styled.div`
-  margin-top: 40px !important;
-  height: 250px;
-  .slick-slide {
-    margin: 0 26px;
-  }
+export const StyledBanner = styled.div`
   .slick-list {
+    max-height: 510px;
     height: 100%;
-    overflow-x: hidden;
+    border-radius: 12px;
   }
   .slick-slide > div > div {
     outline: none;
     border: none;
+    border-radius: 10px;
   }
   .slick-prev,
   .slick-next {
@@ -23,27 +20,18 @@ export const StyledSlider = styled.div`
       display: none;
     }
   }
-  @media screen and (max-width: 1023.98px) {
-    padding: 0 20px;
-    .slick-slide {
-      margin: 0 16px;
-    }
-  }
-  @media screen and (max-width: 767.98px) {
-    .slick-slide {
-      margin: 0px;
-    }
-  }
-`;
-
-export const StyledBanner = styled.div`
-  position: relative;
-  height: 250px;
-  overflow-x: hidden;
-  img {
+  .banner {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 10px;
+    min-height: 200px;
+  }
+  @media screen and (max-width: 767.98px) {
+    .slick-prev {
+      left: 0;
+    }
+    .slick-next {
+      right: 0;
+    }
   }
 `;
