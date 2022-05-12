@@ -7,6 +7,14 @@ export interface Banners {
   title: string;
 }
 
+export interface MovieMedia {
+  businessType: number;
+  currentDefinition: string;
+  episodeId: string;
+  mediaUrl: "";
+  totalDuration: number;
+}
+
 export interface HomeSection {
   bannerProportion?: any;
   blockGroupNum?: any;
