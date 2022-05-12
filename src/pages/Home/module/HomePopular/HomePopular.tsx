@@ -43,18 +43,20 @@ const HomePopular = ({ leaderBoards }: HomePopularProps) => {
     <StyledPopularList>
       <h3>Popular Movie</h3>
       <Slider {...settings}>
-        {leaderBoards?.map((leaderBoard) => (
-          <div key={leaderBoard.id}>
-            <StyledPopularCard>
-              <Link to={`/detail/${leaderBoard.id}`}>
-                <img src={leaderBoard.cover} alt="Top Movie" />
-              </Link>
-              <Link to={`/detail/${leaderBoard.id}}`}>
-                <p>{leaderBoard.title}</p>
-              </Link>
-            </StyledPopularCard>
-          </div>
-        ))}
+        {leaderBoards?.map((leaderBoard) => {
+          return (
+            <div key={leaderBoard.id}>
+              <StyledPopularCard>
+                <Link to={`/detail/${leaderBoard.id}?category=${leaderBoard.domainType}`}>
+                  <img src={leaderBoard.cover} alt="Top Movie" />
+                </Link>
+                <Link to={`/detail/${leaderBoard.id}?category=${leaderBoard.domainType}`}>
+                  <p>{leaderBoard.title}</p>
+                </Link>
+              </StyledPopularCard>
+            </div>
+          );
+        })}
       </Slider>
     </StyledPopularList>
   );
