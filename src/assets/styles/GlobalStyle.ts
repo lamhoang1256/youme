@@ -9,8 +9,8 @@ export const GlobalStyle = createGlobalStyle`
   }
   .container {
     width: 100%;
-    max-width: 1600px;
-    padding: 0 50px;
+    max-width: 1470px;
+    padding: 0 15px;
     margin: 0 auto;
     @media screen and (max-width: 1023.98px) {
       padding: 0 25px;

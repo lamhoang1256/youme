@@ -32,7 +32,7 @@ const HomeBanner = ({ banners }: BannerProps) => {
       <StyledBanner>
         <Slider {...settings}>
           {banners.map((banner) => (
-            <Link to={`/detail/${banner.jumpParam}?category=1`} key={banner.id}>
+            <Link to={`/detail/${banner.jumpParam}?cate=1&ep=1`} key={banner.id}>
               <img className="banner" src={banner.imgUrl} alt="Banner" />
             </Link>
           ))}
