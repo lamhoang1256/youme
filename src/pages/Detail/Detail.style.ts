@@ -21,5 +21,9 @@ export const StyledDetail = styled.div`
       align-items: center;
       border-radius: 8px;
     }
+    button.is-active {
+      background-color: var(--primary-color);
+      color: var(--white);
+    }
   }
 `;
