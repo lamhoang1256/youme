@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { StyledIcon } from "./HomeBannerArrow.style";
+import { StyledIcon } from "./homeBannerArrow.style";
 
 interface ButtonProps {
   className: string;

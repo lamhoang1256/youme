@@ -1,6 +1,6 @@
 import IonIcon from "@reacticons/ionicons";
 import { Link } from "react-router-dom";
-import { StyledHeader } from "./Header.style";
+import { StyledHeader } from "./header.style";
 
 const Header = () => {
   return (
