@@ -136,3 +136,16 @@ export interface LeaderBoard {
   id: string;
   title: string;
 }
+
+export interface MovieBeingWatched {
+  id: number;
+  definitionList: {
+    code: string;
+    description: string;
+    fullDescription: string;
+  }[];
+  name: string;
+  nameJson: string;
+  resourceType: number;
+  seriesNo: number;
+}
