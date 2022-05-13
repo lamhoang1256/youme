@@ -96,7 +96,6 @@ const Detail = () => {
               </div>
               <div className="detail-episodes">
                 {detail?.episodeVo.map((episode) => {
-                  console.log(episode);
                   const active =
                     episode.seriesNo === dataOfEpBeingWatched?.seriesNo ? "is-active" : undefined;
                   return (
