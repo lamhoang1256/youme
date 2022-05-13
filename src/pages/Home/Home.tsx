@@ -4,7 +4,7 @@ import axiosClient from "apis/axiosClient";
 import configAPI from "apis/configAPI";
 import HomeBanner from "./module/HomeBanner/HomeBanner";
 import HomePopular from "./module/HomePopular/HomePopular";
-import { StyledHome, StyledWrapperLayout } from "./Home.style";
+import { StyledHome, StyledWrapperLayout } from "./home.style";
 
 const Home = () => {
   const [banners, setBanners] = useState<Banners[]>([]);
@@ -21,10 +21,7 @@ const Home = () => {
 
   const fetchLeaderBoard = async () => {
     try {
-      const { data } = await axiosClient.get(
-        "https://ga-mobile-api.loklok.tv/cms/app/search/v1/searchLeaderboard",
-      );
-      // /cms/web/pc/search/searchLeaderboard"
+      const { data } = await axiosClient.get(configAPI.getLeaderBoard);
       setLeaderBoards(data.data.list);
     } catch (error) {
       console.log(error);

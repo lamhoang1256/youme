@@ -1,11 +1,11 @@
 import axiosClient from "apis/axiosClient";
 import configAPI from "apis/configAPI";
 import { MovieDetail, MovieMedia, MovieBeingWatched } from "interfaces/api";
-import { StyledWrapperLayout } from "pages/Home/Home.style";
+import { StyledWrapperLayout } from "pages/Home/home.style";
 import { useEffect, useRef, useState } from "react";
-import ReactHlsPlayer from "react-hls-player/dist";
 import { Link, useParams, useSearchParams } from "react-router-dom";
-import { StyledDetail } from "./Detail.style";
+import { StyledDetail } from "./detail.style";
+import VideoPlayer from "./module/VideoPlayer/VideoPlayer";
 
 type DetailParams = {
   id: string;
@@ -21,7 +21,7 @@ const Detail = () => {
   const [detail, setDetail] = useState<MovieDetail>();
   const [mediaBeingWatched, setMediaBeingWatched] = useState<MovieMedia>();
   const [dataOfEpBeingWatched, setDataOfEpBeingWatched] = useState<MovieBeingWatched>();
-  const ref = useRef<HTMLVideoElement>(null);
+  const playerRef = useRef<HTMLVideoElement>(null);
 
   const fetchMovieMedia = async (category: number, contentId: number, episodeId: number) => {
     try {
@@ -71,14 +71,7 @@ const Detail = () => {
         {!isLoading && (
           <StyledWrapperLayout>
             <div className="wrapper-main">
-              <ReactHlsPlayer
-                src={mediaBeingWatched?.mediaUrl || ""}
-                autoPlay={false}
-                controls
-                width="100%"
-                height="auto"
-                playerRef={ref}
-              />
+              <VideoPlayer playerRef={playerRef} src={mediaBeingWatched?.mediaUrl || ""} />
               <h3>
                 {detail?.name} - Ep {dataOfEpBeingWatched?.seriesNo}
               </h3>

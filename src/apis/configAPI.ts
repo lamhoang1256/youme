@@ -8,4 +8,5 @@ export default {
     `${URL}/${genre}/get?id=${id}&category=${category}`,
   getMovieMedia: (category: number, contentId: number, episodeId: number) =>
     `${URL}/media/previewInfo?category=${category}&contentId=${contentId}&episodeId=${episodeId}&definition=GROOT_LD`,
+  getLeaderBoard: `${URL}/search/v1/searchLeaderboard`,
 };
