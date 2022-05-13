@@ -12,9 +12,8 @@ const Home = () => {
 
   const fetchData = async () => {
     try {
-      const { data } = await axiosClient.get(configAPI.getBanners(14));
-      const dataIsFiltered = data.data.filter((banner: any) => banner.jumpType === "DRAMA");
-      setBanners(dataIsFiltered);
+      const { data } = await axiosClient.get(configAPI.getBanners(10));
+      setBanners(data.data);
     } catch (error) {
       console.log(error);
     }
