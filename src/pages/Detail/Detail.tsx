@@ -7,51 +7,45 @@ import ReactHlsPlayer from "react-hls-player/dist";
 import { useParams, useSearchParams } from "react-router-dom";
 import { StyledDetail } from "./Detail.style";
 
+// type DetailParams = {
+//   id: string;
+// };
+
 const Detail = () => {
-  const { id } = useParams();
+  const { id } = useParams() as { id: string };
   const [isLoading, setIsLoading] = useState<boolean>(true);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [searchParams, setSearchParams] = useSearchParams();
-  const category = searchParams.get("category");
+  const category = Number(searchParams.get("category"));
   const [detail, setDetail] = useState<MovieDetail>();
-  const [firstEpisode, setFirstEpisode] = useState<MovieMedia>();
+  // const [numOfEpBeingWatched, setNumOfEpBeingWatched] = useState<number>();
+  const [episodeBeingWatched, setEpisodeBeingWatched] = useState<MovieMedia>();
 
   const ref = useRef<HTMLVideoElement>(null);
+
+  const fetchMovieMedia = async (cate: number, contentId: number, episodeId: number) => {
+    try {
+      const { data } = await axiosClient.get(configAPI.getMovieMedia(cate, contentId, episodeId));
+      console.log(data.data);
+      setEpisodeBeingWatched(data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const fetchMovieDetail = async () => {
     try {
       setIsLoading(true);
-      const { data } = await axiosClient.get(
-        `https://ga-mobile-api.loklok.tv/cms/app/movieDrama/get?id=${id}&category=${category}`,
-      );
-      const responseEpisode = await axiosClient.get(
-        configAPI.getMovieMedia(data.data?.category, data.data.id, data.data?.episodeVo[0].id),
-      );
+      const { data } = await axiosClient.get(configAPI.getMovieDetail("movieDrama", id, category));
       console.log(data.data);
-      // console.log(responseEpisode.data.data);
+      await fetchMovieMedia(data.data?.category, data.data.id, data.data?.episodeVo[2].id);
       setDetail(data.data);
-      setFirstEpisode(responseEpisode.data.data);
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
       console.log(error);
     }
   };
-
-  // const fetchMovieMedia = async () => {
-  //   try {
-  //     const responseMedia = await axiosClient.get(
-  //       configAPI.getMovieMedia(
-  //         detail?.category,
-  //         detail?.episodeVo[0].id,
-  //         detail?.episodeVo[0].seriesNo,
-  //       ),
-  //     );
-  //     console.log(responseMedia.data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   useEffect(() => {
     fetchMovieDetail();
@@ -66,26 +60,37 @@ const Detail = () => {
           <StyledWrapperLayout className="container">
             <div className="wrapper-main">
               <ReactHlsPlayer
-                src={firstEpisode?.mediaUrl}
+                src={episodeBeingWatched?.mediaUrl}
                 autoPlay={false}
                 controls
                 width="100%"
                 height="auto"
                 playerRef={ref}
               />
-              <h3>{detail?.name}</h3>
+              <h3>{detail?.name} -</h3>
               <p>{detail?.score}</p>
               <p>{detail?.year}</p>
-              <p>
+              <div className="detail-areas">
                 {detail?.areaList.map((area) => (
                   <span key={area.id}>{area.name}</span>
                 ))}
-              </p>
-              <p>
+              </div>
+              <div className="detail-categories">
                 {detail?.tagList.map((tag) => (
                   <span key={tag.id}>{tag.name}</span>
                 ))}
-              </p>
+              </div>
+              <div className="detail-episodes">
+                {detail?.episodeVo.map((episode) => {
+                  const active =
+                    `${episode.id}` === episodeBeingWatched?.episodeId ? "is-active" : undefined;
+                  return (
+                    <button className={active} type="button" key={episode.id}>
+                      {episode.seriesNo}
+                    </button>
+                  );
+                })}
+              </div>
               <p>{detail?.introduction}</p>
               {/* <div className="detail-thumbnail">
                 <img src={detail?.coverVerticalUrl} alt="Thumbnail" />
