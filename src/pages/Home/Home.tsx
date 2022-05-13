@@ -12,8 +12,9 @@ const Home = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axiosClient.get(configAPI.getBanners(10));
-      setBanners(response.data.data);
+      const { data } = await axiosClient.get(configAPI.getBanners(14));
+      const dataIsFiltered = data.data.filter((banner: any) => banner.jumpType === "DRAMA");
+      setBanners(dataIsFiltered);
     } catch (error) {
       console.log(error);
     }
@@ -21,11 +22,11 @@ const Home = () => {
 
   const fetchLeaderBoard = async () => {
     try {
-      const response = await axiosClient.get(
+      const { data } = await axiosClient.get(
         "https://ga-mobile-api.loklok.tv/cms/app/search/v1/searchLeaderboard",
       );
       // /cms/web/pc/search/searchLeaderboard"
-      setLeaderBoards(response.data.data.list);
+      setLeaderBoards(data.data.list);
     } catch (error) {
       console.log(error);
     }

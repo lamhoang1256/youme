@@ -4,7 +4,7 @@ import { MovieDetail, MovieMedia, MovieBeingWatched } from "interfaces/api";
 import { StyledWrapperLayout } from "pages/Home/Home.style";
 import { useEffect, useRef, useState } from "react";
 import ReactHlsPlayer from "react-hls-player/dist";
-import { useParams, useSearchParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import { StyledDetail } from "./Detail.style";
 
 type DetailParams = {
@@ -16,19 +16,23 @@ const Detail = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [searchParams, setSearchParams] = useSearchParams();
-  const category = searchParams.get("category");
+  const cate = searchParams.get("cate");
+  const ep = searchParams.get("ep");
   const [detail, setDetail] = useState<MovieDetail>();
   const [mediaBeingWatched, setMediaBeingWatched] = useState<MovieMedia>();
   const [dataOfEpBeingWatched, setDataOfEpBeingWatched] = useState<MovieBeingWatched>();
   const ref = useRef<HTMLVideoElement>(null);
 
-  const fetchMovieMedia = async (cate: number, contentId: number, episodeId: number) => {
+  const fetchMovieMedia = async (category: number, contentId: number, episodeId: number) => {
     try {
-      const { data } = await axiosClient.get(configAPI.getMovieMedia(cate, contentId, episodeId));
-      // console.log(data.data);
-      const activeId = detail?.episodeVo.filter((ep) => String(ep.id) === data.data.episodeId);
-      if (activeId !== undefined) {
-        setDataOfEpBeingWatched(activeId[0]);
+      const { data } = await axiosClient.get(
+        configAPI.getMovieMedia(category, contentId, episodeId),
+      );
+      const movieMedia = detail?.episodeVo.filter(
+        (episode) => String(episode.id) === data.data.episodeId,
+      );
+      if (movieMedia !== undefined) {
+        setDataOfEpBeingWatched(movieMedia[0]);
       }
       setMediaBeingWatched(data.data);
     } catch (error) {
@@ -40,7 +44,7 @@ const Detail = () => {
     try {
       setIsLoading(true);
       const { data } = await axiosClient.get(
-        configAPI.getMovieDetail("movieDrama", Number(id), Number(category)),
+        configAPI.getMovieDetail("movieDrama", Number(id), Number(cate)),
       );
       setDetail(data.data);
       setIsLoading(false);
@@ -50,15 +54,13 @@ const Detail = () => {
     }
   };
 
-  console.log(dataOfEpBeingWatched);
-
   useEffect(() => {
     fetchMovieDetail();
-  }, []);
+  }, [cate, ep]);
 
   useEffect(() => {
     if (detail !== undefined) {
-      fetchMovieMedia(detail.category, Number(detail.id), detail.episodeVo[0].id);
+      fetchMovieMedia(detail.category, Number(detail.id), detail.episodeVo[Number(ep) - 1].id);
     }
   }, [detail]);
 
@@ -67,7 +69,7 @@ const Detail = () => {
       <div className="container">
         {isLoading && "Loading"}
         {!isLoading && (
-          <StyledWrapperLayout className="container">
+          <StyledWrapperLayout>
             <div className="wrapper-main">
               <ReactHlsPlayer
                 src={mediaBeingWatched?.mediaUrl || ""}
@@ -94,11 +96,14 @@ const Detail = () => {
               </div>
               <div className="detail-episodes">
                 {detail?.episodeVo.map((episode) => {
+                  console.log(episode);
                   const active =
                     episode.seriesNo === dataOfEpBeingWatched?.seriesNo ? "is-active" : undefined;
                   return (
                     <button className={active} type="button" key={episode.id}>
-                      {episode.seriesNo}
+                      <Link to={`/detail/${id}?cate=${cate}&ep=${episode.seriesNo}`}>
+                        {episode.seriesNo}
+                      </Link>
                     </button>
                   );
                 })}
