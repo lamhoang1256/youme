@@ -1,12 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { detailSlice } from "pages/Detail/detail.slice";
 import { homeSlice } from "pages/Home/home.slice";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 export const store = configureStore({
   reducer: {
     home: homeSlice.reducer,
-    detail: detailSlice.reducer,
   },
 });
 

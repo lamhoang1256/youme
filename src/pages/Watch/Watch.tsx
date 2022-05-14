@@ -1,41 +1,40 @@
-import axiosClient from "apis/axiosClient";
+import { useEffect, useRef, useState } from "react";
+import { useParams, useSearchParams } from "react-router-dom";
 import configAPI from "apis/configAPI";
 import { MovieDetail, MovieMedia, MovieBeingWatched } from "interfaces/api";
 import { StyledWrapperLayout } from "pages/Home/home.style";
-import { useEffect, useRef, useState } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
 import { StyledWatch } from "./watch.style";
 import DetailContent from "./module/DetailContent/DetailContent";
 import VideoPlayer from "./module/VideoPlayer/VideoPlayer";
 
-type WatchParams = {
-  id: string;
-};
-
 const Watch = () => {
-  const { id } = useParams<WatchParams>();
+  const id = Number(useParams().id);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [searchParams, setSearchParams] = useSearchParams();
-  const cate = searchParams.get("cate");
-  const ep = searchParams.get("ep");
+  const category = Number(searchParams.get("cate"));
+  const ep = Number(searchParams.get("ep"));
   const [detail, setDetail] = useState<MovieDetail>();
   const [mediaBeingWatched, setMediaBeingWatched] = useState<MovieMedia>();
   const [dataOfEpBeingWatched, setDataOfEpBeingWatched] = useState<MovieBeingWatched>();
   const playerRef = useRef<HTMLVideoElement>(null);
 
+  // eslint-disable-next-line @typescript-eslint/no-shadow
   const fetchMovieMedia = async (category: number, contentId: number, episodeId: number) => {
     try {
-      const { data } = await axiosClient.get(
-        configAPI.getMovieMedia(category, contentId, episodeId),
-      );
+      const { data } = await configAPI.getMovieMedia({
+        category,
+        contentId,
+        episodeId,
+        definition: "GROOT_LD",
+      });
       const movieMedia = detail?.episodeVo.filter(
-        (episode) => String(episode.id) === data.data.episodeId,
+        (episode) => String(episode.id) === data.episodeId,
       );
       if (movieMedia !== undefined) {
         setDataOfEpBeingWatched(movieMedia[0]);
       }
-      setMediaBeingWatched(data.data);
+      setMediaBeingWatched(data);
     } catch (error) {
       console.log(error);
     }
@@ -44,20 +43,17 @@ const Watch = () => {
   const fetchMovieDetail = async () => {
     try {
       setIsLoading(true);
-      const { data } = await axiosClient.get(
-        configAPI.getMovieDetail("movieDrama", Number(id), Number(cate)),
-      );
-      setDetail(data.data);
+      const { data } = await configAPI.getMovieDetail({ id, category });
+      setDetail(data);
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
-      console.log(error);
     }
   };
 
   useEffect(() => {
     fetchMovieDetail();
-  }, [cate, ep]);
+  }, [category, ep]);
 
   useEffect(() => {
     if (detail !== undefined) {
@@ -69,7 +65,7 @@ const Watch = () => {
     <StyledWatch>
       <div className="container">
         {isLoading && "Loading"}
-        {!isLoading && detail && dataOfEpBeingWatched && cate && id && (
+        {!isLoading && detail && dataOfEpBeingWatched && (
           <StyledWrapperLayout>
             <div className="wrapper-main">
               <VideoPlayer playerRef={playerRef} src={mediaBeingWatched?.mediaUrl || ""} />
@@ -77,7 +73,7 @@ const Watch = () => {
                 detail={detail}
                 dataOfEpBeingWatched={dataOfEpBeingWatched}
                 id={id}
-                cate={cate}
+                cate={category}
               />
             </div>
             <div className="wrapper-side">Side</div>

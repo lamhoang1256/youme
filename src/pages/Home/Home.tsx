@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Banners, LeaderBoard } from "interfaces/api";
-import axiosClient from "apis/axiosClient";
 import configAPI from "apis/configAPI";
 import HomeBanner from "./module/HomeBanner/HomeBanner";
 import HomePopular from "./module/HomePopular/HomePopular";
@@ -12,8 +11,8 @@ const Home = () => {
 
   const fetchData = async () => {
     try {
-      const { data } = await axiosClient.get(configAPI.getBanners(10));
-      setBanners(data.data);
+      const { data } = await configAPI.getBanners({ size: 10 });
+      setBanners(data);
     } catch (error) {
       console.log(error);
     }
@@ -21,8 +20,8 @@ const Home = () => {
 
   const fetchLeaderBoard = async () => {
     try {
-      const { data } = await axiosClient.get(configAPI.getLeaderBoard);
-      setLeaderBoards(data.data.list);
+      const { data } = await configAPI.getLeaderBoard();
+      setLeaderBoards(data.list);
     } catch (error) {
       console.log(error);
     }
