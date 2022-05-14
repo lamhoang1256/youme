@@ -6,8 +6,8 @@ import { StyledDetailContent } from "./detailContent.style";
 interface DetailContentProps {
   detail: MovieDetail;
   dataOfEpBeingWatched: MovieBeingWatched;
-  id: string;
-  cate: string;
+  id: number;
+  cate: number;
 }
 
 const DetailContent = ({ detail, dataOfEpBeingWatched, id, cate }: DetailContentProps) => {

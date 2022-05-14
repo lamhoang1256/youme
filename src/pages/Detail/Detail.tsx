@@ -1,54 +1,59 @@
-import { AppDispatch, useAppSelector } from "App/store";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import configAPI from "apis/configAPI";
+import { MovieDetail } from "interfaces/api";
+import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
-import { fetchDetail } from "./detail.slice";
 import { StyledDetail } from "./detail.style";
 
-type DetailParams = {
-  id: string;
-};
-
 const Detail = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  const { id } = useParams<DetailParams>();
-  const idMovie: number = Number(id);
+  const id = Number(useParams().id);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [searchParams, setSearchParams] = useSearchParams();
-  const cate = Number(searchParams.get("cate"));
+  const category = Number(searchParams.get("category"));
 
-  const { isLoading, detailMovie } = useAppSelector((state) => state.detail);
-  console.log(detailMovie);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [detail, setDetail] = useState<MovieDetail>();
+
+  const fetchMovieDetail = async () => {
+    try {
+      setIsLoading(true);
+      const { data } = await configAPI.getMovieDetail({ id, category });
+      setDetail(data);
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
-    dispatch(fetchDetail({ idMovie, cate }));
-  }, [dispatch, idMovie, cate]);
+    fetchMovieDetail();
+  }, [id, category]);
 
   return (
     <StyledDetail>
       <div className="container">
         {isLoading && "Loading"}
-        {/* {!isLoading && } */}
-        <div className="detail-info">
-          <div className="detail-thumb">
-            <img src={detailMovie?.coverVerticalUrl} alt="Thumbnail" />
+        {!isLoading && (
+          <div className="detail-info">
+            <div className="detail-thumb">
+              <img src={detail?.coverVerticalUrl} alt="Thumbnail" />
+            </div>
+            <div className="detail-content">
+              <div className="detail-top">
+                <h2 className="detail-heading">{detail?.name}</h2>
+                <div className="detail-rate">{detail?.score}</div>
+              </div>
+              <div className="detail-main">
+                <p>{detail?.introduction}</p>
+              </div>
+              <div className="detail-categoríes">
+                {detail?.tagNameList.map((tag) => (
+                  <span key={tag}>{tag}</span>
+                ))}
+              </div>
+              <button type="button">Watch Now</button>
+            </div>
           </div>
-          <div className="detail-content">
-            <div className="detail-top">
-              <h2 className="detail-heading">{detailMovie?.name}</h2>
-              <div className="detail-rate">{detailMovie?.score}</div>
-            </div>
-            <div className="detail-main">
-              <p>{detailMovie?.introduction}</p>
-            </div>
-            <div className="detail-categoríes">
-              {detailMovie?.tagNameList.map((tag) => (
-                <span key={tag}>{tag}</span>
-              ))}
-            </div>
-            <button type="button">Watch Now</button>
-          </div>
-        </div>
+        )}
       </div>
     </StyledDetail>
   );

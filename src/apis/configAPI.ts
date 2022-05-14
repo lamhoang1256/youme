@@ -1,12 +1,36 @@
+import axiosClient from "./axiosClient";
+
 const URL = process.env.REACT_APP_URL_API;
 const URL2 = process.env.REACT_APP_URL_API_2;
 
 export default {
-  getBanners: (size: number) => `${URL2}/homePage/banners?size=${size}`,
-  getHome: (page: number) => `${URL}/homePage/getHome?page=${page}`,
-  getMovieDetail: (genre: string, id: number, category: number) =>
-    `${URL}/${genre}/get?id=${id}&category=${category}`,
-  getMovieMedia: (category: number, contentId: number, episodeId: number) =>
-    `${URL}/media/previewInfo?category=${category}&contentId=${contentId}&episodeId=${episodeId}&definition=GROOT_LD`,
-  getLeaderBoard: `${URL}/search/v1/searchLeaderboard`,
+  getBanners: (params: { size: number }) => {
+    const url = `${URL2}/homePage/banners`;
+    return axiosClient.get(url, { params });
+  },
+
+  getHome: () => {
+    const url = `${URL}/homePage/getHome`;
+    return axiosClient.get(url);
+  },
+
+  getMovieDetail: (params: { category: number; id: number }) => {
+    const url = `${URL}/movieDrama/get`;
+    return axiosClient.get(url, { params });
+  },
+
+  getMovieMedia: (params: {
+    category: number;
+    contentId: number;
+    episodeId: number;
+    definition: string;
+  }) => {
+    const url = `${URL}/media/previewInfo`;
+    return axiosClient.get(url, { params });
+  },
+
+  getLeaderBoard: () => {
+    const url = `${URL}/search/v1/searchLeaderboard`;
+    return axiosClient.get(url);
+  },
 };
