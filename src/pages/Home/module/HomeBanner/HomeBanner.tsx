@@ -34,7 +34,7 @@ const HomeBanner = ({ banners }: BannerProps) => {
           {banners.map((banner) => {
             const cate = banner.jumpType === "DRAMA" ? 1 : 0;
             return (
-              <Link to={`/detail/${banner.jumpParam}?cate=${cate}&ep=1`} key={banner.id}>
+              <Link to={`/watch/${banner.jumpParam}?cate=${cate}&ep=1`} key={banner.id}>
                 <img className="banner" src={banner.imgUrl} alt="Banner" />
               </Link>
             );
