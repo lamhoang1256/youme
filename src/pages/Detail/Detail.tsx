@@ -1,110 +1,54 @@
-import axiosClient from "apis/axiosClient";
-import configAPI from "apis/configAPI";
-import { MovieDetail, MovieMedia, MovieBeingWatched } from "interfaces/api";
-import { StyledWrapperLayout } from "pages/Home/home.style";
-import { useEffect, useRef, useState } from "react";
-import { Link, useParams, useSearchParams } from "react-router-dom";
+import { AppDispatch, useAppSelector } from "App/store";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useParams, useSearchParams } from "react-router-dom";
+import { fetchDetail } from "./detail.slice";
 import { StyledDetail } from "./detail.style";
-import VideoPlayer from "./module/VideoPlayer/VideoPlayer";
 
 type DetailParams = {
   id: string;
 };
 
 const Detail = () => {
+  const dispatch = useDispatch<AppDispatch>();
   const { id } = useParams<DetailParams>();
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const idMovie: number = Number(id);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [searchParams, setSearchParams] = useSearchParams();
-  const cate = searchParams.get("cate");
-  const ep = searchParams.get("ep");
-  const [detail, setDetail] = useState<MovieDetail>();
-  const [mediaBeingWatched, setMediaBeingWatched] = useState<MovieMedia>();
-  const [dataOfEpBeingWatched, setDataOfEpBeingWatched] = useState<MovieBeingWatched>();
-  const playerRef = useRef<HTMLVideoElement>(null);
+  const cate = Number(searchParams.get("cate"));
 
-  const fetchMovieMedia = async (category: number, contentId: number, episodeId: number) => {
-    try {
-      const { data } = await axiosClient.get(
-        configAPI.getMovieMedia(category, contentId, episodeId),
-      );
-      const movieMedia = detail?.episodeVo.filter(
-        (episode) => String(episode.id) === data.data.episodeId,
-      );
-      if (movieMedia !== undefined) {
-        setDataOfEpBeingWatched(movieMedia[0]);
-      }
-      setMediaBeingWatched(data.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const fetchMovieDetail = async () => {
-    try {
-      setIsLoading(true);
-      const { data } = await axiosClient.get(
-        configAPI.getMovieDetail("movieDrama", Number(id), Number(cate)),
-      );
-      setDetail(data.data);
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-      console.log(error);
-    }
-  };
+  const { isLoading, detailMovie } = useAppSelector((state) => state.detail);
+  console.log(detailMovie);
 
   useEffect(() => {
-    fetchMovieDetail();
-  }, [cate, ep]);
-
-  useEffect(() => {
-    if (detail !== undefined) {
-      fetchMovieMedia(detail.category, Number(detail.id), detail.episodeVo[Number(ep) - 1].id);
-    }
-  }, [detail]);
+    dispatch(fetchDetail({ idMovie, cate }));
+  }, [dispatch, idMovie, cate]);
 
   return (
     <StyledDetail>
       <div className="container">
         {isLoading && "Loading"}
-        {!isLoading && (
-          <StyledWrapperLayout>
-            <div className="wrapper-main">
-              <VideoPlayer playerRef={playerRef} src={mediaBeingWatched?.mediaUrl || ""} />
-              <h3>
-                {detail?.name} - Ep {dataOfEpBeingWatched?.seriesNo}
-              </h3>
-              <p>{detail?.score}</p>
-              <p>{detail?.year}</p>
-              <div className="detail-areas">
-                {detail?.areaList.map((area) => (
-                  <span key={area.id}>{area.name}</span>
-                ))}
-              </div>
-              <div className="detail-categories">
-                {detail?.tagList.map((tag) => (
-                  <span key={tag.id}>{tag.name}</span>
-                ))}
-              </div>
-              <div className="detail-episodes">
-                {detail?.episodeVo.map((episode) => {
-                  const active =
-                    episode.seriesNo === dataOfEpBeingWatched?.seriesNo ? "is-active" : undefined;
-                  return (
-                    <button className={active} type="button" key={episode.id}>
-                      <Link to={`/detail/${id}?cate=${cate}&ep=${episode.seriesNo}`}>
-                        {episode.seriesNo}
-                      </Link>
-                    </button>
-                  );
-                })}
-              </div>
-              <p>{detail?.introduction}</p>
+        {/* {!isLoading && } */}
+        <div className="detail-info">
+          <div className="detail-thumb">
+            <img src={detailMovie?.coverVerticalUrl} alt="Thumbnail" />
+          </div>
+          <div className="detail-content">
+            <div className="detail-top">
+              <h2 className="detail-heading">{detailMovie?.name}</h2>
+              <div className="detail-rate">{detailMovie?.score}</div>
             </div>
-            <div className="wrapper-side">Side</div>
-          </StyledWrapperLayout>
-        )}
+            <div className="detail-main">
+              <p>{detailMovie?.introduction}</p>
+            </div>
+            <div className="detail-categoríes">
+              {detailMovie?.tagNameList.map((tag) => (
+                <span key={tag}>{tag}</span>
+              ))}
+            </div>
+            <button type="button">Watch Now</button>
+          </div>
+        </div>
       </div>
     </StyledDetail>
   );
