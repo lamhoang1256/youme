@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import configAPI from "apis/configAPI";
 // import { MovieDetail, MovieBeingWatched } from "interfaces/api";
-import { StyledWrapperLayout } from "pages/Home/home1.style";
+import { StyledWrapperLayout } from "pages/Home/home.style";
 import { StyledWatch } from "./watch.style";
 import DetailContent from "./module/DetailContent/DetailContent";
 import VideoPlayer from "./module/VideoPlayer/VideoPlayer";

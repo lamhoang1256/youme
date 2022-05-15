@@ -3,7 +3,7 @@ import { Banners, LeaderBoard } from "interfaces/api";
 import configAPI from "apis/configAPI";
 import HomeBanner from "./module/HomeBanner/HomeBanner";
 import HomePopular from "./module/HomePopular/HomePopular";
-import { StyledHome, StyledWrapperLayout } from "./home1.style";
+import { StyledHome, StyledWrapperLayout } from "./home.style";
 
 const Home = () => {
   const [banners, setBanners] = useState<Banners[]>([]);
