@@ -1,7 +1,7 @@
 import Slider from "react-slick";
 import { LeaderBoard } from "interfaces/api";
 import { Link } from "react-router-dom";
-import { StyledPopularCard, StyledPopularList } from "./homePopular1.style";
+import { StyledPopularCard, StyledPopularList } from "./homePopular.style";
 
 interface HomePopularProps {
   leaderBoards: LeaderBoard[];

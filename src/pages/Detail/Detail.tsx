@@ -2,7 +2,7 @@ import configAPI from "apis/configAPI";
 import { MovieDetail } from "interfaces/api";
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
-import { StyledDetail } from "./detail1.style";
+import { StyledDetail } from "./detail.style";
 
 const Detail = () => {
   const id = Number(useParams().id);
