@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { homeSlice } from "pages/Home/home.slice";
+import { homeSlice } from "pages/Home/home1.slice";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 export const store = configureStore({

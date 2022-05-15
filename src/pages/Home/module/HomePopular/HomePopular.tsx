@@ -1,7 +1,7 @@
 import Slider from "react-slick";
 import { LeaderBoard } from "interfaces/api";
 import { Link } from "react-router-dom";
-import { StyledPopularCard, StyledPopularList } from "./homePopular.style";
+import { StyledPopularCard, StyledPopularList } from "./homePopular1.style";
 
 interface HomePopularProps {
   leaderBoards: LeaderBoard[];
@@ -47,10 +47,10 @@ const HomePopular = ({ leaderBoards }: HomePopularProps) => {
           return (
             <div key={leaderBoard.id}>
               <StyledPopularCard>
-                <Link to={`/watch/${leaderBoard.id}?cate=${leaderBoard.domainType}&ep=1`}>
+                <Link to={`/watch/${leaderBoard.id}?cate=${leaderBoard.domainType}`}>
                   <img src={leaderBoard.cover} alt="Top Movie" />
                 </Link>
-                <Link to={`/watch/${leaderBoard.id}?cate=${leaderBoard.domainType}&ep=1`}>
+                <Link to={`/watch/${leaderBoard.id}?cate=${leaderBoard.domainType}`}>
                   <p>{leaderBoard.title}</p>
                 </Link>
               </StyledPopularCard>
