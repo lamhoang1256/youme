@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import configAPI from "apis/configAPI";
-// import { MovieDetail, MovieBeingWatched } from "interfaces/api";
 import { StyledWrapperLayout } from "pages/Home/home.style";
 import { StyledWatch } from "./watch.style";
 import DetailContent from "./module/DetailContent/DetailContent";
@@ -13,7 +12,7 @@ const Watch = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [searchParams, setSearchParams] = useSearchParams();
   const category = Number(searchParams.get("cate"));
-  const ep = Number(searchParams.get("ep"));
+  const episode = Number(searchParams.get("ep"));
   const [watch, setWatch] = useState<any>();
   const playerRef = useRef<HTMLVideoElement>(null);
 
@@ -23,20 +22,19 @@ const Watch = () => {
       const response = await configAPI.getWatchMedia({
         category,
         contentId: id,
-        episodeId: ep,
+        episodeId: episode,
         definition: "GROOT_LD",
       });
       setWatch(response);
       setIsLoading(false);
     } catch (error) {
-      console.log(error);
       setIsLoading(false);
     }
   };
 
   useEffect(() => {
     fetchWatchMovie();
-  }, [category, ep]);
+  }, [category, episode]);
 
   return (
     <StyledWatch>
@@ -46,7 +44,7 @@ const Watch = () => {
           <StyledWrapperLayout>
             <div className="wrapper-main">
               <VideoPlayer playerRef={playerRef} src={watch.detailWatch.mediaUrl || ""} />
-              <DetailContent detail={watch} id={id} cate={category} />
+              <DetailContent detail={watch} />
             </div>
             <div className="wrapper-side">Side</div>
           </StyledWrapperLayout>

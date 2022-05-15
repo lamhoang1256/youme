@@ -32,9 +32,9 @@ const HomeBanner = ({ banners }: BannerProps) => {
       <StyledBanner>
         <Slider {...settings}>
           {banners.map((banner) => {
-            const cate = banner.jumpType === "DRAMA" ? 1 : 0;
+            const category = banner.jumpType === "DRAMA" ? 1 : 0;
             return (
-              <Link to={`/watch/${banner.jumpParam}?cate=${cate}&ep=1`} key={banner.id}>
+              <Link to={`/detail/${banner.jumpParam}?cate=${category}`} key={banner.id}>
                 <img className="banner" src={banner.imgUrl} alt="Banner" />
               </Link>
             );
