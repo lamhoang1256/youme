@@ -2,7 +2,7 @@ import Slider from "react-slick";
 import { Banners } from "interfaces/api";
 import { ButtonArrow } from "components/HomeBannerArrow/HomeBannerArrow";
 import { Link } from "react-router-dom";
-import { StyledBanner } from "./homeBanner.style";
+import { StyledBanner } from "./homeBanner1.style";
 
 interface BannerProps {
   banners: Banners[];

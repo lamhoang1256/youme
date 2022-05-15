@@ -2,7 +2,7 @@ import configAPI from "apis/configAPI";
 import { MovieDetail } from "interfaces/api";
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
-import { StyledDetail } from "./detail.style";
+import { StyledDetail } from "./detail1.style";
 
 const Detail = () => {
   const id = Number(useParams().id);
@@ -33,18 +33,16 @@ const Detail = () => {
       <div className="container">
         {isLoading && "Loading"}
         {!isLoading && (
-          <div className="detail-info">
+          <div className="detail-wrapper">
             <div className="detail-thumb">
               <img src={detail?.coverVerticalUrl} alt="Thumbnail" />
             </div>
             <div className="detail-content">
               <div className="detail-top">
                 <h2 className="detail-heading">{detail?.name}</h2>
-                <div className="detail-rate">{detail?.score}</div>
+                <div className="detail-score">{detail?.score}</div>
               </div>
-              <div className="detail-main">
-                <p>{detail?.introduction}</p>
-              </div>
+              <div className="detail-introduction">{detail?.introduction}</div>
               <div className="detail-categoríes">
                 {detail?.tagNameList.map((tag) => (
                   <span key={tag}>{tag}</span>
