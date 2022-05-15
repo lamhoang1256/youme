@@ -1,41 +1,47 @@
-import { MovieDetail } from "interfaces/api";
+import { MovieBeingWatched, MovieDetail, MovieMedia } from "interfaces/api";
+import { Link } from "react-router-dom";
 import { StyledDetailContent } from "./detailContent.style";
 
 interface DetailContentProps {
-  detail: MovieDetail;
-  id: number;
-  cate: number;
+  detail: {
+    detailMovie: MovieDetail;
+    detailWatch: MovieMedia;
+    detailBeingWatched: MovieBeingWatched;
+  };
 }
 
-const DetailContent = ({ detail, id, cate }: DetailContentProps) => {
-  console.log(id, cate, detail);
+const DetailContent = ({ detail }: DetailContentProps) => {
+  const { detailMovie, detailBeingWatched } = detail;
   return (
     <StyledDetailContent>
-      {/* <h3>{detail?.name} - Ep</h3>
-      <p>{detail?.score}</p>
-      <p>{detail?.year}</p>
+      <h3>
+        {detailMovie.name} - Ep {detailBeingWatched.seriesNo}
+      </h3>
+      <p>Score: {detailMovie.score}</p>
+      <p>Year: {detailMovie.year}</p>
       <div className="detail-areas">
-        {detail?.areaList.map((area) => (
+        {detailMovie.areaList.map((area) => (
           <span key={area.id}>{area.name}</span>
         ))}
       </div>
       <div className="detail-categories">
-        {detail?.tagList.map((tag) => (
+        {detailMovie.tagList.map((tag) => (
           <span key={tag.id}>{tag.name}</span>
         ))}
-      </div> */}
+      </div>
       <div className="detail-episodes">
-        {/* {detail?.episodeVo.map((episode) => {
-          const active =
-            episode.seriesNo === dataOfEpBeingWatched?.seriesNo ? "is-active" : undefined;
+        {detailMovie.episodeVo.map((episode) => {
+          const active = episode.seriesNo === detailBeingWatched.seriesNo ? "is-active" : undefined;
           return (
             <button className={active} type="button" key={episode.id}>
-              <Link to={`/watch/${id}?cate=${cate}&ep=${episode.id}`}>{episode.seriesNo}</Link>
+              <Link to={`/watch/${detailMovie.id}?cate=${detailMovie.category}&ep=${episode.id}`}>
+                {episode.seriesNo}
+              </Link>
             </button>
           );
-        })} */}
+        })}
       </div>
-      {/* <p>{detail?.introduction}</p> */}
+      <p>{detailMovie.introduction}</p>
     </StyledDetailContent>
   );
 };

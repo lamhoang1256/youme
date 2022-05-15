@@ -47,10 +47,10 @@ const HomePopular = ({ leaderBoards }: HomePopularProps) => {
           return (
             <div key={leaderBoard.id}>
               <StyledPopularCard>
-                <Link to={`/watch/${leaderBoard.id}?cate=${leaderBoard.domainType}`}>
+                <Link to={`/detail/${leaderBoard.id}?cate=${leaderBoard.domainType}`}>
                   <img src={leaderBoard.cover} alt="Top Movie" />
                 </Link>
-                <Link to={`/watch/${leaderBoard.id}?cate=${leaderBoard.domainType}`}>
+                <Link to={`/detail/${leaderBoard.id}?cate=${leaderBoard.domainType}`}>
                   <p>{leaderBoard.title}</p>
                 </Link>
               </StyledPopularCard>
