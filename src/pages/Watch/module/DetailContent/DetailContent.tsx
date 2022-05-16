@@ -4,36 +4,36 @@ import { StyledDetailContent } from "./detailContent.style";
 
 interface DetailContentProps {
   detail: {
-    detailMovie: MovieDetail;
-    currentEpisode: MovieBeingWatched;
+    dataDetailMovie: MovieDetail;
+    dataCurrentEpisode: MovieBeingWatched;
   };
 }
 
 const DetailContent = ({ detail }: DetailContentProps) => {
-  const { detailMovie, currentEpisode } = detail;
+  const { dataDetailMovie, dataCurrentEpisode } = detail;
   return (
     <StyledDetailContent>
       <h2>
-        {detailMovie.name} - Ep {currentEpisode.seriesNo}
+        {dataDetailMovie.name} - Ep {dataCurrentEpisode.seriesNo}
       </h2>
-      <p>Score: {detailMovie.score}</p>
-      <p>Year: {detailMovie.year}</p>
+      <p>Score: {dataDetailMovie.score}</p>
+      <p>Year: {dataDetailMovie.year}</p>
       <div className="detail-areas">
-        {detailMovie.areaList.map((area) => (
+        {dataDetailMovie.areaList.map((area) => (
           <span key={area.id}>{area.name}</span>
         ))}
       </div>
       <div className="detail-categories">
-        {detailMovie.tagList.map((tag) => (
+        {dataDetailMovie.tagList.map((tag) => (
           <span key={tag.id}>{tag.name}</span>
         ))}
       </div>
       <div className="detail-episodes">
-        {detailMovie.episodeVo.map((episode) => {
-          const active = episode.seriesNo === currentEpisode.seriesNo ? "is-active" : undefined;
+        {dataDetailMovie.episodeVo.map((episode) => {
+          const active = episode.seriesNo === dataCurrentEpisode.seriesNo ? "is-active" : undefined;
           return (
             <Link
-              to={`/watch/${detailMovie.id}?cate=${detailMovie.category}&ep=${episode.id}`}
+              to={`/watch/${dataDetailMovie.id}?cate=${dataDetailMovie.category}&ep=${episode.id}`}
               key={episode.id}
             >
               <button className={active} type="button">
@@ -43,7 +43,7 @@ const DetailContent = ({ detail }: DetailContentProps) => {
           );
         })}
       </div>
-      <p>{detailMovie.introduction}</p>
+      <p>{dataDetailMovie.introduction}</p>
     </StyledDetailContent>
   );
 };

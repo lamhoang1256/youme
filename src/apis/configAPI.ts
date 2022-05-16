@@ -10,6 +10,11 @@ const configAPI = {
     return axiosClient.get(url, { params });
   },
 
+  getLeaderBoard: () => {
+    const url = `${URL}/search/v1/searchLeaderboard`;
+    return axiosClient.get(url);
+  },
+
   getHome: () => {
     const url = `${URL}/homePage/getHome`;
     return axiosClient.get(url);
@@ -32,28 +37,31 @@ const configAPI = {
 
   getWatchMedia: async (params: MediaParams) => {
     const { category, contentId, episodeId } = params;
-    const paramsDetail = {
+    const paramsGetDetail = {
       category,
       id: contentId,
     };
-    const detailMovie = await configAPI.getMovieDetail(paramsDetail);
-    const episodeNum = episodeId === 0 ? detailMovie.data.episodeVo[0].id : episodeId;
-    let currentEpisode = detailMovie.data.episodeVo.filter(
-      (episode: { id: number }) => episode.id === episodeNum,
+    const dataDetailMovie = await configAPI.getMovieDetail(paramsGetDetail);
+    const episodeCurrentID = episodeId === 0 ? dataDetailMovie.data.episodeVo[0].id : episodeId;
+    // get data movie of current episode being watched
+    let dataCurrentEpisode = dataDetailMovie.data.episodeVo.filter(
+      (episode: { id: number }) => episode.id === episodeCurrentID,
     )[0];
-    const paramsWatchList = currentEpisode.definitionList.map((definition: any) => {
+    const paramsGetUrlsMedia = dataCurrentEpisode.definitionList.map((definition: any) => {
       return {
-        category: params.category,
-        contentId: params.contentId,
-        episodeId: episodeNum,
+        category,
+        contentId,
+        episodeId: episodeCurrentID,
         definition: definition.code,
       };
     });
-    const sources = await Promise.all(
-      paramsWatchList.map((paramsItem: MediaParams) => configAPI.getWatchAPI(paramsItem)),
+    // get url movie with all type quality
+    const dataQuanlities = await Promise.all(
+      paramsGetUrlsMedia.map((paramsMedia: MediaParams) => configAPI.getWatchAPI(paramsMedia)),
     );
-    const qualities = sources.map((quality) => quality.data);
-    const subtitlesFirstVN = [...currentEpisode.subtitlingList].reduce(
+    const qualities = dataQuanlities.map((quality) => quality.data);
+    // bring subtitle of Vietnamese to first element of array to when watch media player will set Vietnamese is default sub
+    const subtitlesFirstVN = [...dataCurrentEpisode.subtitlingList].reduce(
       (prevSub: any, currentSub: any) => {
         if (currentSub.languageAbbr === "vi") {
           return [currentSub, ...prevSub];
@@ -62,28 +70,23 @@ const configAPI = {
       },
       [],
     );
-
+    // get description number of quality Ex: HD -> 1080p
     const qualityList = qualities.map((quality) => {
-      const quanlityDesc = currentEpisode.definitionList.filter(
+      const qualityDesc = dataCurrentEpisode.definitionList.filter(
         (definition: any) => definition.code === quality.currentDefinition,
       );
-      return { ...quality, quanlityDesc: quanlityDesc[0] };
+      return { ...quality, qualityDesc: qualityDesc[0] };
     });
-    currentEpisode = {
-      ...currentEpisode,
+    dataCurrentEpisode = {
+      ...dataCurrentEpisode,
       qualities: qualityList,
       subtitlingList: subtitlesFirstVN,
     };
     return {
-      detailMovie: detailMovie.data,
-      currentEpisode,
+      dataDetailMovie: dataDetailMovie.data,
+      dataCurrentEpisode,
       qualities,
     };
-  },
-
-  getLeaderBoard: () => {
-    const url = `${URL}/search/v1/searchLeaderboard`;
-    return axiosClient.get(url);
   },
 };
 
