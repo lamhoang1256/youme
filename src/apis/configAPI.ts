@@ -38,11 +38,9 @@ const configAPI = {
     };
     const detailMovie = await configAPI.getMovieDetail(paramsDetail);
     const episodeNum = episodeId === 0 ? detailMovie.data.episodeVo[0].id : episodeId;
-
     let currentEpisode = detailMovie.data.episodeVo.filter(
       (episode: { id: number }) => episode.id === episodeNum,
     )[0];
-
     const paramsWatchList = currentEpisode.definitionList.map((definition: any) => {
       return {
         category: params.category,
@@ -54,9 +52,7 @@ const configAPI = {
     const sources = await Promise.all(
       paramsWatchList.map((paramsItem: MediaParams) => configAPI.getWatchAPI(paramsItem)),
     );
-
     const qualities = sources.map((quality) => quality.data);
-
     const subtitlesFirstVN = [...currentEpisode.subtitlingList].reduce(
       (prevSub: any, currentSub: any) => {
         if (currentSub.languageAbbr === "vi") {
@@ -67,9 +63,17 @@ const configAPI = {
       [],
     );
 
-    currentEpisode = { ...currentEpisode, qualities, subtitlingList: subtitlesFirstVN };
-    console.log(currentEpisode);
-
+    const qualityList = qualities.map((quality) => {
+      const quanlityDesc = currentEpisode.definitionList.filter(
+        (definition: any) => definition.code === quality.currentDefinition,
+      );
+      return { ...quality, quanlityDesc: quanlityDesc[0] };
+    });
+    currentEpisode = {
+      ...currentEpisode,
+      qualities: qualityList,
+      subtitlingList: subtitlesFirstVN,
+    };
     return {
       detailMovie: detailMovie.data,
       currentEpisode,

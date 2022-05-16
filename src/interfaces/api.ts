@@ -135,6 +135,7 @@ export interface MovieMedia {
   episodeId: string;
   mediaUrl: "";
   totalDuration: number;
+  quanlityDesc: { code: string; description: string; fullDescription: string };
 }
 
 export interface MovieBeingWatched {
