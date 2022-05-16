@@ -2,9 +2,16 @@ import { useEffect, useRef, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import configAPI from "apis/configAPI";
 import { StyledWrapperLayout } from "pages/Home/home.style";
+import { MovieDetail } from "interfaces/api";
 import { StyledWatch } from "./watch.style";
 import DetailContent from "./module/DetailContent/DetailContent";
-import VideoPlayer from "./module/VideoPlayer/VideoPlayer";
+import WatchPlayer from "./module/VideoPlayer/WatchPlayer";
+
+interface IWatch {
+  detailMovie: MovieDetail;
+  // detailWatch: MovieMedia;
+  currentEpisode: any;
+}
 
 const Watch = () => {
   const id = Number(useParams().id);
@@ -13,7 +20,7 @@ const Watch = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const category = Number(searchParams.get("cate"));
   const episode = Number(searchParams.get("ep"));
-  const [watch, setWatch] = useState<any>();
+  const [watch, setWatch] = useState<IWatch>();
   const playerRef = useRef<HTMLVideoElement>(null);
 
   const fetchWatchMovie = async () => {
@@ -23,7 +30,6 @@ const Watch = () => {
         category,
         contentId: id,
         episodeId: episode,
-        definition: "GROOT_LD",
       });
       setWatch(response);
       setIsLoading(false);
@@ -43,7 +49,11 @@ const Watch = () => {
         {!isLoading && watch && (
           <StyledWrapperLayout>
             <div className="wrapper-main">
-              <VideoPlayer playerRef={playerRef} src={watch.detailWatch.mediaUrl || ""} />
+              <WatchPlayer
+                subtitles={watch.currentEpisode.subtitlingList}
+                qualities={watch.currentEpisode.qualities}
+                playerRef={playerRef}
+              />
               <DetailContent detail={watch} />
             </div>
             <div className="wrapper-side">Side</div>

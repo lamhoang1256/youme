@@ -7,14 +7,6 @@ export interface Banners {
   title: string;
 }
 
-export interface MovieMedia {
-  businessType: number;
-  currentDefinition: string;
-  episodeId: string;
-  mediaUrl: "";
-  totalDuration: number;
-}
-
 export interface HomeSection {
   bannerProportion?: any;
   blockGroupNum?: any;
@@ -37,6 +29,13 @@ export interface HomeSection {
   }[];
   refId?: any;
   refRedirectUrl: string;
+}
+
+export interface LeaderBoard {
+  cover: string;
+  domainType: number;
+  id: string;
+  title: string;
 }
 
 export interface MovieDetail {
@@ -130,11 +129,12 @@ export interface MovieDetail {
   year: number;
 }
 
-export interface LeaderBoard {
-  cover: string;
-  domainType: number;
-  id: string;
-  title: string;
+export interface MovieMedia {
+  businessType: number;
+  currentDefinition: string;
+  episodeId: string;
+  mediaUrl: "";
+  totalDuration: number;
 }
 
 export interface MovieBeingWatched {
@@ -148,4 +148,19 @@ export interface MovieBeingWatched {
   nameJson: string;
   resourceType: number;
   seriesNo: number;
+  subtitlingList: {
+    language: string;
+    languageAbbr: string;
+    subtitlingUrl: string;
+    translateType: number;
+  }[];
+  totalTime: number;
+  vid: string;
+}
+
+export interface MediaParams {
+  category: number;
+  contentId: number;
+  episodeId: number;
+  definition?: string;
 }
