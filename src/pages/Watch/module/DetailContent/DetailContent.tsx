@@ -5,7 +5,6 @@ import { StyledDetailContent } from "./detailContent.style";
 interface DetailContentProps {
   detail: {
     detailMovie: MovieDetail;
-    // detailWatch: MovieMedia;
     currentEpisode: MovieBeingWatched;
   };
 }
@@ -14,9 +13,9 @@ const DetailContent = ({ detail }: DetailContentProps) => {
   const { detailMovie, currentEpisode } = detail;
   return (
     <StyledDetailContent>
-      <h3>
+      <h2>
         {detailMovie.name} - Ep {currentEpisode.seriesNo}
-      </h3>
+      </h2>
       <p>Score: {detailMovie.score}</p>
       <p>Year: {detailMovie.year}</p>
       <div className="detail-areas">
@@ -33,11 +32,14 @@ const DetailContent = ({ detail }: DetailContentProps) => {
         {detailMovie.episodeVo.map((episode) => {
           const active = episode.seriesNo === currentEpisode.seriesNo ? "is-active" : undefined;
           return (
-            <button className={active} type="button" key={episode.id}>
-              <Link to={`/watch/${detailMovie.id}?cate=${detailMovie.category}&ep=${episode.id}`}>
+            <Link
+              to={`/watch/${detailMovie.id}?cate=${detailMovie.category}&ep=${episode.id}`}
+              key={episode.id}
+            >
+              <button className={active} type="button">
                 {episode.seriesNo}
-              </Link>
-            </button>
+              </button>
+            </Link>
           );
         })}
       </div>

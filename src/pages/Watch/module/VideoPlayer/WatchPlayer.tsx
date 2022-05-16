@@ -1,5 +1,5 @@
-import { MovieMedia } from "interfaces/api";
 import ReactHlsPlayer from "react-hls-player/dist";
+import { MovieMedia } from "interfaces/api";
 import { Player } from "react-tuby";
 import "react-tuby/css/main.css";
 
@@ -26,11 +26,10 @@ const WatchPlayer = ({ subtitles, qualities }: WatchPlayerProps) => {
   });
   const qualityList = qualities.map((quality) => {
     return {
-      quality: quality.currentDefinition,
+      quality: quality.quanlityDesc.description,
       url: quality.mediaUrl,
     };
   });
-  console.log(subtitleList);
 
   return (
     <Player src={qualityList} subtitles={subtitleList}>
@@ -40,7 +39,3 @@ const WatchPlayer = ({ subtitles, qualities }: WatchPlayerProps) => {
 };
 
 export default WatchPlayer;
-
-// {code: 'GROOT_HD', description: '1080P', fullDescription: '1080P'}
-// 1: {code: 'GROOT_SD', description: '720P', fullDescription: '720P'}
-// 2: {code: 'GROOT_LD', description: '540P', fullDescription: '540P'}
