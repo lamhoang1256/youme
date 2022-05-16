@@ -1,5 +1,5 @@
 import IonIcon from "@reacticons/ionicons";
-import configAPI from "apis/configAPI";
+import { getMovieDetail } from "apis/configAPI";
 import { MovieDetail } from "interfaces/api";
 import { StyledWrapperLayout } from "pages/Home/home.style";
 import { useEffect, useState } from "react";
@@ -18,7 +18,7 @@ const Detail = () => {
   const fetchMovieDetail = async () => {
     try {
       setIsLoading(true);
-      const { data } = await configAPI.getMovieDetail({ id, category });
+      const { data } = await getMovieDetail({ id, category });
       setDetail(data);
       setIsLoading(false);
     } catch (error) {
@@ -60,16 +60,24 @@ const Detail = () => {
                       <span key={tag}>{tag}</span>
                     ))}
                   </div>
-                  <Link to={`/watch/${detail?.id}?cate=${detail?.category}`}>
-                    <button type="button" className="detail-watch">
-                      Watch Now
+                  <div className="detail-action">
+                    <Link to={`/watch/${detail?.id}?cate=${detail?.category}`}>
+                      <button type="button" className="detail-watch">
+                        Watch Now
+                      </button>
+                    </Link>
+                    <button type="button" className="detail-button detail-favorite">
+                      <IonIcon name="heart" />
                     </button>
-                  </Link>
+                    <button type="button" className="detail-button detail-share">
+                      <IonIcon name="share-social-outline" />
+                    </button>
+                  </div>
                 </div>
               </div>
               <div className="detail-bottom">
                 <div className="detail-summary">
-                  <span className="label">Summary: </span>
+                  <span className="label-small">Summary : </span>
                   {detail?.introduction}
                 </div>
                 <img src={detail?.coverHorizontalUrl} alt="Banner" className="detail-banner" />

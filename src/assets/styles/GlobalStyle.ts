@@ -20,5 +20,9 @@ export const GlobalStyle = createGlobalStyle`
     @media screen and (max-width: 767.98px) {
       padding: 0 15px;
     }
-}
+  }
+  .label-small{
+    font-weight: 700;
+    padding-right: 10px;
+  }
 `;

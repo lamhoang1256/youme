@@ -5,7 +5,7 @@ export const StyledHome = styled.div``;
 export const StyledWrapperLayout = styled.div`
   display: flex;
   gap: 30px;
-  margin-top: 50px !important;
+  margin-top: 40px !important;
   min-height: 100vh;
   .wrapper-main {
     flex: 1;

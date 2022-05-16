@@ -14,7 +14,7 @@ export const StyledDetail = styled.div`
   }
   .detail-content {
     flex: 1;
-    gap: 12px;
+    gap: 13px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -51,7 +51,12 @@ export const StyledDetail = styled.div`
   }
   .detail-categoríes {
     display: flex;
-    gap: 20px;
+    flex-wrap: wrap;
+    gap: 5px 20px;
+  }
+  .detail-action {
+    display: flex;
+    gap: 14px;
   }
   .detail-watch {
     width: 210px;
@@ -59,6 +64,24 @@ export const StyledDetail = styled.div`
     border-radius: 40px;
     color: var(--white);
     background-color: #e62e8f;
+  }
+  .detail-button {
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 100rem;
+    border: 1px solid gray;
+    background-color: transparent;
+  }
+  .detail-favorite {
+    border: 2px solid #e96565;
+    color: #e96565;
+  }
+  .detail-share {
+    color: var(--white);
   }
   .detail-bottom {
     margin-top: 50px;
@@ -70,10 +93,6 @@ export const StyledDetail = styled.div`
     margin: 30px 0;
     border-radius: 14px;
     width: 100%;
-  }
-  .label {
-    font-weight: 600;
-    padding-right: 10px;
   }
   @media screen and (max-width: 767.98px) {
     .detail-top {
