@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Banners, LeaderBoard } from "interfaces/api";
-import configAPI from "apis/configAPI";
+import { getBanners, getLeaderBoard } from "apis/configAPI";
 import HomeBanner from "./module/HomeBanner/HomeBanner";
 import HomePopular from "./module/HomePopular/HomePopular";
 import { StyledHome, StyledWrapperLayout } from "./home.style";
@@ -11,7 +11,7 @@ const Home = () => {
 
   const fetchData = async () => {
     try {
-      const { data } = await configAPI.getBanners({ size: 10 });
+      const { data } = await getBanners({ size: 10 });
       setBanners(data);
     } catch (error) {
       console.log(error);
@@ -20,7 +20,7 @@ const Home = () => {
 
   const fetchLeaderBoard = async () => {
     try {
-      const { data } = await configAPI.getLeaderBoard();
+      const { data } = await getLeaderBoard();
       setLeaderBoards(data.list);
     } catch (error) {
       console.log(error);

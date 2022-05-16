@@ -1,16 +1,15 @@
 import { useEffect, useRef, useState } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
-import configAPI from "apis/configAPI";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import { StyledWrapperLayout } from "pages/Home/home.style";
 import { MovieDetail } from "interfaces/api";
+import { getWatchMedia } from "apis/configAPI";
 import { StyledWatch } from "./watch.style";
-import DetailContent from "./module/DetailContent/DetailContent";
+import DetailContent from "./module/DetailContent/WatchContent";
 import WatchPlayer from "./module/VideoPlayer/WatchPlayer";
 
 interface IWatch {
-  dataDetailMovie: MovieDetail;
-  // detailWatch: MovieMedia;
-  dataCurrentEpisode: any;
+  detailData: MovieDetail;
+  currentWatchData: any;
 }
 
 const Watch = () => {
@@ -26,7 +25,7 @@ const Watch = () => {
   const fetchWatchMovie = async () => {
     setIsLoading(true);
     try {
-      const response = await configAPI.getWatchMedia({
+      const response = await getWatchMedia({
         category,
         contentId: id,
         episodeId: episode,
@@ -50,13 +49,30 @@ const Watch = () => {
           <StyledWrapperLayout>
             <div className="wrapper-main">
               <WatchPlayer
-                subtitles={watch.dataCurrentEpisode.subtitlingList}
-                qualities={watch.dataCurrentEpisode.qualities}
+                subtitles={watch.currentWatchData.subtitlingList}
+                qualities={watch.currentWatchData.qualities}
                 playerRef={playerRef}
               />
               <DetailContent detail={watch} />
             </div>
-            <div className="wrapper-side">Side</div>
+            <div className="wrapper-side">
+              <div className="watch-episodes">
+                {watch.detailData.episodeVo.map((ep) => {
+                  const active =
+                    ep.seriesNo === watch.currentWatchData.seriesNo ? "is-active" : undefined;
+                  return (
+                    <Link
+                      to={`/watch/${watch.detailData.id}?cate=${watch.detailData.category}&ep=${ep.id}`}
+                      key={ep.id}
+                    >
+                      <button className={active} type="button">
+                        {ep.seriesNo}
+                      </button>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
           </StyledWrapperLayout>
         )}
       </div>
