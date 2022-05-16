@@ -26,7 +26,7 @@ const WatchPlayer = ({ subtitles, qualities }: WatchPlayerProps) => {
   });
   const qualityList = qualities.map((quality) => {
     return {
-      quality: quality.quanlityDesc.description,
+      quality: quality.qualityDesc.description,
       url: quality.mediaUrl,
     };
   });

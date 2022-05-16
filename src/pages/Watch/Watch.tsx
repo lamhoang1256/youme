@@ -8,9 +8,9 @@ import DetailContent from "./module/DetailContent/DetailContent";
 import WatchPlayer from "./module/VideoPlayer/WatchPlayer";
 
 interface IWatch {
-  detailMovie: MovieDetail;
+  dataDetailMovie: MovieDetail;
   // detailWatch: MovieMedia;
-  currentEpisode: any;
+  dataCurrentEpisode: any;
 }
 
 const Watch = () => {
@@ -50,8 +50,8 @@ const Watch = () => {
           <StyledWrapperLayout>
             <div className="wrapper-main">
               <WatchPlayer
-                subtitles={watch.currentEpisode.subtitlingList}
-                qualities={watch.currentEpisode.qualities}
+                subtitles={watch.dataCurrentEpisode.subtitlingList}
+                qualities={watch.dataCurrentEpisode.qualities}
                 playerRef={playerRef}
               />
               <DetailContent detail={watch} />
