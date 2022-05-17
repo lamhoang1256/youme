@@ -1,15 +1,16 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, useParams, useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { StyledWrapperLayout } from "pages/Home/home.style";
 import { MovieDetail } from "interfaces/api";
 import { getWatchMedia } from "apis/configAPI";
 import { StyledWatch } from "./watch.style";
-import DetailContent from "./module/DetailContent/WatchContent";
-import WatchPlayer from "./module/VideoPlayer/WatchPlayer";
+import WatchPlayer from "./module/WatchPlayer/WatchPlayer";
+import WatchContent from "./module/WatchContent/WatchContent";
+import WatchEpisodes from "./module/WatchEpisodes/WatchEpisodes";
 
 interface IWatch {
-  detailData: MovieDetail;
-  currentWatchData: any;
+  detailMovie: MovieDetail;
+  detailCurrentPlay: any;
 }
 
 const Watch = () => {
@@ -49,29 +50,18 @@ const Watch = () => {
           <StyledWrapperLayout>
             <div className="wrapper-main">
               <WatchPlayer
-                subtitles={watch.currentWatchData.subtitlingList}
-                qualities={watch.currentWatchData.qualities}
+                subtitles={watch.detailCurrentPlay.subtitlingList}
+                qualities={watch.detailCurrentPlay.qualities}
                 playerRef={playerRef}
               />
-              <DetailContent detail={watch} />
+              <WatchContent detail={watch} />
             </div>
             <div className="wrapper-side">
-              <div className="watch-episodes">
-                {watch.detailData.episodeVo.map((ep) => {
-                  const active =
-                    ep.seriesNo === watch.currentWatchData.seriesNo ? "is-active" : undefined;
-                  return (
-                    <Link
-                      to={`/watch/${watch.detailData.id}?cate=${watch.detailData.category}&ep=${ep.id}`}
-                      key={ep.id}
-                    >
-                      <button className={active} type="button">
-                        {ep.seriesNo}
-                      </button>
-                    </Link>
-                  );
-                })}
-              </div>
+              <WatchEpisodes
+                detailMovie={watch.detailMovie}
+                detailCurrentPlay={watch.detailCurrentPlay}
+              />
+              side
             </div>
           </StyledWrapperLayout>
         )}

@@ -6,7 +6,6 @@ export const StyledWrapperLayout = styled.div`
   display: flex;
   gap: 30px;
   margin-top: 40px !important;
-  min-height: 100vh;
   .wrapper-main {
     flex: 1;
   }
@@ -15,5 +14,8 @@ export const StyledWrapperLayout = styled.div`
   }
   @media screen and (max-width: 1023.98px) {
     flex-direction: column;
+    .wrapper-side {
+      width: 100%;
+    }
   }
 `;

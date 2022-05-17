@@ -22,12 +22,13 @@ export const StyledWatchContent = styled.div`
       width: 10px;
       height: 10px;
       border-radius: 100rem;
-      background-color: #3d6ef7;
+      background-color: var(--primary-color);
     }
   }
   .watch-categories {
     display: flex;
-    gap: 20px;
+    flex-wrap: wrap;
+    gap: 14px 20px;
     margin: 14px 0;
     span {
       height: 31px;

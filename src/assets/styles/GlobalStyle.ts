@@ -5,6 +5,7 @@ export const GlobalStyle = createGlobalStyle`
     --white: #fff;
     --black: #000;
     --primary-color:#007aff;
+    --secondary-color:#e62e8f;
     --dark-color:#080f28;
     --max-width-container:1500px;
   }
