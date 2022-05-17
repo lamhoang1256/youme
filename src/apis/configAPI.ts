@@ -14,9 +14,9 @@ export const getLeaderBoard = () => {
   return axiosClient.get(url);
 };
 
-export const getHome = () => {
+export const getHome = (params: { page: number }) => {
   const url = `${URL}/homePage/getHome`;
-  return axiosClient.get(url);
+  return axiosClient.get(url, { params });
 };
 
 export const getMovieDetail = (params: { category: number; id: number }) => {
