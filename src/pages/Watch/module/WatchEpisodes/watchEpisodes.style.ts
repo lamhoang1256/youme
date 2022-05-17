@@ -7,6 +7,7 @@ export const StyledWatchEpisodes = styled.div`
   max-height: 38vh;
   overflow-y: auto;
   margin-right: -10px;
+  margin-bottom: 40px;
   button {
     width: 40px;
     height: 40px;

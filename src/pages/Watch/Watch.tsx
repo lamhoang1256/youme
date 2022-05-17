@@ -33,7 +33,6 @@ const Watch = () => {
         episodeId: episode,
       });
       setWatch(response);
-      console.log(response.detailMovie);
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
