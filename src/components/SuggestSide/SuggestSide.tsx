@@ -1,3 +1,4 @@
+import IonIcon from "@reacticons/ionicons";
 import { Link } from "react-router-dom";
 import { StyledSuggestSide } from "./suggestSide.style";
 
@@ -28,11 +29,14 @@ interface SuggestSideProps {
     upName: string;
     year: number;
   }[];
+  countMovieSuggest?: number;
 }
 
-const SuggestSide = ({ listSuggest }: SuggestSideProps) => {
-  const countMovieSuggest = 6;
+const defaultProps = {
+  countMovieSuggest: 6,
+};
 
+const SuggestSide = ({ listSuggest, countMovieSuggest }: SuggestSideProps) => {
   return (
     <StyledSuggestSide>
       <h3 className="suggest-label">You may like</h3>
@@ -54,10 +58,13 @@ const SuggestSide = ({ listSuggest }: SuggestSideProps) => {
                     <span key={cate.id}>{cate.name}</span>
                   ))}
                 </div>
+                <div className="movie-rate">
+                  <IonIcon name="star" /> {suggest.score} /10
+                </div>
               </div>
               <div className="movie-bottom">
-                <div className="movie-rate">{suggest.score} /10</div>
-                <div className="movie-year">{suggest.year}</div>
+                <div>{suggest.areaList[0].name}</div>
+                <div>{suggest.year}</div>
               </div>
             </div>
           </div>
@@ -66,5 +73,7 @@ const SuggestSide = ({ listSuggest }: SuggestSideProps) => {
     </StyledSuggestSide>
   );
 };
+
+SuggestSide.defaultProps = defaultProps;
 
 export default SuggestSide;

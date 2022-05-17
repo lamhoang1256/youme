@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const StyledSuggestSide = styled.div`
-  margin-top: 40px;
   .suggest-label {
     margin-bottom: 20px;
   }
@@ -52,6 +51,7 @@ export const StyledSuggestSide = styled.div`
     font-size: 1.4rem;
   }
   .movie-rate {
+    margin-top: 10px;
     color: #edb709;
   }
   @media screen and (max-width: 1023.98px) {
@@ -64,9 +64,15 @@ export const StyledSuggestSide = styled.div`
       grid-template-columns: repeat(2, 1fr);
     }
   }
-  @media screen and (max-width: 670.98px) {
+  @media screen and (max-width: 540.98px) {
     .movie-list {
       grid-template-columns: repeat(1, 1fr);
+    }
+    .movie-name {
+      font-size: 2rem;
+    }
+    .movie-categories span {
+      font-size: 1.7rem;
     }
   }
 `;
