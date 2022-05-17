@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 export const StyledHomeCard = styled.div`
-  position: relative;
-  padding: 0 10px;
   .card-thumb {
     border-radius: 6px;
     width: 100%;
@@ -13,5 +11,11 @@ export const StyledHomeCard = styled.div`
     text-align: center;
     padding-top: 10px;
     color: var(--white);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    white-space: normal;
   }
 `;

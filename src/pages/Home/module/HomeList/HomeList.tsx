@@ -1,5 +1,5 @@
+// import Slider from "react-slick";
 import { IHomeSection } from "interfaces/api";
-import Slider from "react-slick";
 import HomeCard from "../HomeCard/HomeCard";
 import { StyledHomeList } from "./homeList.style";
 
@@ -8,21 +8,14 @@ interface HomeListProps {
 }
 
 const HomeList = ({ homeSection }: HomeListProps) => {
-  // console.log(homeSection.recommendContentVOList.slice(0, 5));
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 6,
-    slidesToScroll: 3,
-  };
   return (
     <StyledHomeList>
-      <Slider {...settings}>
-        {homeSection.recommendContentVOList.map((movie) => (
-          <HomeCard key={movie.id} movie={movie} />
-        ))}
-      </Slider>
+      <h3 className="home-title">{homeSection.homeSectionName}</h3>
+      <div className="home-list">
+        {homeSection.recommendContentVOList.slice(0, 12).map((movie) => {
+          return <HomeCard key={movie.id} movie={movie} />;
+        })}
+      </div>
     </StyledHomeList>
   );
 };

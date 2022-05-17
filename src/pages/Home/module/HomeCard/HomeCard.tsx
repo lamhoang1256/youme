@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
 import { StyledHomeCard } from "./homeCard.style";
+import HomeCardUI from "./HomeCardUI";
 
 interface HomeCardProps {
   movie: {
@@ -16,21 +16,6 @@ interface HomeCardProps {
     title: string;
   };
 }
-
-interface HomeCardUIProps {
-  type: string;
-  children: React.ReactNode;
-  url: string;
-}
-
-const HomeCardUI = ({ type, children, url }: HomeCardUIProps) => {
-  return (
-    <>
-      {type === "movie" && <Link to={url}>{children}</Link>}
-      {type === "actor" && <> {children}</>}
-    </>
-  );
-};
 
 const HomeCard = ({ movie }: HomeCardProps) => {
   const IDandCate = movie.jumpAddress.split("?id=")[1];
