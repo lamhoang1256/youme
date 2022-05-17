@@ -63,7 +63,7 @@ export const StyledDetail = styled.div`
     height: 50px;
     border-radius: 40px;
     color: var(--white);
-    background-color: #e62e8f;
+    background-color: var(--secondary-color);
   }
   .detail-button {
     font-size: 2rem;

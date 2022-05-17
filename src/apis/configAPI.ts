@@ -1,11 +1,11 @@
 import { MediaParams } from "interfaces/api";
 import axiosClient from "./axiosClient";
 
-const URL = process.env.REACT_APP_URL_API;
-const URL2 = process.env.REACT_APP_URL_API_2;
+const URL = process.env.REACT_APP_API;
+const URL_PC = process.env.REACT_APP_API_PC;
 
 export const getBanners = (params: { size: number }) => {
-  const url = `${URL2}/homePage/banners`;
+  const url = `${URL_PC}/homePage/banners`;
   return axiosClient.get(url, { params });
 };
 
@@ -40,13 +40,13 @@ export const getWatchMedia = async (params: MediaParams) => {
     category,
     id: contentId,
   };
-  const detailData = await getMovieDetail(paramsGetDetail);
+  const detailMovie = await getMovieDetail(paramsGetDetail);
 
-  const currentWatchId = episodeId === 0 ? detailData.data.episodeVo[0].id : episodeId;
-  let currentWatchData = detailData.data.episodeVo.filter(
+  const currentWatchId = episodeId === 0 ? detailMovie.data.episodeVo[0].id : episodeId;
+  let detailCurrentPlay = detailMovie.data.episodeVo.filter(
     (episode: { id: number }) => episode.id === currentWatchId,
   )[0];
-  const paramsGetUrlsMedia = currentWatchData.definitionList.map((definition: any) => {
+  const paramsGetUrlsMedia = detailCurrentPlay.definitionList.map((definition: any) => {
     return {
       category,
       contentId,
@@ -61,7 +61,7 @@ export const getWatchMedia = async (params: MediaParams) => {
   const qualities = quanlitiesFetch.map((quality) => quality.data);
 
   // bring subtitle of Vietnamese to first element of array to when watch media player will set Vietnamese is default sub
-  const subtitlesFirstVN = [...currentWatchData.subtitlingList].reduce(
+  const subtitlesFirstVN = [...detailCurrentPlay.subtitlingList].reduce(
     (prevSub: any, currentSub: any) => {
       if (currentSub.languageAbbr === "vi") {
         return [currentSub, ...prevSub];
@@ -73,19 +73,19 @@ export const getWatchMedia = async (params: MediaParams) => {
 
   // get number describe quality Ex: HD -> 1080p
   const qualitiesHasDesc = qualities.map((quality) => {
-    const qualityDesc = currentWatchData.definitionList.filter(
+    const qualityDesc = detailCurrentPlay.definitionList.filter(
       (definition: any) => definition.code === quality.currentDefinition,
     );
     return { ...quality, qualityDesc: qualityDesc[0] };
   });
-  currentWatchData = {
-    ...currentWatchData,
+  detailCurrentPlay = {
+    ...detailCurrentPlay,
     qualities: qualitiesHasDesc,
     subtitlingList: subtitlesFirstVN,
   };
   return {
-    detailData: detailData.data,
-    currentWatchData,
+    detailMovie: detailMovie.data,
+    detailCurrentPlay,
     qualities,
   };
 };
