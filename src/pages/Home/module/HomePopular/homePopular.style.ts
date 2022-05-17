@@ -3,8 +3,6 @@ import styled from "styled-components";
 export const StyledPopularList = styled.div`
   width: 100%;
   height: auto;
-  padding-bottom: 30px;
-  margin-bottom: 40px;
   h3 {
     margin-bottom: 14px;
   }
@@ -17,8 +15,13 @@ export const StyledPopularList = styled.div`
   .slick-slider {
     margin-left: -15px;
   }
+  .slick-list {
+    z-index: 20;
+  }
   .slick-dots {
-    bottom: -30px;
+    top: -40px;
+    text-align: right;
+    z-index: 10;
     li.slick-active {
       width: 30px;
       background-color: var(--primary-color);
