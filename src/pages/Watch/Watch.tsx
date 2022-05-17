@@ -3,6 +3,7 @@ import { useParams, useSearchParams } from "react-router-dom";
 import { StyledWrapperLayout } from "pages/Home/home.style";
 import { MovieDetail } from "interfaces/api";
 import { getWatchMedia } from "apis/configAPI";
+import SuggestSide from "components/SuggestSide/SuggestSide";
 import { StyledWatch } from "./watch.style";
 import WatchPlayer from "./module/WatchPlayer/WatchPlayer";
 import WatchContent from "./module/WatchContent/WatchContent";
@@ -32,6 +33,7 @@ const Watch = () => {
         episodeId: episode,
       });
       setWatch(response);
+      console.log(response.detailMovie);
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
@@ -61,7 +63,7 @@ const Watch = () => {
                 detailMovie={watch.detailMovie}
                 detailCurrentPlay={watch.detailCurrentPlay}
               />
-              side
+              <SuggestSide listSuggest={watch.detailMovie.likeList} />
             </div>
           </StyledWrapperLayout>
         )}

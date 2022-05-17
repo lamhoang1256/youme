@@ -5,12 +5,10 @@ export const StyledDetail = styled.div`
     display: flex;
     gap: 30px;
   }
-  .detail-thumb {
-    img {
-      width: 220px;
-      height: 310px;
-      border-radius: 20px;
-    }
+  .detail-thumb img {
+    width: 220px;
+    height: 310px;
+    border-radius: 20px;
   }
   .detail-content {
     flex: 1;
@@ -84,7 +82,7 @@ export const StyledDetail = styled.div`
     color: var(--white);
   }
   .detail-bottom {
-    margin-top: 50px;
+    margin-top: 30px;
   }
   .detail-summary {
     line-height: 1.9;
@@ -97,6 +95,9 @@ export const StyledDetail = styled.div`
   @media screen and (max-width: 767.98px) {
     .detail-top {
       flex-direction: column;
+    }
+    .detail-action {
+      margin-top: 10px;
     }
   }
 `;

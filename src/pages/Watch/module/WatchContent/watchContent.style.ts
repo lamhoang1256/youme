@@ -22,7 +22,7 @@ export const StyledWatchContent = styled.div`
       width: 10px;
       height: 10px;
       border-radius: 100rem;
-      background-color: var(--primary-color);
+      background-color: var(--secondary-color);
     }
   }
   .watch-categories {
