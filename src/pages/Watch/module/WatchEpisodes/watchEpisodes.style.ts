@@ -4,7 +4,7 @@ export const StyledWatchEpisodes = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  max-height: 60vh;
+  max-height: 38vh;
   overflow-y: auto;
   margin-right: -10px;
   button {
@@ -17,7 +17,7 @@ export const StyledWatchEpisodes = styled.div`
     color: var(--black);
   }
   button.is-active {
-    background-color: var(--primary-color);
+    background-color: var(--secondary-color);
     color: var(--white);
   }
   &::-webkit-scrollbar {

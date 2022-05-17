@@ -16,7 +16,6 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0 auto;
     @media screen and (max-width: 1023.98px) {
       padding: 0 25px;
-      
     }
     @media screen and (max-width: 767.98px) {
       padding: 0 15px;
