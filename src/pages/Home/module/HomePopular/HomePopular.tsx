@@ -51,7 +51,7 @@ const HomePopular = ({ leaderBoards }: HomePopularProps) => {
                   <img src={leaderBoard.cover} alt="Top Movie" />
                 </Link>
                 <Link to={`/detail/${leaderBoard.id}?cate=${leaderBoard.domainType}`}>
-                  <p>{leaderBoard.title}</p>
+                  <p className="popular-name">{leaderBoard.title}</p>
                 </Link>
               </StyledPopularCard>
             </div>

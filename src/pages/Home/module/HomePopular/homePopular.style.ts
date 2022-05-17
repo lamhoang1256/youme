@@ -4,8 +4,12 @@ export const StyledPopularList = styled.div`
   width: 100%;
   height: auto;
   padding-bottom: 30px;
+  margin-bottom: 40px;
   h3 {
     margin-bottom: 14px;
+  }
+  .popular-name {
+    color: var(--white);
   }
   .slick-arrow {
     display: none !important;

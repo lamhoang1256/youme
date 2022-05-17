@@ -7,7 +7,7 @@ export interface Banners {
   title: string;
 }
 
-export interface HomeSection {
+export interface IHomeSection {
   bannerProportion?: any;
   blockGroupNum?: any;
   coverType?: any;
