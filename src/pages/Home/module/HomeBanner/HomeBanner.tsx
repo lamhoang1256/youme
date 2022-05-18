@@ -45,20 +45,27 @@ const HomeBanner = () => {
   return (
     <div className="container">
       <StyledBanner>
-        <Slider {...settings}>
-          {banners.map((banner) => {
-            if (loading) {
-              return <div className="banner-loading" />;
-            }
+        {loading && (
+          <Slider {...settings}>
+            {[1, 2].map((banner) => (
+              <div className="banner-loading" key={banner} />
+            ))}
+          </Slider>
+        )}
 
-            const category = banner.jumpType === "DRAMA" ? 1 : 0;
-            return (
-              <Link to={`/detail/${banner.jumpParam}?cate=${category}`} key={banner.id}>
-                <img className="banner" src={banner.imgUrl} alt="Banner" />
-              </Link>
-            );
-          })}
-        </Slider>
+        {!loading && (
+          <Slider {...settings}>
+            {banners.map((banner) => {
+              const category = banner.jumpType === "DRAMA" ? 1 : 0;
+              const url = `/detail/${banner.jumpParam}?cate=${category}`;
+              return (
+                <Link to={url} key={banner.id}>
+                  <img className="banner" src={banner.imgUrl} alt="Banner" />
+                </Link>
+              );
+            })}
+          </Slider>
+        )}
       </StyledBanner>
     </div>
   );
