@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getLeaderBoard } from "apis/configAPI";
 import { StyledPopularCard, StyledPopularList } from "./homePopular.style";
+import SkeletonTitle from "../HomeSkeleton/SkeletonTitle";
 
 const settings = {
   dots: true,
@@ -57,21 +58,39 @@ const HomePopular = () => {
 
   return (
     <StyledPopularList>
-      <h3>Popular Movie</h3>
-      <Slider {...settings}>
-        {leaderBoards?.map((leaderBoard) => {
-          if (loading) {
-            return (
-              <StyledPopularCard>
-                <div className="popular-skeleton">
-                  <div key={leaderBoard.id}>
-                    <div className="popular-skeleton-thumb" />
-                    <div className="popular-skeleton-name" />
-                  </div>
+      {loading ? <SkeletonTitle /> : <h3>Popular Movie</h3>}
+
+      {loading && (
+        <Slider {...settings}>
+          {[1, 2, 3, 4, 5, 6].map((card) => (
+            <StyledPopularCard key={card}>
+              <div className="popular-skeleton">
+                <div>
+                  <div className="popular-skeleton-thumb" />
+                  <div className="popular-skeleton-name" />
                 </div>
+              </div>
+            </StyledPopularCard>
+          ))}
+        </Slider>
+      )}
+
+      {!loading && (
+        <Slider {...settings}>
+          {leaderBoards.map((leaderBoard) => {
+            const url = `/detail/${leaderBoard.id}?cate=${leaderBoard.domainType}`;
+            return (
+              <StyledPopularCard key={leaderBoard.id}>
+                <Link to={url}>
+                  <img className="popular-thumb" src={leaderBoard.cover} alt="Top Movie" />
+                </Link>
+                <Link to={url}>
+                  <p className="popular-name">{leaderBoard.title}</p>
+                </Link>
               </StyledPopularCard>
             );
-          }
+          })}
+          {/* {leaderBoards?.map((leaderBoard) => {
           const url = `/detail/${leaderBoard.id}?cate=${leaderBoard.domainType}`;
           return (
             <div key={leaderBoard.id}>
@@ -84,9 +103,10 @@ const HomePopular = () => {
                 </Link>
               </StyledPopularCard>
             </div>
-          );
-        })}
-      </Slider>
+          )
+        }} */}
+        </Slider>
+      )}
     </StyledPopularList>
   );
 };
