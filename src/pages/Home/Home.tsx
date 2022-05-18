@@ -1,29 +1,29 @@
 import { useEffect, useState } from "react";
 import { IHomeSection } from "interfaces/api";
 import { getHome } from "apis/configAPI";
-import { StyledHome, StyledWrapperLayout } from "./home.style";
-import { StyledHomeList } from "./module/HomeList/homeList.style";
 import HomeBanner from "./module/HomeBanner/HomeBanner";
 import HomePopular from "./module/HomePopular/HomePopular";
 import HomeList from "./module/HomeList/HomeList";
 import SkeletonCard from "./module/HomeSkeleton/SkeletonCard";
 import SkeletonTitle from "./module/HomeSkeleton/SkeletonTitle";
+import { StyledHome, StyledWrapperLayout } from "./home.style";
+import { StyledHomeList } from "./module/HomeList/homeList.style";
 
 const Home = () => {
-  const [loadingSection, setLoadingSection] = useState<boolean>(true);
+  const [loadingSections, setLoadingSections] = useState<boolean>(true);
   const [homeSections, setHomeSections] = useState<IHomeSection[]>([]);
 
   const fetchHomeSections = async () => {
-    setLoadingSection(true);
+    setLoadingSections(true);
     try {
       const { data } = await getHome({ page: 0 });
       const sectionMovies = data.recommendItems.filter(
         (section: any) => section.bannerProportion !== 1 && section.coverType === 1,
       );
       setHomeSections(sectionMovies);
-      setLoadingSection(false);
+      setLoadingSections(false);
     } catch (error) {
-      setLoadingSection(false);
+      setLoadingSections(false);
     }
   };
 
@@ -38,7 +38,7 @@ const Home = () => {
         <div className="wrapper-main">
           <HomePopular />
 
-          {loadingSection && (
+          {loadingSections && (
             <StyledHomeList>
               <SkeletonTitle />
               <div className="home-list">
@@ -48,8 +48,7 @@ const Home = () => {
               </div>
             </StyledHomeList>
           )}
-
-          {!loadingSection && (
+          {!loadingSections && (
             <>
               {homeSections.map((homeSection) => (
                 <HomeList key={homeSection.homeSectionId} homeSection={homeSection} />
