@@ -10,18 +10,8 @@ import SkeletonCard from "./module/HomeSkeleton/SkeletonCard";
 import SkeletonTitle from "./module/HomeSkeleton/SkeletonTitle";
 
 const Home = () => {
-  // const [banners, setBanners] = useState<Banners[]>([]);
   const [loadingSection, setLoadingSection] = useState<boolean>(true);
   const [homeSections, setHomeSections] = useState<IHomeSection[]>([]);
-
-  // const fetchBanners = async () => {
-  //   try {
-  //     const { data } = await getBanners({ size: 10 });
-  //     setBanners(data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   const fetchHomeSections = async () => {
     setLoadingSection(true);
