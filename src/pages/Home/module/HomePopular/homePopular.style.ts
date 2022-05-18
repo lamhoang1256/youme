@@ -1,3 +1,4 @@
+import { AnimationSkeleton } from "assets/styles/_mixins";
 import styled from "styled-components";
 
 export const StyledPopularList = styled.div`
@@ -39,11 +40,19 @@ export const StyledPopularList = styled.div`
     }
   }
   @media screen and (max-width: 767.98px) {
+    .slick-list {
+      margin-bottom: 50px;
+    }
     .slick-slide {
       margin: 0;
     }
     .slick-slider {
       margin-left: 0;
+    }
+    .slick-dots {
+      top: unset;
+      bottom: -25px;
+      text-align: center;
     }
   }
 `;
@@ -51,13 +60,28 @@ export const StyledPopularList = styled.div`
 export const StyledPopularCard = styled.div`
   height: 100%;
   padding: 0 10px;
-  img {
+  .popular-skeleton {
+    margin-left: 5px;
+  }
+  .popular-skeleton-thumb {
+    border-radius: 8px;
+    aspect-ratio: auto 792 / 445;
+    ${AnimationSkeleton}
+  }
+  .popular-skeleton-name {
+    border-radius: 4px;
+    margin-top: 10px;
+    height: 19px;
+    ${AnimationSkeleton}
+  }
+  .popular-thumb {
     width: 100%;
-    /* height: 160px; */
     border-radius: 8px;
     object-fit: cover;
+    aspect-ratio: auto 792 / 445;
+    background-color: var(--bg-load-image);
   }
-  p {
+  .popular-name {
     padding-top: 14px;
     text-align: center;
     text-overflow: ellipsis;
@@ -69,9 +93,6 @@ export const StyledPopularCard = styled.div`
   }
   @media screen and (max-width: 767.98px) {
     width: 100%;
-    /* img {
-      height: 180px;
-    } */
   }
   @media screen and (max-width: 540px) {
     padding: 0;

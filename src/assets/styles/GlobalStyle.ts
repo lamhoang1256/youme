@@ -4,10 +4,12 @@ export const GlobalStyle = createGlobalStyle`
   :root {
     --white: #fff;
     --black: #000;
-    --primary-color:#007aff;
-    --secondary-color:#e62e8f;
-    --dark-color:#080f28;
-    --max-width-container:1500px;
+    --primary-color: #007aff;
+    --secondary-color: #e62e8f;
+    --dark-color: #080f28;
+    --bg-load-image: #191a1f;
+    --bg-skeleton: #656871;
+    --max-width-container: 1500px;
   }
   .container {
     width: 100%;

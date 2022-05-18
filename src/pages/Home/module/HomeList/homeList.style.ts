@@ -7,22 +7,10 @@ export const StyledHomeList = styled.div`
   }
   .home-list {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
     grid-gap: 20px;
-    @media screen and (max-width: 1300px) {
-      grid-template-columns: repeat(4, 1fr);
-    }
-    @media screen and (max-width: 1023.98px) {
-      grid-template-columns: repeat(6, 1fr);
-    }
-    @media screen and (max-width: 879.98px) {
-      grid-template-columns: repeat(4, 1fr);
-    }
-    @media screen and (max-width: 600.98px) {
-      grid-template-columns: repeat(3, 1fr);
-    }
-    @media screen and (max-width: 450px) {
-      grid-template-columns: repeat(2, 1fr);
+    @media screen and (max-width: 640px) {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     }
   }
 `;

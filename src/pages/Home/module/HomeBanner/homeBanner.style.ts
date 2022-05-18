@@ -1,6 +1,21 @@
 import styled from "styled-components";
+import { AnimationSkeleton } from "assets/styles/_mixins";
 
 export const StyledBanner = styled.div`
+  --aspesct-radion: auto 1270 / 450;
+  aspect-ratio: var(--aspesct-radion);
+  background-color: var(--bg-skeleton);
+  border-radius: 10px;
+  .banner {
+    object-fit: cover;
+    min-height: 200px;
+  }
+  .banner-loading {
+    aspect-ratio: var(--aspesct-radion);
+    ${AnimationSkeleton}
+    background-size: 100% 100%;
+    animation-duration: 4s;
+  }
   .slick-list {
     max-height: 510px;
     height: 100%;
@@ -19,12 +34,6 @@ export const StyledBanner = styled.div`
     &::before {
       display: none;
     }
-  }
-  .banner {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    min-height: 200px;
   }
   @media screen and (max-width: 767.98px) {
     .slick-prev {
