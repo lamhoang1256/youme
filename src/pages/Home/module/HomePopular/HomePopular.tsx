@@ -59,7 +59,6 @@ const HomePopular = () => {
   return (
     <StyledPopularList>
       {loading ? <SkeletonTitle /> : <h3>Popular Movie</h3>}
-
       {loading && (
         <Slider {...settings}>
           {[1, 2, 3, 4, 5, 6].map((card) => (
@@ -74,7 +73,6 @@ const HomePopular = () => {
           ))}
         </Slider>
       )}
-
       {!loading && (
         <Slider {...settings}>
           {leaderBoards.map((leaderBoard) => {
@@ -90,21 +88,6 @@ const HomePopular = () => {
               </StyledPopularCard>
             );
           })}
-          {/* {leaderBoards?.map((leaderBoard) => {
-          const url = `/detail/${leaderBoard.id}?cate=${leaderBoard.domainType}`;
-          return (
-            <div key={leaderBoard.id}>
-              <StyledPopularCard>
-                <Link to={url}>
-                  <img className="popular-thumb" src={leaderBoard.cover} alt="Top Movie" />
-                </Link>
-                <Link to={url}>
-                  <p className="popular-name">{leaderBoard.title}</p>
-                </Link>
-              </StyledPopularCard>
-            </div>
-          )
-        }} */}
         </Slider>
       )}
     </StyledPopularList>

@@ -31,7 +31,7 @@ const HomeCard = ({ movie }: HomeCardProps) => {
           <LazyLoadImage
             className="card-thumb"
             src={movie.imageUrl}
-            alt="Thumbnail card"
+            alt="Thumbnail Card"
             effect="opacity"
           />
         </HomeCardUI>

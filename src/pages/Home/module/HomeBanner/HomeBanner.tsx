@@ -6,6 +6,7 @@ import { ButtonArrow } from "components/HomeBannerArrow/HomeBannerArrow";
 import { getBanners } from "apis/configAPI";
 import { StyledBanner } from "./homeBanner.style";
 
+const URL_PUBLIC_IMG = `${process.env.REACT_APP_PUBLIC}/images`;
 const settings = {
   dots: false,
   infinite: true,
@@ -14,12 +15,12 @@ const settings = {
   slidesToScroll: 1,
   prevArrow: (
     <ButtonArrow onClick={undefined} style={undefined} className="">
-      <img src={`${process.env.REACT_APP_PUBLIC}/images/arrow-back.svg`} alt="Prev" />
+      <img src={`${URL_PUBLIC_IMG}/arrow-back.svg`} alt="Prev" />
     </ButtonArrow>
   ),
   nextArrow: (
     <ButtonArrow onClick={undefined} style={undefined} className="">
-      <img src={`${process.env.REACT_APP_PUBLIC}/images/arrow-next.svg`} alt="Next" />
+      <img src={`${URL_PUBLIC_IMG}/arrow-next.svg`} alt="Next" />
     </ButtonArrow>
   ),
 };

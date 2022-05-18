@@ -2,29 +2,30 @@ import styled from "styled-components";
 import { AnimationSkeleton } from "assets/styles/_mixins";
 
 export const StyledBanner = styled.div`
-  --aspesct-radion: auto 1270 / 450;
-  aspect-ratio: var(--aspesct-radion);
+  --aspect-ratio: auto 1270 / 450;
+  --border-radius: 10px;
   background-color: var(--bg-skeleton);
-  border-radius: 10px;
+  border-radius: var(--border-radius);
+  aspect-ratio: var(--aspect-ratio);
   .banner {
     object-fit: cover;
     min-height: 200px;
   }
   .banner-loading {
-    aspect-ratio: var(--aspesct-radion);
     ${AnimationSkeleton}
     background-size: 100% 100%;
     animation-duration: 4s;
+    aspect-ratio: var(--aspect-ratio);
   }
   .slick-list {
     max-height: 510px;
     height: 100%;
-    border-radius: 12px;
+    border-radius: var(--border-radius);
   }
   .slick-slide > div > div {
     outline: none;
     border: none;
-    border-radius: 10px;
+    border-radius: var(--border-radius);
   }
   .slick-prev,
   .slick-next {
@@ -36,6 +37,7 @@ export const StyledBanner = styled.div`
     }
   }
   @media screen and (max-width: 767.98px) {
+    --aspect-ratio: auto 792 / 445;
     .slick-prev {
       left: 0;
     }
