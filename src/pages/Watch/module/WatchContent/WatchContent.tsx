@@ -40,10 +40,10 @@ const WatchContent = ({ detail }: WatchContentProps) => {
           <span key={tag.id}>{tag.name}</span>
         ))}
       </div>
-      {detailMovie.updateInfo.updatePeriod !== "" && (
+      {detailMovie.updateInfo?.updatePeriod !== "" && (
         <div className="watch-upcoming">
           <span className="label-small">Upcoming:</span>
-          {`Episode is updated on ${detailMovie.updateInfo.updatePeriod} every week`}
+          {`Episode is updated on ${detailMovie.updateInfo?.updatePeriod} every week`}
         </div>
       )}
       <div>

@@ -1,73 +1,66 @@
 import { useEffect, useState } from "react";
-import { Banners, IHomeSection, LeaderBoard } from "interfaces/api";
-import { getBanners, getHome, getLeaderBoard } from "apis/configAPI";
+import { IHomeSection } from "interfaces/api";
+import { getHome } from "apis/configAPI";
+import { StyledHome, StyledWrapperLayout } from "./home.style";
+import { StyledHomeList } from "./module/HomeList/homeList.style";
 import HomeBanner from "./module/HomeBanner/HomeBanner";
 import HomePopular from "./module/HomePopular/HomePopular";
-// import HomeSection from "./module/HomeSection/HomeSection";
-import { StyledHome, StyledWrapperLayout } from "./home.style";
 import HomeList from "./module/HomeList/HomeList";
-import HomeActors from "./module/HomeActors/HomeActors";
+import SkeletonCard from "./module/HomeSkeleton/SkeletonCard";
+import SkeletonTitle from "./module/HomeSkeleton/SkeletonTitle";
 
 const Home = () => {
-  const [banners, setBanners] = useState<Banners[]>([]);
-  const [leaderBoards, setLeaderBoards] = useState<LeaderBoard[]>([]);
-  const [isLoadingSection, setIsLoadingSection] = useState<boolean>(true);
+  // const [banners, setBanners] = useState<Banners[]>([]);
+  const [loadingSection, setLoadingSection] = useState<boolean>(true);
   const [homeSections, setHomeSections] = useState<IHomeSection[]>([]);
-  const [homeActors, setHomeActors] = useState<IHomeSection>(Object);
-  console.log(homeActors);
-  const fetchData = async () => {
-    try {
-      const { data } = await getBanners({ size: 10 });
-      setBanners(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
+  // const fetchBanners = async () => {
+  //   try {
+  //     const { data } = await getBanners({ size: 10 });
+  //     setBanners(data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const fetchHomeSections = async () => {
-    setIsLoadingSection(true);
+    setLoadingSection(true);
     try {
       const { data } = await getHome({ page: 0 });
-      const sectionActors = data.recommendItems.filter(
-        (section: any) => section.bannerProportion === 1,
-      )[0];
       const sectionMovies = data.recommendItems.filter(
         (section: any) => section.bannerProportion !== 1 && section.coverType === 1,
       );
-      setHomeActors(sectionActors);
       setHomeSections(sectionMovies);
-      setIsLoadingSection(false);
+      setLoadingSection(false);
     } catch (error) {
-      // console.log(error);
-      setIsLoadingSection(false);
-    }
-  };
-
-  const fetchLeaderBoard = async () => {
-    try {
-      const { data } = await getLeaderBoard();
-      setLeaderBoards(data.list);
-    } catch (error) {
-      console.log(error);
+      setLoadingSection(false);
     }
   };
 
   useEffect(() => {
-    fetchData();
-    fetchLeaderBoard();
     fetchHomeSections();
   }, []);
 
   return (
     <StyledHome>
-      <HomeBanner banners={banners} />
+      <HomeBanner />
       <StyledWrapperLayout className="container">
         <div className="wrapper-main">
-          <HomePopular leaderBoards={leaderBoards} />
-          {isLoadingSection && "Loading section"}
-          {!isLoadingSection && (
+          <HomePopular />
+
+          {loadingSection && (
+            <StyledHomeList>
+              <SkeletonTitle />
+              <div className="home-list">
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((skeleton) => (
+                  <SkeletonCard key={skeleton} />
+                ))}
+              </div>
+            </StyledHomeList>
+          )}
+
+          {!loadingSection && (
             <>
-              <HomeActors homeActors={homeActors} />
               {homeSections.map((homeSection) => (
                 <HomeList key={homeSection.homeSectionId} homeSection={homeSection} />
               ))}

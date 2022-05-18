@@ -1,3 +1,4 @@
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { StyledHomeCard } from "./homeCard.style";
 import HomeCardUI from "./HomeCardUI";
 
@@ -27,7 +28,12 @@ const HomeCard = ({ movie }: HomeCardProps) => {
     <StyledHomeCard>
       <div className="card">
         <HomeCardUI type={type} url={url}>
-          <img className="card-thumb" src={movie.imageUrl} alt="Thumbnail card" />
+          <LazyLoadImage
+            className="card-thumb"
+            src={movie.imageUrl}
+            alt="Thumbnail card"
+            effect="opacity"
+          />
         </HomeCardUI>
         <HomeCardUI type={type} url={url}>
           <p className="card-name">{movie.title}</p>

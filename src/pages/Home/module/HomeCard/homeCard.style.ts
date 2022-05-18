@@ -4,8 +4,9 @@ export const StyledHomeCard = styled.div`
   .card-thumb {
     border-radius: 6px;
     width: 100%;
-    max-height: 236px;
     object-fit: cover;
+    aspect-ratio: auto 563 / 788;
+    background-color: var(--bg-load-image);
   }
   .card-name {
     text-align: center;
