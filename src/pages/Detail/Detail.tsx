@@ -1,7 +1,7 @@
 import IonIcon from "@reacticons/ionicons";
 import { getMovieDetail } from "apis/configAPI";
+import SuggestSide from "components/SuggestSide/SuggestSide";
 import SuggestSideSkeleton from "components/SuggestSide/SuggestSideSkeleton";
-// import SuggestSide from "components/SuggestSide/SuggestSide";
 import { MovieDetail } from "interfaces/api";
 import { StyledWrapperLayout } from "pages/Home/home.style";
 import { useEffect, useState } from "react";
@@ -15,11 +15,11 @@ const Detail = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const category = Number(searchParams.get("cate"));
   const [loading, setLoading] = useState<boolean>(true);
-  const [detail, setDetail] = useState<MovieDetail>();
+  const [detail, setDetail] = useState<MovieDetail>(Object);
 
   const fetchMovieDetail = async () => {
+    setLoading(true);
     try {
-      setLoading(true);
       const { data } = await getMovieDetail({ id, category });
       setDetail(data);
       setLoading(false);
@@ -39,10 +39,10 @@ const Detail = () => {
   return (
     <StyledDetail>
       <StyledWrapperLayout className="container">
-        {loading && "Loading"}
-        {!loading && detail && (
-          <>
-            <div className="wrapper-main">
+        <div className="wrapper-main">
+          {loading && "Loading"}
+          {!loading && (
+            <>
               <div className="detail-top">
                 <div className="detail-thumb">
                   <LazyLoadImage src={detail?.coverVerticalUrl} alt="Thumbnail" effect="opacity" />
@@ -89,13 +89,13 @@ const Detail = () => {
                   effect="opacity"
                 />
               </div>
-            </div>
-            <div className="wrapper-side">
-              {/* <SuggestSide listSuggest={detail?.likeList} /> */}
-              <SuggestSideSkeleton />
-            </div>
-          </>
-        )}
+            </>
+          )}
+        </div>
+        <div className="wrapper-side">
+          {loading && <SuggestSideSkeleton />}
+          {!loading && <SuggestSide listSuggest={detail.likeList} />}
+        </div>
       </StyledWrapperLayout>
     </StyledDetail>
   );

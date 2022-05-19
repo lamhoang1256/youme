@@ -1,8 +1,8 @@
 import Slider from "react-slick";
-import { LeaderBoard } from "interfaces/api";
+import { Popular } from "interfaces/api";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getLeaderBoard } from "apis/configAPI";
+import { getHome } from "apis/configAPI";
 import SkeletonTitle from "components/Skeleton/SkeletonTitle";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { StyledPopularCard, StyledPopularList } from "./homePopular.style";
@@ -40,13 +40,16 @@ const settings = {
 
 const HomePopular = () => {
   const [loading, setLoading] = useState<boolean>(true);
-  const [leaderBoards, setLeaderBoards] = useState<LeaderBoard[]>([]);
+  const [populars, setPopulars] = useState<Popular[]>([]);
 
   const fetchLeaderBoards = async () => {
     setLoading(true);
     try {
-      const { data } = await getLeaderBoard();
-      setLeaderBoards(data.list);
+      const { data } = await getHome({ page: 0 });
+      const popular = data.recommendItems.filter(
+        (section: any) => section.homeSectionType === "BANNER",
+      )[0];
+      setPopulars(popular.recommendContentVOList);
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -76,20 +79,24 @@ const HomePopular = () => {
       )}
       {!loading && (
         <Slider {...settings}>
-          {leaderBoards.map((leaderBoard) => {
-            const url = `/detail/${leaderBoard.id}?cate=${leaderBoard.domainType}`;
+          {populars.map((popular) => {
+            const IDandCate = popular.jumpAddress.split("?id=")[1];
+            const id = Number(IDandCate.split("&type=")[0]);
+            const category = Number(IDandCate.split("&type=")[1]);
+            const url = `/detail/${id}?cate=${category}`;
+
             return (
-              <StyledPopularCard key={leaderBoard.id}>
+              <StyledPopularCard key={popular.id}>
                 <Link to={url}>
                   <LazyLoadImage
                     className="popular-thumb"
-                    src={leaderBoard.cover}
+                    src={popular.imageUrl}
                     alt="Top Movie"
                     effect="opacity"
                   />
                 </Link>
                 <Link to={url}>
-                  <p className="popular-name">{leaderBoard.title}</p>
+                  <p className="popular-name">{popular.title}</p>
                 </Link>
               </StyledPopularCard>
             );
