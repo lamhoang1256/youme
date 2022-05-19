@@ -13,10 +13,10 @@ export const StyledSuggestSide = styled.div`
   }
   .movie-thumb {
     width: 30%;
-    img {
-      border-radius: 6px;
-      object-fit: cover;
-    }
+    background-color: #3d6ef7;
+    border-radius: 6px;
+    overflow: hidden;
+    aspect-ratio: auto 170/238;
   }
   .movie-content {
     display: flex;
