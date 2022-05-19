@@ -89,8 +89,11 @@ export const StyledDetail = styled.div`
   }
   .detail-banner {
     margin: 30px 0;
-    border-radius: 14px;
-    width: 100%;
+    display: flex;
+    justify-content: center;
+    img {
+      border-radius: 14px;
+    }
   }
   @media screen and (max-width: 767.98px) {
     .detail-top {

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { getHome } from "apis/configAPI";
 import SkeletonTitle from "components/Skeleton/SkeletonTitle";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { resizeImage } from "constants/resizeImage";
 import { StyledPopularCard, StyledPopularList } from "./homePopular.style";
 
 const settings = {
@@ -90,7 +91,7 @@ const HomePopular = () => {
                 <Link to={url}>
                   <LazyLoadImage
                     className="popular-thumb"
-                    src={popular.imageUrl}
+                    src={resizeImage(popular.imageUrl, "300px")}
                     alt="Top Movie"
                     effect="opacity"
                   />
