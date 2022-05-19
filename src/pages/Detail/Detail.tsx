@@ -82,12 +82,9 @@ const Detail = () => {
                   <span className="label-small">Summary : </span>
                   {detail?.introduction}
                 </div>
-                <LazyLoadImage
-                  src={detail?.coverHorizontalUrl}
-                  className="detail-banner"
-                  alt="Banner"
-                  effect="opacity"
-                />
+                <div className="detail-banner">
+                  <LazyLoadImage src={detail?.coverHorizontalUrl} alt="Banner" effect="opacity" />
+                </div>
               </div>
             </>
           )}

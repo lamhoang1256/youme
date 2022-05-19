@@ -1,3 +1,4 @@
+import { resizeImage } from "constants/resizeImage";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { StyledHomeCard } from "./homeCard.style";
 import HomeCardUI from "./HomeCardUI";
@@ -30,7 +31,7 @@ const HomeCard = ({ movie }: HomeCardProps) => {
         <HomeCardUI type={type} url={url}>
           <LazyLoadImage
             className="card-thumb"
-            src={movie.imageUrl}
+            src={resizeImage(movie.imageUrl, "180")}
             alt="Thumbnail Card"
             effect="opacity"
           />

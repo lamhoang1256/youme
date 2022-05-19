@@ -17,13 +17,15 @@ export const StyledHomeSide = styled.div`
   }
   .side-thumb {
     width: 40%;
-    overflow: hidden;
-    border-radius: 4px;
+    img {
+      border-radius: 4px;
+    }
   }
   .side-content {
     flex: 1;
   }
   .side-name {
+    color: var(--white);
     text-overflow: ellipsis;
     overflow: hidden;
     display: -webkit-box !important;
