@@ -5,6 +5,7 @@ import SuggestSideSkeleton from "components/SuggestSide/SuggestSideSkeleton";
 import { MovieDetail } from "interfaces/api";
 import { StyledWrapperLayout } from "pages/Home/home.style";
 import { useEffect, useState } from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import { StyledDetail } from "./detail.style";
 
@@ -44,7 +45,7 @@ const Detail = () => {
             <div className="wrapper-main">
               <div className="detail-top">
                 <div className="detail-thumb">
-                  <img src={detail?.coverVerticalUrl} alt="Thumbnail" />
+                  <LazyLoadImage src={detail?.coverVerticalUrl} alt="Thumbnail" effect="opacity" />
                 </div>
                 <div className="detail-content">
                   <div className="detail-header">
@@ -81,7 +82,12 @@ const Detail = () => {
                   <span className="label-small">Summary : </span>
                   {detail?.introduction}
                 </div>
-                <img src={detail?.coverHorizontalUrl} alt="Banner" className="detail-banner" />
+                <LazyLoadImage
+                  src={detail?.coverHorizontalUrl}
+                  className="detail-banner"
+                  alt="Banner"
+                  effect="opacity"
+                />
               </div>
             </div>
             <div className="wrapper-side">

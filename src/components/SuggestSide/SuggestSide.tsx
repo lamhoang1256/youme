@@ -1,4 +1,5 @@
 import IonIcon from "@reacticons/ionicons";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
 import { StyledSuggestSide } from "./suggestSide.style";
 
@@ -47,7 +48,7 @@ const SuggestSide = ({ listSuggest, countMovieSuggest }: SuggestSideProps) => {
             <div className="movie-item" key={suggest.id}>
               <div className="movie-thumb">
                 <Link to={url}>
-                  <img src={suggest.coverVerticalUrl} alt="Thumbnail" />
+                  <LazyLoadImage src={suggest.coverVerticalUrl} alt="Thumbnail" effect="opacity" />
                 </Link>
               </div>
               <div className="movie-content">

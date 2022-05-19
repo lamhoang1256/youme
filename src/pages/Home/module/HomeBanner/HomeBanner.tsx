@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Banners } from "interfaces/api";
 import { ButtonArrow } from "components/HomeBannerArrow/HomeBannerArrow";
 import { getBanners } from "apis/configAPI";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { StyledBanner } from "./homeBanner.style";
 
 const URL_PUBLIC_IMG = `${process.env.REACT_APP_PUBLIC}/images`;
@@ -61,7 +62,12 @@ const HomeBanner = () => {
               const url = `/detail/${banner.jumpParam}?cate=${category}`;
               return (
                 <Link to={url} key={banner.id}>
-                  <img className="banner" src={banner.imgUrl} alt="Banner" />
+                  <LazyLoadImage
+                    className="banner"
+                    src={banner.imgUrl}
+                    alt="Banner"
+                    effect="opacity"
+                  />
                 </Link>
               );
             })}

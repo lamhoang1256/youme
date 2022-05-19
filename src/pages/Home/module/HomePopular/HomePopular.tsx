@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getLeaderBoard } from "apis/configAPI";
 import SkeletonTitle from "components/Skeleton/SkeletonTitle";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { StyledPopularCard, StyledPopularList } from "./homePopular.style";
 
 const settings = {
@@ -80,7 +81,12 @@ const HomePopular = () => {
             return (
               <StyledPopularCard key={leaderBoard.id}>
                 <Link to={url}>
-                  <img className="popular-thumb" src={leaderBoard.cover} alt="Top Movie" />
+                  <LazyLoadImage
+                    className="popular-thumb"
+                    src={leaderBoard.cover}
+                    alt="Top Movie"
+                    effect="opacity"
+                  />
                 </Link>
                 <Link to={url}>
                   <p className="popular-name">{leaderBoard.title}</p>
