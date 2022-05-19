@@ -7,6 +7,20 @@ export interface Banners {
   title: string;
 }
 
+export interface Popular {
+  category: number;
+  contentType: string;
+  id: number;
+  imageUrl: string;
+  jumpAddress: string;
+  jumpType: string;
+  needLogin: boolean;
+  resourceNum: number;
+  resourceStatus: number;
+  showMark: boolean;
+  title: string;
+}
+
 export interface IHomeSection {
   bannerProportion?: any;
   blockGroupNum?: any;

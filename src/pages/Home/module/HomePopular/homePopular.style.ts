@@ -82,7 +82,7 @@ export const StyledPopularCard = styled.div`
     background-color: var(--bg-load-image);
   }
   .popular-name {
-    padding-top: 14px;
+    padding-top: 10px;
     text-align: center;
     text-overflow: ellipsis;
     overflow: hidden;

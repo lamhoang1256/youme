@@ -4,7 +4,7 @@ export const StyledHome = styled.div``;
 
 export const StyledWrapperLayout = styled.div`
   display: flex;
-  gap: 30px;
+  gap: 40px;
   margin-top: 40px !important;
   .wrapper-main {
     flex: 1;

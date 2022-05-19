@@ -8,7 +8,7 @@ export const StyledHomeList = styled.div`
   .home-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
-    grid-gap: 20px;
+    grid-gap: 15px;
     @media screen and (max-width: 640px) {
       grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     }

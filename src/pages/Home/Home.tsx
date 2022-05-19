@@ -8,6 +8,7 @@ import HomeCardSkeleton from "./module/HomeCard/HomeCardSkeleton";
 import SkeletonTitle from "../../components/Skeleton/SkeletonTitle";
 import { StyledHome, StyledWrapperLayout } from "./home.style";
 import { StyledHomeList } from "./module/HomeList/homeList.style";
+import HomeSide from "./module/HomeSide/HomeSide";
 
 const Home = () => {
   const [loadingSections, setLoadingSections] = useState<boolean>(true);
@@ -27,21 +28,8 @@ const Home = () => {
     }
   };
 
-  const fetchTrendingSide = async () => {
-    try {
-      const { data } = await getHome({ page: 0 });
-      const trendingData = data.recommendItems.filter(
-        (section: any) => section.homeSectionType === "BANNER",
-      )[0];
-      console.log("banner", trendingData);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
     fetchHomeSections();
-    fetchTrendingSide();
   }, []);
 
   return (
@@ -69,10 +57,24 @@ const Home = () => {
             </>
           )}
         </div>
-        <div className="wrapper-side">Side</div>
+        <div className="wrapper-side">
+          <HomeSide />
+        </div>
       </StyledWrapperLayout>
     </StyledHome>
   );
 };
 
 export default Home;
+
+// category: 1
+// contentType: "DRAMA"
+// id: 15870
+// imageUrl: "https://img.netpop.app/cover/20220415/1649993224652_1a1324cdda65685844de7ea9ee348a70ofU2TlwDOOuWtQ456jeGwRNkyp2.jpg"
+// jumpAddress: "tiktik://jump/detail?id=15870&type=1"
+// jumpType: ""
+// needLogin: false
+// resourceNum: 6
+// resourceStatus: 2
+// showMark: true
+// title: "The Sound of Magic"
