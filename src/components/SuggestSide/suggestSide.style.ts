@@ -1,13 +1,11 @@
 import styled from "styled-components";
 
 export const StyledSuggestSide = styled.div`
-  .suggest-label {
-    margin-bottom: 20px;
-  }
   .movie-list {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 20px;
+    margin-top: 20px;
   }
   .movie-item {
     display: flex;
