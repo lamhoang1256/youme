@@ -6,10 +6,14 @@ export const StyledBanner = styled.div`
   --border-radius: 10px;
   background-color: var(--bg-skeleton);
   border-radius: var(--border-radius);
-  aspect-ratio: var(--aspect-ratio);
+  height: 500px;
   .banner {
     object-fit: cover;
     min-height: 200px;
+    /* img { */
+    width: 100%;
+    height: 100%;
+    /* } */
   }
   .banner-loading {
     ${AnimationSkeleton}
@@ -32,6 +36,10 @@ export const StyledBanner = styled.div`
     width: 40px;
     height: 40px;
     z-index: 100;
+    img {
+      width: 100%;
+      height: 100%;
+    }
     &::before {
       display: none;
     }

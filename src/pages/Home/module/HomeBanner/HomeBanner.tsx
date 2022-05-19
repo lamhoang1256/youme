@@ -5,7 +5,6 @@ import { Banners } from "interfaces/api";
 import { ButtonArrow } from "components/HomeBannerArrow/HomeBannerArrow";
 import { getBanners } from "apis/configAPI";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { resizeImage } from "constants/resizeImage";
 import { StyledBanner } from "./homeBanner.style";
 
 const URL_PUBLIC_IMG = `${process.env.REACT_APP_PUBLIC}/images`;
@@ -48,11 +47,7 @@ const HomeBanner = () => {
   return (
     <div className="container">
       <StyledBanner>
-        {loading && (
-          // <Slider {...settings}>
-          <div className="banner-loading" />
-          // </Slider>
-        )}
+        {loading && <div className="banner-loading" />}
 
         {!loading && (
           <Slider {...settings}>
@@ -63,7 +58,7 @@ const HomeBanner = () => {
                 <Link to={url} key={banner.id}>
                   <LazyLoadImage
                     className="banner"
-                    src={resizeImage(banner.imgUrl, "1440px")}
+                    src={`${banner.imgUrl}?imageMogr2/format/webp/format/webp`}
                     alt="Banner"
                     effect="opacity"
                   />

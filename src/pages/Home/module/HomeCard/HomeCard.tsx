@@ -29,12 +29,13 @@ const HomeCard = ({ movie }: HomeCardProps) => {
     <StyledHomeCard>
       <div className="card">
         <HomeCardUI type={type} url={url}>
-          <LazyLoadImage
-            className="card-thumb"
-            src={resizeImage(movie.imageUrl, "180")}
-            alt="Thumbnail Card"
-            effect="opacity"
-          />
+          <div className="card-thumb">
+            <LazyLoadImage
+              src={resizeImage(movie.imageUrl, "180")}
+              alt="Thumbnail Card"
+              effect="opacity"
+            />
+          </div>
         </HomeCardUI>
         <HomeCardUI type={type} url={url}>
           <p className="card-name">{movie.title}</p>

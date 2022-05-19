@@ -2,11 +2,20 @@ import styled from "styled-components";
 
 export const StyledHomeCard = styled.div`
   .card-thumb {
-    border-radius: 6px;
+    position: relative;
+    padding-top: 140%;
+    background-color: var(--bg-load-image);
     width: 100%;
     object-fit: cover;
-    aspect-ratio: auto 563 / 788;
-    background-color: var(--bg-load-image);
+    .lazy-load-image-background {
+      position: absolute;
+      inset: 0;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    img {
+      height: 100%;
+    }
   }
   .card-name {
     text-align: center;
