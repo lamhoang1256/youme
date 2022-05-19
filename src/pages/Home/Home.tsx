@@ -4,8 +4,8 @@ import { getHome } from "apis/configAPI";
 import HomeBanner from "./module/HomeBanner/HomeBanner";
 import HomePopular from "./module/HomePopular/HomePopular";
 import HomeList from "./module/HomeList/HomeList";
-import SkeletonCard from "./module/HomeSkeleton/SkeletonCard";
-import SkeletonTitle from "./module/HomeSkeleton/SkeletonTitle";
+import HomeCardSkeleton from "./module/HomeCard/HomeCardSkeleton";
+import SkeletonTitle from "../../components/Skeleton/SkeletonTitle";
 import { StyledHome, StyledWrapperLayout } from "./home.style";
 import { StyledHomeList } from "./module/HomeList/homeList.style";
 
@@ -27,8 +27,21 @@ const Home = () => {
     }
   };
 
+  const fetchTrendingSide = async () => {
+    try {
+      const { data } = await getHome({ page: 0 });
+      const trendingData = data.recommendItems.filter(
+        (section: any) => section.homeSectionType === "BANNER",
+      )[0];
+      console.log("banner", trendingData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     fetchHomeSections();
+    fetchTrendingSide();
   }, []);
 
   return (
@@ -43,7 +56,7 @@ const Home = () => {
               <SkeletonTitle />
               <div className="home-list">
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((skeleton) => (
-                  <SkeletonCard key={skeleton} />
+                  <HomeCardSkeleton key={skeleton} />
                 ))}
               </div>
             </StyledHomeList>

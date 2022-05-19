@@ -1,6 +1,6 @@
 import IonIcon from "@reacticons/ionicons";
 import { getMovieDetail } from "apis/configAPI";
-import SuggestSide from "components/SuggestSide/SuggestSide";
+import SuggestSideSkeleton from "components/SuggestSide/SuggestSideSkeleton";
 // import SuggestSide from "components/SuggestSide/SuggestSide";
 import { MovieDetail } from "interfaces/api";
 import { StyledWrapperLayout } from "pages/Home/home.style";
@@ -13,17 +13,17 @@ const Detail = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [searchParams, setSearchParams] = useSearchParams();
   const category = Number(searchParams.get("cate"));
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [detail, setDetail] = useState<MovieDetail>();
 
   const fetchMovieDetail = async () => {
     try {
-      setIsLoading(true);
+      setLoading(true);
       const { data } = await getMovieDetail({ id, category });
       setDetail(data);
-      setIsLoading(false);
+      setLoading(false);
     } catch (error) {
-      setIsLoading(false);
+      setLoading(false);
     }
   };
 
@@ -38,8 +38,8 @@ const Detail = () => {
   return (
     <StyledDetail>
       <StyledWrapperLayout className="container">
-        {isLoading && "Loading"}
-        {!isLoading && detail && (
+        {loading && "Loading"}
+        {!loading && detail && (
           <>
             <div className="wrapper-main">
               <div className="detail-top">
@@ -85,7 +85,8 @@ const Detail = () => {
               </div>
             </div>
             <div className="wrapper-side">
-              <SuggestSide listSuggest={detail?.likeList} />
+              {/* <SuggestSide listSuggest={detail?.likeList} /> */}
+              <SuggestSideSkeleton />
             </div>
           </>
         )}

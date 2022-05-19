@@ -3,8 +3,8 @@ import { LeaderBoard } from "interfaces/api";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getLeaderBoard } from "apis/configAPI";
+import SkeletonTitle from "components/Skeleton/SkeletonTitle";
 import { StyledPopularCard, StyledPopularList } from "./homePopular.style";
-import SkeletonTitle from "../HomeSkeleton/SkeletonTitle";
 
 const settings = {
   dots: true,
