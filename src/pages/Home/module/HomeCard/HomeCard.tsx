@@ -27,20 +27,18 @@ const HomeCard = ({ movie }: HomeCardProps) => {
   const type = Number.isNaN(category) ? "actor" : "movie";
   return (
     <StyledHomeCard>
-      <div className="card">
-        <HomeCardUI type={type} url={url}>
-          <div className="card-thumb">
-            <LazyLoadImage
-              src={resizeImage(movie.imageUrl, "180")}
-              alt="Thumbnail Card"
-              effect="opacity"
-            />
-          </div>
-        </HomeCardUI>
-        <HomeCardUI type={type} url={url}>
-          <p className="card-name">{movie.title}</p>
-        </HomeCardUI>
-      </div>
+      <HomeCardUI type={type} url={url}>
+        <div className="card-thumb">
+          <LazyLoadImage
+            src={resizeImage(movie.imageUrl, "180")}
+            alt="Thumbnail Card"
+            effect="opacity"
+          />
+        </div>
+      </HomeCardUI>
+      <HomeCardUI type={type} url={url}>
+        <p className="card-name">{movie.title}</p>
+      </HomeCardUI>
     </StyledHomeCard>
   );
 };

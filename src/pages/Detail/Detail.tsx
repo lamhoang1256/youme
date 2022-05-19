@@ -2,6 +2,7 @@ import IonIcon from "@reacticons/ionicons";
 import { getMovieDetail } from "apis/configAPI";
 import SuggestSide from "components/SuggestSide/SuggestSide";
 import SuggestSideSkeleton from "components/SuggestSide/SuggestSideSkeleton";
+import { resizeImage } from "constants/resizeImage";
 import { MovieDetail } from "interfaces/api";
 import { StyledWrapperLayout } from "pages/Home/home.style";
 import { useEffect, useState } from "react";
@@ -45,7 +46,11 @@ const Detail = () => {
             <>
               <div className="detail-top">
                 <div className="detail-thumb">
-                  <LazyLoadImage src={detail?.coverVerticalUrl} alt="Thumbnail" effect="opacity" />
+                  <LazyLoadImage
+                    src={resizeImage(detail?.coverVerticalUrl, "220px", "310px")}
+                    alt="Thumbnail"
+                    effect="opacity"
+                  />
                 </div>
                 <div className="detail-content">
                   <div className="detail-header">
