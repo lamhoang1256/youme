@@ -1,15 +1,14 @@
-import IonIcon from "@reacticons/ionicons";
+import { useEffect, useState } from "react";
+import { useParams, useSearchParams } from "react-router-dom";
+import { MovieDetail } from "interfaces/api";
 import { getMovieDetail } from "apis/configAPI";
+import { StyledWrapperLayout } from "pages/Home/home.style";
 import SuggestSide from "components/SuggestSide/SuggestSide";
 import SuggestSideSkeleton from "components/SuggestSide/SuggestSideSkeleton";
-import { resizeImage } from "constants/resizeImage";
-import { MovieDetail } from "interfaces/api";
-import { StyledWrapperLayout } from "pages/Home/home.style";
-import { useEffect, useState } from "react";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import { Link, useParams, useSearchParams } from "react-router-dom";
-import { StyledDetail } from "./detail.style";
+import DetailHeader from "./module/DetailHeader/DetailHeader";
+import DetailDescription from "./module/DetailDescription/DetailDescription";
 import DetailSkeleton from "./module/DetailSkeleton/DetailSkeleton";
+import { StyledDetail } from "./detail.style";
 
 const Detail = () => {
   const id = Number(useParams().id);
@@ -40,66 +39,23 @@ const Detail = () => {
 
   return (
     <StyledDetail>
-      <StyledWrapperLayout className="container">
-        <div className="wrapper-main">
-          {loading && <DetailSkeleton />}
-          {!loading && (
-            <>
-              <div className="detail-top">
-                <div className="detail-thumb">
-                  <LazyLoadImage
-                    src={resizeImage(detail?.coverVerticalUrl, "220px", "310px")}
-                    alt="Thumbnail"
-                    effect="opacity"
-                  />
-                </div>
-                <div className="detail-content">
-                  <div className="detail-header">
-                    <h2 className="detail-heading">{detail?.name}</h2>
-                    <div className="detail-score">
-                      <IonIcon name="star-outline" />
-                      {detail?.score}
-                    </div>
-                  </div>
-                  <div className="detail-introduction">{detail?.introduction}</div>
-                  <div className="detail-categoríes">
-                    <h4>Categories: </h4>
-                    {detail?.tagNameList.map((tag) => (
-                      <span key={tag}>{tag}</span>
-                    ))}
-                  </div>
-                  <div className="detail-action">
-                    <Link to={`/watch/${detail?.id}?cate=${detail?.category}`}>
-                      <button type="button" className="detail-watch">
-                        Watch Now
-                      </button>
-                    </Link>
-                    <button type="button" className="detail-button detail-favorite">
-                      <IonIcon name="heart" />
-                    </button>
-                    <button type="button" className="detail-button detail-share">
-                      <IonIcon name="share-social-outline" />
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <div className="detail-bottom">
-                <div className="detail-summary">
-                  <span className="label-small">Summary : </span>
-                  {detail?.introduction}
-                </div>
-                <div className="detail-banner">
-                  <LazyLoadImage src={detail?.coverHorizontalUrl} alt="Banner" effect="opacity" />
-                </div>
-              </div>
-            </>
-          )}
-        </div>
-        <div className="wrapper-side">
-          {loading && <SuggestSideSkeleton />}
-          {!loading && <SuggestSide listSuggest={detail.likeList} />}
-        </div>
-      </StyledWrapperLayout>
+      <div className="container">
+        <StyledWrapperLayout>
+          <div className="wrapper-main">
+            {!loading && (
+              <>
+                <DetailHeader detail={detail} />
+                <DetailDescription detail={detail} />
+              </>
+            )}
+            {loading && <DetailSkeleton />}
+          </div>
+          <div className="wrapper-side">
+            {!loading && <SuggestSide listSuggest={detail.likeList} />}
+            {loading && <SuggestSideSkeleton />}
+          </div>
+        </StyledWrapperLayout>
+      </div>
     </StyledDetail>
   );
 };

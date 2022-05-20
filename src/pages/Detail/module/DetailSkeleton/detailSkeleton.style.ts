@@ -13,7 +13,7 @@ export const StyleDetailSkeleton = styled.div`
       border-radius: 20px;
       ${AnimationSkeleton}
     }
-    &-content {
+    &-main {
       flex: 1;
       gap: 13px;
       display: flex;
