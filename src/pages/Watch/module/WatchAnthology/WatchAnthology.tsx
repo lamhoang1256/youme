@@ -1,15 +1,15 @@
-import { MovieDetail } from "interfaces/api";
 import { Link } from "react-router-dom";
-import { StyledWatchEpisodes } from "./watchEpisodes.style";
+import { MovieDetail } from "interfaces/api";
+import { StyledWatchAnthology } from "./watchAnthology.style";
 
-interface WatchEpisodesProps {
+interface WatchAnthologyProps {
   detailMovie: MovieDetail;
   detailCurrentPlay: any;
 }
 
-const WatchEpisodes = ({ detailMovie, detailCurrentPlay }: WatchEpisodesProps) => {
+const WatchAnthology = ({ detailMovie, detailCurrentPlay }: WatchAnthologyProps) => {
   return (
-    <StyledWatchEpisodes>
+    <StyledWatchAnthology>
       {detailMovie.episodeVo.map((ep) => {
         const active = ep.seriesNo === detailCurrentPlay.seriesNo ? "is-active" : undefined;
         return (
@@ -23,8 +23,8 @@ const WatchEpisodes = ({ detailMovie, detailCurrentPlay }: WatchEpisodesProps) =
           </Link>
         );
       })}
-    </StyledWatchEpisodes>
+    </StyledWatchAnthology>
   );
 };
 
-export default WatchEpisodes;
+export default WatchAnthology;

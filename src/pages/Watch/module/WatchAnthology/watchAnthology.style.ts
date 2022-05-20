@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
-export const StyledWatchEpisodes = styled.div`
+export const StyledWatchAnthology = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   max-height: 38vh;
   overflow-y: auto;
   margin-right: -10px;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   button {
     width: 40px;
     height: 40px;
