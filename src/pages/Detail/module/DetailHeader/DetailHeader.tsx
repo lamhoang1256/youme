@@ -1,0 +1,55 @@
+import IonIcon from "@reacticons/ionicons";
+import { resizeImage } from "constants/resizeImage";
+import { MovieDetail } from "interfaces/api";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { Link } from "react-router-dom";
+import { StyledDetailHeader } from "./detailHeader.style";
+
+interface DetailHeaderProps {
+  detail: MovieDetail;
+}
+
+const DetailHeader = ({ detail }: DetailHeaderProps) => {
+  return (
+    <StyledDetailHeader>
+      <div className="detail-thumb">
+        <LazyLoadImage
+          src={resizeImage(detail?.coverVerticalUrl, "220px", "310px")}
+          alt="Thumbnail"
+          effect="opacity"
+        />
+      </div>
+      <div className="detail-main">
+        <div className="detail-header">
+          <h2 className="detail-heading">{detail?.name}</h2>
+          <div className="detail-score">
+            <IonIcon name="star-outline" />
+            {detail?.score}
+          </div>
+        </div>
+        <div className="detail-introduction">{detail?.introduction}</div>
+        <div className="detail-categoríes">
+          <h4>Categories: </h4>
+          {detail?.tagNameList.map((tag) => (
+            <span key={tag}>{tag}</span>
+          ))}
+        </div>
+        <div className="detail-action">
+          <Link to={`/watch/${detail?.id}?cate=${detail?.category}`}>
+            <button type="button" className="detail-watch">
+              Watch Now
+            </button>
+          </Link>
+          <button type="button" className="detail-button detail-favorite">
+            <IonIcon name="heart" />
+          </button>
+          <button type="button" className="detail-button detail-share">
+            <IonIcon name="share-social-outline" />
+          </button>
+        </div>
+      </div>
+    </StyledDetailHeader>
+  );
+};
+
+export default DetailHeader;

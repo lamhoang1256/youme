@@ -5,7 +5,7 @@ const DetailSkeleton = () => {
     <StyleDetailSkeleton>
       <div className="skeleton-top">
         <div className="skeleton-thumb" />
-        <div className="skeleton-content">
+        <div className="skeleton-main">
           <div className="skeleton-header">
             <div className="skeleton-heading" />
             <div className="skeleton-score" />
