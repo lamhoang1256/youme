@@ -1,8 +1,8 @@
-import IonIcon from "@reacticons/ionicons";
+import { Link } from "react-router-dom";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { resizeImage } from "constants/resizeImage";
 import { MovieDetail } from "interfaces/api";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import { Link } from "react-router-dom";
+import IonIcon from "@reacticons/ionicons";
 import { StyledDetailHeader } from "./detailHeader.style";
 
 interface DetailHeaderProps {
@@ -10,6 +10,8 @@ interface DetailHeaderProps {
 }
 
 const DetailHeader = ({ detail }: DetailHeaderProps) => {
+  const url = `/watch/${detail?.id}?cate=${detail?.category}`;
+
   return (
     <StyledDetailHeader>
       <div className="detail-thumb">
@@ -35,7 +37,7 @@ const DetailHeader = ({ detail }: DetailHeaderProps) => {
           ))}
         </div>
         <div className="detail-action">
-          <Link to={`/watch/${detail?.id}?cate=${detail?.category}`}>
+          <Link to={url}>
             <button type="button" className="detail-watch">
               Watch Now
             </button>

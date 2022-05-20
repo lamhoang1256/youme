@@ -2,9 +2,9 @@ import IonIcon from "@reacticons/ionicons";
 import { resizeImage } from "constants/resizeImage";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
-import { StyledSuggestSide } from "./suggestSide.style";
+import { StyledSideRelated } from "./sideRelated.style";
 
-interface SuggestSideProps {
+interface SideRelatedProps {
   listSuggest: {
     areaList: [
       {
@@ -38,9 +38,9 @@ const defaultProps = {
   countMovieSuggest: 6,
 };
 
-const SuggestSide = ({ listSuggest, countMovieSuggest }: SuggestSideProps) => {
+const SideRelated = ({ listSuggest, countMovieSuggest }: SideRelatedProps) => {
   return (
-    <StyledSuggestSide>
+    <StyledSideRelated>
       <h3>You may like</h3>
       <div className="movie-list">
         {listSuggest.slice(0, countMovieSuggest).map((suggest) => {
@@ -79,10 +79,10 @@ const SuggestSide = ({ listSuggest, countMovieSuggest }: SuggestSideProps) => {
           );
         })}
       </div>
-    </StyledSuggestSide>
+    </StyledSideRelated>
   );
 };
 
-SuggestSide.defaultProps = defaultProps;
+SideRelated.defaultProps = defaultProps;
 
-export default SuggestSide;
+export default SideRelated;

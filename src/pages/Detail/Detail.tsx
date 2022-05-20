@@ -3,8 +3,8 @@ import { useParams, useSearchParams } from "react-router-dom";
 import { MovieDetail } from "interfaces/api";
 import { getMovieDetail } from "apis/configAPI";
 import { StyledWrapperLayout } from "pages/Home/home.style";
-import SuggestSide from "components/SuggestSide/SuggestSide";
-import SuggestSideSkeleton from "components/SuggestSide/SuggestSideSkeleton";
+import SideRelated from "components/SideRelated/SideRelated";
+import SkeletonSideRelated from "components/Skeleton/SkeletonSideRelated";
 import DetailHeader from "./module/DetailHeader/DetailHeader";
 import DetailDescription from "./module/DetailDescription/DetailDescription";
 import DetailSkeleton from "./module/DetailSkeleton/DetailSkeleton";
@@ -51,8 +51,8 @@ const Detail = () => {
             {loading && <DetailSkeleton />}
           </div>
           <div className="wrapper-side">
-            {!loading && <SuggestSide listSuggest={detail.likeList} />}
-            {loading && <SuggestSideSkeleton />}
+            {!loading && <SideRelated listSuggest={detail.likeList} />}
+            {loading && <SkeletonSideRelated />}
           </div>
         </StyledWrapperLayout>
       </div>

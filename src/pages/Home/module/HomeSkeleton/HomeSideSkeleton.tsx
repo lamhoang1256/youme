@@ -1,5 +1,6 @@
-import { AnimationSkeleton } from "assets/styles/_mixins";
+import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
+import { AnimationSkeleton } from "assets/styles/_mixins";
 
 const StyledHomeSideSkeleton = styled.div`
   .skeleton-list {
@@ -41,15 +42,17 @@ const HomeSideSkeleton = () => {
   return (
     <StyledHomeSideSkeleton>
       <div className="skeleton-list">
-        {[1, 2, 3, 4].map((skeleton) => (
-          <div className="skeleton-item" key={skeleton}>
-            <div className="skeleton-thumb" />
-            <div className="skeleton-content">
-              <div className="skeleton-rank" />
-              <div className="skeleton-name" />
+        {Array(4)
+          .fill(0)
+          .map(() => (
+            <div className="skeleton-item" key={uuidv4()}>
+              <div className="skeleton-thumb" />
+              <div className="skeleton-content">
+                <div className="skeleton-rank" />
+                <div className="skeleton-name" />
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </StyledHomeSideSkeleton>
   );

@@ -1,6 +1,7 @@
+import { v4 as uuidv4 } from "uuid";
+import styled from "styled-components";
 import SkeletonTitle from "components/Skeleton/SkeletonTitle";
 import { AnimationSkeleton } from "assets/styles/_mixins";
-import styled from "styled-components";
 
 export const StyledSideSkeleton = styled.div`
   --aspect-ratio: auto 1333 / 1866;
@@ -73,30 +74,32 @@ export const StyledSideSkeleton = styled.div`
   }
 `;
 
-const SuggestSideSkeleton = () => {
+const SkeletonSideRelated = () => {
   return (
     <StyledSideSkeleton>
       <SkeletonTitle />
       <div className="skeleton-list">
-        {[1, 2, 3, 4, 5, 6].map((suggest) => (
-          <div className="skeleton-item" key={suggest}>
-            <div className="skeleton-thumb" />
-            <div className="skeleton-content">
-              <div className="skeleton-top">
-                <div className="skeleton-name" />
-                <div className="skeleton-category" />
-                <div className="skeleton-rate" />
-              </div>
-              <div className="skeleton-bottom">
-                <div className="skeleton-bottom-item" />
-                <div className="skeleton-bottom-item" />
+        {Array(6)
+          .fill(0)
+          .map(() => (
+            <div className="skeleton-item" key={uuidv4()}>
+              <div className="skeleton-thumb" />
+              <div className="skeleton-content">
+                <div className="skeleton-top">
+                  <div className="skeleton-name" />
+                  <div className="skeleton-category" />
+                  <div className="skeleton-rate" />
+                </div>
+                <div className="skeleton-bottom">
+                  <div className="skeleton-bottom-item" />
+                  <div className="skeleton-bottom-item" />
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </StyledSideSkeleton>
   );
 };
 
-export default SuggestSideSkeleton;
+export default SkeletonSideRelated;

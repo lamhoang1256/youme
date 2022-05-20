@@ -1,11 +1,11 @@
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { LeaderBoard } from "interfaces/api";
 import { getLeaderBoard } from "apis/configAPI";
 import { resizeImage } from "constants/resizeImage";
-import { LeaderBoard } from "interfaces/api";
-import { useEffect, useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { Link } from "react-router-dom";
+import HomeSideSkeleton from "../HomeSkeleton/HomeSideSkeleton";
 import { StyledHomeSide } from "./homeSide.style";
-import HomeSideSkeleton from "./HomeSideSkeleton";
 
 const HomeSide = () => {
   const [loading, setLoading] = useState<boolean>(true);

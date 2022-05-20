@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledSuggestSide = styled.div`
+export const StyledSideRelated = styled.div`
   .movie-list {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
