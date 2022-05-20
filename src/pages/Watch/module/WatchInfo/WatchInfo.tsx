@@ -1,23 +1,23 @@
 import IonIcon from "@reacticons/ionicons";
 import { MovieBeingWatched, MovieDetail } from "interfaces/api";
-import { StyledWatchContent } from "./watchContent.style";
+import { StyledWatchInfo } from "./watchInfo.style";
 
-interface WatchContentProps {
+interface WatchInfoProps {
   detail: {
     detailMovie: MovieDetail;
     detailCurrentPlay: MovieBeingWatched;
   };
 }
 
-const WatchContent = ({ detail }: WatchContentProps) => {
+const WatchInfo = ({ detail }: WatchInfoProps) => {
   const { detailMovie, detailCurrentPlay } = detail;
 
   return (
-    <StyledWatchContent>
+    <StyledWatchInfo>
       <h2>
         {detailMovie.name} - Ep {detailCurrentPlay.seriesNo}
       </h2>
-      <ul className="watch-parameter">
+      <ul className="watch-statistics">
         <li>
           <IonIcon name="star-outline" /> {detailMovie.score}
         </li>
@@ -50,8 +50,8 @@ const WatchContent = ({ detail }: WatchContentProps) => {
         <span className="label-small">Summary : </span>
         {detailMovie.introduction}
       </div>
-    </StyledWatchContent>
+    </StyledWatchInfo>
   );
 };
 
-export default WatchContent;
+export default WatchInfo;

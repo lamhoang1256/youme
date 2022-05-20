@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-export const StyledWatchContent = styled.div`
+export const StyledWatchInfo = styled.div`
   padding-top: 20px;
   line-height: 1.7;
-  .watch-parameter {
+  .watch-statistics {
     --gap-space: 32px;
     display: flex;
     gap: var(--gap-space);
