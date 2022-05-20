@@ -1,14 +1,14 @@
 import { ReactNode } from "react";
-import { StyledIcon } from "./homeBannerArrow.style";
+import { StyledIcon } from "./SliderArrow.style";
 
-interface ButtonProps {
+interface SliderArrowProps {
   className: string;
   style: any;
   onClick: any;
   children: ReactNode;
 }
 
-export const ButtonArrow = (props: ButtonProps) => {
+export const SliderArrow = (props: SliderArrowProps) => {
   const { className, style, onClick, children } = props;
   return (
     <div

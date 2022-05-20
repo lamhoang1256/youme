@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
 
 const StyledAnthologySkeleton = styled.div`
@@ -16,9 +17,11 @@ const StyledAnthologySkeleton = styled.div`
 const WatchAnthologySkeleton = () => {
   return (
     <StyledAnthologySkeleton>
-      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((button) => (
-        <div key={button} className="skeleton-button" />
-      ))}
+      {Array(12)
+        .fill(0)
+        .map(() => (
+          <div key={uuidv4()} className="skeleton-button" />
+        ))}
     </StyledAnthologySkeleton>
   );
 };
