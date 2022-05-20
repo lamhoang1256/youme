@@ -57,7 +57,7 @@ const HomeBanner = () => {
               return (
                 <Link to={url} key={banner.id}>
                   <LazyLoadImage
-                    className="banner"
+                    className="banner-img"
                     src={`${banner.imgUrl}?imageMogr2/format/webp/format/webp`}
                     alt="Banner"
                     effect="opacity"
