@@ -1,22 +1,26 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import MainLayout from "layouts/MainLayout";
-import Home from "pages/Home/Home";
-import Login from "pages/Login/Login";
-import Detail from "pages/Detail/Detail";
-import Watch from "pages/Watch/Watch";
+import React, { Suspense } from "react";
+
+const MainLayout = React.lazy(() => import("layouts/MainLayout"));
+const Home = React.lazy(() => import("pages/Home/Home"));
+const Login = React.lazy(() => import("pages/Login/Login"));
+const Detail = React.lazy(() => import("pages/Detail/Detail"));
+const Watch = React.lazy(() => import("pages/Watch/Watch"));
 
 const App = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<MainLayout />}>
-          <Route index element={<Home />} />
-          <Route path="/detail/:id" element={<Detail />} />
-          <Route path="/watch/:id" element={<Watch />} />
-        </Route>
-        <Route path="/login" element={<Login />} />
-      </Routes>
-    </Router>
+    <Suspense>
+      <Router>
+        <Routes>
+          <Route path="/" element={<MainLayout />}>
+            <Route index element={<Home />} />
+            <Route path="/detail/:id" element={<Detail />} />
+            <Route path="/watch/:id" element={<Watch />} />
+          </Route>
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </Router>
+    </Suspense>
   );
 };
 

@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import { StyledDetail } from "./detail.style";
+import DetailSkeleton from "./module/DetailSkeleton/DetailSkeleton";
 
 const Detail = () => {
   const id = Number(useParams().id);
@@ -41,7 +42,7 @@ const Detail = () => {
     <StyledDetail>
       <StyledWrapperLayout className="container">
         <div className="wrapper-main">
-          {loading && "Loading"}
+          {loading && <DetailSkeleton />}
           {!loading && (
             <>
               <div className="detail-top">

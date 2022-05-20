@@ -4,11 +4,11 @@ import { getHome } from "apis/configAPI";
 import HomeBanner from "./module/HomeBanner/HomeBanner";
 import HomePopular from "./module/HomePopular/HomePopular";
 import HomeList from "./module/HomeList/HomeList";
+import HomeSide from "./module/HomeSide/HomeSide";
 import HomeCardSkeleton from "./module/HomeCard/HomeCardSkeleton";
 import SkeletonTitle from "../../components/Skeleton/SkeletonTitle";
 import { StyledHome, StyledWrapperLayout } from "./home.style";
 import { StyledHomeList } from "./module/HomeList/homeList.style";
-import HomeSide from "./module/HomeSide/HomeSide";
 
 const Home = () => {
   const [loadingSections, setLoadingSections] = useState<boolean>(true);
