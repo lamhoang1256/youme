@@ -6,6 +6,7 @@ const Home = React.lazy(() => import("pages/Home/Home"));
 const Login = React.lazy(() => import("pages/Login/Login"));
 const Detail = React.lazy(() => import("pages/Detail/Detail"));
 const Watch = React.lazy(() => import("pages/Watch/Watch"));
+const Explore = React.lazy(() => import("pages/Explore/Explore"));
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
             <Route index element={<Home />} />
             <Route path="/detail/:id" element={<Detail />} />
             <Route path="/watch/:id" element={<Watch />} />
+            <Route path="/explore" element={<Explore />} />
           </Route>
           <Route path="/login" element={<Login />} />
         </Routes>

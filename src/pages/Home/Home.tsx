@@ -3,11 +3,11 @@ import { v4 as uuidv4 } from "uuid";
 import { IHomeSection } from "interfaces/api";
 import { getHome } from "apis/configAPI";
 import SkeletonTitle from "components/Skeleton/SkeletonTitle";
+import SkeletonMovieCard from "components/Skeleton/SkeletonMovieCard";
 import HomeBanner from "./module/HomeBanner/HomeBanner";
 import HomePopular from "./module/HomePopular/HomePopular";
 import HomeList from "./module/HomeList/HomeList";
 import HomeSide from "./module/HomeSide/HomeSide";
-import HomeCardSkeleton from "./module/HomeSkeleton/HomeCardSkeleton";
 import { StyledHome, StyledWrapperLayout } from "./home.style";
 import { StyledHomeList } from "./module/HomeList/homeList.style";
 
@@ -46,7 +46,7 @@ const Home = () => {
                 {Array(12)
                   .fill(0)
                   .map(() => (
-                    <HomeCardSkeleton key={uuidv4()} />
+                    <SkeletonMovieCard key={uuidv4()} />
                   ))}
               </div>
             </StyledHomeList>

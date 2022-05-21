@@ -1,4 +1,4 @@
-import { MediaParams } from "interfaces/api";
+import { FilterByCategory, MediaParams } from "interfaces/api";
 import axiosClient from "./axiosClient";
 
 const URL = process.env.REACT_APP_API;
@@ -32,6 +32,16 @@ export const getMovieMedia = (params: MediaParams) => {
 export const getWatchAPI = (params: MediaParams) => {
   const url = `${URL}/media/previewInfo`;
   return axiosClient.get(url, { params });
+};
+
+export const getAllGenres = () => {
+  const url = `${URL}/search/list`;
+  return axiosClient.get(url);
+};
+
+export const filterByCategory = (params: FilterByCategory) => {
+  const url = "https://ga-mobile-api.loklok.tv/cms/app/search/v1/search";
+  return axiosClient.post(url, params);
 };
 
 export const getWatchMedia = async (params: MediaParams) => {

@@ -13,7 +13,7 @@ export const StyledSideRelated = styled.div`
   }
   .movie-thumb {
     width: 30%;
-    background-color: #3d6ef7;
+    background-color: var(--bg-skeleton);
     border-radius: 6px;
     overflow: hidden;
     aspect-ratio: auto 170/238;

@@ -179,3 +179,25 @@ export interface MediaParams {
   episodeId: number;
   definition?: string;
 }
+
+export interface Genres {
+  id: number;
+  name: string;
+  params: string;
+  screeningItems: {
+    id: number;
+    name: string;
+    items: { name: string; params: string; screeningType: string }[];
+  }[];
+}
+
+export interface FilterByCategory {
+  area?: string;
+  category?: string;
+  order?: string;
+  params?: string;
+  size?: number;
+  sort?: string;
+  subtitles?: string;
+  year?: string;
+}
