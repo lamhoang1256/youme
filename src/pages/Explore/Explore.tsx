@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import { filterByCategory, getAllGenres } from "apis/configAPI";
 import { Genres } from "interfaces/api";
 import Tabs from "components/Tabs/Tabs";
+import InfiniteScroll from "react-infinite-scroll-component";
 import { StyledExplore, StyledExploreButton } from "./explore.style";
 import ExploreList from "./module/ExploreList/ExploreList";
 
@@ -55,6 +56,16 @@ const Explore = () => {
       setLoading(false);
     } catch (error) {
       setLoading(false);
+    }
+  };
+
+  const fetchMore = async () => {
+    try {
+      const { data } = await filterByCategory({ ...filters, size: filters.size + 7 });
+      setFilters({ ...filters, size: filters.size + 7 });
+      setExploreList(data.searchResults);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -125,7 +136,21 @@ const Explore = () => {
             ))}
           </div>
 
-          <ExploreList exploreList={exploreList} />
+          {exploreList.length > 0 && (
+            <InfiniteScroll
+              dataLength={exploreList.length}
+              next={fetchMore}
+              hasMore
+              loader={<h4>Loading...</h4>}
+              endMessage={
+                <p style={{ textAlign: "center" }}>
+                  <b>Yay! You have seen it all</b>
+                </p>
+              }
+            >
+              <ExploreList exploreList={exploreList} />
+            </InfiniteScroll>
+          )}
         </>
       )}
     </StyledExplore>
