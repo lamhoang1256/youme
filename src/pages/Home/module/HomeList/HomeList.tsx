@@ -1,5 +1,5 @@
 import { IHomeSection } from "interfaces/api";
-import MovieCard from "components/MovieCard/MovieCard";
+import HomeCard from "../HomeCard/HomeCard";
 import { StyledHomeList } from "./homeList.style";
 
 interface HomeListProps {
@@ -12,7 +12,7 @@ const HomeList = ({ homeSection }: HomeListProps) => {
       <h3 className="home-title">{homeSection.homeSectionName}</h3>
       <div className="home-list">
         {homeSection.recommendContentVOList.slice(0, 12).map((movie) => {
-          return <MovieCard key={movie.id} movie={movie} />;
+          return <HomeCard key={movie.id} movie={movie} />;
         })}
       </div>
     </StyledHomeList>
