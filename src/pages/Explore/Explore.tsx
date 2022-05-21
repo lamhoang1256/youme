@@ -4,6 +4,7 @@ import { filterByCategory, getAllGenres } from "apis/configAPI";
 import { Genres } from "interfaces/api";
 import Tabs from "components/Tabs/Tabs";
 import { StyledExplore, StyledExploreButton } from "./explore.style";
+import ExploreList from "./module/ExploreList/ExploreList";
 
 interface IObjectKeys {
   [key: string]: string | number;
@@ -18,6 +19,14 @@ interface Filters extends IObjectKeys {
   params: string;
   sort: string;
   size: number;
+}
+
+export interface IExploreCard {
+  coverVerticalUrl: string;
+  domainType: number;
+  id: string;
+  name: string;
+  sort: string;
 }
 
 const initialFilters = {
@@ -36,6 +45,7 @@ const Explore = () => {
   const [allGenres, setAllGenres] = useState<Genres[]>(Object);
   const [selectedTabId, setSelectedTabId] = useState<number>(2);
   const [filters, setFilters] = useState<Filters>(initialFilters);
+  const [exploreList, setExploreList] = useState<IExploreCard[]>(Object);
 
   const fetchGenres = async () => {
     setLoading(true);
@@ -51,7 +61,7 @@ const Explore = () => {
   const fetchFilterByCategory = async (params: Filters) => {
     try {
       const { data } = await filterByCategory(params);
-      console.log(data);
+      setExploreList(data.searchResults);
     } catch (error) {
       console.log(error);
     }
@@ -114,6 +124,8 @@ const Explore = () => {
               </div>
             ))}
           </div>
+
+          <ExploreList exploreList={exploreList} />
         </>
       )}
     </StyledExplore>
