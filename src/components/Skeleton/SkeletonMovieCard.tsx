@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { AnimationSkeleton } from "assets/styles/_mixins";
 
-const StyledHomeCardSkeleton = styled.div`
+const StyledSkeletonMovieCard = styled.div`
   .skeleton-img {
     border-radius: 4px;
     aspect-ratio: auto 563 / 788;
@@ -16,14 +16,14 @@ const StyledHomeCardSkeleton = styled.div`
   }
 `;
 
-const HomeCardSkeleton = () => {
+const SkeletonMovieCard = () => {
   return (
-    <StyledHomeCardSkeleton>
+    <StyledSkeletonMovieCard>
       <div className="skeleton-img" />
       <div className="skeleton-name" />
       <div className="skeleton-name" />
-    </StyledHomeCardSkeleton>
+    </StyledSkeletonMovieCard>
   );
 };
 
-export default HomeCardSkeleton;
+export default SkeletonMovieCard;

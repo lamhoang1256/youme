@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 
-interface HomeCardUIProps {
+interface MovieCardUIProps {
   type: string;
   children: React.ReactNode;
   url: string;
 }
 
-const HomeCardUI = ({ type, children, url }: HomeCardUIProps) => {
+const MovieCardUI = ({ type, children, url }: MovieCardUIProps) => {
   return (
     <>
       {type === "movie" && <Link to={url}>{children}</Link>}
@@ -15,4 +15,4 @@ const HomeCardUI = ({ type, children, url }: HomeCardUIProps) => {
   );
 };
 
-export default HomeCardUI;
+export default MovieCardUI;

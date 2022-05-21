@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledHomeCard = styled.div`
+export const StyledMovieCard = styled.div`
   .card-thumb {
     position: relative;
     padding-top: 140%;
