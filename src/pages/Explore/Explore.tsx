@@ -37,13 +37,13 @@ const initialFilters = {
   order: "up",
   params: "",
   sort: "",
-  size: 20,
+  size: 21,
 };
 
 const Explore = () => {
   const [loading, setLoading] = useState<boolean>(true);
-  const [allGenres, setAllGenres] = useState<Genres[]>(Object);
   const [selectedTabId, setSelectedTabId] = useState<number>(2);
+  const [allGenres, setAllGenres] = useState<Genres[]>(Object);
   const [filters, setFilters] = useState<Filters>(initialFilters);
   const [exploreList, setExploreList] = useState<IExploreCard[]>(Object);
 

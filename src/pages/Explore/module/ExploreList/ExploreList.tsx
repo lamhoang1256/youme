@@ -2,6 +2,10 @@ import { IExploreCard } from "pages/Explore/Explore";
 import styled from "styled-components";
 import ExploreCard from "../ExploreCard/ExploreCard";
 
+interface ExploreListProps {
+  exploreList: IExploreCard[];
+}
+
 const StyledExploreList = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
@@ -11,15 +15,11 @@ const StyledExploreList = styled.div`
   }
 `;
 
-interface ExploreListProps {
-  exploreList: IExploreCard[];
-}
-
 const ExploreList = ({ exploreList }: ExploreListProps) => {
-  console.log(exploreList);
   return (
     <StyledExploreList>
-      {exploreList.length > 0 && exploreList.map((explore) => <ExploreCard explore={explore} />)}
+      {exploreList.length > 0 &&
+        exploreList.map((explore) => <ExploreCard explore={explore} key={explore.id} />)}
     </StyledExploreList>
   );
 };

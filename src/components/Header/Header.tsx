@@ -13,9 +13,9 @@ const Header = () => {
           <ul className="menu">
             {[0, 1, 2, 3].map((item) => (
               <li className="menu-item" key={item}>
-                <a href="#!" className="menu-link">
-                  Home
-                </a>
+                <Link to="/explore" className="menu-link">
+                  Explore
+                </Link>
               </li>
             ))}
           </ul>
