@@ -7,15 +7,16 @@ export const StyledHomeCard = styled.div`
     background-color: var(--bg-load-image);
     width: 100%;
     object-fit: cover;
-    .lazy-load-image-background {
-      position: absolute;
-      inset: 0;
-      border-radius: 6px;
-      overflow: hidden;
-    }
-    img {
-      height: 100%;
-    }
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .lazy-load-image-background {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+  .card-thumb img {
+    height: 100%;
   }
   .card-name {
     text-align: center;
@@ -27,5 +28,9 @@ export const StyledHomeCard = styled.div`
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     white-space: normal;
+    transition: all 0.3s linear;
+    &:hover {
+      color: var(--secondary-color);
+    }
   }
 `;
