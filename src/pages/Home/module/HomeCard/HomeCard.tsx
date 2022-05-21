@@ -1,9 +1,9 @@
 import { resizeImage } from "constants/resizeImage";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { StyledMovieCard } from "./movieCard.style";
-import MovieCardUI from "./MovieCardUI";
+import { StyledHomeCard } from "./homeCard.style";
+import HomeCardUI from "./HomeCardUI";
 
-interface MovieCardProps {
+interface HomeCardProps {
   movie: {
     category: number;
     contentType: string;
@@ -19,15 +19,15 @@ interface MovieCardProps {
   };
 }
 
-const MovieCard = ({ movie }: MovieCardProps) => {
+const HomeCard = ({ movie }: HomeCardProps) => {
   const IDandCate = movie.jumpAddress.split("?id=")[1];
   const id = Number(IDandCate.split("&type=")[0]);
   const category = Number(IDandCate.split("&type=")[1]);
   const url = `/detail/${id}?cate=${category}`;
   const type = Number.isNaN(category) ? "actor" : "movie";
   return (
-    <StyledMovieCard>
-      <MovieCardUI type={type} url={url}>
+    <StyledHomeCard>
+      <HomeCardUI type={type} url={url}>
         <div className="card-thumb">
           <LazyLoadImage
             src={resizeImage(movie.imageUrl, "180")}
@@ -35,12 +35,12 @@ const MovieCard = ({ movie }: MovieCardProps) => {
             effect="opacity"
           />
         </div>
-      </MovieCardUI>
-      <MovieCardUI type={type} url={url}>
+      </HomeCardUI>
+      <HomeCardUI type={type} url={url}>
         <p className="card-name">{movie.title}</p>
-      </MovieCardUI>
-    </StyledMovieCard>
+      </HomeCardUI>
+    </StyledHomeCard>
   );
 };
 
-export default MovieCard;
+export default HomeCard;

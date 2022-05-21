@@ -82,6 +82,7 @@ const Explore = () => {
       {!loading && (
         <>
           <Tabs onClick={onClickTab} tabs={allGenres} />
+
           <div className="tab-content">
             {allGenres.map((genresOneTab, index) => (
               <div className="tab-panel" key={uuidv4()}>
