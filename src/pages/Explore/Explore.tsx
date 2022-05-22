@@ -1,14 +1,15 @@
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import useSWRInfinite from "swr/infinite";
-import { v4 as uuidv4 } from "uuid";
+import Tabs from "components/Tabs/Tabs";
 import { Genres } from "interfaces/api";
 import { Filters, IExploreCard } from "interfaces/explore";
 import { filterByCategory, getAllGenres } from "apis/configAPI";
-import Tabs from "components/Tabs/Tabs";
 import ExploreList from "./module/ExploreList/ExploreList";
-import { StyledExplore, StyledExploreButton, StyledExploreTabPanel } from "./explore.style";
+import { StyledExplore } from "./explore.style";
+import ExploreFilter from "./module/ExploreFilter/ExploreFilter";
 
+const defaultGenresTab = 2;
 const initialFilters = {
   area: "",
   category: "",
@@ -20,19 +21,42 @@ const initialFilters = {
   size: 14,
 };
 
+export interface IExploreContext {
+  exploreList: IExploreCard[];
+  setExploreList: React.Dispatch<React.SetStateAction<number>>;
+  allGenres: Genres[];
+  filters: Filters;
+  setFilters: React.Dispatch<React.SetStateAction<Filters>>;
+  selectedTabId: number;
+  setSelectedTabId: React.Dispatch<React.SetStateAction<number>>;
+}
+
+export const ExploreContext = createContext<IExploreContext | {}>(Object);
 const Explore = () => {
   const [loading, setLoading] = useState<boolean>(true);
-  const [selectedTabId, setSelectedTabId] = useState<number>(2);
+  const [selectedTabId, setSelectedTabId] = useState<number>(defaultGenresTab);
   const [allGenres, setAllGenres] = useState<Genres[]>([]);
   const [filters, setFilters] = useState<Filters>(initialFilters);
   const [exploreList, setExploreList] = useState<IExploreCard[]>([]);
+  const contextValue = useMemo(
+    () => ({
+      exploreList,
+      allGenres,
+      filters,
+      setFilters,
+      setSelectedTabId,
+      selectedTabId,
+      setExploreList,
+    }),
+    [exploreList, allGenres, filters, setFilters],
+  );
 
   const fetchGenres = async () => {
     setLoading(true);
     try {
       const { data } = await getAllGenres();
+      const defaultGenre = data.filter((genre: any) => genre.id === defaultGenresTab)[0];
       setAllGenres(data);
-      const defaultGenre = data.filter((genre: any) => genre.id === 2)[0];
       setFilters({ ...filters, params: defaultGenre.params });
       setLoading(false);
     } catch (error) {
@@ -40,46 +64,24 @@ const Explore = () => {
     }
   };
 
-  const fetchFilterByCategory = async (params: Filters) => {
-    try {
-      const { data } = await filterByCategory(params);
-      setExploreList(data.searchResults);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-    fetchGenres();
-  }, []);
-
   const onClickTab = (keyTab: number) => {
     setSelectedTabId(keyTab);
     const genreTab = allGenres.filter((genre) => genre.id === keyTab)[0];
     setFilters({ ...initialFilters, params: genreTab.params });
   };
 
-  const handleSearchByCategory = (choice: any) => {
-    setFilters({ ...filters, ...choice });
-    fetchFilterByCategory({ ...filters, ...choice });
-  };
-
   const getKey = (indexPage: any, previousPageData: any) => {
     if (previousPageData && previousPageData.length === 0) return null;
     const sort = previousPageData?.data?.searchResults.slice(-1)[0].sort || "";
-    return `${JSON.stringify(filters)}explore-${sort}`;
+    return `${JSON.stringify(filters)}sort-${sort}`;
   };
 
   const { data, error, setSize } = useSWRInfinite(
     getKey,
-    (key) => filterByCategory({ ...filters, sort: key.split("explore-")[1] }),
-    // {
-    //   revalidateFirstPage: false,
-    // },
+    (key) => filterByCategory({ ...filters, sort: key.split("sort-")[1] }),
+    {
+      revalidateFirstPage: false,
+    },
   );
 
   useEffect(() => {
@@ -91,45 +93,23 @@ const Explore = () => {
     setExploreList(newExploreList);
   }, [data]);
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+    fetchGenres();
+  }, []);
+
   return (
     <StyledExplore className="container">
       {loading && "Loading"}
       {!loading && (
-        <>
+        <ExploreContext.Provider value={contextValue}>
+          {/* All tab filter movie by category */}
           <Tabs onClick={onClickTab} tabs={allGenres} />
-
-          <div className="tab-content">
-            {allGenres.map((genresOneTab, index) => (
-              <StyledExploreTabPanel key={uuidv4()}>
-                {selectedTabId === genresOneTab.id && (
-                  <>
-                    {allGenres[index].screeningItems.map((genresOneRow) => (
-                      <div className="genre-list" key={uuidv4()}>
-                        {genresOneRow.items.map((genres) => {
-                          const { name, params, screeningType } = genres;
-                          const choice = {
-                            [screeningType]: params,
-                            params: genresOneTab.params,
-                          };
-                          return (
-                            <StyledExploreButton
-                              key={uuidv4()}
-                              type="button"
-                              onClick={() => handleSearchByCategory(choice)}
-                              background={filters[screeningType] === params ? "yellow" : "blue"}
-                            >
-                              {name}
-                            </StyledExploreButton>
-                          );
-                        })}
-                      </div>
-                    ))}
-                  </>
-                )}
-              </StyledExploreTabPanel>
-            ))}
-          </div>
-
+          <ExploreFilter />
+          {/* All movie has been filtered */}
           {exploreList.length > 0 && (
             <InfiniteScroll
               dataLength={data?.length || 0}
@@ -145,7 +125,7 @@ const Explore = () => {
               <ExploreList exploreList={exploreList} />
             </InfiniteScroll>
           )}
-        </>
+        </ExploreContext.Provider>
       )}
     </StyledExplore>
   );

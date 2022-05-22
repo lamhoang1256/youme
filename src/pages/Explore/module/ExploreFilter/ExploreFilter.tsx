@@ -1,21 +1,28 @@
 import { v4 as uuidv4 } from "uuid";
 import { StyledExploreButton, StyledExploreTabPanel } from "pages/Explore/explore.style";
-import { Genres } from "interfaces/api";
 import { Filters } from "interfaces/explore";
+import { useContext } from "react";
+import { ExploreContext, IExploreContext } from "pages/Explore/Explore";
+import { filterByCategory } from "apis/configAPI";
 
-interface ExploreFilterProps {
-  allGenres: Genres[];
-  handleSearchByCategory: (choice: any) => void;
-  selectedTabId: number;
-  filters: Filters;
-}
+const ExploreFilter = () => {
+  const ExploreStore = useContext(ExploreContext) as IExploreContext;
+  const { allGenres, selectedTabId, filters, setExploreList, setFilters } = ExploreStore;
 
-const ExploreFilter = ({
-  allGenres,
-  handleSearchByCategory,
-  selectedTabId,
-  filters,
-}: ExploreFilterProps) => {
+  const fetchFilterByCategory = async (params: Filters) => {
+    try {
+      const { data } = await filterByCategory(params);
+      setExploreList(data.searchResults);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSearchByCategory = (choice: any) => {
+    setFilters({ ...filters, ...choice });
+    fetchFilterByCategory({ ...filters, ...choice });
+  };
+
   return (
     <div>
       {allGenres.map((genresOneTab, index) => (
