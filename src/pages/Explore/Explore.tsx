@@ -23,9 +23,9 @@ const initialFilters = {
 const Explore = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [selectedTabId, setSelectedTabId] = useState<number>(2);
-  const [allGenres, setAllGenres] = useState<Genres[]>(Object);
+  const [allGenres, setAllGenres] = useState<Genres[]>([]);
   const [filters, setFilters] = useState<Filters>(initialFilters);
-  const [exploreList, setExploreList] = useState<IExploreCard[]>(Object);
+  const [exploreList, setExploreList] = useState<IExploreCard[]>([]);
 
   const fetchGenres = async () => {
     setLoading(true);
@@ -74,9 +74,9 @@ const Explore = () => {
   const { data, error, setSize } = useSWRInfinite(
     getKey,
     (key) => filterByCategory({ ...filters, sort: key.split("explore")[1] }),
-    {
-      revalidateFirstPage: false,
-    },
+    // {
+    //   revalidateFirstPage: false,
+    // },
   );
 
   useEffect(() => {
@@ -131,7 +131,7 @@ const Explore = () => {
             <InfiniteScroll
               dataLength={data?.length || 0}
               next={() => setSize((size) => size + 1)}
-              hasMore={!error}
+              hasMore={!error && data?.slice(-1)[0].data.searchResults.length !== 0}
               loader={<h4>Loading...</h4>}
               endMessage={
                 <p style={{ textAlign: "center" }}>
