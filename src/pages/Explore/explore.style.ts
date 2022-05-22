@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface Props {
+  background: string;
+}
+
 export const StyledExplore = styled.div`
   .tab-content {
     margin-top: 20px;
@@ -15,9 +19,7 @@ export const StyledExplore = styled.div`
   }
 `;
 
-interface Props {
-  background: string;
-}
+export const StyledExploreTabPanel = styled.div``;
 
 export const StyledExploreButton = styled.button<Props>`
   background: ${(props) => props.background};

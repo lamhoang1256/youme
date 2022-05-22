@@ -1,34 +1,13 @@
 import { useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
-import { filterByCategory, getAllGenres } from "apis/configAPI";
-import { Genres } from "interfaces/api";
-import Tabs from "components/Tabs/Tabs";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { StyledExplore, StyledExploreButton } from "./explore.style";
+import useSWRInfinite from "swr/infinite";
+import { v4 as uuidv4 } from "uuid";
+import { Genres } from "interfaces/api";
+import { Filters, IExploreCard } from "interfaces/explore";
+import { filterByCategory, getAllGenres } from "apis/configAPI";
+import Tabs from "components/Tabs/Tabs";
 import ExploreList from "./module/ExploreList/ExploreList";
-
-interface IObjectKeys {
-  [key: string]: string | number;
-}
-
-interface Filters extends IObjectKeys {
-  area: string;
-  category: string;
-  year: string;
-  subtitles: string;
-  order: string;
-  params: string;
-  sort: string;
-  size: number;
-}
-
-export interface IExploreCard {
-  coverVerticalUrl: string;
-  domainType: number;
-  id: string;
-  name: string;
-  sort: string;
-}
+import { StyledExplore, StyledExploreButton, StyledExploreTabPanel } from "./explore.style";
 
 const initialFilters = {
   area: "",
@@ -38,7 +17,7 @@ const initialFilters = {
   order: "up",
   params: "",
   sort: "",
-  size: 21,
+  size: 14,
 };
 
 const Explore = () => {
@@ -59,16 +38,6 @@ const Explore = () => {
     }
   };
 
-  const fetchMore = async () => {
-    try {
-      const { data } = await filterByCategory({ ...filters, size: filters.size + 7 });
-      setFilters({ ...filters, size: filters.size + 7 });
-      setExploreList(data.searchResults);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const fetchFilterByCategory = async (params: Filters) => {
     try {
       const { data } = await filterByCategory(params);
@@ -84,7 +53,6 @@ const Explore = () => {
       behavior: "smooth",
     });
     fetchGenres();
-    fetchFilterByCategory(initialFilters);
   }, []);
 
   const onClickTab = (keyTab: number) => {
@@ -97,6 +65,29 @@ const Explore = () => {
     fetchFilterByCategory({ ...filters, ...choice });
   };
 
+  const getKey = (indexPage: any, previousPageData: any) => {
+    if (previousPageData && previousPageData.length === 0) return null;
+    const sort = previousPageData?.data?.searchResults.slice(-1)[0].sort || "";
+    return `explore${sort}`;
+  };
+
+  const { data, error, setSize } = useSWRInfinite(
+    getKey,
+    (key) => filterByCategory({ ...filters, sort: key.split("explore")[1] }),
+    {
+      revalidateFirstPage: false,
+    },
+  );
+
+  useEffect(() => {
+    if (!data) return;
+    const newExploreList = data?.reduce(
+      (prevExplore: any, currExplore: any) => [...prevExplore, ...currExplore.data.searchResults],
+      [],
+    );
+    setExploreList(newExploreList);
+  }, [data]);
+
   return (
     <StyledExplore className="container">
       {loading && "Loading"}
@@ -106,9 +97,9 @@ const Explore = () => {
 
           <div className="tab-content">
             {allGenres.map((genresOneTab, index) => (
-              <div className="tab-panel" key={uuidv4()}>
+              <StyledExploreTabPanel key={uuidv4()}>
                 {selectedTabId === genresOneTab.id && (
-                  <div>
+                  <>
                     {allGenres[index].screeningItems.map((genresOneRow) => (
                       <div className="genre-list" key={uuidv4()}>
                         {genresOneRow.items.map((genres) => {
@@ -130,17 +121,17 @@ const Explore = () => {
                         })}
                       </div>
                     ))}
-                  </div>
+                  </>
                 )}
-              </div>
+              </StyledExploreTabPanel>
             ))}
           </div>
 
           {exploreList.length > 0 && (
             <InfiniteScroll
-              dataLength={exploreList.length}
-              next={fetchMore}
-              hasMore
+              dataLength={data?.length || 0}
+              next={() => setSize((size) => size + 1)}
+              hasMore={!error}
               loader={<h4>Loading...</h4>}
               endMessage={
                 <p style={{ textAlign: "center" }}>
