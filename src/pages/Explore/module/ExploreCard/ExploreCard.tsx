@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { resizeImage } from "constants/resizeImage";
-import { IExploreCard } from "pages/Explore/Explore";
 import { StyledHomeCard } from "pages/Home/module/HomeCard/homeCard.style";
+import { IExploreCard } from "interfaces/explore";
 
 interface ExploreCardProps {
   explore: IExploreCard;

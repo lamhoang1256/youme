@@ -1,5 +1,5 @@
-import { IExploreCard } from "pages/Explore/Explore";
 import styled from "styled-components";
+import { IExploreCard } from "interfaces/explore";
 import ExploreCard from "../ExploreCard/ExploreCard";
 
 interface ExploreListProps {
