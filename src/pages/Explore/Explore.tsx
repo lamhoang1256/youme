@@ -32,6 +32,8 @@ const Explore = () => {
     try {
       const { data } = await getAllGenres();
       setAllGenres(data);
+      const defaultGenre = data.filter((genre: any) => genre.id === 2)[0];
+      setFilters({ ...filters, params: defaultGenre.params });
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -57,7 +59,8 @@ const Explore = () => {
 
   const onClickTab = (keyTab: number) => {
     setSelectedTabId(keyTab);
-    setFilters(initialFilters);
+    const genreTab = allGenres.filter((genre) => genre.id === keyTab)[0];
+    setFilters({ ...initialFilters, params: genreTab.params });
   };
 
   const handleSearchByCategory = (choice: any) => {
@@ -68,12 +71,12 @@ const Explore = () => {
   const getKey = (indexPage: any, previousPageData: any) => {
     if (previousPageData && previousPageData.length === 0) return null;
     const sort = previousPageData?.data?.searchResults.slice(-1)[0].sort || "";
-    return `explore${sort}`;
+    return `${JSON.stringify(filters)}explore-${sort}`;
   };
 
   const { data, error, setSize } = useSWRInfinite(
     getKey,
-    (key) => filterByCategory({ ...filters, sort: key.split("explore")[1] }),
+    (key) => filterByCategory({ ...filters, sort: key.split("explore-")[1] }),
     // {
     //   revalidateFirstPage: false,
     // },
