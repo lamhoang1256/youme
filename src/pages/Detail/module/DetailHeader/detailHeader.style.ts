@@ -89,11 +89,11 @@ export const StyledDetailHeader = styled.div`
     &-share {
       color: var(--white);
     }
-    @media screen and (max-width: 767.98px) {
-      flex-direction: column;
-      &-action {
-        margin-top: 10px;
-      }
+  }
+  @media screen and (max-width: 767.98px) {
+    flex-direction: column;
+    .detail-action {
+      margin-top: 10px;
     }
   }
 `;

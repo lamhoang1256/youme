@@ -30,12 +30,17 @@ export const StyledWatchInfo = styled.div`
     flex-wrap: wrap;
     gap: 14px 20px;
     margin: 14px 0;
-    span {
-      height: 31px;
-      line-height: 31px;
-      padding: 0 12px;
-      background-color: #434b5a;
-      border-radius: 14px;
+  }
+  .watch-category {
+    height: 31px;
+    line-height: 31px;
+    padding: 0 12px;
+    background-color: #434b5a;
+    color: var(--white);
+    border-radius: 14px;
+    transition: all 0.25s linear;
+    &:hover {
+      background-color: var(--secondary-color);
     }
   }
   .watch-upcoming {

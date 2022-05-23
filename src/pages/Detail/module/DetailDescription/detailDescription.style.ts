@@ -7,12 +7,15 @@ export const StyledDetailDescription = styled.div`
       line-height: 1.9;
     }
     &-banner {
-      margin: 30px 0;
-      display: flex;
-      justify-content: center;
+      margin: 30px auto;
+      width: 100%;
+      max-width: 750px;
+      aspect-ratio: auto 750/422;
+      background-color: var(--bg-skeleton);
+      border-radius: 14px;
+      overflow: hidden;
     }
     &-banner img {
-      border-radius: 14px;
     }
   }
 `;
