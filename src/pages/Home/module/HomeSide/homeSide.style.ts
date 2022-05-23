@@ -2,39 +2,68 @@ import styled from "styled-components";
 
 export const StyledHomeSide = styled.div`
   position: sticky;
-  top: 0;
+  top: 20px;
   left: 0;
   right: 0;
-  .side-list {
-    margin-top: 20px;
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    grid-gap: 20px;
-  }
-  .side-item {
-    display: flex;
-    gap: 10px;
-  }
-  .side-thumb {
-    width: 40%;
-    img {
+  .side {
+    &-list {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: 100%;
+      grid-gap: 20px;
+      max-height: 90vh;
+      overflow: auto;
+      padding-right: 10px;
+      &::-webkit-scrollbar {
+        width: 6px;
+      }
+      &::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      }
+      &::-webkit-scrollbar-thumb {
+        background-image: linear-gradient(-45deg, #6a5af9, #d66efd);
+        border-radius: 50px;
+      }
+    }
+    &-item {
+      display: flex;
+      gap: 10px;
+    }
+    &-thumb {
+      width: 40%;
+    }
+    &-thumb img {
       border-radius: 4px;
     }
-  }
-  .side-content {
-    flex: 1;
-  }
-  .side-name {
-    color: var(--white);
-    text-overflow: ellipsis;
-    overflow: hidden;
-    display: -webkit-box !important;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    white-space: normal;
-  }
-  .side-rank {
-    color: #3d6ef7;
-    margin-bottom: 10px;
+    &-content {
+      flex: 1;
+    }
+    &-name {
+      font-size: 1.45rem;
+      color: var(--white);
+      text-overflow: ellipsis;
+      overflow: hidden;
+      display: -webkit-box !important;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      white-space: normal;
+    }
+    &-rank {
+      color: #3d6ef7;
+      margin-bottom: 10px;
+    }
+    @media screen and (max-width: 1023.98px) {
+      &-list {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      &-thumb {
+        width: unset;
+      }
+    }
+    @media screen and (max-width: 767.98px) {
+      &-list {
+        grid-template-columns: 100%;
+      }
+    }
   }
 `;
