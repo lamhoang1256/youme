@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import useSWRInfinite from "swr/infinite";
-import Tabs from "components/Tabs/Tabs";
 import { Genres } from "interfaces/api";
 import { Filters, IExploreCard } from "interfaces/explore";
 import { filterByCategory, getAllGenres } from "apis/configAPI";
-import ExploreList from "./module/ExploreList/ExploreList";
-import { StyledExplore } from "./explore.style";
+import MovieList from "components/MovieList/MovieList";
+import Tabs from "components/Tabs/Tabs";
 import ExploreFilter from "./module/ExploreFilter/ExploreFilter";
+import { StyledExplore } from "./explore.style";
 
 const defaultGenresTab = 2;
 const initialFilters = {
@@ -105,7 +105,7 @@ const Explore = () => {
                 </p>
               }
             >
-              <ExploreList exploreList={exploreList} />
+              <MovieList movieList={exploreList} />
             </InfiniteScroll>
           )}
         </>

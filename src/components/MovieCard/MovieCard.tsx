@@ -1,18 +1,23 @@
 import { Link } from "react-router-dom";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import { resizeImage } from "constants/resizeImage";
-import { StyledHomeCard } from "pages/Home/module/HomeCard/homeCard.style";
-import { IExploreCard } from "interfaces/explore";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { StyledMovieCard } from "./movieCard.style";
 
-interface ExploreCardProps {
-  explore: IExploreCard;
+interface MovieCardProps {
+  movie: {
+    coverVerticalUrl: string;
+    domainType: number;
+    id: string;
+    name: string;
+    sort: string;
+  };
 }
 
-const ExploreCard = ({ explore }: ExploreCardProps) => {
-  const { id, domainType, name, coverVerticalUrl } = explore;
+const MovieCard = ({ movie }: MovieCardProps) => {
+  const { id, domainType, name, coverVerticalUrl } = movie;
   const url = `/detail/${id}?cate=${domainType}`;
   return (
-    <StyledHomeCard>
+    <StyledMovieCard>
       <Link to={url}>
         <div className="card-thumb">
           <LazyLoadImage
@@ -25,8 +30,8 @@ const ExploreCard = ({ explore }: ExploreCardProps) => {
       <Link to={url}>
         <p className="card-name">{name}</p>
       </Link>
-    </StyledHomeCard>
+    </StyledMovieCard>
   );
 };
 
-export default ExploreCard;
+export default MovieCard;

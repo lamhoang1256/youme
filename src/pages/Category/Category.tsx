@@ -3,9 +3,9 @@ import useSWRInfinite from "swr/infinite";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
-import ExploreList from "pages/Explore/module/ExploreList/ExploreList";
 import { IExploreCard } from "interfaces/explore";
 import { Genres } from "interfaces/api";
+import MovieList from "components/MovieList/MovieList";
 import { StyledCategory } from "./category.style";
 
 const Category = () => {
@@ -74,7 +74,7 @@ const Category = () => {
             </p>
           }
         >
-          <ExploreList exploreList={movieList} />
+          <MovieList movieList={movieList} />
         </InfiniteScroll>
       </div>
     </StyledCategory>
