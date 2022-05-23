@@ -84,7 +84,7 @@ const Explore = () => {
       {!loading && (
         <>
           {/* All tab filter movie by category */}
-          <Tabs onClick={onClickTab} tabs={allGenres} />
+          <Tabs onClick={onClickTab} tabs={allGenres} selectedTabId={selectedTabId} />
           <ExploreFilter
             allGenres={allGenres}
             filters={filters}
