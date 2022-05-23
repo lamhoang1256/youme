@@ -44,6 +44,11 @@ export const filterByCategory = (params: FilterByCategory) => {
   return axiosClient.post(url, params);
 };
 
+export const getMovieByCategory = (params: { category: number; sort: string }) => {
+  const url = "https://ga-mobile-api.loklok.tv/cms/app/search/v1/search";
+  return axiosClient.post(url, { ...params, params: "", size: 14 });
+};
+
 export const getWatchMedia = async (params: MediaParams) => {
   const { category, contentId, episodeId } = params;
   const paramsGetDetail = {

@@ -1,8 +1,12 @@
 import { v4 as uuidv4 } from "uuid";
-import { StyledExploreButton, StyledExploreTabPanel } from "pages/Explore/explore.style";
 import { Filters, IExploreCard } from "interfaces/explore";
 import { filterByCategory } from "apis/configAPI";
 import { Genres } from "interfaces/api";
+import {
+  StyledExploreFilter,
+  StyledExploreButton,
+  StyledExploreTabPanel,
+} from "./exploreFilter.style";
 
 export interface ExploreFilterProps {
   allGenres: Genres[];
@@ -24,13 +28,13 @@ const ExploreFilter = (props: ExploreFilterProps) => {
     }
   };
 
-  const handleSearchByCategory = (choice: any) => {
-    setFilters({ ...filters, ...choice });
-    fetchFilterByCategory({ ...filters, ...choice });
+  const handleSearchByCategory = (category: any) => {
+    setFilters({ ...filters, ...category });
+    fetchFilterByCategory({ ...filters, ...category });
   };
 
   return (
-    <div>
+    <StyledExploreFilter>
       {allGenres.map((genresOneTab, index) => (
         <StyledExploreTabPanel key={uuidv4()}>
           {selectedTabId === genresOneTab.id && (
@@ -48,7 +52,7 @@ const ExploreFilter = (props: ExploreFilterProps) => {
                         key={uuidv4()}
                         type="button"
                         onClick={() => handleSearchByCategory(choice)}
-                        background={filters[screeningType] === params ? "yellow" : "blue"}
+                        background={filters[screeningType] === params ? "#e62e8f" : "#3d6ef7"}
                       >
                         {name}
                       </StyledExploreButton>
@@ -60,7 +64,7 @@ const ExploreFilter = (props: ExploreFilterProps) => {
           )}
         </StyledExploreTabPanel>
       ))}
-    </div>
+    </StyledExploreFilter>
   );
 };
 

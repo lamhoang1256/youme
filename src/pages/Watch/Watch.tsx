@@ -5,13 +5,13 @@ import { MovieDetail } from "interfaces/api";
 import { getWatchMedia } from "apis/configAPI";
 import SideRelated from "components/SideRelated/SideRelated";
 import SkeletonSideRelated from "components/Skeleton/SkeletonSideRelated";
-import { StyledWatch } from "./watch.style";
 import WatchPlayer from "./module/WatchPlayer/WatchPlayer";
 import WatchInfo from "./module/WatchInfo/WatchInfo";
 import WatchAnthology from "./module/WatchAnthology/WatchAnthology";
 import WatchPlayerSkeleton from "./module/WatchSkeleton/WatchPlayerSkeleton";
 import WatchInfoSkeleton from "./module/WatchSkeleton/WatchInfoSkeleton";
 import WatchAnthologySkeleton from "./module/WatchSkeleton/WatchAnthologySkeleton";
+import { StyledWatch } from "./watch.style";
 
 interface IWatch {
   detailMovie: MovieDetail;
@@ -20,9 +20,9 @@ interface IWatch {
 
 const Watch = () => {
   const id = Number(useParams().id);
-  const [loading, setLoading] = useState<boolean>(true);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [searchParams, setSearchParams] = useSearchParams();
+  const [loading, setLoading] = useState<boolean>(true);
   const category = Number(searchParams.get("cate"));
   const episode = Number(searchParams.get("ep"));
   const [watch, setWatch] = useState<IWatch>(Object);

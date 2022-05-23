@@ -22,6 +22,7 @@ const Detail = () => {
     setLoading(true);
     try {
       const { data } = await getMovieDetail({ id, category });
+      console.log(data);
       setDetail(data);
       setLoading(false);
     } catch (error) {

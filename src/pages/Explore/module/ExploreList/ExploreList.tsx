@@ -7,6 +7,7 @@ interface ExploreListProps {
 }
 
 const StyledExploreList = styled.div`
+  margin-top: 15px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
   grid-gap: 15px;
