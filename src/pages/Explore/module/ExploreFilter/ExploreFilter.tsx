@@ -1,13 +1,19 @@
 import { v4 as uuidv4 } from "uuid";
 import { StyledExploreButton, StyledExploreTabPanel } from "pages/Explore/explore.style";
-import { Filters } from "interfaces/explore";
-import { useContext } from "react";
-import { ExploreContext, IExploreContext } from "pages/Explore/Explore";
+import { Filters, IExploreCard } from "interfaces/explore";
 import { filterByCategory } from "apis/configAPI";
+import { Genres } from "interfaces/api";
 
-const ExploreFilter = () => {
-  const ExploreStore = useContext(ExploreContext) as IExploreContext;
-  const { allGenres, selectedTabId, filters, setExploreList, setFilters } = ExploreStore;
+export interface ExploreFilterProps {
+  allGenres: Genres[];
+  filters: Filters;
+  setFilters: React.Dispatch<React.SetStateAction<Filters>>;
+  selectedTabId: number;
+  setExploreList: React.Dispatch<React.SetStateAction<IExploreCard[]>>;
+}
+
+const ExploreFilter = (props: ExploreFilterProps) => {
+  const { allGenres, filters, setFilters, selectedTabId, setExploreList } = props;
 
   const fetchFilterByCategory = async (params: Filters) => {
     try {
