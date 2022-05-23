@@ -32,8 +32,10 @@ const DetailHeader = ({ detail }: DetailHeaderProps) => {
         <div className="detail-introduction">{detail?.introduction}</div>
         <div className="detail-categoríes">
           <h4>Categories: </h4>
-          {detail?.tagNameList.map((tag) => (
-            <span key={tag}>{tag}</span>
+          {detail?.tagList.map((tag) => (
+            <Link to={`/category/${tag.id}`} key={tag.id} className="detail-category">
+              {tag.name}
+            </Link>
           ))}
         </div>
         <div className="detail-action">
