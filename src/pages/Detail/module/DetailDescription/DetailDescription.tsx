@@ -1,3 +1,4 @@
+import { resizeImage } from "constants/resizeImage";
 import { MovieDetail } from "interfaces/api";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { StyledDetailDescription } from "./detailDescription.style";
@@ -14,7 +15,11 @@ const DetailDescription = ({ detail }: DetailDescriptionProps) => {
         {detail?.introduction}
       </div>
       <div className="detail-banner">
-        <LazyLoadImage src={detail?.coverHorizontalUrl} alt="Banner" effect="opacity" />
+        <LazyLoadImage
+          src={resizeImage(detail?.coverHorizontalUrl, "750")}
+          alt="Banner"
+          effect="opacity"
+        />
       </div>
     </StyledDetailDescription>
   );

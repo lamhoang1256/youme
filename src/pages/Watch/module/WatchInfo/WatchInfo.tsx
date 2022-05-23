@@ -1,5 +1,6 @@
 import IonIcon from "@reacticons/ionicons";
 import { MovieBeingWatched, MovieDetail } from "interfaces/api";
+import { Link } from "react-router-dom";
 import { StyledWatchInfo } from "./watchInfo.style";
 
 interface WatchInfoProps {
@@ -37,7 +38,9 @@ const WatchInfo = ({ detail }: WatchInfoProps) => {
       </ul>
       <div className="watch-categories">
         {detailMovie.tagList.map((tag) => (
-          <span key={tag.id}>{tag.name}</span>
+          <Link to={`/category/${tag.id}`} key={tag.id} className="watch-category">
+            {tag.name}
+          </Link>
         ))}
       </div>
       {detailMovie.updateInfo?.updatePeriod !== "" && (

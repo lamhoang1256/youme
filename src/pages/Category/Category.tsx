@@ -55,13 +55,15 @@ const Category = () => {
   return (
     <StyledCategory>
       <div className="container">
-        <div className="category-breadcum">
-          <Link to="/">
-            <h4>Home</h4>
-          </Link>
-          <h4> {">"} </h4>
-          <h4 className="category-name">{nameCategory}</h4>
-        </div>
+        {nameCategory && (
+          <div className="category-breadcum">
+            <Link to="/">
+              <h4>Home</h4>
+            </Link>
+            <h4> {">"} </h4>
+            <h4 className="category-name">{nameCategory}</h4>
+          </div>
+        )}
         {nameCategory && <h3 className="category-name">{nameCategory}</h3>}
         <InfiniteScroll
           dataLength={data?.length || 0}
