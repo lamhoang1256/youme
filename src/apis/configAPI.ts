@@ -1,4 +1,4 @@
-import { FilterByCategory, MediaParams } from "interfaces/api";
+import { IFilterByCategory, IMediaParams } from "interfaces/api";
 import axiosClient from "./axiosClient";
 
 const URL = process.env.REACT_APP_API;
@@ -24,12 +24,12 @@ export const getMovieDetail = (params: { category: number; id: number }) => {
   return axiosClient.get(url, { params });
 };
 
-export const getMovieMedia = (params: MediaParams) => {
+export const getMovieMedia = (params: IMediaParams) => {
   const url = `${URL}/media/previewInfo`;
   return axiosClient.get(url, { params });
 };
 
-export const getWatchAPI = (params: MediaParams) => {
+export const getWatchAPI = (params: IMediaParams) => {
   const url = `${URL}/media/previewInfo`;
   return axiosClient.get(url, { params });
 };
@@ -39,7 +39,7 @@ export const getAllGenres = () => {
   return axiosClient.get(url);
 };
 
-export const filterByCategory = (params: FilterByCategory) => {
+export const filterByCategory = (params: IFilterByCategory) => {
   const url = "https://ga-mobile-api.loklok.tv/cms/app/search/v1/search";
   return axiosClient.post(url, params);
 };
@@ -49,14 +49,13 @@ export const getMovieByCategory = (params: { category: number; sort: string }) =
   return axiosClient.post(url, { ...params, params: "", size: 14 });
 };
 
-export const getWatchMedia = async (params: MediaParams) => {
+export const getWatchMedia = async (params: IMediaParams) => {
   const { category, contentId, episodeId } = params;
   const paramsGetDetail = {
     category,
     id: contentId,
   };
   const detailMovie = await getMovieDetail(paramsGetDetail);
-
   const currentWatchId = episodeId === 0 ? detailMovie.data.episodeVo[0].id : episodeId;
   let detailCurrentPlay = detailMovie.data.episodeVo.filter(
     (episode: { id: number }) => episode.id === currentWatchId,
@@ -71,10 +70,9 @@ export const getWatchMedia = async (params: MediaParams) => {
   });
   // get url and data of episode with all quality type
   const quanlitiesFetch = await Promise.all(
-    paramsGetUrlsMedia.map((paramsMedia: MediaParams) => getWatchAPI(paramsMedia)),
+    paramsGetUrlsMedia.map((paramsMedia: IMediaParams) => getWatchAPI(paramsMedia)),
   );
   const qualities = quanlitiesFetch.map((quality) => quality.data);
-
   // bring subtitle of Vietnamese to first element of array to when watch media player will set Vietnamese is default sub
   const subtitlesFirstVN = [...detailCurrentPlay.subtitlingList].reduce(
     (prevSub: any, currentSub: any) => {
@@ -85,7 +83,6 @@ export const getWatchMedia = async (params: MediaParams) => {
     },
     [],
   );
-
   // get number describe quality Ex: HD -> 1080p
   const qualitiesHasDesc = qualities.map((quality) => {
     const qualityDesc = detailCurrentPlay.definitionList.filter(

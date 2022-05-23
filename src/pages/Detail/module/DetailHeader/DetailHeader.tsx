@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { resizeImage } from "constants/resizeImage";
-import { MovieDetail } from "interfaces/api";
+import { IMovieDetail } from "interfaces/detail";
 import IonIcon from "@reacticons/ionicons";
 import { StyledDetailHeader } from "./detailHeader.style";
 
 interface DetailHeaderProps {
-  detail: MovieDetail;
+  detail: IMovieDetail;
 }
 
 const DetailHeader = ({ detail }: DetailHeaderProps) => {

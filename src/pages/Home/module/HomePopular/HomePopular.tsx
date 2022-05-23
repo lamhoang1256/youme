@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { v4 as uuidv4 } from "uuid";
-import { Popular } from "interfaces/api";
+import { IPopular } from "interfaces/home";
 import { getHome } from "apis/configAPI";
 import { resizeImage } from "constants/resizeImage";
 import SkeletonTitle from "components/Skeleton/SkeletonTitle";
@@ -11,7 +11,7 @@ import { settingsPopular, StyledPopularCard, StyledPopularList } from "./homePop
 
 const HomePopular = () => {
   const [loading, setLoading] = useState<boolean>(true);
-  const [populars, setPopulars] = useState<Popular[]>([]);
+  const [populars, setPopulars] = useState<IPopular[]>([]);
 
   const fetchLeaderBoards = async () => {
     setLoading(true);
@@ -26,7 +26,6 @@ const HomePopular = () => {
       setLoading(false);
     }
   };
-
   useEffect(() => {
     fetchLeaderBoards();
   }, []);

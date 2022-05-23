@@ -1,7 +1,7 @@
 import Slider from "react-slick";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Banners } from "interfaces/api";
+import { IBanners } from "interfaces/home";
 import { getBanners } from "apis/configAPI";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { StyledBanner } from "./homeBanner.style";
@@ -9,7 +9,7 @@ import { settingsBanner } from "./settingsBanner";
 
 const HomeBanner = () => {
   const [loading, setLoading] = useState<boolean>(true);
-  const [banners, setBanners] = useState<Banners[]>([]);
+  const [banners, setBanners] = useState<IBanners[]>([]);
 
   const fetchBanners = async () => {
     setLoading(true);

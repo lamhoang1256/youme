@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import useSWRInfinite from "swr/infinite";
-import { Genres } from "interfaces/api";
-import { Filters, IExploreCard } from "interfaces/explore";
+import { IGenres, IFilters, IExploreCard } from "interfaces/explore";
 import { filterByCategory, getAllGenres } from "apis/configAPI";
 import MovieList from "components/MovieList/MovieList";
 import Tabs from "components/Tabs/Tabs";
@@ -24,8 +23,8 @@ const initialFilters = {
 const Explore = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [selectedTabId, setSelectedTabId] = useState<number>(defaultGenresTab);
-  const [allGenres, setAllGenres] = useState<Genres[]>([]);
-  const [filters, setFilters] = useState<Filters>(initialFilters);
+  const [allGenres, setAllGenres] = useState<IGenres[]>([]);
+  const [filters, setFilters] = useState<IFilters>(initialFilters);
   const [exploreList, setExploreList] = useState<IExploreCard[]>([]);
 
   const fetchGenres = async () => {

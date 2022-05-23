@@ -1,12 +1,13 @@
 import IonIcon from "@reacticons/ionicons";
-import { MovieBeingWatched, MovieDetail } from "interfaces/api";
 import { Link } from "react-router-dom";
+import { IMovieDetail } from "interfaces/detail";
+import { IMovieBeingWatched } from "interfaces/watch";
 import { StyledWatchInfo } from "./watchInfo.style";
 
 interface WatchInfoProps {
   detail: {
-    detailMovie: MovieDetail;
-    detailCurrentPlay: MovieBeingWatched;
+    detailMovie: IMovieDetail;
+    detailCurrentPlay: IMovieBeingWatched;
   };
 }
 
