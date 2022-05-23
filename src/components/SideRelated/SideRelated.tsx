@@ -31,19 +31,14 @@ interface SideRelatedProps {
     upName: string;
     year: number;
   }[];
-  countMovieSuggest?: number;
 }
 
-const defaultProps = {
-  countMovieSuggest: 6,
-};
-
-const SideRelated = ({ listSuggest, countMovieSuggest }: SideRelatedProps) => {
+const SideRelated = ({ listSuggest }: SideRelatedProps) => {
   return (
     <StyledSideRelated>
       <h3>You may like</h3>
       <div className="movie-list">
-        {listSuggest.slice(0, countMovieSuggest).map((suggest) => {
+        {listSuggest.map((suggest) => {
           const url = `/detail/${suggest?.id}?cate=${suggest?.category}`;
           return (
             <div className="movie-item" key={suggest.id}>
@@ -82,7 +77,5 @@ const SideRelated = ({ listSuggest, countMovieSuggest }: SideRelatedProps) => {
     </StyledSideRelated>
   );
 };
-
-SideRelated.defaultProps = defaultProps;
 
 export default SideRelated;

@@ -1,11 +1,29 @@
 import styled from "styled-components";
 
 export const StyledSideRelated = styled.div`
+  position: sticky;
+  top: 20px;
+  left: 0;
+  right: 0;
   .movie-list {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 20px;
+    max-height: 90vh;
+    overflow: auto;
     margin-top: 20px;
+    padding-bottom: 20px;
+    padding-right: 10px;
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+    &::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+    &::-webkit-scrollbar-thumb {
+      background-image: linear-gradient(-45deg, #6a5af9, #d66efd);
+      border-radius: 50px;
+    }
   }
   .movie-item {
     display: flex;
