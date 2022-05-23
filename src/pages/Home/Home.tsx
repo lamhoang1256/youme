@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { IHomeSection } from "interfaces/api";
+import { IHomeSection } from "interfaces/home";
 import { getHome } from "apis/configAPI";
 import SkeletonTitle from "components/Skeleton/SkeletonTitle";
 import HomeBanner from "./module/HomeBanner/HomeBanner";

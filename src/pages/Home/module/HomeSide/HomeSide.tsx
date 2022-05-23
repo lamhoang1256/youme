@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { LeaderBoard } from "interfaces/api";
+import { ILeaderBoard } from "interfaces/home";
 import { getLeaderBoard } from "apis/configAPI";
 import { resizeImage } from "constants/resizeImage";
 import { LazyLoadImage } from "react-lazy-load-image-component";
@@ -9,7 +9,7 @@ import { StyledHomeSide } from "./homeSide.style";
 
 const HomeSide = () => {
   const [loading, setLoading] = useState<boolean>(true);
-  const [trendings, setTrendings] = useState<LeaderBoard[]>([]);
+  const [trendings, setTrendings] = useState<ILeaderBoard[]>([]);
 
   const fetchTrendingSide = async () => {
     setLoading(true);

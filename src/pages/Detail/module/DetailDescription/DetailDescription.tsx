@@ -1,10 +1,10 @@
 import { resizeImage } from "constants/resizeImage";
-import { MovieDetail } from "interfaces/api";
+import { IMovieDetail } from "interfaces/detail";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { StyledDetailDescription } from "./detailDescription.style";
 
 interface DetailDescriptionProps {
-  detail: MovieDetail;
+  detail: IMovieDetail;
 }
 
 const DetailDescription = ({ detail }: DetailDescriptionProps) => {

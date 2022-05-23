@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
-import { Filters, IExploreCard } from "interfaces/explore";
+import { IFilters, IExploreCard, IGenres } from "interfaces/explore";
 import { filterByCategory } from "apis/configAPI";
-import { Genres } from "interfaces/api";
+
 import {
   StyledExploreFilter,
   StyledExploreButton,
@@ -9,9 +9,9 @@ import {
 } from "./exploreFilter.style";
 
 export interface ExploreFilterProps {
-  allGenres: Genres[];
-  filters: Filters;
-  setFilters: React.Dispatch<React.SetStateAction<Filters>>;
+  allGenres: IGenres[];
+  filters: IFilters;
+  setFilters: React.Dispatch<React.SetStateAction<IFilters>>;
   selectedTabId: number;
   setExploreList: React.Dispatch<React.SetStateAction<IExploreCard[]>>;
 }
@@ -19,7 +19,7 @@ export interface ExploreFilterProps {
 const ExploreFilter = (props: ExploreFilterProps) => {
   const { allGenres, filters, setFilters, selectedTabId, setExploreList } = props;
 
-  const fetchFilterByCategory = async (params: Filters) => {
+  const fetchFilterByCategory = async (params: IFilters) => {
     try {
       const { data } = await filterByCategory(params);
       setExploreList(data.searchResults);

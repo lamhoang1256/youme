@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
-import { MovieDetail } from "interfaces/api";
+import { IMovieDetail } from "interfaces/detail";
 import { getMovieDetail } from "apis/configAPI";
 import { StyledWrapperLayout } from "pages/Home/home.style";
 import SideRelated from "components/SideRelated/SideRelated";
@@ -16,13 +16,12 @@ const Detail = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const category = Number(searchParams.get("cate"));
   const [loading, setLoading] = useState<boolean>(true);
-  const [detail, setDetail] = useState<MovieDetail>(Object);
+  const [detail, setDetail] = useState<IMovieDetail>(Object);
 
   const fetchMovieDetail = async () => {
     setLoading(true);
     try {
       const { data } = await getMovieDetail({ id, category });
-      console.log(data);
       setDetail(data);
       setLoading(false);
     } catch (error) {

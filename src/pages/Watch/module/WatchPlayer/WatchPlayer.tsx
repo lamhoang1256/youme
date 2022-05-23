@@ -1,5 +1,5 @@
 import ReactHlsPlayer from "react-hls-player/dist";
-import { MovieMedia } from "interfaces/api";
+import { IMovieMedia } from "interfaces/watch";
 import { Player } from "react-tuby";
 import "react-tuby/css/main.css";
 
@@ -13,7 +13,7 @@ interface ISubtitles {
 interface WatchPlayerProps {
   playerRef: React.RefObject<HTMLVideoElement>;
   subtitles: ISubtitles[];
-  qualities: MovieMedia[];
+  qualities: IMovieMedia[];
 }
 
 const WatchPlayer = ({ subtitles, qualities }: WatchPlayerProps) => {

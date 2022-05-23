@@ -1,4 +1,4 @@
-import { IHomeSection } from "interfaces/api";
+import { IHomeSection } from "interfaces/home";
 import HomeCard from "../HomeCard/HomeCard";
 import { StyledHomeList } from "./homeList.style";
 
