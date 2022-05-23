@@ -1,4 +1,4 @@
-import { createContext, useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import useSWRInfinite from "swr/infinite";
 import Tabs from "components/Tabs/Tabs";
@@ -21,35 +21,12 @@ const initialFilters = {
   size: 14,
 };
 
-export interface IExploreContext {
-  exploreList: IExploreCard[];
-  setExploreList: React.Dispatch<React.SetStateAction<number>>;
-  allGenres: Genres[];
-  filters: Filters;
-  setFilters: React.Dispatch<React.SetStateAction<Filters>>;
-  selectedTabId: number;
-  setSelectedTabId: React.Dispatch<React.SetStateAction<number>>;
-}
-
-export const ExploreContext = createContext<IExploreContext | {}>(Object);
 const Explore = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [selectedTabId, setSelectedTabId] = useState<number>(defaultGenresTab);
   const [allGenres, setAllGenres] = useState<Genres[]>([]);
   const [filters, setFilters] = useState<Filters>(initialFilters);
   const [exploreList, setExploreList] = useState<IExploreCard[]>([]);
-  const contextValue = useMemo(
-    () => ({
-      exploreList,
-      allGenres,
-      filters,
-      setFilters,
-      setSelectedTabId,
-      selectedTabId,
-      setExploreList,
-    }),
-    [exploreList, allGenres, filters, setFilters],
-  );
 
   const fetchGenres = async () => {
     setLoading(true);
@@ -105,10 +82,16 @@ const Explore = () => {
     <StyledExplore className="container">
       {loading && "Loading"}
       {!loading && (
-        <ExploreContext.Provider value={contextValue}>
+        <>
           {/* All tab filter movie by category */}
           <Tabs onClick={onClickTab} tabs={allGenres} />
-          <ExploreFilter />
+          <ExploreFilter
+            allGenres={allGenres}
+            filters={filters}
+            setFilters={setFilters}
+            selectedTabId={selectedTabId}
+            setExploreList={setExploreList}
+          />
           {/* All movie has been filtered */}
           {exploreList.length > 0 && (
             <InfiniteScroll
@@ -125,7 +108,7 @@ const Explore = () => {
               <ExploreList exploreList={exploreList} />
             </InfiniteScroll>
           )}
-        </ExploreContext.Provider>
+        </>
       )}
     </StyledExplore>
   );
