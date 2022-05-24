@@ -5,6 +5,7 @@ import { IGenres, IFilters, IExploreCard } from "interfaces/explore";
 import { filterByCategory, getAllGenres } from "apis/configAPI";
 import MovieList from "components/MovieList/MovieList";
 import Tabs from "components/Tabs/Tabs";
+import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
 import ExploreFilter from "./module/ExploreFilter/ExploreFilter";
 import { StyledExplore } from "./explore.style";
 
@@ -79,7 +80,7 @@ const Explore = () => {
 
   return (
     <StyledExplore className="container">
-      {loading && "Loading"}
+      {loading && <LoadingSpinner />}
       {!loading && (
         <>
           {/* All tab filter movie by category */}
