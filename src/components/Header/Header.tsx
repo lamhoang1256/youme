@@ -1,10 +1,12 @@
 import IonIcon from "@reacticons/ionicons";
+import useScrollingUp from "hooks/useScrollingUp";
 import { Link } from "react-router-dom";
 import { StyledHeader } from "./header.style";
 
 const Header = () => {
+  const isScrollingUp = useScrollingUp();
   return (
-    <StyledHeader>
+    <StyledHeader className={`${isScrollingUp ? "stickyHeader" : ""}`}>
       <div className="container">
         <div className="header-container ">
           <Link to="/" className="header-logo">
