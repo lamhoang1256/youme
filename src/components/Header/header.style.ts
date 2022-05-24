@@ -1,18 +1,6 @@
 import styled from "styled-components";
 
 export const StyledHeader = styled.header`
-  box-shadow: none;
-  border: none;
-  z-index: 100;
-  transition: box-shadow 250ms ease-in-out;
-  background-color: var(--dark-color);
-  &.stickyHeader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  }
   .header-container {
     height: 100px;
     display: flex;
