@@ -1,6 +1,7 @@
+import { Outlet } from "react-router-dom";
 import Header from "components/Header/Header";
 import Footer from "components/Footer/Footer";
-import { Outlet } from "react-router-dom";
+import ButtonScrollTop from "components/Button/ButtonScrollTop";
 
 const MainLayout = () => {
   return (
@@ -8,6 +9,7 @@ const MainLayout = () => {
       <Header />
       <main>
         <Outlet />
+        <ButtonScrollTop />
       </main>
       <Footer />
     </>
