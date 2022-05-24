@@ -9,7 +9,6 @@ interface MovieCardProps {
     domainType: number;
     id: string;
     name: string;
-    sort: string;
   };
 }
 

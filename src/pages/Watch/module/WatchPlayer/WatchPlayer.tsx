@@ -33,7 +33,7 @@ const WatchPlayer = ({ subtitles, qualities }: WatchPlayerProps) => {
 
   return (
     <Player src={qualityList} subtitles={subtitleList}>
-      {(ref, props) => <ReactHlsPlayer playerRef={ref} {...props} />}
+      {(ref, props) => <ReactHlsPlayer playerRef={ref} {...props} autoPlay />}
     </Player>
   );
 };

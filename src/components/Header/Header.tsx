@@ -17,8 +17,8 @@ const Header = () => {
               </Link>
             </li>
             <li className="menu-item">
-              <Link to="/community" className="menu-link">
-                Community
+              <Link to="/history" className="menu-link">
+                History
               </Link>
             </li>
           </ul>
