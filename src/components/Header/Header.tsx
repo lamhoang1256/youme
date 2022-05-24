@@ -1,8 +1,11 @@
 import IonIcon from "@reacticons/ionicons";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { StyledHeader } from "./header.style";
 
 const Header = () => {
+  const [showNavbar, setShowNavbar] = useState(false);
+
   return (
     <StyledHeader>
       <div className="container">
@@ -10,7 +13,7 @@ const Header = () => {
           <Link to="/" className="header-logo">
             LOGO
           </Link>
-          <ul className="menu">
+          <ul className={`menu ${showNavbar ? "active" : ""}`}>
             <li className="menu-item">
               <Link to="/explore" className="menu-link">
                 Explore
@@ -36,6 +39,9 @@ const Header = () => {
               </button>
             </div>
           </div>
+          <button type="button" onClick={() => setShowNavbar(!showNavbar)} className="header-open">
+            <IonIcon name="menu-outline" />
+          </button>
         </div>
       </div>
     </StyledHeader>

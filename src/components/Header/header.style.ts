@@ -61,4 +61,44 @@ export const StyledHeader = styled.header`
       color: var(--white);
     }
   }
+  .header-open {
+    display: none;
+    font-size: 3rem;
+    z-index: 100;
+    background-color: #3d6ef7;
+    color: #fff;
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  @media screen and (max-width: 767.98px) {
+    .header-action {
+      display: none;
+    }
+    .header-open {
+      display: block;
+    }
+    .menu {
+      position: fixed;
+      width: 300px;
+      background: #eee;
+      height: 100vh;
+      top: 0;
+      right: 0;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      transform: translateX(300px);
+      transition: all 0.25s linear;
+      &.active {
+        transform: translateX(0);
+      }
+    }
+    .menu-link {
+      color: #000;
+    }
+  }
 `;
