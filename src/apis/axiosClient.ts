@@ -7,6 +7,7 @@ const axiosClient = axios.create({
     lang: "en",
     versioncode: 11,
     clienttype: "ios_jike_default",
+    deviceid: Math.random().toString(36).slice(-8),
   },
   paramsSerializer: (params) => queryString.stringify(params),
 });

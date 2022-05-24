@@ -11,13 +11,16 @@ const Header = () => {
             LOGO
           </Link>
           <ul className="menu">
-            {[0, 1, 2, 3].map((item) => (
-              <li className="menu-item" key={item}>
-                <Link to="/explore" className="menu-link">
-                  Explore
-                </Link>
-              </li>
-            ))}
+            <li className="menu-item">
+              <Link to="/explore" className="menu-link">
+                Explore
+              </Link>
+            </li>
+            <li className="menu-item">
+              <Link to="/community" className="menu-link">
+                Community
+              </Link>
+            </li>
           </ul>
           <div className="header-action">
             <div className="header-search">

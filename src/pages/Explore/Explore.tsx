@@ -97,7 +97,13 @@ const Explore = () => {
               dataLength={data?.length || 0}
               next={() => setSize((size) => size + 1)}
               hasMore={!error && data?.slice(-1)[0].data.searchResults.length !== 0}
-              loader={<h4>Loading...</h4>}
+              loader={
+                <img
+                  className="loading-spinner"
+                  src={`${process.env.REACT_APP_PUBLIC}/images/spinner-no-bg.gif`}
+                  alt="Spinner"
+                />
+              }
               endMessage={
                 <p style={{ textAlign: "center" }}>
                   <b>Yay! You have seen it all</b>
