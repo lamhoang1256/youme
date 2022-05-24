@@ -5,6 +5,7 @@ import { IMovieDetail } from "interfaces/detail";
 import { getWatchMedia } from "apis/configAPI";
 import SideRelated from "components/SideRelated/SideRelated";
 import SkeletonSideRelated from "components/Skeleton/SkeletonSideRelated";
+import { checkEmptyObj } from "utilities/checkEmptyObj";
 import WatchPlayer from "./module/WatchPlayer/WatchPlayer";
 import WatchInfo from "./module/WatchInfo/WatchInfo";
 import WatchAnthology from "./module/WatchAnthology/WatchAnthology";
@@ -46,6 +47,23 @@ const Watch = () => {
   useEffect(() => {
     fetchWatchMovie();
   }, [category, episode]);
+
+  useEffect(() => {
+    if (checkEmptyObj(watch)) return;
+    const historyLocalStorage = JSON.parse(localStorage.getItem("movie-history") || "[]");
+    const history = historyLocalStorage?.filter((movie: any) => movie.id !== `${id}`);
+    if (history.length > 60) {
+      // if history movies > 60 remove 10 last movies
+      history.splice(-10);
+    }
+    history.unshift({
+      id: watch.detailMovie.id,
+      name: watch.detailMovie.name,
+      coverVerticalUrl: watch.detailMovie.coverVerticalUrl,
+      domainType: watch.detailMovie.category,
+    });
+    localStorage.setItem("movie-history", JSON.stringify(history));
+  }, [watch]);
 
   return (
     <StyledWatch>

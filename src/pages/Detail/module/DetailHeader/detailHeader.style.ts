@@ -5,6 +5,7 @@ export const StyledDetailHeader = styled.div`
   gap: 30px;
   .detail {
     &-thumb img {
+      margin: 0 auto;
       width: 220px;
       height: 310px;
       border-radius: 20px;

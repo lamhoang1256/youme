@@ -7,7 +7,6 @@ interface MovieListProps {
     domainType: number;
     id: string;
     name: string;
-    sort: string;
   }[];
 }
 
