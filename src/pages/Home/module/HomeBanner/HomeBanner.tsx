@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { IBanners } from "interfaces/home";
 import { getBanners } from "apis/configAPI";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { resizeImage } from "constants/resizeImage";
 import { StyledBanner } from "./homeBanner.style";
 import { settingsBanner } from "./settingsBanner";
 
@@ -39,7 +40,7 @@ const HomeBanner = () => {
                 <Link to={url} key={banner.id}>
                   <LazyLoadImage
                     className="banner-img"
-                    src={`${banner.imgUrl}?imageMogr2/format/webp/format/webp`}
+                    src={resizeImage(`${banner.imgUrl}?imageMogr2/format/webp/format/webp`, "1440")}
                     alt="Banner"
                     effect="opacity"
                   />
