@@ -7,7 +7,7 @@ const StyledButtonScrollTop = styled.button`
     transform: rotate(90deg);
     position: fixed;
     bottom: 40px;
-    right: 25px;
+    right: 20px;
     z-index: 20;
   }
 `;
