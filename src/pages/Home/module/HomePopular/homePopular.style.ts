@@ -16,9 +16,6 @@ export const StyledPopularList = styled.div`
   .slick-slider {
     margin-left: -10px;
   }
-  .slick-list {
-    z-index: 20;
-  }
   .slick-dots {
     top: -40px;
     text-align: right;

@@ -12,15 +12,6 @@ export const StyledHeader = styled.header`
   .header-logo {
     color: var(--white);
   }
-  .header-action {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-  }
-  .header-action {
-    display: flex;
-    gap: 20px;
-  }
   button {
     padding: 10px 20px;
     border-radius: 8px;
@@ -48,10 +39,14 @@ export const StyledHeader = styled.header`
     align-items: center;
   }
   @media screen and (max-width: 1023.98px) {
+    .header-container.show-search {
+      margin-bottom: calc(var(--header-height) / 100 * 70);
+    }
     .header-overplay {
       position: fixed;
       inset: 0;
       background-color: rgba(0, 0, 0, 0.8);
+      z-index: 30;
     }
     .header-search {
       display: block;
@@ -59,16 +54,13 @@ export const StyledHeader = styled.header`
     .header-auth {
       display: none;
     }
-  }
-  @media screen and (max-width: 767.98px) {
-    .header-container.show-search {
-      margin-bottom: calc(var(--header-height) / 100 * 70);
-    }
-    .header-action {
-      display: none;
-    }
     .header-mobile {
       display: flex;
+    }
+  }
+  @media screen and (max-width: 767.98px) {
+    .header-action {
+      display: none;
     }
     .header-search {
       display: block;

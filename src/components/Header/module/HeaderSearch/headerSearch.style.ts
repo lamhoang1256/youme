@@ -35,9 +35,9 @@ export const StyledHeaderSearch = styled.div`
     left: 0;
     right: 0;
     background-color: var(--dark-color);
-    z-index: 20;
+    z-index: 25;
     border-radius: 8px;
-    height: 300px;
+    height: 400px;
     overflow-y: scroll;
     &::-webkit-scrollbar {
       width: 6px;
@@ -60,13 +60,13 @@ export const StyledHeaderSearch = styled.div`
       background-color: #666666;
     }
   }
-  @media screen and (max-width: 767.98px) {
+  @media screen and (max-width: 1023.98px) {
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
     width: 100%;
-    z-index: 100;
+    z-index: 20;
     .header-searchbar {
       height: 45px;
     }
