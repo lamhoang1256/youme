@@ -20,6 +20,7 @@ export const StyledHeaderSearch = styled.div`
     padding: 0 20px;
     height: 100%;
     font-size: 1.5rem;
+    min-height: 45px;
   }
   .header-searchbar .search-icon {
     padding: 0 12px;
@@ -35,7 +36,6 @@ export const StyledHeaderSearch = styled.div`
     right: 0;
     background-color: var(--dark-color);
     z-index: 20;
-    padding: 10px;
     border-radius: 8px;
     height: 300px;
     overflow-y: scroll;
@@ -51,10 +51,24 @@ export const StyledHeaderSearch = styled.div`
     }
   }
   .header-result li {
-    padding: 8px 0;
-    border-bottom: 1px solid #fff;
-    em {
-      font-weight: 600;
+    padding: 14px;
+    transition: all 0.25s linear;
+    a {
+      color: var(--white);
+    }
+    &:hover {
+      background-color: #666666;
+    }
+  }
+  @media screen and (max-width: 767.98px) {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 100;
+    .header-searchbar {
+      height: 45px;
     }
   }
 `;
