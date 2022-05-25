@@ -27,7 +27,8 @@ const HeaderSearch = () => {
   };
 
   const handleSearch = (e: any) => {
-    const inputValue = e.target.value;
+    const inputValue: string = e.target.value;
+    if (inputValue.startsWith(" ")) return;
     setSearchValue(inputValue);
     setShowResults(true);
   };
