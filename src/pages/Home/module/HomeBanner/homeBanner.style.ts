@@ -33,7 +33,7 @@ export const StyledBanner = styled.div`
   .slick-next {
     width: 40px;
     height: 40px;
-    z-index: 100;
+    z-index: 10;
     img {
       width: 100%;
       height: 100%;
