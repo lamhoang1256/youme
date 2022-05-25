@@ -1,39 +1,46 @@
 import IonIcon from "@reacticons/ionicons";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { searchGetKeyword } from "apis/configAPI";
+import { useOnClickOutside } from "hooks/useClickOutside";
 import { StyledHeaderSearch } from "./headerSearch.style";
 
 const HeaderSearch = () => {
   const navigate = useNavigate();
+  const searchRef = useRef(null);
   const [searchValue, setSearchValue] = useState<string>("");
   const [keywordList, setKeywordList] = useState<string[]>([]);
+  const [showResults, setShowResults] = useState<boolean>(false);
+
+  useOnClickOutside(searchRef, () => setShowResults(false));
 
   const fetchGetKeyword = async (keyword: string) => {
     try {
       const { data } = await searchGetKeyword({ searchKeyWord: keyword });
       setKeywordList(data.searchResults);
-      // console.log(data);
     } catch (error) {
       console.log(error);
     }
   };
 
   const handleSearch = (e: any) => {
-    setSearchValue(e.target.value);
-    fetchGetKeyword(e.target.value);
+    const inputValue = e.target.value.trim();
+    setSearchValue(inputValue);
+    fetchGetKeyword(inputValue);
+    setShowResults(true);
   };
 
   // if user click Enter from keyboard
   const handleKeyDown = (e: any) => {
     if (e.key === "Enter") {
+      setShowResults(false);
       navigate(`/search?query=${searchValue}`);
     }
   };
 
   return (
-    <StyledHeaderSearch>
+    <StyledHeaderSearch ref={searchRef}>
       <div className="header-searchbar">
         <input
           type="text"
@@ -46,7 +53,7 @@ const HeaderSearch = () => {
           <IonIcon name="menu-outline" />
         </div>
       </div>
-      {keywordList.length > 0 && (
+      {showResults && keywordList.length > 0 && (
         <ul className="header-result">
           {keywordList.map((keyword) => {
             const title = encodeURIComponent(
