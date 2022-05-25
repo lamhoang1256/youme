@@ -8,6 +8,7 @@ export const StyleDetailSkeleton = styled.div`
       gap: 30px;
     }
     &-thumb {
+      margin: 0 auto;
       width: 220px;
       height: 310px;
       border-radius: 20px;

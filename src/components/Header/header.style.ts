@@ -35,19 +35,19 @@ export const StyledHeader = styled.header`
     height: 40px;
     display: flex;
     align-items: center;
-    input {
-      background: transparent;
-      border: none;
-      outline: none;
-      padding: 0 20px;
-      height: 100%;
-      font-size: 1.5rem;
-    }
-    .search-icon {
-      padding-right: 20px;
-      font-size: 2rem;
-      cursor: pointer;
-    }
+  }
+  .header-search input {
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 0 20px;
+    height: 100%;
+    font-size: 1.5rem;
+  }
+  .header-search .search-icon {
+    padding-right: 20px;
+    font-size: 2rem;
+    cursor: pointer;
   }
   .header-auth {
     display: flex;
@@ -67,10 +67,8 @@ export const StyledHeader = styled.header`
     z-index: 100;
     background-color: #3d6ef7;
     color: #fff;
-    width: 50px;
-    height: 50px;
-    border-radius: 8px;
-    display: flex;
+    padding: 8px;
+    border-radius: 10px;
     justify-content: center;
     align-items: center;
   }
@@ -78,8 +76,13 @@ export const StyledHeader = styled.header`
     .header-action {
       display: none;
     }
+    .header-overplay {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.8);
+    }
     .header-open {
-      display: block;
+      display: flex;
     }
     .menu {
       position: fixed;
@@ -88,11 +91,13 @@ export const StyledHeader = styled.header`
       height: 100vh;
       top: 0;
       right: 0;
-      align-items: center;
-      justify-content: center;
       flex-direction: column;
-      transform: translateX(300px);
+      align-items: center;
+      padding-top: 100px;
+      transform: translateX(100%);
       transition: all 0.25s linear;
+      will-change: transform;
+      z-index: 100;
       &.active {
         transform: translateX(0);
       }
