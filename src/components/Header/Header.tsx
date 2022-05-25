@@ -2,6 +2,7 @@ import IonIcon from "@reacticons/ionicons";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { StyledHeader } from "./header.style";
+import HeaderSearch from "./module/HeaderSearch";
 
 const menuLinks = [
   { id: 1, display: "Explore", path: "/explore" },
@@ -23,7 +24,7 @@ const Header = () => {
           </Link>
           <ul className={`menu ${showMenu ? "active" : ""}`}>
             {menuLinks.map((link) => (
-              <li className="menu-item">
+              <li className="menu-item" key={link.id}>
                 <Link to={link.path} className="menu-link" onClick={handleToggleMenu}>
                   {link.display}
                 </Link>
@@ -31,12 +32,7 @@ const Header = () => {
             ))}
           </ul>
           <div className="header-action">
-            <div className="header-search">
-              <input type="text" placeholder="Search..." />
-              <div className="search-icon">
-                <IonIcon name="menu-outline" />
-              </div>
-            </div>
+            <HeaderSearch />
             <div className="header-auth">
               <button type="button">Sign Up</button>
               <button type="button" className="primary">
