@@ -14,7 +14,6 @@ const Search = () => {
     setLoading(true);
     try {
       const { data } = await searchWithKeyword({ searchKeyWord: keyword });
-      console.log(data);
       setMovieList(data.searchResults);
       setLoading(false);
     } catch (error) {
@@ -31,7 +30,12 @@ const Search = () => {
   return (
     <div className="container">
       {loading && "Loading"}
-      {!loading && <MovieList movieList={movieList} />}
+      {!loading && (
+        <>
+          {query && <h3>Keyword: {query}</h3>}
+          <MovieList movieList={movieList} />
+        </>
+      )}
     </div>
   );
 };
