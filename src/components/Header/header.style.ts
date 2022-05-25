@@ -28,27 +28,6 @@ export const StyledHeader = styled.header`
     align-items: center;
     gap: 30px;
   }
-  .header-search {
-    background-color: var(--white);
-    border-radius: 30px;
-    overflow: hidden;
-    height: 40px;
-    display: flex;
-    align-items: center;
-  }
-  .header-search input {
-    background: transparent;
-    border: none;
-    outline: none;
-    padding: 0 20px;
-    height: 100%;
-    font-size: 1.5rem;
-  }
-  .header-search .search-icon {
-    padding-right: 20px;
-    font-size: 2rem;
-    cursor: pointer;
-  }
   .header-auth {
     display: flex;
     gap: 20px;

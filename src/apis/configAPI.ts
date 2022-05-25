@@ -101,3 +101,13 @@ export const getWatchMedia = async (params: IMediaParams) => {
     qualities,
   };
 };
+
+export const searchGetKeyword = (params: { searchKeyWord: string }) => {
+  const url = "https://ga-mobile-api.loklok.tv/cms/app/search/searchLenovo";
+  return axiosClient.post(url, { ...params, size: 10 });
+};
+
+export const searchWithKeyword = (params: { searchKeyWord: string }) => {
+  const url = "https://ga-mobile-api.loklok.tv/cms/app/search/v1/searchWithKeyWord";
+  return axiosClient.post(url, { ...params, size: 50, sort: "", searchType: "" });
+};
