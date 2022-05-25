@@ -1,5 +1,5 @@
 import IonIcon from "@reacticons/ionicons";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { searchGetKeyword } from "apis/configAPI";
@@ -7,6 +7,7 @@ import { useOnClickOutside } from "hooks/useClickOutside";
 import { StyledHeaderSearch } from "./headerSearch.style";
 
 const HeaderSearch = () => {
+  const currentURL = window.location.href;
   const navigate = useNavigate();
   const searchRef = useRef(null);
   const [searchValue, setSearchValue] = useState<string>("");
@@ -31,13 +32,17 @@ const HeaderSearch = () => {
     setShowResults(true);
   };
 
-  // if user click Enter from keyboard
   const handleKeyDown = (e: any) => {
     if (e.key === "Enter") {
-      setShowResults(false);
       navigate(`/search?query=${searchValue}`);
     }
   };
+
+  useEffect(() => {
+    // when change page clear value search input and close search result
+    setSearchValue("");
+    setShowResults(false);
+  }, [currentURL]);
 
   return (
     <StyledHeaderSearch ref={searchRef}>
