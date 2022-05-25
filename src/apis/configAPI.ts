@@ -109,5 +109,5 @@ export const searchGetKeyword = (params: { searchKeyWord: string }) => {
 
 export const searchWithKeyword = (params: { searchKeyWord: string }) => {
   const url = "https://ga-mobile-api.loklok.tv/cms/app/search/v1/searchWithKeyWord";
-  return axiosClient.post(url, { ...params, size: 50, sort: "", searchType: "" });
+  return axiosClient.post(url, { ...params, size: 56, sort: "", searchType: "" });
 };

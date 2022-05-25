@@ -3,6 +3,7 @@ import { searchWithKeyword } from "apis/configAPI";
 import { useSearchParams } from "react-router-dom";
 import { IExploreCard } from "interfaces/explore";
 import MovieList from "components/MovieList/MovieList";
+import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
 
 const Search = () => {
   const [searchParams] = useSearchParams();
@@ -29,7 +30,7 @@ const Search = () => {
 
   return (
     <div className="container">
-      {loading && "Loading"}
+      {loading && <LoadingSpinner />}
       {!loading && (
         <>
           {query && <h3>Keyword: {query}</h3>}
