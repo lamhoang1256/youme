@@ -10,8 +10,10 @@ export const StyledHeaderSearch = styled.div`
     height: 40px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
   }
   .header-searchbar input {
+    flex: 1;
     background: transparent;
     border: none;
     outline: none;
@@ -20,9 +22,11 @@ export const StyledHeaderSearch = styled.div`
     font-size: 1.5rem;
   }
   .header-searchbar .search-icon {
-    padding-right: 20px;
+    padding: 0 12px;
     font-size: 2rem;
     cursor: pointer;
+    color: var(--black);
+    background-color: transparent;
   }
   .header-result {
     position: absolute;

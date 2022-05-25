@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { searchGetKeyword } from "apis/configAPI";
 import { useOnClickOutside } from "hooks/useClickOutside";
+import { useDebounce } from "hooks/useDebounce";
 import { StyledHeaderSearch } from "./headerSearch.style";
 
 const HeaderSearch = () => {
@@ -13,7 +14,7 @@ const HeaderSearch = () => {
   const [searchValue, setSearchValue] = useState<string>("");
   const [keywordList, setKeywordList] = useState<string[]>([]);
   const [showResults, setShowResults] = useState<boolean>(false);
-
+  const searchDebouced = useDebounce(searchValue, 500);
   useOnClickOutside(searchRef, () => setShowResults(false));
 
   const fetchGetKeyword = async (keyword: string) => {
@@ -26,17 +27,25 @@ const HeaderSearch = () => {
   };
 
   const handleSearch = (e: any) => {
-    const inputValue = e.target.value.trim();
+    const inputValue = e.target.value;
     setSearchValue(inputValue);
-    fetchGetKeyword(inputValue);
     setShowResults(true);
+  };
+
+  const handleNavigateSearch = () => {
+    if (!searchValue) return;
+    navigate(`/search?query=${searchValue}`);
   };
 
   const handleKeyDown = (e: any) => {
     if (e.key === "Enter") {
-      navigate(`/search?query=${searchValue}`);
+      handleNavigateSearch();
     }
   };
+
+  useEffect(() => {
+    fetchGetKeyword(searchDebouced.trim());
+  }, [searchDebouced]);
 
   useEffect(() => {
     // when change page clear value search input and close search result
@@ -54,9 +63,9 @@ const HeaderSearch = () => {
           onChange={handleSearch}
           onKeyDown={handleKeyDown}
         />
-        <div className="search-icon">
-          <IonIcon name="menu-outline" />
-        </div>
+        <button className="search-icon" type="button" onClick={handleNavigateSearch}>
+          <IonIcon name="search-outline" />
+        </button>
       </div>
       {showResults && keywordList.length > 0 && (
         <ul className="header-result">
