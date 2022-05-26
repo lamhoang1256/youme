@@ -29,16 +29,13 @@ const Header = () => {
           <Link to="/" className="header-logo">
             LOGO
           </Link>
-          <HeaderMenu showMenu={showMenu} handleToggleMenu={handleToggleMenu} />
           {showSearchMobile && <HeaderSearch />}
-          <button type="button" className="header-auth primary">
-            Sign In
-          </button>
+          <HeaderMenu showMenu={showMenu} handleToggleMenu={handleToggleMenu} />
           <div className="header-mobile">
-            <button className="header-search primary" type="button" onClick={handleToggleSearch}>
+            <button className="header-search" onClick={handleToggleSearch} type="button">
               <IonIcon name="search-outline" />
             </button>
-            <button type="button" onClick={handleToggleMenu} className="header-open">
+            <button className="header-open" onClick={handleToggleMenu} type="button">
               <IonIcon name="menu-outline" />
             </button>
           </div>

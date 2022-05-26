@@ -15,6 +15,10 @@ interface HeaderMenuProps {
 const HeaderMenu = ({ showMenu, handleToggleMenu }: HeaderMenuProps) => {
   return (
     <StyledHeaderMenu className={`${showMenu ? "active" : ""}`}>
+      <div className="menu-header">
+        <img src={`${process.env.REACT_APP_PUBLIC}/images/header-avatar.webp`} alt="Avatar" />
+        <span>Hello, Guest</span>
+      </div>
       {menuLinks.map((link) => (
         <li className="menu-item" key={link.id}>
           <Link to={link.path} className="menu-link" onClick={handleToggleMenu}>
@@ -22,6 +26,11 @@ const HeaderMenu = ({ showMenu, handleToggleMenu }: HeaderMenuProps) => {
           </Link>
         </li>
       ))}
+      <li className="menu-item">
+        <button type="button" className="header-login">
+          Sign In
+        </button>
+      </li>
     </StyledHeaderMenu>
   );
 };
