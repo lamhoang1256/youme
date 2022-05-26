@@ -13,30 +13,24 @@ export const StyledHeader = styled.header`
     color: var(--white);
   }
   button {
-    padding: 10px 20px;
-    border-radius: 8px;
-  }
-  button.primary {
-    background-color: var(--primary-color);
-    color: var(--white);
+    padding: 4px;
   }
   .header-mobile {
     display: none;
     gap: 20px;
+    align-items: center;
   }
   .header-search {
     display: none;
   }
-  .header-open {
-    display: flex;
+  .header-open,
+  .header-search {
     font-size: 3rem;
-    z-index: 100;
-    background-color: #3d6ef7;
     color: #fff;
-    padding: 8px;
-    border-radius: 10px;
-    justify-content: center;
-    align-items: center;
+    background-color: transparent;
+  }
+  .header-search {
+    font-size: 2.4rem;
   }
   @media screen and (max-width: 1023.98px) {
     .header-container.show-search {
@@ -50,9 +44,6 @@ export const StyledHeader = styled.header`
     }
     .header-search {
       display: block;
-    }
-    .header-auth {
-      display: none;
     }
     .header-mobile {
       display: flex;
