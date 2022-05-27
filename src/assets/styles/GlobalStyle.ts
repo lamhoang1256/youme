@@ -6,6 +6,7 @@ export const GlobalStyle = createGlobalStyle`
     --black: #000;
     --primary-color: #007aff;
     --secondary-color: #e62e8f;
+    /* purple 8a3cff */
     --dark-color: #080f28;
     --bg-load-image: #191a1f;
     --bg-skeleton: #656871;

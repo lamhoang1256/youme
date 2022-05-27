@@ -10,6 +10,7 @@ const MainLayout = React.lazy(() => import("layouts/MainLayout"));
 const Home = React.lazy(() => import("pages/Home/Home"));
 const SignUp = React.lazy(() => import("pages/SignUp/SignUp"));
 const SignIn = React.lazy(() => import("pages/SignUp/SignIn"));
+const Login = React.lazy(() => import("pages/SignUp/Login"));
 const Detail = React.lazy(() => import("pages/Detail/Detail"));
 const Watch = React.lazy(() => import("pages/Watch/Watch"));
 const Explore = React.lazy(() => import("pages/Explore/Explore"));
@@ -22,9 +23,8 @@ const App = () => {
 
   // check at page load if a user is authenticated
   useEffect(() => {
-    onAuthStateChanged(auth, async (userAuth) => {
+    const unsubscribe = onAuthStateChanged(auth, async (userAuth) => {
       if (userAuth) {
-        // console.log(userAuth);
         const docRef = doc(db, `users/${userAuth.uid}`);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) dispatch(login(docSnap.data()));
@@ -34,6 +34,7 @@ const App = () => {
         console.log("Chưa đăng nhập");
       }
     });
+    return unsubscribe;
   }, []);
 
   return (
@@ -50,7 +51,8 @@ const App = () => {
             <Route path="/search" element={<Search />} />
           </Route>
           <Route path="/register" element={<SignUp />} />
-          <Route path="/login" element={<SignIn />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </Router>
     </Suspense>
