@@ -21,13 +21,6 @@ export const authRegister = createAsyncThunk(
   },
 );
 
-// export const authLogin = createAsyncThunk(
-//   "auth/login",
-//   async (user: { email: string; password: string }) => {
-//     return loginAPi(user);
-//   },
-// );
-
 const authSlice = createSlice({
   name: "auth",
   initialState,

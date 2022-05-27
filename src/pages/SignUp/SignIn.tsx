@@ -1,4 +1,5 @@
 import { loginAPi } from "apis/loginApi";
+import { logout } from "firebase-app/firebase-action";
 import { useState } from "react";
 // import { authLogin } from "./auth.slice";
 import { StyledSignUp } from "./signUp.style";
@@ -16,7 +17,10 @@ const SignIn = () => {
     <StyledSignUp>
       <div className="form">
         <form className="login-form">
+          <span>Email</span>
           <input type="email" placeholder="email" onChange={(e) => setEmail(e.target.value)} />
+          <span>Email</span>
+
           <input
             type="password"
             placeholder="password"
@@ -24,6 +28,9 @@ const SignIn = () => {
           />
           <button type="button" onClick={handleSignIn} style={{ background: "#3d6ef7" }}>
             login
+          </button>
+          <button type="button" onClick={() => logout()} style={{ background: "#ff0000" }}>
+            logout
           </button>
           <p className="message">
             Not registered? <a href="!#">Create an account</a>
