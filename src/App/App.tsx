@@ -1,9 +1,15 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
+import { auth, db } from "firebase-app/firebase-config";
+import { onAuthStateChanged } from "firebase/auth";
+import { login, logout } from "pages/SignUp/auth.slice";
+import { doc, getDoc } from "firebase/firestore";
+import { useAppDispatch } from "./store";
 
 const MainLayout = React.lazy(() => import("layouts/MainLayout"));
 const Home = React.lazy(() => import("pages/Home/Home"));
-const Login = React.lazy(() => import("pages/Login/Login"));
+const SignUp = React.lazy(() => import("pages/SignUp/SignUp"));
+const SignIn = React.lazy(() => import("pages/SignUp/SignIn"));
 const Detail = React.lazy(() => import("pages/Detail/Detail"));
 const Watch = React.lazy(() => import("pages/Watch/Watch"));
 const Explore = React.lazy(() => import("pages/Explore/Explore"));
@@ -12,6 +18,24 @@ const History = React.lazy(() => import("pages/History/History"));
 const Search = React.lazy(() => import("pages/Search/Search"));
 
 const App = () => {
+  const dispatch = useAppDispatch();
+
+  // check at page load if a user is authenticated
+  useEffect(() => {
+    onAuthStateChanged(auth, async (userAuth) => {
+      if (userAuth) {
+        // console.log(userAuth);
+        const docRef = doc(db, `users/${userAuth.uid}`);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) dispatch(login(docSnap.data()));
+        console.log("đã đăng nhập");
+      } else {
+        dispatch(logout());
+        console.log("Chưa đăng nhập");
+      }
+    });
+  }, []);
+
   return (
     <Suspense>
       <Router>
@@ -25,7 +49,8 @@ const App = () => {
             <Route path="/history" element={<History />} />
             <Route path="/search" element={<Search />} />
           </Route>
-          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<SignUp />} />
+          <Route path="/login" element={<SignIn />} />
         </Routes>
       </Router>
     </Suspense>
