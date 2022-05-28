@@ -20,6 +20,7 @@ const HomePopular = () => {
       const popular = data.recommendItems.filter(
         (section: any) => section.homeSectionType === "BANNER",
       )[0];
+      console.log(data);
       setPopulars(popular.recommendContentVOList);
       setLoading(false);
     } catch (error) {
@@ -56,7 +57,7 @@ const HomePopular = () => {
             const id = Number(IDandCate?.split("&type=")[0]);
             const category = Number(IDandCate?.split("&type=")[1]);
             const url = `/detail/${id}?cate=${category}`;
-
+            if (Number.isNaN(id) || Number.isNaN(category)) return null;
             return (
               <StyledPopularCard key={popular.id}>
                 <Link to={url}>
