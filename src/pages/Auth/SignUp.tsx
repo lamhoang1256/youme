@@ -1,16 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAppDispatch } from "App/store";
+import styled from "styled-components";
 import AuthInput from "components/Input/AuthInput";
 import { toast } from "react-toastify";
-import { authRegister } from "./auth.slice";
+import { auth, db } from "firebase-app/firebase-config";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { StyledAuth, StyledButtonAuth } from "./auth.style";
-import { StyledSignUp } from "./signUp.style";
+
+const StyledSignUp = styled.div`
+  .signup {
+    &-header {
+      display: flex;
+      justify-content: space-between;
+    }
+    &-back {
+      background-color: transparent;
+      color: #fff;
+    }
+  }
+`;
 
 const SignUp = () => {
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
   const [showOption, setShowOption] = useState(true);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -18,13 +30,32 @@ const SignUp = () => {
   const [repeatPassword, setRepeatPassword] = useState("");
 
   const handleSignUp = async () => {
-    if (password !== repeatPassword) return;
-    await dispatch(authRegister({ username, email, password }));
-    toast.success("Sign Up Success");
-    setTimeout(() => {
-      navigate("/");
-    }, 500);
+    if (password !== repeatPassword) {
+      toast.error("Password and repeat password not same !");
+      return;
+    }
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      if (!auth.currentUser) return;
+      await setDoc(doc(db, "users", auth.currentUser.uid), {
+        uid: auth.currentUser.uid,
+        username,
+        email,
+        createdAt: serverTimestamp(),
+        favorites: [],
+      });
+      toast.success("Sign Up Success");
+      setTimeout(() => {
+        navigate("/");
+      }, 500);
+    } catch (error: any) {
+      toast.error(error.message);
+    }
   };
+
+  useEffect(() => {
+    document.title = "Sign Up Page";
+  }, []);
 
   return (
     <StyledSignUp>
@@ -90,7 +121,7 @@ const SignUp = () => {
               </>
             )}
             <div className="auth-no-acount">
-              Have an account? <Link to="/signin">Login Here</Link>
+              Have an account? <Link to="/sign-in">Login Here</Link>
             </div>
           </div>
         </div>
