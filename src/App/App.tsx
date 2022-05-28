@@ -2,15 +2,14 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import React, { Suspense, useEffect } from "react";
 import { auth, db } from "firebase-app/firebase-config";
 import { onAuthStateChanged } from "firebase/auth";
-import { login, logout } from "pages/SignUp/auth.slice";
+import { login, logout } from "pages/Auth/auth.slice";
 import { doc, getDoc } from "firebase/firestore";
 import { useAppDispatch } from "./store";
 
 const MainLayout = React.lazy(() => import("layouts/MainLayout"));
 const Home = React.lazy(() => import("pages/Home/Home"));
-const SignUp = React.lazy(() => import("pages/SignUp/SignUp"));
-const SignIn = React.lazy(() => import("pages/SignUp/SignIn"));
-const Login = React.lazy(() => import("pages/SignUp/Login"));
+const SignUp = React.lazy(() => import("pages/Auth/SignUp"));
+const SignIn = React.lazy(() => import("pages/Auth/Login"));
 const Detail = React.lazy(() => import("pages/Detail/Detail"));
 const Watch = React.lazy(() => import("pages/Watch/Watch"));
 const Explore = React.lazy(() => import("pages/Explore/Explore"));
@@ -25,10 +24,12 @@ const App = () => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (userAuth) => {
       if (userAuth) {
-        const docRef = doc(db, `users/${userAuth.uid}`);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) dispatch(login(docSnap.data()));
-        console.log("đã đăng nhập");
+        setTimeout(async () => {
+          const docRef = doc(db, `users/${userAuth.uid}`);
+          const docSnap = await getDoc(docRef);
+          if (docSnap.exists()) dispatch(login(docSnap.data()));
+          console.log("đã đăng nhập");
+        }, 600);
       } else {
         dispatch(logout());
         console.log("Chưa đăng nhập");
@@ -52,7 +53,6 @@ const App = () => {
           </Route>
           <Route path="/register" element={<SignUp />} />
           <Route path="/signin" element={<SignIn />} />
-          <Route path="/login" element={<Login />} />
         </Routes>
       </Router>
     </Suspense>

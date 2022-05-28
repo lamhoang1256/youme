@@ -1,49 +1,52 @@
-import AuthInput from "components/Input/AuthInput";
 import { useState } from "react";
-import { Link } from "react-router-dom";
-// import { useAppDispatch } from "App/store";
-// import { authRegister } from "./auth.slice";
-import { StyledButtonLogin, StyledLogin } from "./login.style";
+import { Link, useNavigate } from "react-router-dom";
+import { useAppDispatch } from "App/store";
+import AuthInput from "components/Input/AuthInput";
+import { authRegister } from "./auth.slice";
+import { StyledAuth, StyledButtonAuth } from "./auth.style";
 import { StyledSignUp } from "./signUp.style";
 
 const SignUp = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   const [showOption, setShowOption] = useState(true);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
-  console.log(email, password, username, repeatPassword);
-  // const fullname = "Nguyen Hoang Lam";
-  // const photoURL =
-  //   "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80";
-  // const dispatch = useAppDispatch();
-  // const handleSignUp = async () => {
-  //   dispatch(authRegister({ fullname, email, password, photoURL }));
-  //   console.log("SignUp Success");
-  // };
+
+  const handleSignUp = async () => {
+    if (password !== repeatPassword) return;
+    await dispatch(authRegister({ username, email, password }));
+    console.log("SignUp Success");
+    setTimeout(() => {
+      navigate("/");
+    }, 500);
+  };
 
   return (
     <StyledSignUp>
-      <StyledLogin>
-        <div className="login">
-          <div className="login-container">
+      <StyledAuth>
+        <div className="auth">
+          <div className="auth-container">
             {showOption ? (
               <>
                 <h2>Sign Up Option</h2>
-                <div className="login-main">
-                  <StyledButtonLogin
+                <div className="auth-main">
+                  <StyledButtonAuth
                     type="button"
-                    className="login-primary"
+                    className="auth-primary"
                     onClick={() => setShowOption(false)}
                   >
                     Sign Up with Email
-                  </StyledButtonLogin>
-                  <StyledButtonLogin type="button" className="login-facebook">
+                  </StyledButtonAuth>
+                  <StyledButtonAuth type="button" className="auth-facebook">
                     Sign Up with Facebook
-                  </StyledButtonLogin>
-                  <StyledButtonLogin type="button" className="login-google">
+                  </StyledButtonAuth>
+                  <StyledButtonAuth type="button" className="auth-google">
                     Sign Up with Google
-                  </StyledButtonLogin>
+                  </StyledButtonAuth>
                 </div>
               </>
             ) : (
@@ -54,7 +57,7 @@ const SignUp = () => {
                     Back
                   </button>
                 </div>
-                <div className="login-main">
+                <div className="auth-main">
                   <AuthInput
                     label="Username"
                     type="text"
@@ -70,27 +73,27 @@ const SignUp = () => {
                   <AuthInput
                     label="Password"
                     type="password"
-                    placeholder="Password"
+                    placeholder="Min 6 characters"
                     onChange={(e) => setPassword(e.target.value)}
                   />
                   <AuthInput
                     label="Re-type Password"
                     type="password"
-                    placeholder="Password"
+                    placeholder="Min 6 characters"
                     onChange={(e) => setRepeatPassword(e.target.value)}
                   />
-                  <StyledButtonLogin type="button" className="login-primary">
+                  <StyledButtonAuth type="button" className="auth-primary" onClick={handleSignUp}>
                     Sign Up
-                  </StyledButtonLogin>
+                  </StyledButtonAuth>
                 </div>
               </>
             )}
-            <div className="login-no-acount">
-              Dont have an account? <Link to="/">Sign Up Here</Link>
+            <div className="auth-no-acount">
+              Have an account? <Link to="/signin">Login Here</Link>
             </div>
           </div>
         </div>
-      </StyledLogin>
+      </StyledAuth>
     </StyledSignUp>
   );
 };

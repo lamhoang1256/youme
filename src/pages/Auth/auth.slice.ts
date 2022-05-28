@@ -16,7 +16,7 @@ const initialState: AuthState = {
 
 export const authRegister = createAsyncThunk(
   "auth/register",
-  async (user: { fullname: string; email: string; password: string; photoURL: string }) => {
+  async (user: { username: string; email: string; password: string }) => {
     return registerApi(user);
   },
 );
@@ -36,8 +36,7 @@ const authSlice = createSlice({
     builder.addCase(authRegister.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(authRegister.fulfilled, (state, action) => {
-      state.currentUser = action.payload;
+    builder.addCase(authRegister.fulfilled, (state) => {
       state.loading = false;
     });
     builder.addCase(authRegister.rejected, (state, action) => {
