@@ -3,6 +3,10 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import { resizeImage } from "constants/resizeImage";
 import { IMovieDetail } from "interfaces/detail";
 import IonIcon from "@reacticons/ionicons";
+import { useAppSelector } from "App/store";
+import { doc, updateDoc } from "firebase/firestore";
+import { toast } from "react-toastify";
+import { db } from "firebase-app/firebase-config";
 import { StyledDetailHeader } from "./detailHeader.style";
 
 interface DetailHeaderProps {
@@ -11,6 +15,29 @@ interface DetailHeaderProps {
 
 const DetailHeader = ({ detail }: DetailHeaderProps) => {
   const url = `/watch/${detail?.id}?cate=${detail?.category}`;
+  const { currentUser } = useAppSelector((state) => state.auth);
+
+  const handleAddFavoriteMovie = () => {
+    const isExistFavorite = currentUser?.favorites.some(
+      (favorite: any) => favorite.id === detail?.id,
+    );
+    if (isExistFavorite) return;
+    const docRef = doc(db, "users", currentUser?.uid);
+    if (docRef) {
+      try {
+        const favoriteMovie = {
+          coverVerticalUrl: detail?.coverVerticalUrl,
+          domainType: detail?.category,
+          id: detail?.id,
+          name: detail?.name,
+        };
+        updateDoc(docRef, { favorites: [favoriteMovie, ...currentUser.favorites] });
+        toast.success("Success add favorite movie");
+      } catch (error: any) {
+        toast.error(error);
+      }
+    }
+  };
 
   return (
     <StyledDetailHeader>
@@ -44,7 +71,11 @@ const DetailHeader = ({ detail }: DetailHeaderProps) => {
               Watch Now
             </button>
           </Link>
-          <button type="button" className="detail-button detail-favorite">
+          <button
+            type="button"
+            className="detail-button detail-favorite"
+            onClick={handleAddFavoriteMovie}
+          >
             <IonIcon name="heart" />
           </button>
           <button type="button" className="detail-button detail-share">

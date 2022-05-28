@@ -16,11 +16,11 @@ const Explore = React.lazy(() => import("pages/Explore/Explore"));
 const Category = React.lazy(() => import("pages/Category/Category"));
 const History = React.lazy(() => import("pages/History/History"));
 const Search = React.lazy(() => import("pages/Search/Search"));
+const Favorites = React.lazy(() => import("pages/Favorites/Favorites"));
 
 const App = () => {
-  const dispatch = useAppDispatch();
-
   // check at page load if a user is authenticated
+  const dispatch = useAppDispatch();
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (userAuth) => {
       if (userAuth) {
@@ -48,6 +48,7 @@ const App = () => {
             <Route path="/explore" element={<Explore />} />
             <Route path="/history" element={<History />} />
             <Route path="/search" element={<Search />} />
+            <Route path="/favorites" element={<Favorites />} />
           </Route>
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/sign-in" element={<SignIn />} />
