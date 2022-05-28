@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "App/store";
 import AuthInput from "components/Input/AuthInput";
+import { toast } from "react-toastify";
 import { authRegister } from "./auth.slice";
 import { StyledAuth, StyledButtonAuth } from "./auth.style";
 import { StyledSignUp } from "./signUp.style";
@@ -19,7 +20,7 @@ const SignUp = () => {
   const handleSignUp = async () => {
     if (password !== repeatPassword) return;
     await dispatch(authRegister({ username, email, password }));
-    console.log("SignUp Success");
+    toast.success("Sign Up Success");
     setTimeout(() => {
       navigate("/");
     }, 500);

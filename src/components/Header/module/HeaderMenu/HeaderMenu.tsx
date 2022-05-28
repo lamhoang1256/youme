@@ -21,7 +21,7 @@ const HeaderMenu = ({ showMenu, handleToggleMenu }: HeaderMenuProps) => {
     <StyledHeaderMenu className={`${showMenu ? "active" : ""}`}>
       <div className="menu-header">
         <img src={`${process.env.REACT_APP_PUBLIC}/images/header-avatar.webp`} alt="Avatar" />
-        <span>Hello, Guest</span>
+        <span>Hello, {currentUser ? currentUser.username : "Guest"}</span>
       </div>
       {menuLinks.map((link) => (
         <li className="menu-item" key={link.id}>
