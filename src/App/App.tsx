@@ -34,7 +34,7 @@ const App = () => {
       }
     });
     return unsubscribe;
-  }, []);
+  }, [dispatch]);
 
   return (
     <Suspense>

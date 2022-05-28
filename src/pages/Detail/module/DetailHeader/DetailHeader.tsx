@@ -3,10 +3,11 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import { resizeImage } from "constants/resizeImage";
 import { IMovieDetail } from "interfaces/detail";
 import IonIcon from "@reacticons/ionicons";
-import { useAppSelector } from "App/store";
+import { useAppDispatch, useAppSelector } from "App/store";
 import { doc, updateDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { db } from "firebase-app/firebase-config";
+import { addFavoriteMovie } from "pages/Auth/auth.slice";
 import { StyledDetailHeader } from "./detailHeader.style";
 
 interface DetailHeaderProps {
@@ -14,6 +15,7 @@ interface DetailHeaderProps {
 }
 
 const DetailHeader = ({ detail }: DetailHeaderProps) => {
+  const dispatch = useAppDispatch();
   const url = `/watch/${detail?.id}?cate=${detail?.category}`;
   const { currentUser } = useAppSelector((state) => state.auth);
 
@@ -25,13 +27,20 @@ const DetailHeader = ({ detail }: DetailHeaderProps) => {
     const docRef = doc(db, "users", currentUser?.uid);
     if (docRef) {
       try {
+        const cloneFavoritesRedux = [...currentUser.favorites];
         const favoriteMovie = {
           coverVerticalUrl: detail?.coverVerticalUrl,
           domainType: detail?.category,
           id: detail?.id,
           name: detail?.name,
         };
-        updateDoc(docRef, { favorites: [favoriteMovie, ...currentUser.favorites] });
+        updateDoc(docRef, { favorites: [favoriteMovie, cloneFavoritesRedux] });
+        dispatch(
+          addFavoriteMovie({
+            ...currentUser,
+            favorites: [favoriteMovie, cloneFavoritesRedux],
+          }),
+        );
         toast.success("Success add favorite movie");
       } catch (error: any) {
         toast.error(error);
