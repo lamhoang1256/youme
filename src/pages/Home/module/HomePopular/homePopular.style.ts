@@ -13,6 +13,9 @@ export const StyledPopularList = styled.div`
   .slick-arrow {
     display: none !important;
   }
+  .slick-list {
+    z-index: 40;
+  }
   .slick-slider {
     margin-left: -10px;
   }

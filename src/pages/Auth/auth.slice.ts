@@ -1,6 +1,8 @@
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { registerApi } from "apis/registerApi";
+import { auth, db } from "firebase-app/firebase-config";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 
 export interface AuthState {
   currentUser: any;
@@ -17,7 +19,19 @@ const initialState: AuthState = {
 export const authRegister = createAsyncThunk(
   "auth/register",
   async (user: { username: string; email: string; password: string }) => {
-    return registerApi(user);
+    const { username, email, password } = user;
+    await createUserWithEmailAndPassword(auth, email, password);
+    if (!auth.currentUser) return;
+    await updateProfile(auth.currentUser, {
+      displayName: username,
+    });
+    await setDoc(doc(db, "users", auth.currentUser.uid), {
+      username,
+      email,
+      password,
+      createdAt: serverTimestamp(),
+      favorites: [],
+    });
   },
 );
 

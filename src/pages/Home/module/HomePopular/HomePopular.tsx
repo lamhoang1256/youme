@@ -53,8 +53,8 @@ const HomePopular = () => {
         <Slider {...settingsPopular}>
           {populars.map((popular) => {
             const IDandCate = popular.jumpAddress.split("?id=")[1];
-            const id = Number(IDandCate.split("&type=")[0]);
-            const category = Number(IDandCate.split("&type=")[1]);
+            const id = Number(IDandCate?.split("&type=")[0]);
+            const category = Number(IDandCate?.split("&type=")[1]);
             const url = `/detail/${id}?cate=${category}`;
 
             return (
