@@ -59,7 +59,7 @@ export const StyledDetailHeader = styled.div`
       transition: all 0.25s linear;
     }
     &-category:hover {
-      color: var(--secondary-color);
+      color: var(--primary-color);
     }
     &-action {
       display: flex;
@@ -70,7 +70,7 @@ export const StyledDetailHeader = styled.div`
       height: 50px;
       border-radius: 40px;
       color: var(--white);
-      background-color: var(--secondary-color);
+      background-image: linear-gradient(270deg, #c042ff, #8a3cff);
     }
     &-button {
       font-size: 2rem;

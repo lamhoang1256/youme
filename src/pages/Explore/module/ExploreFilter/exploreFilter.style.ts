@@ -18,7 +18,7 @@ export const StyledExploreTabPanel = styled.div`
 `;
 
 export const StyledExploreButton = styled.button<Props>`
-  background: ${(props) => props.background};
+  background: ${(props) => (props.background === "active" ? "#8a3cff" : "#3d6ef7")};
   color: #fff;
   padding: 5px 10px;
   border-radius: 4px;

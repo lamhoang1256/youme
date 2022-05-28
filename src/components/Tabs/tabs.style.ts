@@ -10,6 +10,6 @@ export const StyledTabs = styled.div`
     border-radius: 4px;
   }
   .tab.active {
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
   }
 `;

@@ -7,7 +7,7 @@ const StyledLoadingSpinner = styled.div`
   pointer-events: none;
   border: 4px solid transparent;
   border-color: #eee;
-  border-top-color: var(--secondary-color);
+  border-top-color: var(--primary-color);
   border-radius: 50%;
   animation: loadingspin 1.2s linear infinite;
   @keyframes loadingspin {
