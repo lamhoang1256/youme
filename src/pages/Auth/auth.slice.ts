@@ -23,11 +23,8 @@ const authSlice = createSlice({
     logout: (state) => {
       state.currentUser = null;
     },
-    addFavoriteMovie: (state, action) => {
-      state.currentUser = action.payload;
-    },
   },
 });
 
-export const { setCurrentUser, logout, addFavoriteMovie } = authSlice.actions;
+export const { setCurrentUser, logout } = authSlice.actions;
 export default authSlice.reducer;

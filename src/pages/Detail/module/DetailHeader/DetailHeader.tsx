@@ -3,50 +3,64 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import { resizeImage } from "constants/resizeImage";
 import { IMovieDetail } from "interfaces/detail";
 import IonIcon from "@reacticons/ionicons";
-import { useAppDispatch, useAppSelector } from "App/store";
-import { doc, updateDoc } from "firebase/firestore";
+import { useAppSelector } from "App/store";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { db } from "firebase-app/firebase-config";
-import { addFavoriteMovie } from "pages/Auth/auth.slice";
+import { useEffect, useState } from "react";
 import { StyledDetailHeader } from "./detailHeader.style";
 
 interface DetailHeaderProps {
   detail: IMovieDetail;
 }
 
+interface IFavorites {
+  coverVerticalUrl: string;
+  domainType: number;
+  id: string;
+  name: string;
+}
+
 const DetailHeader = ({ detail }: DetailHeaderProps) => {
-  const dispatch = useAppDispatch();
   const url = `/watch/${detail?.id}?cate=${detail?.category}`;
   const { currentUser } = useAppSelector((state) => state.auth);
+  const [favorites, setFavorites] = useState<IFavorites[]>([]);
+
+  const getData = async () => {
+    if (currentUser?.uid) {
+      const colRef = doc(db, "users", currentUser?.uid);
+      const data = await getDoc(colRef);
+      setFavorites(data.data()?.favorites);
+    }
+  };
 
   const handleAddFavoriteMovie = () => {
-    const isExistFavorite = currentUser?.favorites.some(
-      (favorite: any) => favorite.id === detail?.id,
-    );
-    if (isExistFavorite) return;
-    const docRef = doc(db, "users", currentUser?.uid);
-    if (docRef) {
+    const isExistFavorite = favorites.some((favorite: any) => favorite.id === detail?.id);
+    if (isExistFavorite) {
+      toast.error("Movie is added favorite");
+      return;
+    }
+    const colRef = doc(db, "users", currentUser?.uid);
+    if (colRef) {
       try {
-        const cloneFavoritesRedux = [...currentUser.favorites];
         const favoriteMovie = {
           coverVerticalUrl: detail?.coverVerticalUrl,
           domainType: detail?.category,
           id: detail?.id,
           name: detail?.name,
         };
-        updateDoc(docRef, { favorites: [favoriteMovie, cloneFavoritesRedux] });
-        dispatch(
-          addFavoriteMovie({
-            ...currentUser,
-            favorites: [favoriteMovie, cloneFavoritesRedux],
-          }),
-        );
+        updateDoc(colRef, { favorites: [favoriteMovie, ...currentUser.favorites] });
+        getData();
         toast.success("Success add favorite movie");
       } catch (error: any) {
         toast.error(error);
       }
     }
   };
+
+  useEffect(() => {
+    getData();
+  }, [currentUser]);
 
   return (
     <StyledDetailHeader>
