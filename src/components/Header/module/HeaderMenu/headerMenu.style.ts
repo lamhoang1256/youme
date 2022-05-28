@@ -35,6 +35,49 @@ export const StyledHeaderMenu = styled.ul`
       color: var(--primary-color);
     }
   }
+  .header-avatar {
+    position: relative;
+  }
+  .header-avatar:hover .dropdown {
+    opacity: 1;
+    visibility: visible;
+  }
+  .header-avatar img {
+    width: 45px;
+    height: 45px;
+    border-radius: 100rem;
+  }
+  .dropdown {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    z-index: 20;
+    top: 110%;
+    right: 0;
+    background-color: #fff;
+    padding: 10px 0;
+    border-radius: 4px;
+    min-width: 200px;
+    transition: all 0.25s linear;
+    &-item {
+      padding: 12px 40px 12px 30px;
+    }
+    &-item:hover {
+      background-color: #f8f8f8;
+    }
+    &-link {
+      display: flex !important;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      color: #000;
+      transition: all 0.25s linear;
+    }
+  }
+  .logout {
+    padding: 0;
+    background-color: transparent;
+  }
   @media screen and (max-width: 1023.98px) {
     position: fixed;
     width: 300px;
