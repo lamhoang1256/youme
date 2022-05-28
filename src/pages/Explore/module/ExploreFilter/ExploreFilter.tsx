@@ -52,7 +52,7 @@ const ExploreFilter = (props: ExploreFilterProps) => {
                         key={uuidv4()}
                         type="button"
                         onClick={() => handleSearchByCategory(choice)}
-                        background={filters[screeningType] === params ? "#e62e8f" : "#3d6ef7"}
+                        background={filters[screeningType] === params ? "active" : "normal"}
                       >
                         {name}
                       </StyledExploreButton>

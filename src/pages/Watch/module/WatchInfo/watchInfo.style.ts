@@ -22,7 +22,7 @@ export const StyledWatchInfo = styled.div`
       width: 10px;
       height: 10px;
       border-radius: 100rem;
-      background-color: var(--secondary-color);
+      background-color: var(--primary-color);
     }
   }
   .watch-categories {
@@ -40,7 +40,7 @@ export const StyledWatchInfo = styled.div`
     border-radius: 14px;
     transition: all 0.25s linear;
     &:hover {
-      background-color: var(--secondary-color);
+      background-color: var(--primary-color);
     }
   }
   .watch-upcoming {

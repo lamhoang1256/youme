@@ -18,7 +18,7 @@ export const StyledWatchAnthology = styled.div`
     color: var(--black);
   }
   button.is-active {
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
     color: var(--white);
   }
   &::-webkit-scrollbar {
@@ -28,7 +28,7 @@ export const StyledWatchAnthology = styled.div`
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   }
   &::-webkit-scrollbar-thumb {
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
     border-radius: 6px;
   }
 `;

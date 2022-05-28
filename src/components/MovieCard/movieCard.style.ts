@@ -30,7 +30,7 @@ export const StyledMovieCard = styled.div`
     white-space: normal;
     transition: all 0.3s linear;
     &:hover {
-      color: var(--secondary-color);
+      color: var(--primary-color);
     }
   }
 `;

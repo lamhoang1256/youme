@@ -23,7 +23,7 @@ export const StyledHeaderMenu = styled.ul`
   .header-login {
     font-size: 18px;
     padding: 10px 20px;
-    background-color: #3d6ef7;
+    background-image: linear-gradient(270deg, #c042ff, #8a3cff);
     border-radius: 8px;
     color: #fff;
   }
