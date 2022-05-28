@@ -1,5 +1,6 @@
 import { useAppSelector } from "App/store";
-import { logout } from "firebase-app/firebase-action";
+import { auth } from "firebase-app/firebase-config";
+import { signOut } from "firebase/auth";
 import { Link } from "react-router-dom";
 import { StyledHeaderMenu } from "./headerMenu.style";
 
@@ -13,6 +14,10 @@ interface HeaderMenuProps {
   showMenu: boolean;
   handleToggleMenu: () => void;
 }
+
+const handleLogout = () => {
+  signOut(auth);
+};
 
 const HeaderMenu = ({ showMenu, handleToggleMenu }: HeaderMenuProps) => {
   const { currentUser } = useAppSelector((state) => state.auth);
@@ -32,13 +37,15 @@ const HeaderMenu = ({ showMenu, handleToggleMenu }: HeaderMenuProps) => {
       ))}
       <li className="menu-item">
         {currentUser ? (
-          <button type="button" className="header-login" onClick={logout}>
+          <button type="button" className="header-login" onClick={handleLogout}>
             Logout
           </button>
         ) : (
-          <button type="button" className="header-login">
-            Sign In
-          </button>
+          <Link to="/sign-in">
+            <button type="button" className="header-login">
+              Sign In
+            </button>
+          </Link>
         )}
       </li>
     </StyledHeaderMenu>
