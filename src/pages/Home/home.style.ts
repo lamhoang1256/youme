@@ -14,6 +14,7 @@ export const StyledWrapperLayout = styled.div`
   }
   @media screen and (max-width: 1023.98px) {
     flex-direction: column;
+    margin-top: 20px !important;
     .wrapper-side {
       width: 100%;
     }

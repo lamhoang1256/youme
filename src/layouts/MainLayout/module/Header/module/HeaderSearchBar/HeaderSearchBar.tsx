@@ -5,9 +5,9 @@ import { v4 as uuidv4 } from "uuid";
 import { searchGetKeyword } from "apis/configAPI";
 import { useOnClickOutside } from "hooks/useClickOutside";
 import { useDebounce } from "hooks/useDebounce";
-import { StyledHeaderSearch } from "./headerSearch.style";
+import { StyledHeaderSearchBar } from "./headerSearchBar.style";
 
-const HeaderSearch = () => {
+const HeaderSearchBar = () => {
   const currentURL = window.location.href;
   const navigate = useNavigate();
   const searchRef = useRef(null);
@@ -55,7 +55,7 @@ const HeaderSearch = () => {
   }, [currentURL]);
 
   return (
-    <StyledHeaderSearch ref={searchRef}>
+    <StyledHeaderSearchBar ref={searchRef}>
       <div className="header-searchbar">
         <input
           type="text"
@@ -82,8 +82,8 @@ const HeaderSearch = () => {
           })}
         </ul>
       )}
-    </StyledHeaderSearch>
+    </StyledHeaderSearchBar>
   );
 };
 
-export default HeaderSearch;
+export default HeaderSearchBar;
