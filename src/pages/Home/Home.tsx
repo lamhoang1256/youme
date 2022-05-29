@@ -1,37 +1,41 @@
 import { useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import { IHomeSection } from "interfaces/home";
 import { getHome } from "apis/configAPI";
-import SkeletonTitle from "components/Skeleton/SkeletonTitle";
+import useSWRInfinite from "swr/infinite";
+import InfiniteScroll from "react-infinite-scroll-component";
+import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
 import HomeBanner from "./module/HomeBanner/HomeBanner";
 import HomePopular from "./module/HomePopular/HomePopular";
 import HomeList from "./module/HomeList/HomeList";
 import HomeSide from "./module/HomeSide/HomeSide";
-import HomeCardSkeleton from "./module/HomeSkeleton/HomeCardSkeleton";
 import { StyledHome, StyledWrapperLayout } from "./home.style";
-import { StyledHomeList } from "./module/HomeList/homeList.style";
 
 const Home = () => {
-  const [loadingSections, setLoadingSections] = useState<boolean>(true);
+  // const [loadingSections, setLoadingSections] = useState<boolean>(true);
   const [homeSections, setHomeSections] = useState<IHomeSection[]>([]);
 
-  const fetchHomeSections = async () => {
-    setLoadingSections(true);
-    try {
-      const { data } = await getHome({ page: 0 });
-      const sectionMovies = data.recommendItems.filter(
-        (section: any) => section.bannerProportion !== 1 && section.coverType === 1,
-      );
-      setHomeSections(sectionMovies);
-      setLoadingSections(false);
-    } catch (error) {
-      setLoadingSections(false);
-    }
+  const getKey = (indexPage: any, previousPageData: any) => {
+    if (previousPageData && previousPageData.length === 0) return null;
+    const prevPage = previousPageData?.data?.page || 0;
+    return `page-${prevPage}`;
   };
 
+  const { data, error, setSize } = useSWRInfinite(
+    getKey,
+    (key: string) => getHome({ page: Number(key.split("page-")[1]) + 1 }),
+    {
+      revalidateFirstPage: false,
+    },
+  );
+
   useEffect(() => {
-    fetchHomeSections();
-  }, []);
+    if (!data) return;
+    const sectionMovies = data?.reduce(
+      (prevExplore: any, currExplore: any) => [...prevExplore, ...currExplore.data.recommendItems],
+      [],
+    );
+    setHomeSections(sectionMovies);
+  }, [data]);
 
   return (
     <StyledHome>
@@ -39,7 +43,7 @@ const Home = () => {
       <StyledWrapperLayout className="container">
         <div className="wrapper-main">
           <HomePopular />
-          {loadingSections && (
+          {/* {loadingSections && (
             <StyledHomeList>
               <SkeletonTitle />
               <div className="home-list">
@@ -50,14 +54,27 @@ const Home = () => {
                   ))}
               </div>
             </StyledHomeList>
-          )}
+          )} */}
 
-          {!loadingSections && (
-            <>
+          {/* {homeSections.map((homeSection) => (
+                <HomeList key={homeSection.homeSectionId} homeSection={homeSection} />
+              ))} */}
+          {homeSections.length > 0 && (
+            <InfiniteScroll
+              dataLength={data?.length || 0}
+              next={() => setSize((size) => size + 1)}
+              hasMore={!error && data?.slice(-1)[0].data.recommendItems.length !== 0}
+              loader={<LoadingSpinner />}
+              endMessage={
+                <p style={{ textAlign: "center" }}>
+                  <b>Yay! You have seen it all</b>
+                </p>
+              }
+            >
               {homeSections.map((homeSection) => (
                 <HomeList key={homeSection.homeSectionId} homeSection={homeSection} />
               ))}
-            </>
+            </InfiniteScroll>
           )}
         </div>
         <div className="wrapper-side">
