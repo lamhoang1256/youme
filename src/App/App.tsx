@@ -6,7 +6,7 @@ import { setCurrentUser } from "pages/Auth/auth.slice";
 import { doc, getDoc } from "firebase/firestore";
 import { useAppDispatch } from "./store";
 
-const MainLayout = React.lazy(() => import("layouts/MainLayout"));
+const MainLayout = React.lazy(() => import("layouts/MainLayout/MainLayout"));
 const Home = React.lazy(() => import("pages/Home/Home"));
 const SignUp = React.lazy(() => import("pages/Auth/SignUp"));
 const SignIn = React.lazy(() => import("pages/Auth/SignIn"));

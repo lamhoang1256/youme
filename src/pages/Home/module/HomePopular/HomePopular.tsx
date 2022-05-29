@@ -20,7 +20,6 @@ const HomePopular = () => {
       const popular = data.recommendItems.filter(
         (section: any) => section.homeSectionType === "BANNER",
       )[0];
-      console.log(data);
       setPopulars(popular.recommendContentVOList);
       setLoading(false);
     } catch (error) {
