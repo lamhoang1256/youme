@@ -36,6 +36,9 @@ export const StyledHeaderActions = styled.div`
       gap: 20px;
       align-items: center;
     }
+    &-login {
+      background-image: linear-gradient(270deg, #c042ff, #8a3cff);
+    }
     @media screen and (max-width: 1023.98px) {
       &-mobile {
         display: flex;
@@ -56,16 +59,5 @@ export const StyledHeaderButton = styled.button`
   align-items: center;
   @media screen and (max-width: 1023.98px) {
     display: flex;
-  }
-`;
-
-export const StyledButonLogin = styled.button`
-  font-size: 1.8rem;
-  padding: 8px 20px;
-  background-image: linear-gradient(270deg, #c042ff, #8a3cff);
-  border-radius: 8px;
-  color: #fff;
-  @media screen and (max-width: 767.98px) {
-    font-size: 1.6rem;
   }
 `;

@@ -70,6 +70,10 @@ export const StyledHeaderSearchBar = styled.div`
       a {
         color: var(--white);
       }
+      em {
+        color: var(--primary-color);
+        font-weight: 600;
+      }
       &:hover {
         background-color: #666666;
       }

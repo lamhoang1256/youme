@@ -2,6 +2,7 @@ import { useAppSelector } from "App/store";
 import Breadcrumb from "components/Breadcrumb/Breadcrumb";
 import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
 import MovieList from "components/MovieList/MovieList";
+import Nothing from "components/Nothing/Nothing";
 import { db } from "firebase-app/firebase-config";
 import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
@@ -40,7 +41,17 @@ const Favorites = () => {
     <div className="container">
       <Breadcrumb crumbs={crumbs} />
       {loading && <LoadingSpinner />}
-      {!loading && <MovieList movieList={favorites} />}
+      {!loading && favorites.length > 0 ? (
+        <MovieList movieList={favorites} />
+      ) : (
+        <Nothing
+          image={`${process.env.REACT_APP_PUBLIC}/images/favorites.png`}
+          heading="No Movies Added!"
+          description="There are no items in your favourite."
+          titleButton="Add more"
+          redirect="/explore"
+        />
+      )}
     </div>
   );
 };

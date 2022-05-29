@@ -3,12 +3,8 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useMediaQuery } from "hooks/useMediaQuery";
 import { useAppSelector } from "App/store";
-import {
-  StyledButonLogin,
-  StyledHeader,
-  StyledHeaderActions,
-  StyledHeaderButton,
-} from "./header.style";
+import ButtonGradient from "components/Button/ButtonGradient";
+import { StyledHeader, StyledHeaderActions, StyledHeaderButton } from "./header.style";
 import HeaderMenu from "./module/HeaderMenu/HeaderMenu";
 import HeaderSearchBar from "./module/HeaderSearchBar/HeaderSearchBar";
 import HeaderUser from "./module/HeaderUser/HeaderUser";
@@ -52,7 +48,7 @@ const Header = () => {
               <HeaderUser username={currentUser?.username} />
             ) : (
               <Link to="/sign-in">
-                <StyledButonLogin>Sign In</StyledButonLogin>
+                <ButtonGradient className="header-login">Sign In</ButtonGradient>
               </Link>
             )}
           </StyledHeaderActions>
