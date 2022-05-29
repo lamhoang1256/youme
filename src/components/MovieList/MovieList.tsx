@@ -13,8 +13,13 @@ interface MovieListProps {
 const MovieList = ({ movieList }: MovieListProps) => {
   return (
     <StyledMovieList>
-      {movieList.length > 0 &&
-        movieList.map((explore) => <MovieCard movie={explore} key={explore.id} />)}
+      {movieList.length > 0 && (
+        <div className="movie-list">
+          {movieList.map((explore) => (
+            <MovieCard movie={explore} key={explore.id} />
+          ))}
+        </div>
+      )}
     </StyledMovieList>
   );
 };

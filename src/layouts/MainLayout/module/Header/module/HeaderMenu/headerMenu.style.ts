@@ -24,6 +24,7 @@ export const StyledHeaderMenu = styled.ul`
     color: var(--white);
     transition: all 0.35s linear;
     font-size: 1.7rem;
+    font-weight: 600;
     &:hover {
       color: var(--primary-color);
     }
