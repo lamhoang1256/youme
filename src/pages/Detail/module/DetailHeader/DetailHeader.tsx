@@ -27,14 +27,16 @@ const DetailHeader = ({ detail }: DetailHeaderProps) => {
   const [favorites, setFavorites] = useState<IFavorites[]>([]);
 
   const getData = async () => {
-    if (currentUser?.uid) {
-      const colRef = doc(db, "users", currentUser?.uid);
-      const data = await getDoc(colRef);
-      setFavorites(data.data()?.favorites);
-    }
+    const colRef = doc(db, "users", currentUser?.uid);
+    const data = await getDoc(colRef);
+    setFavorites(data.data()?.favorites);
   };
 
   const handleAddFavoriteMovie = () => {
+    if (!currentUser?.uid) {
+      toast.error("Please Login");
+      return;
+    }
     const isExistFavorite = favorites.some((favorite: any) => favorite.id === detail?.id);
     if (isExistFavorite) {
       toast.error("Movie is added favorite");
@@ -59,7 +61,9 @@ const DetailHeader = ({ detail }: DetailHeaderProps) => {
   };
 
   useEffect(() => {
-    getData();
+    if (currentUser?.id) {
+      getData();
+    }
   }, [currentUser]);
 
   return (
