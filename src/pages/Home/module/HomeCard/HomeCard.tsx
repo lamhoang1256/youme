@@ -20,9 +20,9 @@ interface HomeCardProps {
 }
 
 const HomeCard = ({ movie }: HomeCardProps) => {
-  const IDandCate = movie.jumpAddress.split("?id=")[1];
-  const id = Number(IDandCate.split("&type=")[0]);
-  const category = Number(IDandCate.split("&type=")[1]);
+  const IDandCate = movie.jumpAddress?.split("?id=")[1];
+  const id = Number(IDandCate?.split("&type=")[0]);
+  const category = Number(IDandCate?.split("&type=")[1]);
   const url = `/detail/${id}?cate=${category}`;
   const type = Number.isNaN(category) ? "actor" : "movie";
   return (
