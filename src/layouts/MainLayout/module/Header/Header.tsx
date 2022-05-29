@@ -1,12 +1,20 @@
 import IonIcon from "@reacticons/ionicons";
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { useMediaQuery } from "hooks/useMediaQuery";
-import { StyledHeader } from "./header.style";
+import { useAppSelector } from "App/store";
+import {
+  StyledButonLogin,
+  StyledHeader,
+  StyledHeaderActions,
+  StyledHeaderButton,
+} from "./header.style";
 import HeaderMenu from "./module/HeaderMenu/HeaderMenu";
-import HeaderSearch from "./module/HeaderSearch/HeaderSearch";
+import HeaderSearchBar from "./module/HeaderSearchBar/HeaderSearchBar";
+import HeaderUser from "./module/HeaderUser/HeaderUser";
 
 const Header = () => {
+  const { currentUser } = useAppSelector((state) => state.auth);
   const isTablet = useMediaQuery("(max-width:1023.98px)");
   const [showMenu, setShowMenu] = useState(false);
   const [showSearchMobile, setShowSearchMobile] = useState(!isTablet);
@@ -29,16 +37,25 @@ const Header = () => {
           <Link to="/" className="header-logo">
             LOGO
           </Link>
-          {showSearchMobile && <HeaderSearch />}
-          <HeaderMenu showMenu={showMenu} handleToggleMenu={handleToggleMenu} />
-          <div className="header-mobile">
-            <button className="header-search" onClick={handleToggleSearch} type="button">
-              <IonIcon name="search-outline" />
-            </button>
-            <button className="header-open" onClick={handleToggleMenu} type="button">
-              <IonIcon name="menu-outline" />
-            </button>
-          </div>
+          {showSearchMobile && <HeaderSearchBar />}
+          <StyledHeaderActions>
+            <HeaderMenu showMenu={showMenu} handleToggleMenu={handleToggleMenu} />
+            <div className="header-mobile">
+              <StyledHeaderButton onClick={handleToggleSearch}>
+                <IonIcon name="search-outline" />
+              </StyledHeaderButton>
+              <StyledHeaderButton onClick={handleToggleMenu}>
+                <IonIcon name="reorder-four-outline" />
+              </StyledHeaderButton>
+            </div>
+            {currentUser ? (
+              <HeaderUser username={currentUser?.username} />
+            ) : (
+              <Link to="/sign-in">
+                <StyledButonLogin>Sign In</StyledButonLogin>
+              </Link>
+            )}
+          </StyledHeaderActions>
         </div>
       </div>
       {showMenu && <switch className="header-overplay" onClick={handleToggleMenu} />}
