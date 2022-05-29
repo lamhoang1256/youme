@@ -5,6 +5,7 @@ import MovieList from "components/MovieList/MovieList";
 import Nothing from "components/Nothing/Nothing";
 import { db } from "firebase-app/firebase-config";
 import { doc, getDoc } from "firebase/firestore";
+import { IMovieList } from "interfaces/components";
 import { useEffect, useState } from "react";
 
 const crumbs = [
@@ -12,16 +13,9 @@ const crumbs = [
   { id: 2, label: "Favorites", path: "/favorites" },
 ];
 
-interface IFavorites {
-  coverVerticalUrl: string;
-  domainType: number;
-  id: string;
-  name: string;
-}
-
 const Favorites = () => {
   const { currentUser } = useAppSelector((state) => state.auth);
-  const [favorites, setFavorites] = useState<IFavorites[]>([]);
+  const [favorites, setFavorites] = useState<IMovieList[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

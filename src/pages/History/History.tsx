@@ -11,15 +11,15 @@ const StyledHistory = styled.div`
     &-header {
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
     }
     &-clear {
-      padding: 8px 10px;
+      height: fit-content;
       background-color: transparent;
-      color: #fff;
+      color: var(--white);
+      font-weight: 600;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       border-radius: 4px;
     }
   }
