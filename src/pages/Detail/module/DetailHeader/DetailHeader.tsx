@@ -8,6 +8,7 @@ import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { db } from "firebase-app/firebase-config";
 import { useEffect, useState } from "react";
+import ButtonGradient from "components/Button/ButtonGradient";
 import { StyledDetailHeader } from "./detailHeader.style";
 
 interface DetailHeaderProps {
@@ -94,9 +95,9 @@ const DetailHeader = ({ detail }: DetailHeaderProps) => {
         </div>
         <div className="detail-action">
           <Link to={url}>
-            <button type="button" className="detail-watch">
+            <ButtonGradient type="button" className="primary detail-watch">
               Watch Now
-            </button>
+            </ButtonGradient>
           </Link>
           <button
             type="button"

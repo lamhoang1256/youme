@@ -9,6 +9,12 @@ const StyledButtonGradient = styled.button`
   color: #fff;
   isolation: isolate;
   overflow: hidden;
+  &.primary {
+    background-image: var(--gradient-primary);
+  }
+  &.secondary {
+    background-image: var(--gradient-secondary);
+  }
   &::before {
     content: "";
     position: absolute;

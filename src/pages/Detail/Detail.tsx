@@ -5,6 +5,7 @@ import { getMovieDetail } from "apis/configAPI";
 import { StyledWrapperLayout } from "pages/Home/home.style";
 import SideRelated from "components/SideRelated/SideRelated";
 import SkeletonSideRelated from "components/Skeleton/SkeletonSideRelated";
+import Nothing from "components/Nothing/Nothing";
 import DetailHeader from "./module/DetailHeader/DetailHeader";
 import DetailDescription from "./module/DetailDescription/DetailDescription";
 import DetailSkeleton from "./module/DetailSkeleton/DetailSkeleton";
@@ -36,6 +37,17 @@ const Detail = () => {
     });
     fetchMovieDetail();
   }, [id, category]);
+
+  if (detail === null) {
+    return (
+      <Nothing
+        image={`${process.env.REACT_APP_PUBLIC}/images/not-found-404.png`}
+        heading="This movie is not available yet."
+        titleButton="Return Home"
+        redirect="/"
+      />
+    );
+  }
 
   return (
     <StyledDetail>
