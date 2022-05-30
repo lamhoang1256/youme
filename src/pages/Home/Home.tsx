@@ -1,6 +1,4 @@
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { IHomeSection } from "interfaces/home";
 import { v4 as uuidv4 } from "uuid";
 import useSWRInfinite from "swr/infinite";
 import { getHome } from "apis/configAPI";
@@ -16,7 +14,6 @@ import { StyledHome, StyledWrapperLayout } from "./home.style";
 import { StyledHomeList } from "./module/HomeList/homeList.style";
 
 const Home = () => {
-  const [homeSections, setHomeSections] = useState<IHomeSection[]>([]);
   const getKey = (index: number) => `page-${index || 0}`;
   const { data, error, setSize } = useSWRInfinite(
     getKey,
@@ -25,18 +22,6 @@ const Home = () => {
       revalidateFirstPage: false,
     },
   );
-
-  useEffect(() => {
-    if (!data) return;
-    const allSections = data?.reduce(
-      (prevData: any, currentData: any) => [...prevData, ...currentData.data.recommendItems],
-      [],
-    );
-    const suitableSections = allSections?.filter(
-      (section: any) => section.bannerProportion !== 1 && section.coverType === 1,
-    );
-    setHomeSections(suitableSections);
-  }, [data]);
 
   return (
     <StyledHome>
@@ -60,7 +45,7 @@ const Home = () => {
             <InfiniteScroll
               dataLength={data?.length || 0}
               next={() => setSize((size) => size + 1)}
-              hasMore={!error && data?.slice(-1)[0].data.recommendItems.length !== 0}
+              hasMore={!error && data?.slice(-1)?.[0].data?.recommendItems?.length !== 0}
               loader={<LoadingSpinner />}
               endMessage={
                 <Link to="/explore">
@@ -70,9 +55,16 @@ const Home = () => {
                 </Link>
               }
             >
-              {homeSections.map((homeSection) => (
-                <HomeList key={uuidv4()} homeSection={homeSection} />
-              ))}
+              {data
+                ?.reduce((prevData: any, currentData: any) => {
+                  const suitableSections = [...currentData.data.recommendItems]?.filter(
+                    (section: any) => section.bannerProportion !== 1 && section.coverType === 1,
+                  );
+                  return [...prevData, ...suitableSections];
+                }, [])
+                .map((homeSection) => (
+                  <HomeList key={uuidv4()} homeSection={homeSection} />
+                ))}
             </InfiniteScroll>
           )}
         </div>

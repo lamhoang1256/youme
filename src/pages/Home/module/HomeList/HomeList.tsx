@@ -1,4 +1,5 @@
 import { IHomeSection } from "interfaces/home";
+import { memo } from "react";
 import HomeCard from "../HomeCard/HomeCard";
 import { StyledHomeList } from "./homeList.style";
 
@@ -19,4 +20,4 @@ const HomeList = ({ homeSection }: HomeListProps) => {
   );
 };
 
-export default HomeList;
+export default memo(HomeList);
