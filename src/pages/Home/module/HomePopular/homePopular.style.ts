@@ -14,7 +14,7 @@ export const StyledPopularList = styled.div`
     display: none !important;
   }
   .slick-list {
-    z-index: 40;
+    z-index: var(--zIndex-popular-list);
   }
   .slick-slider {
     margin-left: -10px;

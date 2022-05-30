@@ -5,11 +5,16 @@ export const GlobalStyle = createGlobalStyle`
     --white: #fff;
     --black: #000;
     --primary-color: #8a3cff;
-    /* purple 8a3cff, pink: e62e8f* 8a3cff*/
     --dark-color: #080f28;
     --bg-load-image: #191a1f;
     --bg-skeleton: #656871;
     --max-width-container: 1500px;
+    --zIndex-header-dropdown:20;
+    --zIndex-search-result:25;
+    --zIndex-popular-list:40;
+    --zIndex-searchbar-mobile:50;
+    --zIndex-overplay: 50;
+    --zIndex-header-menu: 100;
   }
   .container {
     width: 100%;
