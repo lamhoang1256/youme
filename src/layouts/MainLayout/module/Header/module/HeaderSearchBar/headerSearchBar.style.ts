@@ -49,7 +49,7 @@ export const StyledHeaderSearchBar = styled.div`
       left: 0;
       right: 0;
       background-color: var(--dark-color);
-      z-index: 25;
+      z-index: var(--zIndex-search-result);
       border-radius: 8px;
       height: 400px;
       overflow-y: scroll;
@@ -85,7 +85,7 @@ export const StyledHeaderSearchBar = styled.div`
     left: 0;
     right: 0;
     width: 100%;
-    z-index: 20;
+    z-index: var(--zIndex-searchbar-mobile);
     .header-searchbar {
       height: 45px;
     }

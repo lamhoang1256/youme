@@ -21,7 +21,7 @@ export const StyledHeader = styled.header`
         position: fixed;
         inset: 0;
         background-color: rgba(0, 0, 0, 0.8);
-        z-index: 50;
+        z-index: var(--zIndex-overplay);
       }
     }
   }

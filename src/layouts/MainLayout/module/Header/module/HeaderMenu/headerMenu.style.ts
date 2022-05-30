@@ -42,7 +42,7 @@ export const StyledHeaderMenu = styled.ul`
     transform: translateX(100%);
     transition: all 0.25s linear;
     will-change: transform;
-    z-index: 100;
+    z-index: var(--zIndex-header-menu);
     .menu-header {
       display: flex;
     }
