@@ -69,8 +69,6 @@ export const StyledDetailHeader = styled.div`
       width: 210px;
       height: 50px;
       border-radius: 40px;
-      color: var(--white);
-      background-image: linear-gradient(270deg, #c042ff, #8a3cff);
     }
     &-button {
       font-size: 2rem;
