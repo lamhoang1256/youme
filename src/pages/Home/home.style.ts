@@ -12,6 +12,14 @@ export const StyledWrapperLayout = styled.div`
   .wrapper-side {
     width: 310px;
   }
+  .seemore {
+    padding: 12px 20px;
+    width: 100%;
+    background-color: var(--primary-color);
+    border-radius: 4px;
+    color: var(--white);
+    font-weight: 600;
+  }
   @media screen and (max-width: 1023.98px) {
     flex-direction: column;
     .wrapper-side {
