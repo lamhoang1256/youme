@@ -45,7 +45,7 @@ const Header = () => {
               </StyledHeaderButton>
             </div>
             {currentUser ? (
-              <HeaderUser username={currentUser?.username} />
+              <HeaderUser username={currentUser?.username} avatar={currentUser?.avatar} />
             ) : (
               <Link to="/sign-in">
                 <ButtonGradient className="header-login">Sign In</ButtonGradient>

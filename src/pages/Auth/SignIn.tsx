@@ -8,6 +8,7 @@ import styled from "styled-components";
 import { StyledAuth, StyledButtonAuth } from "./auth.style";
 
 const StyledSignIn = styled.div``;
+const publicImage = `${process.env.REACT_APP_PUBLIC}/images`;
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -56,14 +57,11 @@ const SignIn = () => {
                 <span>Or</span>
               </div>
               <StyledButtonAuth type="button" className="auth-facebook">
-                <img src="https://www.facebook.com/images/fb_icon_325x325.png" alt="facebook" />
+                <img src={`${publicImage}/auth-facebook.png`} alt="facebook" />
                 Sign In with Facebook
               </StyledButtonAuth>
               <StyledButtonAuth type="button" className="auth-google">
-                <img
-                  src="https://icon-library.com/images/google-login-icon/google-login-icon-24.jpg"
-                  alt="google"
-                />
+                <img src={`${publicImage}/auth-google.png`} alt="google" />
                 Sign In with Google
               </StyledButtonAuth>
             </div>
