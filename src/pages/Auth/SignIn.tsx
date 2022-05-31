@@ -56,9 +56,14 @@ const SignIn = () => {
                 <span>Or</span>
               </div>
               <StyledButtonAuth type="button" className="auth-facebook">
+                <img src="https://www.facebook.com/images/fb_icon_325x325.png" alt="facebook" />
                 Sign In with Facebook
               </StyledButtonAuth>
               <StyledButtonAuth type="button" className="auth-google">
+                <img
+                  src="https://icon-library.com/images/google-login-icon/google-login-icon-24.jpg"
+                  alt="google"
+                />
                 Sign In with Google
               </StyledButtonAuth>
             </div>

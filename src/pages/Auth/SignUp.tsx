@@ -21,6 +21,8 @@ const StyledSignUp = styled.div`
   }
 `;
 
+const publicImage = `${process.env.REACT_APP_PUBLIC}/images`;
+
 const SignUp = () => {
   const navigate = useNavigate();
   const [showOption, setShowOption] = useState(true);
@@ -71,12 +73,14 @@ const SignUp = () => {
                     className="auth-primary"
                     onClick={() => setShowOption(false)}
                   >
-                    Sign Up with Email
+                    <img src={`${publicImage}/auth-email.png`} alt="email" /> Sign Up with Email
                   </StyledButtonAuth>
                   <StyledButtonAuth type="button" className="auth-facebook">
+                    <img src={`${publicImage}/auth-facebook.png`} alt="facebook" />
                     Sign Up with Facebook
                   </StyledButtonAuth>
                   <StyledButtonAuth type="button" className="auth-google">
+                    <img src={`${publicImage}/auth-google.png`} alt="google" />
                     Sign Up with Google
                   </StyledButtonAuth>
                 </div>
