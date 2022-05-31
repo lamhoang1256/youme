@@ -5,6 +5,7 @@ import Breadcrumb from "components/Breadcrumb/Breadcrumb";
 import MovieList from "components/MovieList/MovieList";
 import Nothing from "components/Nothing/Nothing";
 import { IMovieList } from "interfaces/components";
+import { useTranslation } from "react-i18next";
 
 const StyledHistory = styled.div`
   .history {
@@ -32,6 +33,7 @@ const crumbs = [
 
 const History = () => {
   const [moviesHistory, setMoviesHistory] = useState<IMovieList[]>([]);
+  const { t } = useTranslation();
   const getHistory = () => {
     const historyLocal = JSON.parse(localStorage.getItem("movie-history") || "[]");
     setMoviesHistory(historyLocal);
@@ -52,7 +54,7 @@ const History = () => {
         <div className="history-header">
           <Breadcrumb crumbs={crumbs} />
           <button type="button" className="history-clear" onClick={handleClearHistory}>
-            Clear <IonIcon name="trash-outline" />
+            {t("Clear")} <IonIcon name="trash-outline" />
           </button>
         </div>
         {moviesHistory?.length > 0 ? (

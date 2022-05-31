@@ -1,11 +1,6 @@
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { StyledBreabcrum } from "./breadcrumb.style";
-
-// const crumbs = [
-//   {id:1,label:"Home 1"},
-//   {id:2,label:"Home 2"},
-//   {id:3,label:"Home 3"},
-// ]
 
 interface BreadcrumbProps {
   crumbs: {
@@ -16,6 +11,7 @@ interface BreadcrumbProps {
 }
 
 const Breadcrumb = ({ crumbs }: BreadcrumbProps) => {
+  const { t } = useTranslation();
   const isLastCrumb = (index: number) => {
     return index === crumbs.length - 1;
   };
@@ -25,9 +21,9 @@ const Breadcrumb = ({ crumbs }: BreadcrumbProps) => {
       {crumbs.map((crumb, index) => (
         <li key={crumb.id} className="crumb">
           {isLastCrumb(index) ? (
-            <span>{crumb.label}</span>
+            <span>{t(crumb.label)}</span>
           ) : (
-            <Link to={crumb.path}>{crumb.label}</Link>
+            <Link to={crumb.path}>{t(crumb.label)}</Link>
           )}
         </li>
       ))}
