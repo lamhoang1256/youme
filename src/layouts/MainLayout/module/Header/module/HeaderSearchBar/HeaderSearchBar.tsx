@@ -1,15 +1,17 @@
 import IonIcon from "@reacticons/ionicons";
-import { useEffect, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { searchGetKeyword } from "apis/configAPI";
 import { useOnClickOutside } from "hooks/useClickOutside";
 import { useDebounce } from "hooks/useDebounce";
+import { useTranslation } from "react-i18next";
 import { StyledHeaderSearchBar } from "./headerSearchBar.style";
 
 const HeaderSearchBar = () => {
-  const currentURL = window.location.href;
+  const { t } = useTranslation();
   const navigate = useNavigate();
+  const currentURL = window.location.href;
   const searchRef = useRef(null);
   const [searchValue, setSearchValue] = useState<string>("");
   const [keywordList, setKeywordList] = useState<string[]>([]);
@@ -33,15 +35,10 @@ const HeaderSearchBar = () => {
     setShowResults(true);
   };
 
-  const handleNavigateSearch = () => {
+  const handleNavigateSearch = (e: FormEvent) => {
+    e.preventDefault();
     if (!searchValue) return;
     navigate(`/search?query=${searchValue}`);
-  };
-
-  const handleKeyDown = (e: any) => {
-    if (e.key === "Enter") {
-      handleNavigateSearch();
-    }
   };
 
   useEffect(() => {
@@ -56,18 +53,20 @@ const HeaderSearchBar = () => {
 
   return (
     <StyledHeaderSearchBar ref={searchRef}>
-      <div className="header-searchbar">
+      <form className="header-searchbar" onSubmit={handleNavigateSearch}>
         <input
           type="text"
-          placeholder="Search..."
+          placeholder={t("Search...")}
           value={searchValue}
           onChange={handleSearch}
-          onKeyDown={handleKeyDown}
+          onKeyDown={(e) => e.stopPropagation()}
+          onKeyUp={(e) => e.stopPropagation()}
+          onKeyPress={(e) => e.stopPropagation()}
         />
-        <button className="search-icon" type="button" onClick={handleNavigateSearch}>
+        <button className="search-icon" type="submit">
           <IonIcon name="search-outline" />
         </button>
-      </div>
+      </form>
       {showResults && keywordList.length > 0 && (
         <ul className="header-result">
           {keywordList.map((keyword) => {
