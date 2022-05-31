@@ -5,6 +5,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { setCurrentUser } from "pages/Auth/auth.slice";
 import { doc, getDoc } from "firebase/firestore";
 import { useAppDispatch } from "./store";
+import "i18n/i18next";
 
 const MainLayout = React.lazy(() => import("layouts/MainLayout/MainLayout"));
 const Home = React.lazy(() => import("pages/Home/Home"));

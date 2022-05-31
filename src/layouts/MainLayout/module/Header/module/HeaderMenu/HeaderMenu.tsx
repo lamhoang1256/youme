@@ -1,5 +1,6 @@
 import { useAppSelector } from "App/store";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { StyledHeaderMenu } from "./headerMenu.style";
 
 const menuLinks = [
@@ -14,18 +15,21 @@ interface HeaderMenuProps {
 }
 
 const HeaderMenu = ({ showMenu, handleToggleMenu }: HeaderMenuProps) => {
+  const { t } = useTranslation();
   const { currentUser } = useAppSelector((state) => state.auth);
 
   return (
     <StyledHeaderMenu className={`${showMenu ? "active" : ""}`}>
       <div className="menu-header">
         <img src={`${process.env.REACT_APP_PUBLIC}/images/header-avatar.webp`} alt="Avatar" />
-        <span>Hello, {currentUser ? currentUser.username : "Guest"}</span>
+        <span>
+          {t("Hello")}, {currentUser ? currentUser.username : "Guest"}
+        </span>
       </div>
       {menuLinks.map((link) => (
         <li className="menu-item" key={link.id}>
           <Link to={link.path} className="menu-link" onClick={handleToggleMenu}>
-            {link.display}
+            {t(link.display)}
           </Link>
         </li>
       ))}

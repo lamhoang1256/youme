@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { db } from "firebase-app/firebase-config";
 import { useEffect, useState } from "react";
 import ButtonGradient from "components/Button/ButtonGradient";
+import { useTranslation } from "react-i18next";
 import { StyledDetailHeader } from "./detailHeader.style";
 
 interface DetailHeaderProps {
@@ -23,6 +24,7 @@ interface IFavorites {
 }
 
 const DetailHeader = ({ detail }: DetailHeaderProps) => {
+  const { t } = useTranslation();
   const url = `/watch/${detail?.id}?cate=${detail?.category}`;
   const { currentUser } = useAppSelector((state) => state.auth);
   const [favorites, setFavorites] = useState<IFavorites[]>([]);
@@ -86,7 +88,7 @@ const DetailHeader = ({ detail }: DetailHeaderProps) => {
         </div>
         <div className="detail-introduction">{detail?.introduction}</div>
         <div className="detail-categoríes">
-          <h4>Categories: </h4>
+          <h4>{t("Categories")}: </h4>
           {detail?.tagList.map((tag) => (
             <Link to={`/category/${tag.id}`} key={tag.id} className="detail-category">
               {tag.name}
@@ -96,7 +98,7 @@ const DetailHeader = ({ detail }: DetailHeaderProps) => {
         <div className="detail-action">
           <Link to={url}>
             <ButtonGradient type="button" className="primary detail-watch">
-              Watch Now
+              {t("Watch now")}
             </ButtonGradient>
           </Link>
           <button

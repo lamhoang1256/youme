@@ -7,9 +7,11 @@ import { IPopular } from "interfaces/home";
 import { getHome } from "apis/configAPI";
 import { resizeImage } from "constants/resizeImage";
 import SkeletonTitle from "components/Skeleton/SkeletonTitle";
+import { useTranslation } from "react-i18next";
 import { settingsPopular, StyledPopularCard, StyledPopularList } from "./homePopular.style";
 
 const HomePopular = () => {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState<boolean>(true);
   const [populars, setPopulars] = useState<IPopular[]>([]);
 
@@ -32,7 +34,7 @@ const HomePopular = () => {
 
   return (
     <StyledPopularList>
-      {loading ? <SkeletonTitle /> : <h3>Popular Movie</h3>}
+      {loading ? <SkeletonTitle /> : <h3>{t("Popular Movie")}</h3>}
       {loading && (
         <Slider {...settingsPopular}>
           {Array(6)

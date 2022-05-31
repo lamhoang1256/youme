@@ -2,6 +2,7 @@ import IonIcon from "@reacticons/ionicons";
 import { Link } from "react-router-dom";
 import { IMovieDetail } from "interfaces/detail";
 import { IMovieBeingWatched } from "interfaces/watch";
+import { useTranslation } from "react-i18next";
 import { StyledWatchInfo } from "./watchInfo.style";
 
 interface WatchInfoProps {
@@ -12,12 +13,13 @@ interface WatchInfoProps {
 }
 
 const WatchInfo = ({ detail }: WatchInfoProps) => {
+  const { t } = useTranslation();
   const { detailMovie, detailCurrentPlay } = detail;
 
   return (
     <StyledWatchInfo>
       <h2>
-        {detailMovie.name} - Ep {detailCurrentPlay.seriesNo}
+        {detailMovie.name} - {t("Ep")} {detailCurrentPlay.seriesNo}
       </h2>
       <ul className="watch-statistics">
         <li>
@@ -28,13 +30,13 @@ const WatchInfo = ({ detail }: WatchInfoProps) => {
             <span key={area.id}>{area.name}</span>
           ))}
         </li>
-        <li>
-          {detailMovie.episodeCount && (
+        {detailMovie.episodeCount && (
+          <li>
             <span>
-              EP {detailMovie.episodeVo.length}/ {detailMovie.episodeCount}
+              {t("EP")} {detailMovie.episodeVo.length}/ {detailMovie.episodeCount}
             </span>
-          )}
-        </li>
+          </li>
+        )}
         <li>{detailMovie.year}</li>
       </ul>
       <div className="watch-categories">
@@ -44,14 +46,15 @@ const WatchInfo = ({ detail }: WatchInfoProps) => {
           </Link>
         ))}
       </div>
-      {detailMovie.updateInfo?.updatePeriod !== "" && (
+      {detailMovie.updateInfo?.updatePeriod && (
         <div className="watch-upcoming">
-          <span className="label-small">Upcoming:</span>
-          {`Episode is updated on ${detailMovie.updateInfo?.updatePeriod} every week`}
+          <span className="label-small">{t("Upcoming")}:</span>
+          {t("New episode is updated on")} {` ${detailMovie.updateInfo?.updatePeriod} `}
+          {t("every week")}
         </div>
       )}
       <div>
-        <span className="label-small">Summary : </span>
+        <span className="label-small">{t("Summary")} : </span>
         {detailMovie.introduction}
       </div>
     </StyledWatchInfo>

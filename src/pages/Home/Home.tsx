@@ -7,6 +7,7 @@ import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
 import SkeletonTitle from "components/Skeleton/SkeletonTitle";
 import { useEffect, useState } from "react";
 import { IHomeSection } from "interfaces/home";
+import { useTranslation } from "react-i18next";
 import HomeBanner from "./module/HomeBanner/HomeBanner";
 import HomePopular from "./module/HomePopular/HomePopular";
 import HomeList from "./module/HomeList/HomeList";
@@ -16,6 +17,7 @@ import { StyledHome, StyledWrapperLayout } from "./home.style";
 import { StyledHomeList } from "./module/HomeList/homeList.style";
 
 const Home = () => {
+  const { t } = useTranslation();
   const [homeSections, setHomeSections] = useState<IHomeSection[]>([]);
   const getKey = (index: number) => `page-${index || 1}`;
   const { data, error, setSize } = useSWRInfinite(
@@ -64,7 +66,7 @@ const Home = () => {
               endMessage={
                 <Link to="/explore">
                   <button type="button" className="seemore">
-                    See more
+                    {t("See More")}
                   </button>
                 </Link>
               }

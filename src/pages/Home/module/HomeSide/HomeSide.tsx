@@ -4,10 +4,12 @@ import { ILeaderBoard } from "interfaces/home";
 import { getLeaderBoard } from "apis/configAPI";
 import { resizeImage } from "constants/resizeImage";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { useTranslation } from "react-i18next";
 import HomeSideSkeleton from "../HomeSkeleton/HomeSideSkeleton";
 import { StyledHomeSide } from "./homeSide.style";
 
 const HomeSide = () => {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState<boolean>(true);
   const [trendings, setTrendings] = useState<ILeaderBoard[]>([]);
 
@@ -28,7 +30,7 @@ const HomeSide = () => {
 
   return (
     <StyledHomeSide>
-      <h3>Top trending</h3>
+      <h3>{t("Top Trending")}</h3>
       {loading && <HomeSideSkeleton />}
       {!loading && (
         <div className="side-list">

@@ -1,10 +1,11 @@
 import axios from "axios";
 import queryString from "query-string";
 
+const language = localStorage.getItem("language") || "en";
 const axiosClient = axios.create({
   baseURL: process.env.REACT_APP_URL_API,
   headers: {
-    lang: "en",
+    lang: language,
     versioncode: 11,
     clienttype: "ios_jike_default",
     deviceid: Math.random().toString(36).slice(-8),

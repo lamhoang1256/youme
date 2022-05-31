@@ -61,4 +61,62 @@ export const StyledHeaderUser = styled.div`
     padding: 0;
     background-color: transparent;
   }
+  .language {
+    --speed3: cubic-bezier(0.26, 0.48, 0.08, 0.9);
+    --height: 25px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    .language-switcher {
+      position: relative;
+      display: inline-block;
+      width: calc(var(--height) * 2);
+      height: var(--height);
+      input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      box-shadow: 0 3px 64px rgba(var(--primary-color), 0.1);
+      -webkit-transition: 0.4s;
+      transition: 0.4s;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: var(--height);
+      width: var(--height);
+      left: 0;
+      bottom: 0;
+      background-color: white;
+      -webkit-transition: 0.4s;
+      transition: 0.4s;
+    }
+    input:checked + .slider {
+      background-color: var(--primary-color);
+    }
+    input:focus + .slider {
+      box-shadow: none;
+    }
+    input:checked + .slider:before {
+      -webkit-transform: translateX(var(--height));
+      -ms-transform: translateX(var(--height));
+      transform: translateX(var(--height));
+    }
+    .slider.round {
+      border-radius: var(--height);
+    }
+    .slider.round:before {
+      border-radius: 50%;
+    }
+  }
 `;

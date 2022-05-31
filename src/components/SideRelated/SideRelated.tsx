@@ -1,5 +1,6 @@
 import IonIcon from "@reacticons/ionicons";
 import { resizeImage } from "constants/resizeImage";
+import { useTranslation } from "react-i18next";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
 import { StyledSideRelated } from "./sideRelated.style";
@@ -34,9 +35,10 @@ interface SideRelatedProps {
 }
 
 const SideRelated = ({ listSuggest }: SideRelatedProps) => {
+  const { t } = useTranslation();
   return (
     <StyledSideRelated>
-      <h3>You may like</h3>
+      <h3>{t("You may like")}</h3>
       <div className="movie-list">
         {listSuggest.map((suggest) => {
           const url = `/detail/${suggest?.id}?cate=${suggest?.category}`;
