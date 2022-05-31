@@ -1,12 +1,22 @@
 import styled from "styled-components";
 
 export const StyledButtonAuth = styled.button`
+  position: relative;
+
   width: 100%;
   margin-top: 12px;
   padding: 12px;
   border-radius: 6px;
   line-height: 2.4rem;
   font-weight: 600;
+  img {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    height: 30px;
+    width: 30px;
+    transform: translateY(-50%);
+  }
 `;
 
 export const StyledAuth = styled.div`
