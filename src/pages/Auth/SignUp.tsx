@@ -4,7 +4,13 @@ import styled from "styled-components";
 import AuthInput from "components/Input/AuthInput";
 import { toast } from "react-toastify";
 import { auth, db } from "firebase-app/firebase-config";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  FacebookAuthProvider,
+  GoogleAuthProvider,
+  signInWithPopup,
+  User,
+} from "firebase/auth";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { StyledAuth, StyledButtonAuth } from "./auth.style";
 
@@ -31,7 +37,7 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
 
-  const handleSignUp = async () => {
+  const signUpWithEmail = async () => {
     if (password !== repeatPassword) {
       toast.error("Password and repeat password not same !");
       return;
@@ -44,6 +50,7 @@ const SignUp = () => {
         username,
         email,
         createdAt: serverTimestamp(),
+        avatar: `${publicImage}/header-avatar.png`,
         favorites: [],
       });
       toast.success("Sign Up Success");
@@ -53,6 +60,45 @@ const SignUp = () => {
     } catch (error: any) {
       toast.error(error.message);
     }
+  };
+
+  const createProfileUser = (user: User) => {
+    setDoc(doc(db, "users", user.uid), {
+      uid: user.uid,
+      username: user.displayName,
+      email: user.email,
+      createdAt: serverTimestamp(),
+      avatar: user.photoURL,
+      favorites: [],
+    });
+  };
+
+  const signUpWithGoogle = async () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const { user } = result;
+        if (!user) return;
+        createProfileUser(user);
+        toast.success("Success Login with Google");
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
+
+  const signUpWithFacebook = async () => {
+    const provider = new FacebookAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const { user } = result;
+        if (!user) return;
+        createProfileUser(user);
+        toast.success("Success Login with Facebook");
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   };
 
   useEffect(() => {
@@ -75,11 +121,19 @@ const SignUp = () => {
                   >
                     <img src={`${publicImage}/auth-email.png`} alt="email" /> Sign Up with Email
                   </StyledButtonAuth>
-                  <StyledButtonAuth type="button" className="auth-facebook">
+                  <StyledButtonAuth
+                    type="button"
+                    className="auth-facebook"
+                    onClick={signUpWithFacebook}
+                  >
                     <img src={`${publicImage}/auth-facebook.png`} alt="facebook" />
                     Sign Up with Facebook
                   </StyledButtonAuth>
-                  <StyledButtonAuth type="button" className="auth-google">
+                  <StyledButtonAuth
+                    type="button"
+                    className="auth-google"
+                    onClick={signUpWithGoogle}
+                  >
                     <img src={`${publicImage}/auth-google.png`} alt="google" />
                     Sign Up with Google
                   </StyledButtonAuth>
@@ -118,7 +172,11 @@ const SignUp = () => {
                     placeholder="Min 6 characters"
                     onChange={(e) => setRepeatPassword(e.target.value)}
                   />
-                  <StyledButtonAuth type="button" className="auth-primary" onClick={handleSignUp}>
+                  <StyledButtonAuth
+                    type="button"
+                    className="auth-primary"
+                    onClick={signUpWithEmail}
+                  >
                     Sign Up
                   </StyledButtonAuth>
                 </div>

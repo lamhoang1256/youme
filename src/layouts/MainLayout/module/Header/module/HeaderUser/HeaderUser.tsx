@@ -5,20 +5,20 @@ import { StyledHeaderUser } from "./headerUser.style";
 
 interface HeaderUserProps {
   username: string;
+  avatar: string;
 }
-const urlAvatar = `${process.env.REACT_APP_PUBLIC}/images/header-avatar.webp`;
 
-const HeaderUser = ({ username }: HeaderUserProps) => {
+const HeaderUser = ({ username, avatar }: HeaderUserProps) => {
   const handleLogout = () => {
     signOut(auth);
   };
 
   return (
     <StyledHeaderUser>
-      <img src={urlAvatar} alt="avatar" className="header-avatar" />
+      <img src={avatar} alt="avatar" className="header-avatar" />
       <div className="dropdown">
         <div className="dropdown-header">
-          <img src={urlAvatar} alt="avatar" className="dropdown-avatar" />
+          <img src={avatar} alt="avatar" className="dropdown-avatar" />
           <div className="dropdown-user">
             <span className="dropdown-username">{username}</span>
             <span>User</span>
