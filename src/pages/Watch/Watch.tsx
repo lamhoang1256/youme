@@ -6,6 +6,7 @@ import { getWatchMedia } from "apis/configAPI";
 import SideRelated from "components/SideRelated/SideRelated";
 import SkeletonSideRelated from "components/Skeleton/SkeletonSideRelated";
 import { checkEmptyObj } from "utilities/checkEmptyObj";
+import Comment from "components/Comment/Comment";
 import WatchPlayer from "./module/WatchPlayer/WatchPlayer";
 import WatchInfo from "./module/WatchInfo/WatchInfo";
 import WatchAnthology from "./module/WatchAnthology/WatchAnthology";
@@ -90,6 +91,7 @@ const Watch = () => {
                 playerRef={playerRef}
               />
               <WatchInfo detail={watch} />
+              <Comment />
             </div>
             <div className="wrapper-side">
               <WatchAnthology
