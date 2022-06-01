@@ -28,6 +28,15 @@ export const StyledHomeSide = styled.div`
     &-item {
       display: flex;
       gap: 10px;
+      &:nth-child(1) .side-rank {
+        color: #efa5a4;
+      }
+      &:nth-child(2) .side-rank {
+        color: #ff0000;
+      }
+      &:nth-child(3) .side-rank {
+        color: #d3a446;
+      }
     }
     &-thumb {
       width: 40%;
@@ -51,6 +60,7 @@ export const StyledHomeSide = styled.div`
     &-rank {
       color: #3d6ef7;
       margin-bottom: 10px;
+      font-weight: 600;
     }
     @media screen and (max-width: 1023.98px) {
       &-list {

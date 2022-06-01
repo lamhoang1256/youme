@@ -10,8 +10,9 @@ export const StyledHeader = styled.header`
       justify-content: space-between;
       align-items: center;
     }
-    &-logo {
-      color: var(--white);
+    .logo-img {
+      height: 35px;
+      transform: translateY(15%);
     }
     @media screen and (max-width: 1023.98px) {
       &-container.show-search {
@@ -22,6 +23,12 @@ export const StyledHeader = styled.header`
         inset: 0;
         background-color: rgba(0, 0, 0, 0.8);
         z-index: var(--zIndex-overplay);
+      }
+    }
+    @media screen and (max-width: 767.98px) {
+      .logo-img {
+        height: 30px;
+        transform: translateY(20%);
       }
     }
   }
