@@ -4,19 +4,22 @@ export const StyledWatchInfo = styled.div`
   padding-top: 20px;
   line-height: 1.7;
   .watch-statistics {
-    --gap-space: 32px;
+    --gap-x: 32px;
+    --gap-y: 10px;
     display: flex;
-    gap: var(--gap-space);
+    flex-wrap: wrap;
+    gap: var(--gap-y) var(--gap-x);
+    overflow: hidden;
     li {
       position: relative;
     }
-    li:first-child::before {
+    li:last-child::after {
       display: none;
     }
-    li::before {
+    li::after {
       content: "";
       position: absolute;
-      left: calc(var(--gap-space) * -1 / 2);
+      right: calc(var(--gap-x) * -1);
       top: 50%;
       transform: translate(-50%, -50%);
       width: 10px;

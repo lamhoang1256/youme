@@ -6,6 +6,7 @@ export const StyledNothing = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
   height: 100%;
   gap: 14px;
   img {
@@ -28,8 +29,8 @@ export const StyledNothing = styled.div`
     background-image: linear-gradient(to right top, #fc6c8f, #ffb86c);
   }
   @media screen and (max-width: 767.98px) {
-    .nothing .heading {
-      font-size: 2.2rem;
+    .heading {
+      font-size: 2.1rem;
     }
   }
 `;

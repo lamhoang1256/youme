@@ -19,18 +19,8 @@ export const StyledDetailHeader = styled.div`
       flex-direction: column;
       justify-content: space-between;
     }
-    &-header {
-      display: flex;
-      align-items: center;
-      gap: 30px;
-    }
-    &-heading {
-      max-width: 80%;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      white-space: nowrap;
-    }
     &-score {
+      margin-top: 10px;
       display: flex;
       align-items: center;
       gap: 10px;
@@ -91,8 +81,10 @@ export const StyledDetailHeader = styled.div`
   }
   @media screen and (max-width: 767.98px) {
     flex-direction: column;
-    .detail-action {
-      margin-top: 10px;
+    .detail {
+      &-action {
+        margin-top: 10px;
+      }
     }
   }
 `;

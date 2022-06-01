@@ -28,10 +28,14 @@ const Header = () => {
 
   return (
     <StyledHeader>
-      <div className="container">
+      <div className="container header">
         <div className={`header-container ${showSearchMobile ? "show-search" : ""}`}>
           <Link to="/" className="header-logo">
-            LOGO
+            <img
+              src={`${process.env.REACT_APP_PUBLIC}/images/logo.png`}
+              alt="logo"
+              className="logo-img"
+            />
           </Link>
           {showSearchMobile && <HeaderSearchBar />}
           <StyledHeaderActions>
