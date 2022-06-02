@@ -3,12 +3,13 @@ import { db } from "firebase-app/firebase-config";
 import { doc, setDoc, Timestamp } from "firebase/firestore";
 import { IComment } from "interfaces/components";
 import { FormEvent, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 
 const StyledCommentAdd = styled.form`
   .comment-post {
-    margin-top: 20px;
+    margin-top: 14px;
     width: 100%;
     display: flex;
     gap: 14px;
@@ -44,9 +45,11 @@ interface CommentAddProps {
 }
 
 const CommentAdd = ({ comments, fetchCommentList, id }: CommentAddProps) => {
+  const { t } = useTranslation();
   const { currentUser } = useAppSelector((state) => state.auth);
   const [commentValue, setCommentValue] = useState("");
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
+
   const resizeTextArea = () => {
     if (textAreaRef.current) {
       textAreaRef.current.style.height = "auto";
@@ -61,7 +64,7 @@ const CommentAdd = ({ comments, fetchCommentList, id }: CommentAddProps) => {
     e.preventDefault();
     try {
       if (commentValue === "") {
-        toast.error("Comment must be filled out");
+        toast.error(t("Comment must be filled out"));
         return;
       }
       await setDoc(doc(db, "comments", id), {
@@ -94,7 +97,7 @@ const CommentAdd = ({ comments, fetchCommentList, id }: CommentAddProps) => {
         <img className="comment-avatar" src={currentUser.avatar} alt="avatar" />
         <textarea
           className="comment-textarea"
-          placeholder="Add a comment..."
+          placeholder={t("Add a comment...")}
           onKeyDown={(e) => e.stopPropagation()}
           onKeyUp={(e) => e.stopPropagation()}
           onKeyPress={(e) => e.stopPropagation()}
@@ -104,7 +107,7 @@ const CommentAdd = ({ comments, fetchCommentList, id }: CommentAddProps) => {
           rows={1}
         />
         <button type="submit" className="comment-button">
-          Post
+          {t("Post")}
         </button>
       </div>
     </StyledCommentAdd>
