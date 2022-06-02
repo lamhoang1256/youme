@@ -1,4 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useAppSelector } from "App/store";
+import { db } from "firebase-app/firebase-config";
+import { doc, setDoc, Timestamp } from "firebase/firestore";
+import { IComment } from "interfaces/components";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 const StyledCommentAdd = styled.form`
@@ -11,7 +15,8 @@ const StyledCommentAdd = styled.form`
   .comment-textarea {
     flex: 1;
     border-radius: 10px;
-    padding: 10px 20px;
+    padding: 20px;
+    min-height: 50px;
     flex: 1;
     resize: none;
     overflow-y: hidden;
@@ -35,7 +40,13 @@ const StyledCommentAdd = styled.form`
   }
 `;
 
-const CommentAdd = () => {
+interface CommentAddProps {
+  comments: IComment[];
+  fetchCommentList: () => Promise<void>;
+}
+
+const CommentAdd = ({ comments, fetchCommentList }: CommentAddProps) => {
+  const { currentUser } = useAppSelector((state) => state.auth);
   const [commentValue, setCommentValue] = useState("");
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
   const resizeTextArea = () => {
@@ -47,10 +58,36 @@ const CommentAdd = () => {
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setCommentValue(e.target.value);
   };
+
+  const handleAddComment = async (e: FormEvent) => {
+    e.preventDefault();
+    try {
+      if (commentValue === "") return;
+      await setDoc(doc(db, "comments", "12269"), {
+        comments: [
+          ...comments,
+          {
+            userId: currentUser.uid,
+            username: currentUser.username,
+            avatar: currentUser.avatar,
+            email: currentUser.email,
+            content: commentValue,
+            like: 0,
+            dislike: 0,
+            createdAt: Timestamp.now(),
+          },
+        ],
+      });
+      fetchCommentList();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(resizeTextArea, [commentValue]);
 
   return (
-    <StyledCommentAdd className="comment-form">
+    <StyledCommentAdd className="comment-form" onSubmit={handleAddComment}>
       <div className="comment-post">
         <img
           className="comment-avatar"
