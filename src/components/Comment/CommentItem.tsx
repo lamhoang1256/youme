@@ -9,7 +9,7 @@ interface CommentItemProps {
 const StyledCommentItem = styled.div`
   margin-top: 20px;
   display: flex;
-  gap: 20px;
+  gap: 14px;
   .comment-main {
     flex: 1;
   }

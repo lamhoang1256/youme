@@ -6,6 +6,7 @@ import { StyledWrapperLayout } from "pages/Home/home.style";
 import SideRelated from "components/SideRelated/SideRelated";
 import SkeletonSideRelated from "components/Skeleton/SkeletonSideRelated";
 import Nothing from "components/Nothing/Nothing";
+import Comment from "components/Comment/Comment";
 import DetailHeader from "./module/DetailHeader/DetailHeader";
 import DetailDescription from "./module/DetailDescription/DetailDescription";
 import DetailSkeleton from "./module/DetailSkeleton/DetailSkeleton";
@@ -59,6 +60,7 @@ const Detail = () => {
               <>
                 <DetailHeader detail={detail} />
                 <DetailDescription detail={detail} />
+                <Comment id={String(id)} />
               </>
             )}
             {loading && <DetailSkeleton />}
