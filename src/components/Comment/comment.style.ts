@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const StyledComment = styled.div`
-  margin-top: 10px;
+  margin-top: 30px;
+  margin-bottom: 20px;
   .comment {
     &-heading {
       display: flex;

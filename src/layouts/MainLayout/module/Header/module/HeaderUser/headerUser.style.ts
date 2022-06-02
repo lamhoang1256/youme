@@ -13,6 +13,7 @@ export const StyledHeaderUser = styled.div`
     visibility: visible;
   }
   .dropdown {
+    min-width: 270px;
     opacity: 0;
     visibility: hidden;
     position: absolute;
@@ -20,7 +21,7 @@ export const StyledHeaderUser = styled.div`
     top: 130%;
     right: 0;
     background-color: #4c505c;
-    padding: 20px;
+    padding: 20px 10px;
     border-radius: 4px;
     transition: all 0.25s linear;
     &-header {

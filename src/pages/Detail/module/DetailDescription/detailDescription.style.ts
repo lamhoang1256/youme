@@ -7,7 +7,7 @@ export const StyledDetailDescription = styled.div`
       line-height: 1.9;
     }
     &-banner {
-      margin: 30px auto;
+      margin: 30px auto 0;
       width: 100%;
       max-width: 750px;
       aspect-ratio: auto 750/422;

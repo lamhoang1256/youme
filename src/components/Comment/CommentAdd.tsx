@@ -69,7 +69,6 @@ const CommentAdd = ({ comments, fetchCommentList, id }: CommentAddProps) => {
       }
       await setDoc(doc(db, "comments", id), {
         comments: [
-          ...comments,
           {
             userId: currentUser.uid,
             username: currentUser.username,
@@ -80,6 +79,7 @@ const CommentAdd = ({ comments, fetchCommentList, id }: CommentAddProps) => {
             dislike: 0,
             createdAt: Timestamp.now(),
           },
+          ...comments,
         ],
       });
       fetchCommentList();
