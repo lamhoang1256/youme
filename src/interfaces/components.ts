@@ -13,4 +13,8 @@ export interface IComment {
   username: string;
   like: number;
   dislike: number;
+  createdAt: {
+    nanoseconds: number;
+    seconds: number;
+  };
 }

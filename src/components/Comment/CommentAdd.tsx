@@ -3,11 +3,12 @@ import { db } from "firebase-app/firebase-config";
 import { doc, setDoc, Timestamp } from "firebase/firestore";
 import { IComment } from "interfaces/components";
 import { FormEvent, useEffect, useRef, useState } from "react";
+import { toast } from "react-toastify";
 import styled from "styled-components";
 
 const StyledCommentAdd = styled.form`
   .comment-post {
-    margin-top: 10px;
+    margin-top: 20px;
     width: 100%;
     display: flex;
     gap: 14px;
@@ -15,37 +16,34 @@ const StyledCommentAdd = styled.form`
   .comment-textarea {
     flex: 1;
     border-radius: 10px;
-    padding: 20px;
-    min-height: 50px;
+    padding: 14px;
+    min-height: 44px;
     flex: 1;
     resize: none;
     overflow-y: hidden;
-    background-color: #434b5a;
+    background-color: #39354d;
     color: var(--white);
     &::placeholder {
       color: var(--white);
     }
   }
-  .comment-action {
-    margin-top: 10px;
-    display: flex;
-    gap: 10px;
-    justify-content: end;
-  }
   .comment-button {
     border-radius: 4px;
-    padding: 8px 20px;
+    padding: 0 20px;
     background-color: var(--primary-color);
     color: var(--white);
+    height: 44px;
+    place-self: end;
   }
 `;
 
 interface CommentAddProps {
   comments: IComment[];
+  id: string;
   fetchCommentList: () => Promise<void>;
 }
 
-const CommentAdd = ({ comments, fetchCommentList }: CommentAddProps) => {
+const CommentAdd = ({ comments, fetchCommentList, id }: CommentAddProps) => {
   const { currentUser } = useAppSelector((state) => state.auth);
   const [commentValue, setCommentValue] = useState("");
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
@@ -62,8 +60,11 @@ const CommentAdd = ({ comments, fetchCommentList }: CommentAddProps) => {
   const handleAddComment = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      if (commentValue === "") return;
-      await setDoc(doc(db, "comments", "12269"), {
+      if (commentValue === "") {
+        toast.error("Comment must be filled out");
+        return;
+      }
+      await setDoc(doc(db, "comments", id), {
         comments: [
           ...comments,
           {
@@ -79,21 +80,18 @@ const CommentAdd = ({ comments, fetchCommentList }: CommentAddProps) => {
         ],
       });
       fetchCommentList();
-    } catch (error) {
-      console.log(error);
+      setCommentValue("");
+    } catch (error: any) {
+      toast.error(error.message);
     }
   };
 
   useEffect(resizeTextArea, [commentValue]);
 
   return (
-    <StyledCommentAdd className="comment-form" onSubmit={handleAddComment}>
+    <StyledCommentAdd className="comment-form" onSubmit={handleAddComment} method="POST">
       <div className="comment-post">
-        <img
-          className="comment-avatar"
-          src="https://img.onesignal.com/permanent/e18751dc-56d8-452f-a2b8-db7db66f8120"
-          alt="avatar"
-        />
+        <img className="comment-avatar" src={currentUser.avatar} alt="avatar" />
         <textarea
           className="comment-textarea"
           placeholder="Add a comment..."
@@ -105,13 +103,8 @@ const CommentAdd = ({ comments, fetchCommentList }: CommentAddProps) => {
           onChange={onChange}
           rows={1}
         />
-      </div>
-      <div className="comment-action">
-        <button type="button" onClick={() => setCommentValue("")} className="comment-button">
-          Cancel
-        </button>
         <button type="submit" className="comment-button">
-          Add Comment
+          Post
         </button>
       </div>
     </StyledCommentAdd>

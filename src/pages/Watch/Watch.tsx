@@ -91,7 +91,7 @@ const Watch = () => {
                 playerRef={playerRef}
               />
               <WatchInfo detail={watch} />
-              <Comment />
+              <Comment id={String(id)} />
             </div>
             <div className="wrapper-side">
               <WatchAnthology
