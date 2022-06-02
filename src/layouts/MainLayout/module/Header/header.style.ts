@@ -44,6 +44,7 @@ export const StyledHeaderActions = styled.div`
       align-items: center;
     }
     &-login {
+      width: 100%;
       background-image: linear-gradient(270deg, #c042ff, #8a3cff);
     }
     @media screen and (max-width: 1023.98px) {

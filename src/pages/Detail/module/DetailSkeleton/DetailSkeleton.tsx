@@ -1,3 +1,4 @@
+import CommentSkeleton from "components/Comment/CommentSkeleton";
 import { StyleDetailSkeleton } from "./detailSkeleton.style";
 
 const DetailSkeleton = () => {
@@ -28,6 +29,7 @@ const DetailSkeleton = () => {
         <div className="skeleton-summary" />
         <div className="skeleton-banner" />
       </div>
+      <CommentSkeleton />
     </StyleDetailSkeleton>
   );
 };
