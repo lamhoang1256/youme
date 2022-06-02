@@ -7,4 +7,7 @@ export const StyledComment = styled.div`
     height: 40px;
     border-radius: 100rem;
   }
+  .no-login {
+    margin-top: 10px;
+  }
 `;

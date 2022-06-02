@@ -1,10 +1,18 @@
 import IonIcon from "@reacticons/ionicons";
+import { IComment } from "interfaces/components";
 import styled from "styled-components";
+
+interface CommentItemProps {
+  comment: IComment;
+}
 
 const StyledCommentItem = styled.div`
   margin-top: 20px;
   display: flex;
   gap: 20px;
+  .comment-main {
+    flex: 1;
+  }
   .comment-header {
     display: flex;
     gap: 10px;
@@ -28,29 +36,22 @@ const StyledCommentItem = styled.div`
   }
 `;
 
-const CommentItem = () => {
+const CommentItem = ({ comment }: CommentItemProps) => {
   return (
     <StyledCommentItem>
-      <img
-        className="comment-avatar"
-        src="https://img.onesignal.com/permanent/e18751dc-56d8-452f-a2b8-db7db66f8120"
-        alt="avatar"
-      />
+      <img className="comment-avatar" src={comment.avatar} alt="avatar" />
       <div className="comment-main">
         <div className="comment-header">
-          <h3 className="comment-name">Nguyen Lam</h3>
+          <h3 className="comment-name">{comment.username}</h3>
           <span className="comment-time">8 days ago</span>
         </div>
-        <p className="comment-content">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta obcaecati molestiae nisi
-          itaque rerum consectetur
-        </p>
+        <p className="comment-content">{comment.content}</p>
         <div className="comment-feeling">
           <span>
-            <IonIcon name="thumbs-up-outline" /> 1
+            <IonIcon name="thumbs-up-outline" /> {comment.like}
           </span>
           <span>
-            <IonIcon name="thumbs-down-outline" /> 2
+            <IonIcon name="thumbs-down-outline" /> {comment.dislike}
           </span>
         </div>
       </div>
