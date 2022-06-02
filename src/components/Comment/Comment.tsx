@@ -4,6 +4,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "firebase-app/firebase-config";
 import { IComment } from "interfaces/components";
 import IonIcon from "@reacticons/ionicons";
+import { useTranslation } from "react-i18next";
 import CommentAdd from "./CommentAdd";
 import { StyledComment } from "./comment.style";
 import CommentItem from "./CommentItem";
@@ -13,6 +14,7 @@ interface CommentProps {
 }
 
 const Comment = ({ id }: CommentProps) => {
+  const { t } = useTranslation();
   const { currentUser } = useAppSelector((state) => state.auth);
   const [comments, setComments] = useState<any>([]);
 
@@ -33,12 +35,12 @@ const Comment = ({ id }: CommentProps) => {
   return (
     <StyledComment>
       <h3 className="comment-heading">
-        <IonIcon name="chatbubbles-outline" /> Comments ({comments?.length})
+        <IonIcon name="chatbubbles-outline" /> {t("Comments")} ({comments?.length})
       </h3>
       {currentUser ? (
         <CommentAdd comments={comments} fetchCommentList={fetchCommentList} id={id} />
       ) : (
-        <div className="no-login">Login to comment</div>
+        <div className="no-login">{t("Login to comment")}</div>
       )}
       <div className="comment-list">
         {comments.length > 0 ? (
@@ -46,7 +48,7 @@ const Comment = ({ id }: CommentProps) => {
             <CommentItem key={comment.createdAt.nanoseconds} comment={comment} />
           ))
         ) : (
-          <div className="no-comment">No one has commented</div>
+          <div className="no-comment">{t("No one has commented")}</div>
         )}
       </div>
     </StyledComment>
