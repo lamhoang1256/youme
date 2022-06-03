@@ -8,6 +8,7 @@ const menuLinks = [
   { id: 2, display: "History", path: "/history" },
   { id: 3, display: "Favorites", path: "/favorites" },
 ];
+const urlAvatar = `${process.env.REACT_APP_PUBLIC}/images/header-avatar.webp`;
 
 interface HeaderMenuProps {
   showMenu: boolean;
@@ -20,12 +21,12 @@ const HeaderMenu = ({ showMenu, handleToggleMenu }: HeaderMenuProps) => {
 
   return (
     <StyledHeaderMenu className={`${showMenu ? "active" : ""}`}>
-      <div className="menu-header">
-        <img src={`${process.env.REACT_APP_PUBLIC}/images/header-avatar.webp`} alt="Avatar" />
+      <li className="menu-header">
+        <img src={urlAvatar} alt="avatar" />
         <span>
           {t("Hello")}, {currentUser ? currentUser.username : "Guest"}
         </span>
-      </div>
+      </li>
       {menuLinks.map((link) => (
         <li className="menu-item" key={link.id}>
           <Link to={link.path} className="menu-link" onClick={handleToggleMenu}>
