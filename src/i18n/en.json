@@ -41,6 +41,7 @@
   "Please Login": "Please Login",
   "Movie is added favorite": "Movie is added favorite",
   "Success add favorite movie": "Success add favorite movie",
+  "Success remove favorite movie": "Success remove favorite movie",
   "Success Sign In": "Success Sign In",
   "It seems your password was wrong": "It seems your password was wrong",
   "Success Login with Google": "Success Login with Google",
@@ -62,5 +63,6 @@
   "Username": "Username",
   "Min 6 characters": "Min 6 characters",
   "Re-type Password": "Re-type Password",
-  "Back": "Back"
+  "Back": "Back",
+  "You are logged in": "You are logged in"
 }
