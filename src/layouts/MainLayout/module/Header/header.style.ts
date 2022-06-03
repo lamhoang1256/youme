@@ -38,19 +38,12 @@ export const StyledHeaderActions = styled.div`
   display: flex;
   gap: 40px;
   .header {
-    &-mobile {
-      display: none;
-      gap: 20px;
+    &-auth {
+      display: flex;
+      gap: 8px;
       align-items: center;
-    }
-    &-login {
+      justify-content: center;
       width: 100%;
-      background-image: linear-gradient(270deg, #c042ff, #8a3cff);
-    }
-    @media screen and (max-width: 1023.98px) {
-      &-mobile {
-        display: flex;
-      }
     }
   }
   @media screen and (max-width: 767.98px) {
@@ -58,14 +51,22 @@ export const StyledHeaderActions = styled.div`
   }
 `;
 
-export const StyledHeaderButton = styled.button`
+export const HeaderMenuMobile = styled.div`
   display: none;
-  font-size: 2.6rem;
-  color: #fff;
-  background-color: transparent;
-  height: 100%;
+  gap: 20px;
   align-items: center;
+  button {
+    display: none;
+    font-size: 2.6rem;
+    color: #fff;
+    background-color: transparent;
+    height: 100%;
+    align-items: center;
+  }
   @media screen and (max-width: 1023.98px) {
     display: flex;
+    button {
+      display: flex;
+    }
   }
 `;

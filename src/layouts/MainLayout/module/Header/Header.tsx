@@ -1,13 +1,11 @@
-import IonIcon from "@reacticons/ionicons";
-import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import IonIcon from "@reacticons/ionicons";
 import { useMediaQuery } from "hooks/useMediaQuery";
-// import { useAppSelector } from "App/store";
-import { StyledHeader, StyledHeaderActions, StyledHeaderButton } from "./header.style";
-import HeaderMenu from "./module/HeaderMenu/HeaderMenu";
 import HeaderSearchBar from "./module/HeaderSearchBar/HeaderSearchBar";
+import HeaderMenu from "./module/HeaderMenu/HeaderMenu";
 import HeaderUser from "./module/HeaderUser/HeaderUser";
-// import HeaderUser from "./module/HeaderUser/HeaderUser";
+import { HeaderMenuMobile, StyledHeader, StyledHeaderActions } from "./header.style";
 
 const Header = () => {
   const isTablet = useMediaQuery("(max-width:1023.98px)");
@@ -27,7 +25,7 @@ const Header = () => {
 
   return (
     <StyledHeader>
-      <div className="container header">
+      <div className="header container">
         <div className={`header-container ${showSearchMobile ? "show-search" : ""}`}>
           <Link to="/" className="header-logo">
             <img
@@ -39,14 +37,14 @@ const Header = () => {
           {showSearchMobile && <HeaderSearchBar />}
           <StyledHeaderActions>
             <HeaderMenu showMenu={showMenu} handleToggleMenu={handleToggleMenu} />
-            <div className="header-mobile">
-              <StyledHeaderButton onClick={handleToggleSearch}>
+            <HeaderMenuMobile>
+              <button type="button" onClick={handleToggleSearch}>
                 <IonIcon name="search-outline" />
-              </StyledHeaderButton>
-              <StyledHeaderButton onClick={handleToggleMenu}>
+              </button>
+              <button type="button" onClick={handleToggleMenu}>
                 <IonIcon name="reorder-four-outline" />
-              </StyledHeaderButton>
-            </div>
+              </button>
+            </HeaderMenuMobile>
             <HeaderUser />
           </StyledHeaderActions>
         </div>

@@ -58,10 +58,6 @@ export const StyledHeaderUser = styled.div`
       transition: all 0.25s linear;
     }
   }
-  .logout {
-    padding: 0;
-    background-color: transparent;
-  }
   .language {
     --speed3: cubic-bezier(0.26, 0.48, 0.08, 0.9);
     --height: 25px;

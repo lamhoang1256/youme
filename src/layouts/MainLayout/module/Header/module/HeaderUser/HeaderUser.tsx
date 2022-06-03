@@ -8,13 +8,13 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { StyledHeaderUser } from "./headerUser.style";
 
+const urlAvatar = `${process.env.REACT_APP_PUBLIC}/images/header-avatar.webp`;
+
 const HeaderUser = () => {
   const { currentUser } = useAppSelector((state) => state.auth);
   const { t } = useTranslation();
   const [isEnglish, setIsEnglish] = useState(localStorage.getItem("language") === "en");
-  const avatar = currentUser?.avatar
-    ? currentUser.avatar
-    : `${process.env.REACT_APP_PUBLIC}/images/header-avatar.webp`;
+  const avatar = currentUser?.avatar ? currentUser.avatar : urlAvatar;
   const username = currentUser?.username ? currentUser?.username : "Guest";
 
   const handleLogout = () => {
@@ -50,22 +50,21 @@ const HeaderUser = () => {
         <ul className="dropdown-list">
           <li className="dropdown-item language">
             <span>{t("Vietnamese")}</span>
-            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-            <label className="language-switcher">
+            <div className="language-switcher">
               <input type="checkbox" onChange={switchLanguage} checked={isEnglish} />
               <span className="slider round" />
-            </label>
+            </div>
             <span>{t("English")}</span>
           </li>
           <li className="dropdown-item">
             {currentUser ? (
-              <button type="button" className="dropdown-link logout" onClick={handleLogout}>
+              <ButtonGradient className="header-auth secondary" onClick={handleLogout}>
                 <IonIcon name="log-out-outline" />
                 <span>{t("Logout")}</span>
-              </button>
+              </ButtonGradient>
             ) : (
               <Link to="/sign-in">
-                <ButtonGradient className="header-login">Sign In</ButtonGradient>
+                <ButtonGradient className="header-auth primary">Sign In</ButtonGradient>
               </Link>
             )}
           </li>
