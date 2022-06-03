@@ -4,7 +4,7 @@ export const StyledDetailHeader = styled.div`
   display: flex;
   gap: 30px;
   .detail {
-    &-thumb img {
+    &-poster img {
       margin: 0 auto;
       width: 220px;
       height: 310px;
@@ -85,6 +85,26 @@ export const StyledDetailHeader = styled.div`
       &-action {
         margin-top: 10px;
       }
+    }
+  }
+`;
+
+export const StyledDetailMain = styled.div`
+  margin-top: 30px;
+  .detail {
+    &-summary {
+      line-height: 1.9;
+    }
+    &-banner {
+      margin: 30px auto 0;
+      width: 100%;
+      max-width: 750px;
+      aspect-ratio: auto 750/422;
+      background-color: var(--bg-skeleton);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    &-banner img {
     }
   }
 `;

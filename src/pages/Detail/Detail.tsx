@@ -7,8 +7,7 @@ import SideRelated from "components/SideRelated/SideRelated";
 import SkeletonSideRelated from "components/Skeleton/SkeletonSideRelated";
 import Nothing from "components/Nothing/Nothing";
 import Comment from "components/Comment/Comment";
-import DetailHeader from "./module/DetailHeader/DetailHeader";
-import DetailDescription from "./module/DetailDescription/DetailDescription";
+import DetailContent from "./module/DetailContent/DetailContent";
 import DetailSkeleton from "./module/DetailSkeleton/DetailSkeleton";
 import { StyledDetail } from "./detail.style";
 
@@ -39,7 +38,7 @@ const Detail = () => {
     fetchMovieDetail();
   }, [id, category]);
 
-  if (detail === null) {
+  if (!detail) {
     return (
       <Nothing
         image={`${process.env.REACT_APP_PUBLIC}/images/not-found-404.png`}
@@ -58,8 +57,7 @@ const Detail = () => {
           <div className="wrapper-main">
             {!loading && (
               <>
-                <DetailHeader detail={detail} />
-                <DetailDescription detail={detail} />
+                <DetailContent detail={detail} />
                 <Comment id={String(id)} />
               </>
             )}
