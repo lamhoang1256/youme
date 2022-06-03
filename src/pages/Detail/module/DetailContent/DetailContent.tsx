@@ -28,38 +28,58 @@ const DetailContent = ({ detail }: DetailContentProps) => {
   const url = `/watch/${detail?.id}?cate=${detail?.category}`;
   const { currentUser } = useAppSelector((state) => state.auth);
   const [favorites, setFavorites] = useState<IFavorites[]>([]);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const getData = async () => {
     const colRef = doc(db, "users", currentUser?.uid);
     const data = await getDoc(colRef);
+    const isExist = data?.data()?.favorites?.some((favorite: any) => favorite.id === detail?.id);
+    console.log(isExist);
+    setIsFavorite(isExist);
     setFavorites(data.data()?.favorites);
   };
 
-  const handleAddFavoriteMovie = () => {
+  const handleAddFavoriteMovie = async () => {
     if (!currentUser?.uid) {
       toast.error(t("Please Login"));
       return;
     }
-    const isExistFavorite = favorites.some((favorite: any) => favorite.id === detail?.id);
-    if (isExistFavorite) {
-      toast.error(t("Movie is added favorites"));
-      return;
-    }
     const colRef = doc(db, "users", currentUser?.uid);
-    if (colRef) {
-      try {
-        const favoriteMovie = {
-          coverVerticalUrl: detail?.coverVerticalUrl,
-          domainType: detail?.category,
-          id: detail?.id,
-          name: detail?.name,
-        };
-        updateDoc(colRef, { favorites: [favoriteMovie, ...currentUser.favorites] });
-        getData();
-        toast.success(t("Success add favorite movie"));
-      } catch (error: any) {
-        toast.error(error);
-      }
+    const dbFavorites = await getDoc(colRef);
+    const dataFavorites = dbFavorites.data()?.favorites;
+    const isExistFavorite = dataFavorites?.some((favorite: any) => favorite.id === detail?.id);
+
+    if (isExistFavorite && colRef) {
+      const removeFavoriteMovie = async () => {
+        try {
+          const newFavorite = favorites.filter((favorite) => favorite.id !== detail.id);
+          await updateDoc(colRef, { favorites: [...newFavorite] });
+          getData();
+          toast.success(t("Success remove favorite movie"));
+        } catch (error: any) {
+          toast.error(error);
+        }
+      };
+      removeFavoriteMovie();
+    }
+
+    if (!isExistFavorite && colRef) {
+      const addFavoriteMovie = async () => {
+        try {
+          const favoriteMovie = {
+            coverVerticalUrl: detail?.coverVerticalUrl,
+            domainType: detail?.category,
+            id: detail?.id,
+            name: detail?.name,
+          };
+          await updateDoc(colRef, { favorites: [favoriteMovie, ...favorites] });
+          getData();
+          toast.success(t("Success add favorite movie"));
+        } catch (error: any) {
+          toast.error(error);
+        }
+      };
+      addFavoriteMovie();
     }
   };
 
@@ -104,7 +124,7 @@ const DetailContent = ({ detail }: DetailContentProps) => {
             </Link>
             <button
               type="button"
-              className="detail-button detail-favorite"
+              className={`detail-button detail-favorite ${isFavorite ? "active" : ""}`}
               onClick={handleAddFavoriteMovie}
             >
               <IonIcon name="heart" />

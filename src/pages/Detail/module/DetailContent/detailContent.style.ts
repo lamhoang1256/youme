@@ -72,8 +72,12 @@ export const StyledDetailHeader = styled.div`
       background-color: transparent;
     }
     &-favorite {
-      border: 2px solid #e96565;
-      color: #e96565;
+      color: var(--white);
+      /* border: 2px solid var(--white); */
+      &.active {
+        border: 2px solid #e96565;
+        color: #e96565;
+      }
     }
     &-share {
       color: var(--white);

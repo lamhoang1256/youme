@@ -15,7 +15,9 @@ import {
 import AuthInput from "components/Input/AuthInput";
 import { PUBLIC_IMAGE } from "constants/path";
 import { toastErrorFirebase } from "helpers/toastErrorFirebase";
+import { useAppSelector } from "App/store";
 import { StyledAuth, StyledButtonAuth } from "./auth.style";
+import AuthSuccess from "./AuthSuccess";
 
 const StyledSignUp = styled.div`
   .signup {
@@ -31,6 +33,7 @@ const StyledSignUp = styled.div`
 `;
 
 const SignUp = () => {
+  const { currentUser } = useAppSelector((state) => state.auth);
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [showOption, setShowOption] = useState(true);
@@ -38,6 +41,10 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+
+  const redirectHome = (timeDelay = 500) => {
+    setTimeout(() => navigate("/"), timeDelay);
+  };
 
   const signUpWithEmail = async () => {
     if (password !== repeatPassword) {
@@ -56,9 +63,7 @@ const SignUp = () => {
         favorites: [],
       });
       toast.success(t("Sign Up Success"));
-      setTimeout(() => {
-        navigate("/");
-      }, 500);
+      redirectHome();
     } catch (error: any) {
       toastErrorFirebase(t(error.message));
     }
@@ -83,6 +88,7 @@ const SignUp = () => {
         if (!user) return;
         createProfileUser(user);
         toast.success(t("Success Login with Google"));
+        redirectHome();
       })
       .catch((error) => {
         toastErrorFirebase(error.message);
@@ -97,6 +103,7 @@ const SignUp = () => {
         if (!user) return;
         createProfileUser(user);
         toast.success(t("Success Login with Facebook"));
+        redirectHome();
       })
       .catch((error) => {
         toastErrorFirebase(error.message);
@@ -111,84 +118,94 @@ const SignUp = () => {
     <StyledSignUp>
       <StyledAuth>
         <div className="auth">
-          <div className="auth-container">
-            {showOption ? (
-              <>
-                <h2>Sign Up Option</h2>
-                <div className="auth-main">
-                  <StyledButtonAuth
-                    type="button"
-                    className="auth-primary"
-                    onClick={() => setShowOption(false)}
-                  >
-                    <img src={`${PUBLIC_IMAGE}/auth-email.png`} alt="email" />{" "}
-                    {t("Sign Up with Email")}
-                  </StyledButtonAuth>
-                  <StyledButtonAuth
-                    type="button"
-                    className="auth-facebook"
-                    onClick={signUpWithFacebook}
-                  >
-                    <img src={`${PUBLIC_IMAGE}/auth-facebook.png`} alt="facebook" />
-                    {t("Sign Up with Facebook")}
-                  </StyledButtonAuth>
-                  <StyledButtonAuth
-                    type="button"
-                    className="auth-google"
-                    onClick={signUpWithGoogle}
-                  >
-                    <img src={`${PUBLIC_IMAGE}/auth-google.png`} alt="google" />
-                    {t("Sign Up with Google")}
-                  </StyledButtonAuth>
-                </div>
-              </>
-            ) : (
-              <>
-                <div className="signup-header">
-                  <h2>{t("Sign Up with Email")}</h2>
-                  <button onClick={() => setShowOption(true)} type="button" className="signup-back">
-                    {t("Back")}
-                  </button>
-                </div>
-                <div className="auth-main">
-                  <AuthInput
-                    label="Username"
-                    type="text"
-                    placeholder={t("Username")}
-                    onChange={(e: any) => setUsername(e.target.value)}
-                  />
-                  <AuthInput
-                    label="Email"
-                    type="email"
-                    placeholder="Email"
-                    onChange={(e: any) => setEmail(e.target.value)}
-                  />
-                  <AuthInput
-                    label="Password"
-                    type="password"
-                    placeholder={t("Min 6 characters")}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                  <AuthInput
-                    label={t("Re-type Password")}
-                    type="password"
-                    placeholder={t("Min 6 characters")}
-                    onChange={(e) => setRepeatPassword(e.target.value)}
-                  />
-                  <StyledButtonAuth
-                    type="button"
-                    className="auth-primary"
-                    onClick={signUpWithEmail}
-                  >
-                    {t("Sign Up")}
-                  </StyledButtonAuth>
-                </div>
-              </>
-            )}
-            <div className="auth-no-acount">
-              {t("Have an account?")} <Link to="/sign-in">{t("Sign In Here")}</Link>
+          {currentUser ? (
+            <div className="auth-container">
+              <AuthSuccess />
             </div>
-          </div>
+          ) : (
+            <div className="auth-container">
+              {showOption ? (
+                <>
+                  <h2>Sign Up Option</h2>
+                  <div className="auth-main">
+                    <StyledButtonAuth
+                      type="button"
+                      className="auth-primary"
+                      onClick={() => setShowOption(false)}
+                    >
+                      <img src={`${PUBLIC_IMAGE}/auth-email.png`} alt="email" />{" "}
+                      {t("Sign Up with Email")}
+                    </StyledButtonAuth>
+                    <StyledButtonAuth
+                      type="button"
+                      className="auth-facebook"
+                      onClick={signUpWithFacebook}
+                    >
+                      <img src={`${PUBLIC_IMAGE}/auth-facebook.png`} alt="facebook" />
+                      {t("Sign Up with Facebook")}
+                    </StyledButtonAuth>
+                    <StyledButtonAuth
+                      type="button"
+                      className="auth-google"
+                      onClick={signUpWithGoogle}
+                    >
+                      <img src={`${PUBLIC_IMAGE}/auth-google.png`} alt="google" />
+                      {t("Sign Up with Google")}
+                    </StyledButtonAuth>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="signup-header">
+                    <h2>{t("Sign Up with Email")}</h2>
+                    <button
+                      onClick={() => setShowOption(true)}
+                      type="button"
+                      className="signup-back"
+                    >
+                      {t("Back")}
+                    </button>
+                  </div>
+                  <div className="auth-main">
+                    <AuthInput
+                      label="Username"
+                      type="text"
+                      placeholder={t("Username")}
+                      onChange={(e: any) => setUsername(e.target.value)}
+                    />
+                    <AuthInput
+                      label="Email"
+                      type="email"
+                      placeholder="Email"
+                      onChange={(e: any) => setEmail(e.target.value)}
+                    />
+                    <AuthInput
+                      label="Password"
+                      type="password"
+                      placeholder={t("Min 6 characters")}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <AuthInput
+                      label={t("Re-type Password")}
+                      type="password"
+                      placeholder={t("Min 6 characters")}
+                      onChange={(e) => setRepeatPassword(e.target.value)}
+                    />
+                    <StyledButtonAuth
+                      type="button"
+                      className="auth-primary"
+                      onClick={signUpWithEmail}
+                    >
+                      {t("Sign Up")}
+                    </StyledButtonAuth>
+                  </div>
+                </>
+              )}
+              <div className="auth-no-acount">
+                {t("Have an account?")} <Link to="/sign-in">{t("Sign In Here")}</Link>
+              </div>
+            </div>
+          )}
         </div>
       </StyledAuth>
     </StyledSignUp>
