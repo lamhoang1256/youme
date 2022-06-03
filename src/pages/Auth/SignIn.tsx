@@ -10,12 +10,15 @@ import {
 import { auth } from "firebase-app/firebase-config";
 import AuthInput from "components/Input/AuthInput";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
+import { toastErrorFirebase } from "helpers/toastErrorFirebase";
 import { StyledAuth, StyledButtonAuth } from "./auth.style";
 
 const StyledSignIn = styled.div``;
 const publicImage = `${process.env.REACT_APP_PUBLIC}/images`;
 
 const SignIn = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,11 +30,12 @@ const SignIn = () => {
   const signInWithEmail = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      toast.success("Success Sign In");
+      toast.success(t("Success Sign In"));
       redirectHome();
     } catch (error: any) {
-      if (error.message.includes("wrong-password")) toast.error("It seems your password was wrong");
-      else toast.error(error.message.split("Firebase: ")[1]);
+      if (error.message.includes("wrong-password"))
+        toast.error(t("It seems your password was wrong"));
+      else toastErrorFirebase(error.message);
     }
   };
 
@@ -39,11 +43,11 @@ const SignIn = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
       .then(() => {
-        toast.success("Success Login with Google");
+        toast.success(t("Success Login with Google"));
         redirectHome();
       })
       .catch((error) => {
-        toast.error(error.message);
+        toastErrorFirebase(error.message);
       });
   };
 
@@ -51,16 +55,16 @@ const SignIn = () => {
     const provider = new FacebookAuthProvider();
     signInWithPopup(auth, provider)
       .then(() => {
-        toast.success("Success Login with Facebook");
+        toast.success(t("Success Login with Facebook"));
         redirectHome();
       })
       .catch((error) => {
-        toast.error(error.message);
+        toastErrorFirebase(error.message);
       });
   };
 
   useEffect(() => {
-    document.title = "Sign In Page";
+    document.title = t("Youme - Sign In");
   }, []);
 
   return (
@@ -69,7 +73,7 @@ const SignIn = () => {
         <div className="auth">
           <div className="auth-container">
             <h2>Welcome to Youme</h2>
-            <span className="auth-label">SignIn to continue</span>
+            <span className="auth-label">{t("SignIn to continue")}</span>
             <div className="auth-main">
               <AuthInput
                 label="Email"
@@ -78,13 +82,13 @@ const SignIn = () => {
                 onChange={(e: any) => setEmail(e.target.value)}
               />
               <AuthInput
-                label="Password"
+                label={t("Password")}
                 type="password"
-                placeholder="Password"
+                placeholder={t("Password")}
                 onChange={(e) => setPassword(e.target.value)}
               />
               <StyledButtonAuth type="button" className="auth-primary" onClick={signInWithEmail}>
-                Sign In
+                {t("Sign In")}
               </StyledButtonAuth>
               <div className="auth-other">
                 <span>Or</span>
@@ -95,15 +99,15 @@ const SignIn = () => {
                 onClick={signInWithFacebook}
               >
                 <img src={`${publicImage}/auth-facebook.png`} alt="facebook" />
-                Sign In with Facebook
+                {t("Sign In with Facebook")}
               </StyledButtonAuth>
               <StyledButtonAuth type="button" className="auth-google" onClick={signInWithGoogle}>
                 <img src={`${publicImage}/auth-google.png`} alt="google" />
-                Sign In with Google
+                {t("Sign In with Google")}
               </StyledButtonAuth>
             </div>
             <div className="auth-no-acount">
-              Dont have an account? <Link to="/sign-up">Sign Up Here</Link>
+              {t("Do not have an account?")} <Link to="/sign-up">{t("Sign Up Here")}</Link>
             </div>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import { InputHTMLAttributes } from "react";
+import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 
 const StyledAuthInput = styled.div`
@@ -22,9 +23,10 @@ interface AuthInputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const AuthInput = ({ label, ...otherProps }: AuthInputProps) => {
+  const { t } = useTranslation();
   return (
     <StyledAuthInput>
-      <span>{label}</span>
+      <span>{t(label)}</span>
       <input {...otherProps} />
     </StyledAuthInput>
   );

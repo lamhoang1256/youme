@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import AuthInput from "components/Input/AuthInput";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { auth, db } from "firebase-app/firebase-config";
+import styled from "styled-components";
 import {
   createUserWithEmailAndPassword,
   FacebookAuthProvider,
@@ -11,7 +12,9 @@ import {
   signInWithPopup,
   User,
 } from "firebase/auth";
-import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import AuthInput from "components/Input/AuthInput";
+import { PUBLIC_IMAGE } from "constants/path";
+import { toastErrorFirebase } from "helpers/toastErrorFirebase";
 import { StyledAuth, StyledButtonAuth } from "./auth.style";
 
 const StyledSignUp = styled.div`
@@ -27,9 +30,8 @@ const StyledSignUp = styled.div`
   }
 `;
 
-const publicImage = `${process.env.REACT_APP_PUBLIC}/images`;
-
 const SignUp = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [showOption, setShowOption] = useState(true);
   const [username, setUsername] = useState("");
@@ -39,7 +41,7 @@ const SignUp = () => {
 
   const signUpWithEmail = async () => {
     if (password !== repeatPassword) {
-      toast.error("Password and repeat password not same !");
+      toast.error(t("Password and repeat password not same!"));
       return;
     }
     try {
@@ -50,15 +52,15 @@ const SignUp = () => {
         username,
         email,
         createdAt: serverTimestamp(),
-        avatar: `${publicImage}/header-avatar.png`,
+        avatar: `${PUBLIC_IMAGE}/header-avatar.png`,
         favorites: [],
       });
-      toast.success("Sign Up Success");
+      toast.success(t("Sign Up Success"));
       setTimeout(() => {
         navigate("/");
       }, 500);
     } catch (error: any) {
-      toast.error(error.message);
+      toastErrorFirebase(t(error.message));
     }
   };
 
@@ -80,10 +82,10 @@ const SignUp = () => {
         const { user } = result;
         if (!user) return;
         createProfileUser(user);
-        toast.success("Success Login with Google");
+        toast.success(t("Success Login with Google"));
       })
       .catch((error) => {
-        toast.error(error.message);
+        toastErrorFirebase(error.message);
       });
   };
 
@@ -94,15 +96,15 @@ const SignUp = () => {
         const { user } = result;
         if (!user) return;
         createProfileUser(user);
-        toast.success("Success Login with Facebook");
+        toast.success(t("Success Login with Facebook"));
       })
       .catch((error) => {
-        toast.error(error.message);
+        toastErrorFirebase(error.message);
       });
   };
 
   useEffect(() => {
-    document.title = "Sign Up Page";
+    document.title = t("Youme - Sign Up");
   }, []);
 
   return (
@@ -119,39 +121,40 @@ const SignUp = () => {
                     className="auth-primary"
                     onClick={() => setShowOption(false)}
                   >
-                    <img src={`${publicImage}/auth-email.png`} alt="email" /> Sign Up with Email
+                    <img src={`${PUBLIC_IMAGE}/auth-email.png`} alt="email" />{" "}
+                    {t("Sign Up with Email")}
                   </StyledButtonAuth>
                   <StyledButtonAuth
                     type="button"
                     className="auth-facebook"
                     onClick={signUpWithFacebook}
                   >
-                    <img src={`${publicImage}/auth-facebook.png`} alt="facebook" />
-                    Sign Up with Facebook
+                    <img src={`${PUBLIC_IMAGE}/auth-facebook.png`} alt="facebook" />
+                    {t("Sign Up with Facebook")}
                   </StyledButtonAuth>
                   <StyledButtonAuth
                     type="button"
                     className="auth-google"
                     onClick={signUpWithGoogle}
                   >
-                    <img src={`${publicImage}/auth-google.png`} alt="google" />
-                    Sign Up with Google
+                    <img src={`${PUBLIC_IMAGE}/auth-google.png`} alt="google" />
+                    {t("Sign Up with Google")}
                   </StyledButtonAuth>
                 </div>
               </>
             ) : (
               <>
                 <div className="signup-header">
-                  <h2>Sign Up with Email</h2>
+                  <h2>{t("Sign Up with Email")}</h2>
                   <button onClick={() => setShowOption(true)} type="button" className="signup-back">
-                    Back
+                    {t("Back")}
                   </button>
                 </div>
                 <div className="auth-main">
                   <AuthInput
                     label="Username"
                     type="text"
-                    placeholder="Username"
+                    placeholder={t("Username")}
                     onChange={(e: any) => setUsername(e.target.value)}
                   />
                   <AuthInput
@@ -163,13 +166,13 @@ const SignUp = () => {
                   <AuthInput
                     label="Password"
                     type="password"
-                    placeholder="Min 6 characters"
+                    placeholder={t("Min 6 characters")}
                     onChange={(e) => setPassword(e.target.value)}
                   />
                   <AuthInput
-                    label="Re-type Password"
+                    label={t("Re-type Password")}
                     type="password"
-                    placeholder="Min 6 characters"
+                    placeholder={t("Min 6 characters")}
                     onChange={(e) => setRepeatPassword(e.target.value)}
                   />
                   <StyledButtonAuth
@@ -177,13 +180,13 @@ const SignUp = () => {
                     className="auth-primary"
                     onClick={signUpWithEmail}
                   >
-                    Sign Up
+                    {t("Sign Up")}
                   </StyledButtonAuth>
                 </div>
               </>
             )}
             <div className="auth-no-acount">
-              Have an account? <Link to="/sign-in">Login Here</Link>
+              {t("Have an account?")} <Link to="/sign-in">{t("Sign In Here")}</Link>
             </div>
           </div>
         </div>
