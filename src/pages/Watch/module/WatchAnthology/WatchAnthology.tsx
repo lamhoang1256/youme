@@ -10,15 +10,13 @@ interface WatchAnthologyProps {
 const WatchAnthology = ({ detailMovie, detailCurrentPlay }: WatchAnthologyProps) => {
   return (
     <StyledWatchAnthology>
-      {detailMovie.episodeVo.map((ep) => {
-        const active = ep.seriesNo === detailCurrentPlay.seriesNo ? "is-active" : undefined;
+      {detailMovie.episodeVo.map(({ seriesNo, id }) => {
+        const url = `/watch/${detailMovie.id}?cate=${detailMovie.category}&ep=${id}`;
+        const active = seriesNo === detailCurrentPlay.seriesNo ? "is-active" : undefined;
         return (
-          <Link
-            to={`/watch/${detailMovie.id}?cate=${detailMovie.category}&ep=${ep.id}`}
-            key={ep.id}
-          >
+          <Link to={url} key={id}>
             <button className={active} type="button">
-              {ep.seriesNo}
+              {seriesNo}
             </button>
           </Link>
         );

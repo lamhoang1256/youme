@@ -5,8 +5,9 @@ import { IMovieDetail } from "interfaces/detail";
 import { getWatchMedia } from "apis/configAPI";
 import SideRelated from "components/SideRelated/SideRelated";
 import SkeletonSideRelated from "components/Skeleton/SkeletonSideRelated";
-import { checkEmptyObj } from "utilities/checkEmptyObj";
+import { checkEmptyObj } from "helpers/checkEmptyObj";
 import Comment from "components/Comment/Comment";
+import CommentSkeleton from "components/Comment/CommentSkeleton";
 import WatchPlayer from "./module/WatchPlayer/WatchPlayer";
 import WatchInfo from "./module/WatchInfo/WatchInfo";
 import WatchAnthology from "./module/WatchAnthology/WatchAnthology";
@@ -74,9 +75,10 @@ const Watch = () => {
             <div className="wrapper-main">
               <WatchPlayerSkeleton />
               <WatchInfoSkeleton />
+              <WatchAnthologySkeleton />
+              <CommentSkeleton />
             </div>
             <div className="wrapper-side">
-              <WatchAnthologySkeleton />
               <SkeletonSideRelated />
             </div>
           </StyledWrapperLayout>
@@ -91,13 +93,13 @@ const Watch = () => {
                 playerRef={playerRef}
               />
               <WatchInfo detail={watch} />
-              <Comment id={String(id)} />
-            </div>
-            <div className="wrapper-side">
               <WatchAnthology
                 detailMovie={watch.detailMovie}
                 detailCurrentPlay={watch.detailCurrentPlay}
               />
+              <Comment id={String(id)} />
+            </div>
+            <div className="wrapper-side">
               <SideRelated listSuggest={watch.detailMovie.likeList} />
             </div>
           </StyledWrapperLayout>

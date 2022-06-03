@@ -2,10 +2,10 @@ import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
 
 const StyledAnthologySkeleton = styled.div`
+  margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-bottom: 30px;
   .skeleton-button {
     width: 40px;
     height: 40px;
