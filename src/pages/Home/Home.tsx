@@ -8,7 +8,6 @@ import SkeletonTitle from "components/Skeleton/SkeletonTitle";
 import { useEffect, useState } from "react";
 import { IHomeSection } from "interfaces/home";
 import { useTranslation } from "react-i18next";
-import { PUBLIC_IMAGE } from "constants/path";
 import HomeBanner from "./module/HomeBanner/HomeBanner";
 import HomeTrending from "./module/HomeTrending/HomeTrending";
 import HomeList from "./module/HomeList/HomeList";
@@ -47,7 +46,6 @@ const Home = () => {
     <StyledHome>
       <HomeBanner />
       <div className="container">
-        <img src={`${PUBLIC_IMAGE}/banner-welcome.jpeg`} alt="welcome" className="home-welcome" />
         <HomeTrending />
         {!data && (
           <StyledHomeList>
@@ -69,7 +67,7 @@ const Home = () => {
             loader={<LoadingSpinner />}
             endMessage={
               <Link to="/explore">
-                <button type="button" className="seemore">
+                <button type="button" className="see-more">
                   {t("See More")}
                 </button>
               </Link>
