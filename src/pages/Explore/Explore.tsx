@@ -6,6 +6,7 @@ import { filterByCategory, getAllGenres } from "apis/configAPI";
 import MovieList from "components/MovieList/MovieList";
 import Tabs from "components/Tabs/Tabs";
 import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
+import { useTranslation } from "react-i18next";
 import ExploreFilter from "./module/ExploreFilter/ExploreFilter";
 import { StyledExplore } from "./explore.style";
 
@@ -22,6 +23,7 @@ const initialFilters = {
 };
 
 const Explore = () => {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState<boolean>(true);
   const [selectedTabId, setSelectedTabId] = useState<number>(defaultGenresTab);
   const [allGenres, setAllGenres] = useState<IGenres[]>([]);
@@ -75,6 +77,7 @@ const Explore = () => {
       top: 0,
       behavior: "smooth",
     });
+    document.title = `Youme - ${t("Explore")}`;
     fetchGenres();
   }, []);
 

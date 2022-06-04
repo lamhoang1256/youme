@@ -32,9 +32,7 @@ const WatchInfo = ({ detail }: WatchInfoProps) => {
         </li>
         {detailMovie.episodeCount && (
           <li>
-            <span>
-              {t("EP")} {detailMovie.episodeVo.length}/ {detailMovie.episodeCount}
-            </span>
+            {t("EP")} {detailMovie.episodeVo.length}/ {detailMovie.episodeCount}
           </li>
         )}
         <li>{detailMovie.year}</li>
@@ -49,7 +47,10 @@ const WatchInfo = ({ detail }: WatchInfoProps) => {
       {detailMovie.updateInfo?.updatePeriod && (
         <div className="watch-upcoming">
           <span className="label-small">{t("Upcoming")}:</span>
-          {t("New episode is updated on")} {` ${detailMovie.updateInfo?.updatePeriod} `}
+          {t("New episode is updated on")}{" "}
+          {` ${detailMovie.updateInfo.updatePeriod.substring(
+            detailMovie.updateInfo.updatePeriod.indexOf(",") + 1,
+          )} `}
           {t("every week")}
         </div>
       )}
