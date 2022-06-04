@@ -9,7 +9,6 @@ import IonIcon from "@reacticons/ionicons";
 import { resizeImage } from "constants/resizeImage";
 import { IMovieDetail } from "interfaces/detail";
 import { useAppSelector } from "App/store";
-import ButtonGradient from "components/Button/ButtonGradient";
 import { StyledDetailHeader, StyledDetailMain } from "./detailContent.style";
 
 interface DetailContentProps {
@@ -120,9 +119,9 @@ const DetailContent = ({ detail }: DetailContentProps) => {
           </div>
           <div className="detail-action">
             <Link to={url}>
-              <ButtonGradient type="button" className="primary detail-watch">
+              <button type="button" className="primary detail-watch">
                 {t("Watch now")}
-              </ButtonGradient>
+              </button>
             </Link>
             <button
               type="button"

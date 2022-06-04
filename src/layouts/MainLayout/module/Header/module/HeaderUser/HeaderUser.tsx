@@ -20,20 +20,20 @@ const HeaderUser = () => {
     signOut(auth);
   };
 
-  function setLanguage(language: string) {
+  const setLangLocalStorage = (language: string) => {
     localStorage.setItem("language", language);
-  }
+  };
 
-  function switchLanguage() {
+  const switchLanguage = () => {
     if (localStorage.getItem("language") === "en") {
-      setLanguage("vi");
+      setLangLocalStorage("vi");
       setIsEnglish(false);
     } else {
-      setLanguage("en");
+      setLangLocalStorage("en");
       setIsEnglish(true);
     }
     window.location.reload();
-  }
+  };
 
   return (
     <StyledHeaderUser>

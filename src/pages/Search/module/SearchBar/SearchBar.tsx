@@ -53,22 +53,23 @@ const SearchBar = () => {
 
   return (
     <StyledSearchBar ref={searchRef}>
-      <form className="header-searchbar" onSubmit={handleNavigateSearch}>
+      <form className="searchbar" onSubmit={handleNavigateSearch}>
         <input
           type="text"
           placeholder={t("Search...")}
           value={searchValue}
+          className="searchbar-input"
           onChange={handleSearch}
           onKeyDown={(e) => e.stopPropagation()}
           onKeyUp={(e) => e.stopPropagation()}
           onKeyPress={(e) => e.stopPropagation()}
         />
-        <button className="search-icon" type="submit">
+        <button className="searchbar-icon" type="submit">
           <IonIcon name="search-outline" />
         </button>
       </form>
       {showResults && keywordList.length > 0 && (
-        <ul className="header-result">
+        <ul className="searchbar-result">
           {keywordList.map((keyword) => {
             const title = encodeURIComponent(
               keyword.replaceAll("<em>", "").replaceAll("</em>", ""),

@@ -2,36 +2,34 @@ import styled from "styled-components";
 
 export const StyledSearchBar = styled.div`
   margin-bottom: 20px;
-  .header {
-    &-searchbar {
-      position: relative;
-      background-color: #39354d;
-      border-radius: 10px;
-      height: 45px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    &-searchbar input {
+  position: relative;
+  .searchbar {
+    position: relative;
+    background-color: #39354d;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &-input {
       border-radius: 10px;
       flex: 1;
       background: transparent;
       border: none;
       outline: none;
-      padding: 0 20px;
+      padding: 16px 20px;
       height: 100%;
-      font-size: 1.5rem;
+      font-size: 1.7rem;
       min-height: 45px;
       color: var(--white);
       border: 1px solid transparent;
     }
-    &-searchbar input:focus {
+    &-input:focus {
       border: 1px solid var(--primary-color);
     }
-    &-searchbar input::placeholder {
+    &-input::placeholder {
       color: #eee;
     }
-    &-searchbar .search-icon {
+    &-icon {
       position: absolute;
       right: 10px;
       top: 50%;
@@ -52,6 +50,7 @@ export const StyledSearchBar = styled.div`
       border-radius: 8px;
       height: 400px;
       overflow-y: scroll;
+      box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
       &::-webkit-scrollbar {
         width: 6px;
       }
@@ -78,7 +77,8 @@ export const StyledSearchBar = styled.div`
       }
     }
   }
-  @media screen and (max-width: 1023.98px) {
-    width: 100%;
+  @media screen and (min-width: 1024px) {
+    width: 50%;
+    margin: 0 auto 30px;
   }
 `;

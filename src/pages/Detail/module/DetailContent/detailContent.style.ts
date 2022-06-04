@@ -56,9 +56,12 @@ export const StyledDetailHeader = styled.div`
       gap: 14px;
     }
     &-watch {
+      font-weight: 600;
+      color: var(--white);
       width: 210px;
       height: 50px;
       border-radius: 40px;
+      background-color: var(--primary-color);
     }
     &-button {
       font-size: 2rem;
@@ -73,7 +76,6 @@ export const StyledDetailHeader = styled.div`
     }
     &-favorite {
       color: var(--white);
-      /* border: 2px solid var(--white); */
       &.active {
         border: 2px solid #e96565;
         color: #e96565;

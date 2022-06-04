@@ -37,7 +37,7 @@ export const StyledHeaderMenu = styled.ul`
       bottom: -10px;
       left: 0;
       right: 0;
-      height: 2px;
+      height: 3px;
       transition: all 0.25s linear;
       border-radius: 10px;
       background-color: var(--primary-color);
