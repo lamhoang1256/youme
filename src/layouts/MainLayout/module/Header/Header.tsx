@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import IonIcon from "@reacticons/ionicons";
 import HeaderMenu from "./module/HeaderMenu/HeaderMenu";
-import HeaderUser from "./module/HeaderUser/HeaderUser";
+import HeaderDropdown from "./module/HeaderDropdown/HeaderDropdown";
 import { StyledHeaderButton, StyledHeader, StyledHeaderActions } from "./header.style";
 
 const Header = () => {
@@ -33,7 +33,7 @@ const Header = () => {
             <StyledHeaderButton onClick={handleToggleMenu}>
               <IonIcon name="reorder-four-outline" />
             </StyledHeaderButton>
-            <HeaderUser />
+            <HeaderDropdown />
           </StyledHeaderActions>
         </div>
       </div>

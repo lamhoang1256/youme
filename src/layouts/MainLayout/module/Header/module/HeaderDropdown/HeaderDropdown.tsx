@@ -1,19 +1,19 @@
 import { PUBLIC_IMAGE } from "constants/path";
 import { useState } from "react";
-import { StyledHeaderUser } from "./headerUser.style";
+import { StyledHeaderDropdown } from "./headerDropdown.style";
 
 const avatar = `${PUBLIC_IMAGE}/header-avatar.webp`;
-const HeaderUser = () => {
+const HeaderDropdown = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <StyledHeaderUser>
+    <StyledHeaderDropdown>
       <button type="button" className="header-avatar" onClick={() => setOpen(!open)}>
         <img src={avatar} alt="avatar" />
       </button>
       {open && <h1>Dropdown Menu</h1>}
-    </StyledHeaderUser>
+    </StyledHeaderDropdown>
   );
 };
 
-export default HeaderUser;
+export default HeaderDropdown;
