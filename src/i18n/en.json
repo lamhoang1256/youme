@@ -9,7 +9,6 @@
   "Logout": "Logout",
   "Sign In": "Sign In",
   "Sign Up": "Sign Up",
-  "Popular Movie": "Popular Movie",
   "Top Trending": "Top trending",
   "Clear": "Clear",
   "See More": "See More",
@@ -66,7 +65,6 @@
   "Back": "Back",
   "You are logged in": "You are logged in",
   "Favorite": "Favorite",
-  "History": "History",
   "Search": "Search",
   "Keyword": "Keyword"
 }

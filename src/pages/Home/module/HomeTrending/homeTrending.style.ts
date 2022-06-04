@@ -1,13 +1,14 @@
 import { AnimationSkeleton } from "assets/styles/_mixins";
 import styled from "styled-components";
 
-export const StyledPopularList = styled.div`
+export const StyledTrendingList = styled.div`
+  margin-top: 30px;
   width: 100%;
   height: auto;
   h3 {
     margin-bottom: 14px;
   }
-  .popular-name {
+  .trending-name {
     color: var(--white);
     font-weight: 500;
   }
@@ -58,31 +59,31 @@ export const StyledPopularList = styled.div`
   }
 `;
 
-export const StyledPopularCard = styled.div`
+export const StyledTrendingCard = styled.div`
   height: 100%;
   padding: 0 10px;
-  .popular-skeleton {
+  .trending-skeleton {
     margin-left: 5px;
   }
-  .popular-skeleton-thumb {
+  .trending-skeleton-thumb {
     border-radius: 8px;
     aspect-ratio: auto 792 / 445;
     ${AnimationSkeleton}
   }
-  .popular-skeleton-name {
+  .trending-skeleton-name {
     border-radius: 4px;
     margin-top: 10px;
     height: 19px;
     ${AnimationSkeleton}
   }
-  .popular-thumb {
+  .trending-thumb {
     width: 100%;
     border-radius: 8px;
     object-fit: cover;
     aspect-ratio: auto 792 / 445;
     background-color: var(--bg-load-image);
   }
-  .popular-name {
+  .trending-name {
     padding-top: 10px;
     text-align: center;
     text-overflow: ellipsis;
@@ -99,34 +100,3 @@ export const StyledPopularCard = styled.div`
     padding: 0;
   }
 `;
-
-export const settingsPopular = {
-  dots: true,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 4,
-  slidesToScroll: 1,
-  responsive: [
-    {
-      breakpoint: 1450,
-      settings: {
-        slidesToShow: 3,
-        slidesToScroll: 1,
-      },
-    },
-    {
-      breakpoint: 880,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 1,
-      },
-    },
-    {
-      breakpoint: 650,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-      },
-    },
-  ],
-};

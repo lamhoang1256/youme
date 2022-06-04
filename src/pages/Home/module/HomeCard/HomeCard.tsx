@@ -1,7 +1,7 @@
+import { StyledMovieCard } from "components/MovieCard/movieCard.style";
 import { PUBLIC_IMAGE } from "constants/path";
 import { resizeImage } from "constants/resizeImage";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { StyledHomeCard } from "./homeCard.style";
 import HomeCardUI from "./HomeCardUI";
 
 interface HomeCardProps {
@@ -27,7 +27,7 @@ const HomeCard = ({ movie }: HomeCardProps) => {
   const url = `/detail/${id}?cate=${category}`;
   const type = Number.isNaN(category) ? "actor" : "movie";
   return (
-    <StyledHomeCard>
+    <StyledMovieCard>
       <HomeCardUI type={type} url={url}>
         <div className="card-poster">
           <LazyLoadImage
@@ -42,7 +42,7 @@ const HomeCard = ({ movie }: HomeCardProps) => {
       <HomeCardUI type={type} url={url}>
         <p className="card-name">{movie.title}</p>
       </HomeCardUI>
-    </StyledHomeCard>
+    </StyledMovieCard>
   );
 };
 

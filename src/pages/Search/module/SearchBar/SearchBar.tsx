@@ -1,14 +1,14 @@
-import IonIcon from "@reacticons/ionicons";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { v4 as uuidv4 } from "uuid";
+import IonIcon from "@reacticons/ionicons";
 import { searchGetKeyword } from "apis/configAPI";
 import { useOnClickOutside } from "hooks/useClickOutside";
 import { useDebounce } from "hooks/useDebounce";
-import { useTranslation } from "react-i18next";
-import { StyledHeaderSearchBar } from "./headerSearchBar.style";
+import { StyledSearchBar } from "./searchBar.style";
 
-const HeaderSearchBar = () => {
+const SearchBar = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const currentURL = window.location.href;
@@ -52,7 +52,7 @@ const HeaderSearchBar = () => {
   }, [currentURL]);
 
   return (
-    <StyledHeaderSearchBar ref={searchRef}>
+    <StyledSearchBar ref={searchRef}>
       <form className="header-searchbar" onSubmit={handleNavigateSearch}>
         <input
           type="text"
@@ -81,8 +81,8 @@ const HeaderSearchBar = () => {
           })}
         </ul>
       )}
-    </StyledHeaderSearchBar>
+    </StyledSearchBar>
   );
 };
 
-export default HeaderSearchBar;
+export default SearchBar;
