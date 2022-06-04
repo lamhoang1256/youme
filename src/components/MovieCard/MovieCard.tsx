@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { resizeImage } from "constants/resizeImage";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { PUBLIC_IMAGE } from "constants/path";
 import { StyledMovieCard } from "./movieCard.style";
 
 interface MovieCardProps {
@@ -18,12 +19,14 @@ const MovieCard = ({ movie }: MovieCardProps) => {
   return (
     <StyledMovieCard>
       <Link to={url}>
-        <div className="card-thumb">
+        <div className="card-poster">
           <LazyLoadImage
             src={resizeImage(coverVerticalUrl, "180")}
             alt="Thumbnail Card"
             effect="opacity"
+            className="poster"
           />
+          <img src={`${PUBLIC_IMAGE}/play-movie.png`} alt="play" className="card-play" />
         </div>
       </Link>
       <Link to={url}>
