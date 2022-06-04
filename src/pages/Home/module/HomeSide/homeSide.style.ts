@@ -56,6 +56,7 @@ export const StyledHomeSide = styled.div`
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       white-space: normal;
+      font-weight: 500;
     }
     &-rank {
       color: #3d6ef7;

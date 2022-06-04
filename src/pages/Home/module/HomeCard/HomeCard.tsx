@@ -1,3 +1,4 @@
+import { PUBLIC_IMAGE } from "constants/path";
 import { resizeImage } from "constants/resizeImage";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { StyledHomeCard } from "./homeCard.style";
@@ -28,12 +29,14 @@ const HomeCard = ({ movie }: HomeCardProps) => {
   return (
     <StyledHomeCard>
       <HomeCardUI type={type} url={url}>
-        <div className="card-thumb">
+        <div className="card-poster">
           <LazyLoadImage
             src={resizeImage(movie.imageUrl, "180")}
-            alt="Thumbnail Card"
+            alt="Poster Card"
             effect="opacity"
+            className="poster"
           />
+          <img src={`${PUBLIC_IMAGE}/play-movie.png`} alt="play" className="card-play" />
         </div>
       </HomeCardUI>
       <HomeCardUI type={type} url={url}>

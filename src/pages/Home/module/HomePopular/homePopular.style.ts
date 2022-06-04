@@ -9,6 +9,7 @@ export const StyledPopularList = styled.div`
   }
   .popular-name {
     color: var(--white);
+    font-weight: 500;
   }
   .slick-arrow {
     display: none !important;
