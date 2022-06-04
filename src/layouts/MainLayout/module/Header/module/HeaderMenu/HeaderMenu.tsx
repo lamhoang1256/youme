@@ -1,14 +1,14 @@
-import { useAppSelector } from "App/store";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useAppSelector } from "App/store";
+import { PUBLIC_IMAGE } from "constants/path";
 import { StyledHeaderMenu } from "./headerMenu.style";
 
 const menuLinks = [
   { id: 1, display: "Explore", path: "/explore" },
-  { id: 2, display: "History", path: "/history" },
-  { id: 3, display: "Favorites", path: "/favorites" },
+  { id: 2, display: "Favorites", path: "/favorites" },
+  { id: 3, display: "History", path: "/history" },
 ];
-const urlAvatar = `${process.env.REACT_APP_PUBLIC}/images/header-avatar.webp`;
 
 interface HeaderMenuProps {
   showMenu: boolean;
@@ -22,16 +22,16 @@ const HeaderMenu = ({ showMenu, handleToggleMenu }: HeaderMenuProps) => {
   return (
     <StyledHeaderMenu className={`${showMenu ? "active" : ""}`}>
       <li className="menu-header">
-        <img src={urlAvatar} alt="avatar" />
+        <img src={`${PUBLIC_IMAGE}/header-avatar.webp`} alt="avatar" />
         <span>
           {t("Hello")}, {currentUser ? currentUser.username : "Guest"}
         </span>
       </li>
       {menuLinks.map((link) => (
         <li className="menu-item" key={link.id}>
-          <Link to={link.path} className="menu-link" onClick={handleToggleMenu}>
+          <NavLink to={link.path} className="menu-link" onClick={handleToggleMenu}>
             {t(link.display)}
-          </Link>
+          </NavLink>
         </li>
       ))}
     </StyledHeaderMenu>

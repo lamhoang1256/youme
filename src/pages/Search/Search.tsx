@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
-import { searchWithKeyword } from "apis/configAPI";
+import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
+import { searchWithKeyword } from "apis/configAPI";
 import { IExploreCard } from "interfaces/explore";
+import SearchBar from "pages/Search/module/SearchBar/SearchBar";
 import MovieList from "components/MovieList/MovieList";
 import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
-import { useTranslation } from "react-i18next";
 
 const Search = () => {
   const { t } = useTranslation();
   const [searchParams] = useSearchParams();
   const query = searchParams.get("query");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [movieList, setMovieList] = useState<IExploreCard[]>([]);
 
   const fetchMovieWithKeyWord = async (keyword: string) => {
@@ -21,7 +22,6 @@ const Search = () => {
       setLoading(false);
     } catch (error) {
       setLoading(false);
-      console.log(error);
     }
   };
 
@@ -39,6 +39,7 @@ const Search = () => {
       {loading && <LoadingSpinner />}
       {!loading && (
         <>
+          <SearchBar />
           {query && (
             <h3>
               {t("Keyword")}: {query}

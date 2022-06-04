@@ -4,8 +4,9 @@ export const GlobalStyle = createGlobalStyle`
   :root {
     --white: #fff;
     --black: #000;
-    --primary-color: #8a3cff;
+    --primary-color: #6c43bf;
     --dark-color: #080f28;
+    --darker-color:#210e37;
     --bg-load-image: #191a1f;
     --bg-skeleton: #656871;
     --max-width-container: 1500px;

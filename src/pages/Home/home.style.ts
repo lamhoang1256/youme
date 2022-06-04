@@ -1,6 +1,13 @@
 import styled from "styled-components";
 
-export const StyledHome = styled.div``;
+export const StyledHome = styled.div`
+  .home {
+    &-welcome {
+      margin-top: 30px;
+      border-radius: 10px;
+    }
+  }
+`;
 
 export const StyledWrapperLayout = styled.div`
   display: flex;

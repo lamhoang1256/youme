@@ -36,7 +36,8 @@ export const StyledHeader = styled.header`
 
 export const StyledHeaderActions = styled.div`
   display: flex;
-  gap: 40px;
+  align-items: center;
+  gap: 30px;
   .header {
     &-auth {
       display: flex;
@@ -45,28 +46,21 @@ export const StyledHeaderActions = styled.div`
       justify-content: center;
       width: 100%;
     }
+    &-search {
+      display: block;
+    }
   }
   @media screen and (max-width: 767.98px) {
     gap: 20px;
   }
 `;
 
-export const HeaderMenuMobile = styled.div`
+export const StyledHeaderButton = styled.button`
   display: none;
-  gap: 20px;
-  align-items: center;
-  button {
-    display: none;
-    font-size: 2.6rem;
-    color: #fff;
-    background-color: transparent;
-    height: 100%;
-    align-items: center;
-  }
+  font-size: 2.6rem;
+  color: #fff;
+  background-color: transparent;
   @media screen and (max-width: 1023.98px) {
-    display: flex;
-    button {
-      display: flex;
-    }
+    display: block;
   }
 `;

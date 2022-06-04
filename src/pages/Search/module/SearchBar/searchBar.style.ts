@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
-export const StyledHeaderSearchBar = styled.div`
-  position: relative;
-  width: 50%;
+export const StyledSearchBar = styled.div`
+  margin-bottom: 20px;
   .header {
     &-searchbar {
       position: relative;
@@ -80,14 +79,6 @@ export const StyledHeaderSearchBar = styled.div`
     }
   }
   @media screen and (max-width: 1023.98px) {
-    position: absolute;
-    top: 90%;
-    left: 0;
-    right: 0;
     width: 100%;
-    z-index: var(--zIndex-searchbar-mobile);
-    .header-searchbar {
-      height: 45px;
-    }
   }
 `;

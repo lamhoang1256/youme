@@ -24,12 +24,27 @@ export const StyledHeaderMenu = styled.ul`
     }
   }
   .menu-link {
+    position: relative;
     color: var(--white);
     transition: all 0.35s linear;
     font-size: 1.7rem;
     font-weight: 600;
-    &:hover {
-      color: var(--primary-color);
+    &::after {
+      opacity: 0;
+      visibility: hidden;
+      position: absolute;
+      content: "";
+      bottom: -10px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      transition: all 0.25s linear;
+      border-radius: 10px;
+      background-color: var(--primary-color);
+    }
+    &.active::after {
+      opacity: 1;
+      visibility: visible;
     }
   }
 
