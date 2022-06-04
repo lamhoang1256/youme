@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { IMovieDetail } from "interfaces/detail";
 import { getMovieDetail } from "apis/configAPI";
 import { StyledWrapperLayout } from "pages/Home/home.style";
@@ -12,9 +13,9 @@ import DetailSkeleton from "./module/DetailSkeleton/DetailSkeleton";
 import { StyledDetail } from "./detail.style";
 
 const Detail = () => {
+  const { t } = useTranslation();
   const id = Number(useParams().id);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const category = Number(searchParams.get("cate"));
   const [loading, setLoading] = useState<boolean>(true);
   const [detail, setDetail] = useState<IMovieDetail>(Object);
@@ -37,6 +38,10 @@ const Detail = () => {
     });
     fetchMovieDetail();
   }, [id, category]);
+
+  useEffect(() => {
+    document.title = t("Youme - Detail");
+  }, []);
 
   if (!detail) {
     return (

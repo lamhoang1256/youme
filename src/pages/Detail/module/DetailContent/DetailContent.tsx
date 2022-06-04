@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useTranslation } from "react-i18next";
+import { db } from "firebase-app/firebase-config";
 import { toast } from "react-toastify";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { db } from "firebase-app/firebase-config";
-import { Link } from "react-router-dom";
 import IonIcon from "@reacticons/ionicons";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import { resizeImage } from "constants/resizeImage";
 import { IMovieDetail } from "interfaces/detail";
 import { useAppSelector } from "App/store";
@@ -25,18 +25,23 @@ interface IFavorites {
 
 const DetailContent = ({ detail }: DetailContentProps) => {
   const { t } = useTranslation();
-  const url = `/watch/${detail?.id}?cate=${detail?.category}`;
   const { currentUser } = useAppSelector((state) => state.auth);
   const [favorites, setFavorites] = useState<IFavorites[]>([]);
   const [isFavorite, setIsFavorite] = useState(false);
+  const url = `/watch/${detail?.id}?cate=${detail?.category}`;
 
-  const getData = async () => {
+  const getFavoritesFromDB = async () => {
     const colRef = doc(db, "users", currentUser?.uid);
     const data = await getDoc(colRef);
-    const isExist = data?.data()?.favorites?.some((favorite: any) => favorite.id === detail?.id);
-    console.log(isExist);
+    return data?.data()?.favorites;
+  };
+
+  const updateStatusFavorite = async () => {
+    if (!currentUser) return;
+    const favoritesDB = await getFavoritesFromDB();
+    const isExist = favoritesDB?.some((favorite: IFavorites) => favorite.id === detail?.id);
     setIsFavorite(isExist);
-    setFavorites(data.data()?.favorites);
+    setFavorites(favoritesDB);
   };
 
   const handleAddFavoriteMovie = async () => {
@@ -45,25 +50,24 @@ const DetailContent = ({ detail }: DetailContentProps) => {
       return;
     }
     const colRef = doc(db, "users", currentUser?.uid);
-    const dbFavorites = await getDoc(colRef);
-    const dataFavorites = dbFavorites.data()?.favorites;
-    const isExistFavorite = dataFavorites?.some((favorite: any) => favorite.id === detail?.id);
-
-    if (isExistFavorite && colRef) {
+    const favoritesDB = await getFavoritesFromDB();
+    const hasAdded = favoritesDB?.some((favorite: any) => favorite.id === detail.id);
+    // if movie has been added to the playlist categories
+    if (hasAdded && colRef) {
       const removeFavoriteMovie = async () => {
         try {
-          const newFavorite = favorites.filter((favorite) => favorite.id !== detail.id);
-          await updateDoc(colRef, { favorites: [...newFavorite] });
-          getData();
+          const removedFavorites = favorites.filter((favorite) => favorite.id !== detail.id);
+          await updateDoc(colRef, { favorites: [...removedFavorites] });
+          updateStatusFavorite();
           toast.success(t("Success remove favorite movie"));
         } catch (error: any) {
-          toast.error(error);
+          toast.error(error.message);
         }
       };
       removeFavoriteMovie();
     }
-
-    if (!isExistFavorite && colRef) {
+    // if movie hasn't been added to the playlist categories
+    if (!hasAdded && colRef) {
       const addFavoriteMovie = async () => {
         try {
           const favoriteMovie = {
@@ -73,10 +77,10 @@ const DetailContent = ({ detail }: DetailContentProps) => {
             name: detail?.name,
           };
           await updateDoc(colRef, { favorites: [favoriteMovie, ...favorites] });
-          getData();
+          updateStatusFavorite();
           toast.success(t("Success add favorite movie"));
         } catch (error: any) {
-          toast.error(error);
+          toast.error(error.message);
         }
       };
       addFavoriteMovie();
@@ -84,9 +88,7 @@ const DetailContent = ({ detail }: DetailContentProps) => {
   };
 
   useEffect(() => {
-    if (currentUser?.id) {
-      getData();
-    }
+    updateStatusFavorite();
   }, [currentUser]);
 
   return (
