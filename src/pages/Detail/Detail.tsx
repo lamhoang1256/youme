@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 import { IMovieDetail } from "interfaces/detail";
 import { getMovieDetail } from "apis/configAPI";
 import { StyledWrapperLayout } from "pages/Home/home.style";
@@ -13,7 +12,6 @@ import DetailSkeleton from "./module/DetailSkeleton/DetailSkeleton";
 import { StyledDetail } from "./detail.style";
 
 const Detail = () => {
-  const { t } = useTranslation();
   const id = Number(useParams().id);
   const [searchParams] = useSearchParams();
   const category = Number(searchParams.get("cate"));
@@ -40,8 +38,12 @@ const Detail = () => {
   }, [id, category]);
 
   useEffect(() => {
-    document.title = t("Youme - Detail");
-  }, []);
+    if (!detail?.name) {
+      document.title = `Youme`;
+      return;
+    }
+    document.title = `Youme: ${detail.name}`;
+  }, [detail]);
 
   if (!detail) {
     return (

@@ -23,8 +23,7 @@ interface IWatch {
 
 const Watch = () => {
   const id = Number(useParams().id);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const [loading, setLoading] = useState<boolean>(true);
   const category = Number(searchParams.get("cate"));
   const episode = Number(searchParams.get("ep"));
@@ -65,6 +64,14 @@ const Watch = () => {
       domainType: watch.detailMovie.category,
     });
     localStorage.setItem("movie-history", JSON.stringify(history));
+  }, [watch]);
+
+  useEffect(() => {
+    if (!watch?.detailMovie?.name) {
+      document.title = `Youme`;
+      return;
+    }
+    document.title = `Youme: ${watch.detailMovie.name}`;
   }, [watch]);
 
   return (

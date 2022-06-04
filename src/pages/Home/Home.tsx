@@ -39,6 +39,10 @@ const Home = () => {
     setHomeSections(sectionMovies);
   }, [data]);
 
+  useEffect(() => {
+    document.title = "Youme";
+  }, []);
+
   return (
     <StyledHome>
       <HomeBanner />

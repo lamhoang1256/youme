@@ -7,6 +7,7 @@ import { db } from "firebase-app/firebase-config";
 import { doc, getDoc } from "firebase/firestore";
 import { IMovieList } from "interfaces/components";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const crumbs = [
   { id: 1, label: "Home", path: "/" },
@@ -14,6 +15,7 @@ const crumbs = [
 ];
 
 const Favorites = () => {
+  const { t } = useTranslation();
   const { currentUser } = useAppSelector((state) => state.auth);
   const [favorites, setFavorites] = useState<IMovieList[]>([]);
   const [loading, setLoading] = useState(true);
@@ -30,6 +32,10 @@ const Favorites = () => {
     };
     getData();
   }, [currentUser]);
+
+  useEffect(() => {
+    document.title = `Youme - ${t("Favorite")}`;
+  }, []);
 
   return (
     <div className="container">

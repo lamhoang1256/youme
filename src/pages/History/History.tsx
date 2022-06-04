@@ -45,6 +45,7 @@ const History = () => {
   };
 
   useEffect(() => {
+    document.title = `Youme - ${t("History")}`;
     getHistory();
   }, []);
 

@@ -19,6 +19,9 @@ export const StyledHeaderMenu = styled.ul`
       height: 56px;
       border-radius: 50%;
     }
+    span {
+      flex: 1;
+    }
   }
   .menu-link {
     color: var(--white);
