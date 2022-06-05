@@ -1,13 +1,13 @@
-import { useAppSelector } from "App/store";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "firebase-app/firebase-config";
-import { IComment } from "interfaces/components";
 import IonIcon from "@reacticons/ionicons";
-import { useTranslation } from "react-i18next";
+import { IComment } from "interfaces/components";
+import { useAppSelector } from "App/store";
 import CommentAdd from "./CommentAdd";
-import { StyledComment } from "./comment.style";
 import CommentItem from "./CommentItem";
+import { StyledComment } from "./comment.style";
 
 interface CommentProps {
   id: string;
@@ -16,12 +16,12 @@ interface CommentProps {
 const Comment = ({ id }: CommentProps) => {
   const { t } = useTranslation();
   const { currentUser } = useAppSelector((state) => state.auth);
-  const [comments, setComments] = useState<any>([]);
+  const [comments, setComments] = useState<IComment[]>([]);
 
   const fetchCommentList = async () => {
     try {
-      const colRef = doc(db, "comments", id);
-      const data = await getDoc(colRef);
+      const commentsRef = doc(db, "comments", id);
+      const data = await getDoc(commentsRef);
       if (data.data()) setComments(data.data()?.comments);
     } catch (error) {
       console.log(error);
@@ -44,9 +44,7 @@ const Comment = ({ id }: CommentProps) => {
       )}
       <div className="comment-list">
         {comments.length > 0 ? (
-          comments.map((comment: IComment) => (
-            <CommentItem key={comment.createdAt.nanoseconds} comment={comment} />
-          ))
+          comments.map((comment: IComment) => <CommentItem key={comment.uid} comment={comment} />)
         ) : (
           <div className="no-comment">{t("No one has commented")}</div>
         )}

@@ -1,6 +1,7 @@
 import { useAppSelector } from "App/store";
 import { db } from "firebase-app/firebase-config";
 import { doc, setDoc, Timestamp } from "firebase/firestore";
+import { toastErrorFirebase } from "helpers/toastErrorFirebase";
 import { IComment } from "interfaces/components";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -8,33 +9,35 @@ import { toast } from "react-toastify";
 import styled from "styled-components";
 
 const StyledCommentAdd = styled.form`
-  .comment-post {
-    margin-top: 14px;
-    width: 100%;
-    display: flex;
-    gap: 14px;
-  }
-  .comment-textarea {
-    flex: 1;
-    border-radius: 10px;
-    padding: 14px;
-    min-height: 44px;
-    flex: 1;
-    resize: none;
-    overflow-y: hidden;
-    background-color: #39354d;
-    color: var(--white);
-    &::placeholder {
-      color: var(--white);
+  .comment {
+    &-post {
+      margin-top: 14px;
+      width: 100%;
+      display: flex;
+      gap: 14px;
     }
-  }
-  .comment-button {
-    border-radius: 4px;
-    padding: 0 20px;
-    background-color: var(--primary-color);
-    color: var(--white);
-    height: 44px;
-    place-self: end;
+    &-textarea {
+      flex: 1;
+      border-radius: 10px;
+      padding: 14px;
+      min-height: 44px;
+      flex: 1;
+      resize: none;
+      overflow-y: hidden;
+      background-color: #39354d;
+      color: var(--white);
+      &::placeholder {
+        color: var(--white);
+      }
+    }
+    &-button {
+      border-radius: 4px;
+      padding: 0 20px;
+      background-color: var(--primary-color);
+      color: var(--white);
+      height: 44px;
+      place-self: end;
+    }
   }
 `;
 
@@ -75,8 +78,6 @@ const CommentAdd = ({ comments, fetchCommentList, id }: CommentAddProps) => {
             avatar: currentUser.avatar,
             email: currentUser.email,
             content: commentValue,
-            like: 0,
-            dislike: 0,
             createdAt: Timestamp.now(),
           },
           ...comments,
@@ -85,7 +86,7 @@ const CommentAdd = ({ comments, fetchCommentList, id }: CommentAddProps) => {
       fetchCommentList();
       setCommentValue("");
     } catch (error: any) {
-      toast.error(error.message);
+      toastErrorFirebase(error.message);
     }
   };
 
