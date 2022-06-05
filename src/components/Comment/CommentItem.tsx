@@ -1,6 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import IonIcon from "@reacticons/ionicons";
 import { IComment } from "interfaces/components";
 import styled from "styled-components";
+import TimeAgo from "javascript-time-ago";
+import en from "javascript-time-ago/locale/en";
+import vi from "javascript-time-ago/locale/vi";
 
 interface CommentItemProps {
   comment: IComment;
@@ -37,13 +41,21 @@ const StyledCommentItem = styled.div`
 `;
 
 const CommentItem = ({ comment }: CommentItemProps) => {
+  const language = localStorage.getItem("language");
+  if (language === "vi") {
+    TimeAgo.addDefaultLocale(vi);
+  } else {
+    TimeAgo.addDefaultLocale(en);
+  }
+  const timeAgo = new TimeAgo("en-US");
+
   return (
     <StyledCommentItem>
       <img className="comment-avatar" src={comment.avatar} alt="avatar" />
       <div className="comment-main">
         <div className="comment-header">
           <h3 className="comment-name">{comment.username}</h3>
-          <span className="comment-time">8 days ago</span>
+          <span className="comment-time">{timeAgo.format(comment.createdAt.seconds * 1000)}</span>
         </div>
         <p className="comment-content">{comment.content}</p>
         <div className="comment-feeling">
