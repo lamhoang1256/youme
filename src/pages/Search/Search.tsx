@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
+import styled from "styled-components";
 import { searchWithKeyword } from "apis/configAPI";
 import { IExploreCard } from "interfaces/explore";
 import SearchBar from "pages/Search/module/SearchBar/SearchBar";
-import MovieList from "components/MovieList/MovieList";
 import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
+import MovieList from "components/MovieList/MovieList";
+
+const StyledSearch = styled.div``;
 
 const Search = () => {
   const { t } = useTranslation();
@@ -35,11 +38,11 @@ const Search = () => {
   }, []);
 
   return (
-    <div className="container">
+    <StyledSearch className="container">
+      <SearchBar />
       {loading && <LoadingSpinner />}
       {!loading && (
         <>
-          <SearchBar />
           {query && (
             <h3>
               {t("Keyword")}: {query}
@@ -48,7 +51,7 @@ const Search = () => {
           <MovieList movieList={movieList} />
         </>
       )}
-    </div>
+    </StyledSearch>
   );
 };
 
