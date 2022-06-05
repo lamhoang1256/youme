@@ -111,3 +111,35 @@ export const searchWithKeyword = (params: { searchKeyWord: string }) => {
   const url = "https://ga-mobile-api.loklok.tv/cms/app/search/v1/searchWithKeyWord";
   return axiosClient.post(url, { ...params, size: 56, sort: "", searchType: "" });
 };
+
+// eslint-disable-next-line consistent-return
+export const getPreviewVideoMedia = async (page: number) => {
+  try {
+    const { data }: any = await axiosClient.get(
+      `https://ga-mobile-api.loklok.tv/cms/app/recommendPool/getVideoFromRecommondPool?page=${page}`,
+    );
+    const requestMedia = data.map((item: any) => {
+      const { definitionList } = item.mediaInfo;
+      const definition = definitionList[definitionList.length - 1]?.code;
+      return {
+        contentId: item.id,
+        episodeId: item.mediaInfo.id,
+        category: item.category,
+        definition,
+      };
+    });
+    const response: any = await axiosClient.post(
+      "https://ga-mobile-api.loklok.tv/cms/app/media/bathGetplayInfo",
+      requestMedia,
+    );
+    const community = data.map((item: any, index: number) => {
+      return {
+        ...item,
+        mediaUrl: response.data[index],
+      };
+    });
+    return community;
+  } catch (error) {
+    console.log(error);
+  }
+};

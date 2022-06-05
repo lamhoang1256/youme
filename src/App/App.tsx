@@ -18,6 +18,7 @@ const Category = React.lazy(() => import("pages/Category/Category"));
 const History = React.lazy(() => import("pages/History/History"));
 const Search = React.lazy(() => import("pages/Search/Search"));
 const Favorites = React.lazy(() => import("pages/Favorites/Favorites"));
+const Community = React.lazy(() => import("pages/Community/Community"));
 
 const App = () => {
   // check at page load if a user is authenticated
@@ -50,6 +51,7 @@ const App = () => {
             <Route path="/history" element={<History />} />
             <Route path="/search" element={<Search />} />
             <Route path="/favorites" element={<Favorites />} />
+            <Route path="/community" element={<Community />} />
           </Route>
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/sign-in" element={<SignIn />} />
