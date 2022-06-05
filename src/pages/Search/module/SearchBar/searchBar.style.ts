@@ -16,7 +16,7 @@ export const StyledSearchBar = styled.div`
       background: transparent;
       border: none;
       outline: none;
-      padding: 16px 20px;
+      padding: 10px 20px;
       height: 100%;
       font-size: 1.7rem;
       min-height: 45px;
@@ -80,5 +80,8 @@ export const StyledSearchBar = styled.div`
   @media screen and (min-width: 1024px) {
     width: 50%;
     margin: 0 auto 30px;
+    .searchbar-input {
+      padding: 16px 20px;
+    }
   }
 `;

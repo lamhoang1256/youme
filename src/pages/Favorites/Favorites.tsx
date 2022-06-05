@@ -20,28 +20,37 @@ const Favorites = () => {
   const [favorites, setFavorites] = useState<IMovieList[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const getFavorites = async () => {
+    setLoading(true);
+    const colRef = doc(db, "users", currentUser.uid);
+    const data = await getDoc(colRef);
+    setFavorites(data.data()?.favorites);
+    setLoading(false);
+  };
+
   useEffect(() => {
-    const getData = async () => {
-      setLoading(true);
-      if (currentUser?.uid) {
-        const colRef = doc(db, "users", currentUser.uid);
-        const data = await getDoc(colRef);
-        setFavorites(data.data()?.favorites);
-      }
-      setLoading(false);
-    };
-    getData();
+    if (currentUser?.uid) {
+      getFavorites();
+    }
   }, [currentUser]);
 
   useEffect(() => {
     document.title = `Youme - ${t("Favorite")}`;
   }, []);
 
+  if (loading) {
+    return (
+      <div className="container">
+        <Breadcrumb crumbs={crumbs} />
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
   return (
     <div className="container">
       <Breadcrumb crumbs={crumbs} />
-      {loading && <LoadingSpinner />}
-      {!loading && favorites.length > 0 ? (
+      {favorites.length > 0 ? (
         <MovieList movieList={favorites} />
       ) : (
         <Nothing

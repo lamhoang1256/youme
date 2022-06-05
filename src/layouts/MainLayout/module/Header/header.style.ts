@@ -50,8 +50,11 @@ export const StyledHeaderActions = styled.div`
       display: block;
     }
   }
-  @media screen and (max-width: 767.98px) {
+  @media screen and (max-width: 1023.98px) {
     gap: 20px;
+  }
+  @media screen and (max-width: 767.98px) {
+    gap: 14px;
   }
 `;
 
