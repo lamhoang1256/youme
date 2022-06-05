@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import IonIcon from "@reacticons/ionicons";
-import HeaderMenu from "./module/HeaderMenu/HeaderMenu";
+import { StyledHeader, StyledHeaderActions, StyledHeaderButton } from "./header.style";
 import HeaderDropdown from "./module/HeaderDropdown/HeaderDropdown";
-import { StyledHeaderButton, StyledHeader, StyledHeaderActions } from "./header.style";
+import HeaderLanguage from "./module/HeaderLanguage/HeaderLanguage";
+import HeaderMenu from "./module/HeaderMenu/HeaderMenu";
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
-
   const handleToggleMenu = () => {
     setShowMenu(!showMenu);
   };
@@ -25,6 +25,7 @@ const Header = () => {
           </Link>
           <HeaderMenu showMenu={showMenu} handleToggleMenu={handleToggleMenu} />
           <StyledHeaderActions>
+            <HeaderLanguage />
             <Link to="/search">
               <StyledHeaderButton className="header-search">
                 <IonIcon name="search-outline" />
