@@ -6,13 +6,12 @@ export interface IMovieList {
 }
 
 export interface IComment {
+  uid: string;
   avatar: string;
   content: string;
   email: string;
   userId: string;
   username: string;
-  like: number;
-  dislike: number;
   createdAt: {
     nanoseconds: number;
     seconds: number;
