@@ -7,12 +7,12 @@ import { toast } from "react-toastify";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import IonIcon from "@reacticons/ionicons";
 import { resizeImage } from "constants/resizeImage";
-import { IMovieDetail } from "interfaces/detail";
+import { IDetailMovie } from "interfaces/detail";
 import { useAppSelector } from "App/store";
 import { StyledDetailHeader, StyledDetailMain } from "./detailContent.style";
 
 interface DetailContentProps {
-  detail: IMovieDetail;
+  detail: IDetailMovie;
 }
 
 interface IFavorites {

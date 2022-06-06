@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import { IMovieDetail } from "interfaces/detail";
+import { IDetailMovie } from "interfaces/detail";
 import { StyledWatchAnthology } from "./watchAnthology.style";
 
 interface WatchAnthologyProps {
-  detailMovie: IMovieDetail;
+  detailMovie: IDetailMovie;
   detailCurrentPlay: any;
 }
 

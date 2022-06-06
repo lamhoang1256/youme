@@ -4,30 +4,30 @@ export const StyledWatchInfo = styled.div`
   padding-top: 20px;
   line-height: 1.7;
   .watch {
-    &-statistics {
+    &-properties {
       --gap-x: 32px;
       --gap-y: 10px;
       display: flex;
       flex-wrap: wrap;
       gap: var(--gap-y) var(--gap-x);
       overflow: hidden;
-      li {
-        position: relative;
-      }
-      li:last-child::after {
-        display: none;
-      }
-      li::after {
-        content: "";
-        position: absolute;
-        right: calc(var(--gap-x) * -1);
-        top: 50%;
-        transform: translate(-50%, -50%);
-        width: 10px;
-        height: 10px;
-        border-radius: 100rem;
-        background-color: var(--primary-color);
-      }
+    }
+    &-properties li {
+      position: relative;
+    }
+    &-properties li:last-child::after {
+      display: none;
+    }
+    &-properties li::after {
+      content: "";
+      position: absolute;
+      right: calc(var(--gap-x) * -1);
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 10px;
+      height: 10px;
+      border-radius: 100rem;
+      background-color: var(--primary-color);
     }
     &-areas {
       display: flex;
@@ -47,12 +47,17 @@ export const StyledWatchInfo = styled.div`
       color: var(--white);
       border-radius: 14px;
       transition: all 0.25s linear;
-      &:hover {
-        background-color: var(--primary-color);
-      }
+    }
+    &-category:hover {
+      background-color: var(--primary-color);
     }
     &-upcoming {
       margin-bottom: 10px;
     }
+  }
+  .show-more {
+    padding-left: 10px;
+    background-color: transparent;
+    color: var(--primary-color);
   }
 `;

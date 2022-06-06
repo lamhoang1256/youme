@@ -1,9 +1,11 @@
+import { useEffect } from "react";
 import IonIcon from "@reacticons/ionicons";
 import { Link } from "react-router-dom";
 import useSWRInfinite from "swr/infinite";
 import HlsPlayer from "react-hls-player";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { InView } from "react-intersection-observer";
+import { useTranslation } from "react-i18next";
 import { getPreviewVideoMedia } from "apis/configAPI";
 import { PUBLIC_IMAGE } from "constants/path";
 import { ICommunity } from "interfaces/community";
@@ -11,6 +13,7 @@ import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
 import { StyledCommunity } from "./community.style";
 
 const Community = () => {
+  const { t } = useTranslation();
   const getKey = (index: number) => `discovery-${index || 0}`;
   const { data, error, setSize } = useSWRInfinite(
     getKey,
@@ -19,6 +22,10 @@ const Community = () => {
       revalidateFirstPage: false,
     },
   );
+
+  useEffect(() => {
+    document.title = `Youme - ${t("Community")}`;
+  }, []);
 
   return (
     <StyledCommunity>

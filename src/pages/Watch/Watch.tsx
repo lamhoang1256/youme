@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import { StyledWrapperLayout } from "pages/Home/home.style";
-import { IMovieDetail } from "interfaces/detail";
+import { IDetailMovie } from "interfaces/detail";
 import { getWatchMedia } from "apis/configAPI";
 import SideRelated from "components/SideRelated/SideRelated";
 import SkeletonSideRelated from "components/Skeleton/SkeletonSideRelated";
@@ -17,7 +17,7 @@ import WatchAnthologySkeleton from "./module/WatchSkeleton/WatchAnthologySkeleto
 import { StyledWatch } from "./watch.style";
 
 interface IWatch {
-  detailMovie: IMovieDetail;
+  detailMovie: IDetailMovie;
   detailCurrentPlay: any;
 }
 
@@ -99,7 +99,10 @@ const Watch = () => {
                 qualities={watch.detailCurrentPlay.qualities}
                 playerRef={playerRef}
               />
-              <WatchInfo detail={watch} />
+              <WatchInfo
+                detailMovie={watch.detailMovie}
+                detailCurrentPlay={watch.detailCurrentPlay}
+              />
               <WatchAnthology
                 detailMovie={watch.detailMovie}
                 detailCurrentPlay={watch.detailCurrentPlay}

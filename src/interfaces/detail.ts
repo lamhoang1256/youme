@@ -1,9 +1,9 @@
-export interface IMovieDetail {
+export interface IDetailMovie {
   aliasName: string;
-  areaList: { id: number; name: string }[];
   areaNameList: string[];
-  category: number;
+  areaList: { id: number; name: string }[];
   collect: boolean;
+  category: number;
   coverHorizontalUrl: string;
   coverHorizontalUrlJson: string;
   coverVerticalUrl: string;
@@ -52,6 +52,7 @@ export interface IMovieDetail {
     drameTypeVo?: any;
     id: string;
     name: string;
+    seriesNo: number;
     score: number;
     tagList: [
       {
@@ -77,7 +78,6 @@ export interface IMovieDetail {
   }[];
   reserved: boolean;
   score: number;
-  seriesNo: number;
   showSetName: boolean;
   starList: [];
   tagList: { id: number; name: string }[];
