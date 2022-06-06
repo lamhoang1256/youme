@@ -1,10 +1,14 @@
+import IonIcon from "@reacticons/ionicons";
+import { Link } from "react-router-dom";
 import useSWRInfinite from "swr/infinite";
+import HlsPlayer from "react-hls-player";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { InView } from "react-intersection-observer";
-import HlsPlayer from "react-hls-player";
 import { getPreviewVideoMedia } from "apis/configAPI";
+import { PUBLIC_IMAGE } from "constants/path";
+import { ICommunity } from "interfaces/community";
+import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
 import { StyledCommunity } from "./community.style";
-// import { PUBLIC_IMAGE } from "constants/path";
 
 const Community = () => {
   const getKey = (index: number) => `discovery-${index || 0}`;
@@ -22,24 +26,40 @@ const Community = () => {
         <div className="community-list">
           <InfiniteScroll
             dataLength={data?.length || 0}
-            next={() => setSize((prev: any) => prev + 1)}
+            next={() => setSize((prev: number) => prev + 1)}
             hasMore={!error && data?.slice(-1)?.[0]?.length !== 0}
-            loader={<>Load</>}
+            loader={<LoadingSpinner />}
           >
             {data
               ?.reduce((acc, current) => [...acc, ...current], [])
-              ?.map((community: any) => {
+              ?.map((community: ICommunity) => {
+                const { id, refList, upInfo, introduction, likeCount, mediaInfoUrl } = community;
+                const category = refList?.[0]?.category;
+                const idMovie = refList?.[0]?.id;
                 return (
-                  <div className="community-card" key={community.id}>
+                  <div className="community-card" key={id}>
                     <div className="community-header">
-                      <img
-                        src={community.upInfo.upImgUrl}
-                        className="community-avatar"
-                        alt="Avatar"
-                      />
+                      <img src={upInfo?.upImgUrl} className="community-avatar" alt="Avatar" />
                       <div className="community-info">
-                        <h3>{community.upInfo.upName}</h3>
-                        <p>{community.introduction}</p>
+                        <h3>{upInfo?.upName}</h3>
+                        <p className="community-introduction">{introduction}</p>
+                      </div>
+                      <div className="community-actions">
+                        <div className="community-action">
+                          <div className="community-icon">
+                            <img src={`${PUBLIC_IMAGE}/heart.svg`} alt="heart" />
+                          </div>
+                          <span>{likeCount}</span>
+                        </div>
+                        <div className="community-action">
+                          <Link
+                            to={`/detail/${idMovie}?cate=${category}`}
+                            className="community-icon"
+                          >
+                            <IonIcon name="open-outline" />
+                          </Link>
+                          <span>Open</span>
+                        </div>
                       </div>
                     </div>
                     <div className="community-playerBox">
@@ -49,7 +69,7 @@ const Community = () => {
                             <div ref={ref} className="community-playerRef">
                               {/* @ts-ignore */}
                               <HlsPlayer
-                                src={community.mediaUrl.mediaUrl}
+                                src={mediaInfoUrl.mediaUrl}
                                 autoPlay={inView}
                                 controls
                                 playsInline
@@ -59,9 +79,6 @@ const Community = () => {
                           );
                         }}
                       </InView>
-                      {/* <div className="community-action">
-                        <img src={`${PUBLIC_IMAGE}/heart.svg`} alt="" />
-                      </div> */}
                     </div>
                   </div>
                 );
