@@ -112,7 +112,6 @@ export const searchWithKeyword = (params: { searchKeyWord: string }) => {
   return axiosClient.post(url, { ...params, size: 56, sort: "", searchType: "" });
 };
 
-// eslint-disable-next-line consistent-return
 export const getPreviewVideoMedia = async (page: number) => {
   try {
     const { data }: any = await axiosClient.get(
@@ -135,11 +134,11 @@ export const getPreviewVideoMedia = async (page: number) => {
     const community = data.map((item: any, index: number) => {
       return {
         ...item,
-        mediaUrl: response.data[index],
+        mediaInfoUrl: response.data[index],
       };
     });
     return community;
   } catch (error) {
-    console.log(error);
+    return error;
   }
 };
