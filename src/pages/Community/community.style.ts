@@ -3,10 +3,13 @@ import styled from "styled-components";
 export const StyledCommunity = styled.section`
   .community {
     &-list {
-      width: 60%;
+      width: 50%;
+      .infinite-scroll-component {
+        overflow: hidden !important;
+      }
     }
     &-card {
-      margin-top: 70px;
+      margin-top: 40px;
     }
     &-header {
       display: flex;
@@ -17,9 +20,23 @@ export const StyledCommunity = styled.section`
       height: 60px;
       border-radius: 100rem;
     }
-    &-player {
-      margin-top: 20px;
-      width: 400px;
+    &-playerBox {
+      margin-top: 30px;
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      height: 0;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    &-playerRef {
+      position: absolute;
+      inset: 0;
+    }
+    &-playerMedia {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
   }
 `;
