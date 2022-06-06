@@ -1,12 +1,12 @@
-import { getPreviewVideoMedia } from "apis/configAPI";
-import HlsPlayer from "react-hls-player";
+import useSWRInfinite from "swr/infinite";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { InView } from "react-intersection-observer";
-import useSWRInfinite from "swr/infinite";
+import HlsPlayer from "react-hls-player";
+import { getPreviewVideoMedia } from "apis/configAPI";
 import { StyledCommunity } from "./community.style";
+// import { PUBLIC_IMAGE } from "constants/path";
 
 const Community = () => {
-  // const communityRef = useRef<RefObject<HTMLVideoElement>(null);
   const getKey = (index: number) => `discovery-${index || 0}`;
   const { data, error, setSize } = useSWRInfinite(
     getKey,
@@ -42,31 +42,32 @@ const Community = () => {
                         <p>{community.introduction}</p>
                       </div>
                     </div>
-                    <div className="community-player">
-                      <InView threshold={0.5}>
+                    <div className="community-playerBox">
+                      <InView threshold={1}>
                         {({ ref, inView }) => {
                           return (
-                            <div ref={ref}>
+                            <div ref={ref} className="community-playerRef">
                               {/* @ts-ignore */}
                               <HlsPlayer
                                 src={community.mediaUrl.mediaUrl}
                                 autoPlay={inView}
                                 controls
                                 playsInline
-                                width="100%"
-                                height="400px"
+                                className="community-playerMedia"
                               />
                             </div>
                           );
                         }}
                       </InView>
+                      {/* <div className="community-action">
+                        <img src={`${PUBLIC_IMAGE}/heart.svg`} alt="" />
+                      </div> */}
                     </div>
                   </div>
                 );
               })}
           </InfiniteScroll>
         </div>
-        {/* )} */}
       </div>
     </StyledCommunity>
   );
