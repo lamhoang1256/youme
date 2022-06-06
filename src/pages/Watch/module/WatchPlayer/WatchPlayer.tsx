@@ -1,23 +1,16 @@
 import ReactHlsPlayer from "react-hls-player/dist";
-import { IMovieMedia } from "interfaces/watch";
+import { IMovieMedia, IWatchSubtitles } from "interfaces/watch";
 import { Player } from "react-tuby";
 import "react-tuby/css/main.css";
 
-interface ISubtitles {
-  language: string;
-  languageAbbr: string;
-  subtitlingUrl: string;
-  translateType: number;
-}
-
 interface WatchPlayerProps {
   playerRef: React.RefObject<HTMLVideoElement>;
-  subtitles: ISubtitles[];
+  subtitles: IWatchSubtitles[];
   qualities: IMovieMedia[];
 }
 
 const WatchPlayer = ({ subtitles, qualities }: WatchPlayerProps) => {
-  const subtitleList = subtitles.map((subtitle: ISubtitles) => {
+  const subtitleList = subtitles.map((subtitle: IWatchSubtitles) => {
     return {
       lang: subtitle.languageAbbr,
       language: subtitle.language,

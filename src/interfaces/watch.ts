@@ -7,7 +7,7 @@ export interface IMovieMedia {
   qualityDesc: { code: string; description: string; fullDescription: string };
 }
 
-export interface IMovieBeingWatched {
+export interface IDetailCurrentPlay {
   id: number;
   definitionList: {
     code: string;
@@ -26,4 +26,11 @@ export interface IMovieBeingWatched {
   }[];
   totalTime: number;
   vid: string;
+}
+
+export interface IWatchSubtitles {
+  language: string;
+  languageAbbr: string;
+  subtitlingUrl: string;
+  translateType: number;
 }

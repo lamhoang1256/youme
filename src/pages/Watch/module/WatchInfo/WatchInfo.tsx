@@ -1,62 +1,74 @@
 import IonIcon from "@reacticons/ionicons";
 import { Link } from "react-router-dom";
-import { IMovieDetail } from "interfaces/detail";
-import { IMovieBeingWatched } from "interfaces/watch";
+import { IDetailMovie } from "interfaces/detail";
+import { IDetailCurrentPlay } from "interfaces/watch";
 import { useTranslation } from "react-i18next";
+import { useState } from "react";
 import { StyledWatchInfo } from "./watchInfo.style";
 
 interface WatchInfoProps {
-  detail: {
-    detailMovie: IMovieDetail;
-    detailCurrentPlay: IMovieBeingWatched;
-  };
+  detailMovie: IDetailMovie;
+  detailCurrentPlay: IDetailCurrentPlay;
 }
 
-const WatchInfo = ({ detail }: WatchInfoProps) => {
+const WatchInfo = ({ detailMovie, detailCurrentPlay }: WatchInfoProps) => {
   const { t } = useTranslation();
-  const { detailMovie, detailCurrentPlay } = detail;
+  const [showMoreDesc, setShowMoreDesc] = useState(false);
+  const { seriesNo } = detailCurrentPlay;
+  const {
+    name,
+    score,
+    areaList,
+    episodeCount,
+    year,
+    tagList,
+    updateInfo,
+    introduction,
+    episodeVo,
+  } = detailMovie;
 
   return (
     <StyledWatchInfo>
       <h2>
-        {detailMovie.name} - {t("Ep")} {detailCurrentPlay.seriesNo}
+        {name} - {t("Ep")} {seriesNo}
       </h2>
-      <ul className="watch-statistics">
+      <ul className="watch-properties">
         <li>
-          <IonIcon name="star-outline" /> {detailMovie.score}
+          <IonIcon name="star-outline" /> {score}
         </li>
         <li className="watch-areas">
-          {detailMovie.areaList.map((area) => (
+          {areaList.map((area) => (
             <span key={area.id}>{area.name}</span>
           ))}
         </li>
-        {detailMovie.episodeCount && (
+        {episodeCount && (
           <li>
-            {t("EP")} {detailMovie.episodeVo.length}/ {detailMovie.episodeCount}
+            {t("EP")} {episodeVo.length}/ {episodeCount}
           </li>
         )}
-        <li>{detailMovie.year}</li>
+        <li>{year}</li>
       </ul>
       <div className="watch-categories">
-        {detailMovie.tagList.map((tag) => (
+        {tagList.map((tag) => (
           <Link to={`/category/${tag.id}`} key={tag.id} className="watch-category">
             {tag.name}
           </Link>
         ))}
       </div>
-      {detailMovie.updateInfo?.updatePeriod && (
+      {updateInfo?.updatePeriod && (
         <div className="watch-upcoming">
           <span className="label-small">{t("Upcoming")}:</span>
           {t("New episode is updated on")}{" "}
-          {` ${detailMovie.updateInfo.updatePeriod.substring(
-            detailMovie.updateInfo.updatePeriod.indexOf(",") + 1,
-          )} `}
+          {` ${updateInfo.updatePeriod.substring(updateInfo.updatePeriod.indexOf(",") + 1)} `}
           {t("every week")}
         </div>
       )}
       <div>
         <span className="label-small">{t("Summary")} : </span>
-        {detailMovie.introduction}
+        {showMoreDesc ? introduction : `${introduction.substring(0, 200)}...`}
+        <button type="button" className="show-more" onClick={() => setShowMoreDesc(!showMoreDesc)}>
+          {showMoreDesc ? "Show Less" : "Show More"}
+        </button>
       </div>
     </StyledWatchInfo>
   );
