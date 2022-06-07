@@ -2,11 +2,31 @@ import { v4 as uuidv4 } from "uuid";
 import { IFilters, IGenres } from "interfaces/explore";
 import { filterByCategory } from "apis/configAPI";
 import { IMovieCard } from "interfaces/components";
-import {
-  StyledExploreFilter,
-  StyledExploreButton,
-  StyledExploreTabPanel,
-} from "./exploreFilter.style";
+import styled from "styled-components";
+
+interface Props {
+  background: string;
+}
+
+export const StyledExploreFilter = styled.div`
+  margin-top: 15px;
+`;
+
+export const StyledExploreTabPanel = styled.div`
+  .genre-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+`;
+
+export const StyledExploreButton = styled.button<Props>`
+  background: ${(props) => (props.background === "active" ? "#8a3cff" : "#3d6ef7")};
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+`;
 
 export interface ExploreFilterProps {
   allGenres: IGenres[];
@@ -27,7 +47,6 @@ const ExploreFilter = (props: ExploreFilterProps) => {
       console.log(error);
     }
   };
-
   const handleSearchByCategory = (category: any) => {
     setFilters({ ...filters, ...category });
     fetchFilterByCategory({ ...filters, ...category });

@@ -3,10 +3,11 @@ import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import { searchWithKeyword } from "apis/configAPI";
-import SearchBar from "draft/Search/module/SearchBar/SearchBar";
+import SearchBar from "module/search/SearchBar";
 import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
 import MovieList from "components/movie/MovieList";
 import { IMovieCard } from "interfaces/components";
+import Heading from "components/heading/Heading";
 
 const StyledSearch = styled.div``;
 
@@ -27,7 +28,6 @@ const Search = () => {
       setLoading(false);
     }
   };
-
   useEffect(() => {
     if (!query) return;
     fetchMovieWithKeyWord(query);
@@ -44,9 +44,9 @@ const Search = () => {
       {!loading && (
         <>
           {query && (
-            <h3>
+            <Heading>
               {t("Keyword")}: {query}
-            </h3>
+            </Heading>
           )}
           <MovieList movieList={movieList} />
         </>

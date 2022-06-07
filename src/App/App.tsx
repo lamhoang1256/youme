@@ -13,12 +13,12 @@ const SignUp = React.lazy(() => import("draft/Auth/SignUp"));
 const SignIn = React.lazy(() => import("draft/Auth/SignIn"));
 const Detail = React.lazy(() => import("pages/Detail/Detail"));
 const Watch = React.lazy(() => import("draft/Watch/Watch"));
-const Explore = React.lazy(() => import("draft/Explore/Explore"));
+const Explore = React.lazy(() => import("pages/Explore/Explore"));
 const Category = React.lazy(() => import("pages/Category/Category"));
 const History = React.lazy(() => import("draft/History/History"));
-const Search = React.lazy(() => import("draft/Search/Search"));
+const Search = React.lazy(() => import("pages/Search/Search"));
 const Favorites = React.lazy(() => import("draft/Favorites/Favorites"));
-const Community = React.lazy(() => import("draft/Community/Community"));
+const Community = React.lazy(() => import("pages/Community/Community"));
 
 const App = () => {
   // check at page load if a user is authenticated

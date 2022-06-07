@@ -6,7 +6,7 @@ import { getAllGenres, getMovieByCategory } from "apis/configAPI";
 import { IGenres } from "interfaces/explore";
 import MovieList from "components/movie/MovieList";
 import { IMovieCard } from "interfaces/components";
-import Breadcrumb from "components/Breadcrumb/Breadcrumb";
+import Breadcrumb from "components/breadcrumb/Breadcrumb";
 import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
 import { StyledCategory } from "./category.style";
 
@@ -32,7 +32,6 @@ const Category = () => {
     const sort = prevData?.data?.searchResults.slice(-1)[0].sort || "";
     return `${JSON.stringify(id)}sort-${sort}`;
   };
-
   const { data, error, setSize } = useSWRInfinite(
     getKey,
     (key) => getMovieByCategory({ category: id, sort: key.split("sort-")[1] }),

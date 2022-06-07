@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
+import styled from "styled-components";
 import useSWRInfinite from "swr/infinite";
 import { IGenres, IFilters } from "interfaces/explore";
 import { filterByCategory, getAllGenres } from "apis/configAPI";
@@ -8,8 +9,17 @@ import Tabs from "components/Tabs/Tabs";
 import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
 import { useTranslation } from "react-i18next";
 import { IMovieCard } from "interfaces/components";
-import ExploreFilter from "./module/ExploreFilter/ExploreFilter";
-import { StyledExplore } from "./explore.style";
+import ExploreFilter from "../../module/explore/ExploreFilter";
+
+export const StyledExplore = styled.div`
+  .genre-item:first-child {
+    background-color: red;
+  }
+  .loading-spinner {
+    margin: 20px auto;
+    width: 40px;
+  }
+`;
 
 const defaultGenresTab = 2;
 const initialFilters = {
@@ -25,7 +35,7 @@ const initialFilters = {
 
 const Explore = () => {
   const { t } = useTranslation();
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState(true);
   const [selectedTabId, setSelectedTabId] = useState<number>(defaultGenresTab);
   const [allGenres, setAllGenres] = useState<IGenres[]>([]);
   const [filters, setFilters] = useState<IFilters>(initialFilters);

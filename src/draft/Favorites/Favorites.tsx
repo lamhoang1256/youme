@@ -1,5 +1,5 @@
 import { useAppSelector } from "App/store";
-import Breadcrumb from "components/Breadcrumb/Breadcrumb";
+import Breadcrumb from "components/breadcrumb/Breadcrumb";
 import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
 import MovieList from "components/movie/MovieList";
 import Nothing from "components/Nothing/Nothing";
