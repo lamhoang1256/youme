@@ -8,12 +8,11 @@ import SkeletonTitle from "components/Skeleton/SkeletonTitle";
 import { useEffect, useState } from "react";
 import { IHomeSection } from "interfaces/home";
 import { useTranslation } from "react-i18next";
-import HomeBanner from "./module/HomeBanner/HomeBanner";
-import HomeTrending from "./module/HomeTrending/HomeTrending";
-import HomeList from "./module/HomeList/HomeList";
-import HomeCardSkeleton from "./module/HomeSkeleton/HomeCardSkeleton";
+import HomeBanner from "module/home/HomeBanner";
+import HomeTrending from "module/home/HomeTrending";
+import HomeCardSkeleton from "module/home/HomeCardSkeleton";
+import HomeList, { StyledHomeList } from "module/home/HomeList";
 import { StyledHome } from "./home.style";
-import { StyledHomeList } from "./module/HomeList/homeList.style";
 
 const Home = () => {
   const { t } = useTranslation();

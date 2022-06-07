@@ -15,3 +15,19 @@ export const AnimationSkeleton = () => css`
     }
   }
 `;
+
+export const TextClamp = {
+  onelines: css`
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  `,
+  multilines: (countRow: number) => css`
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box !important;
+    -webkit-line-clamp: ${countRow};
+    -webkit-box-orient: vertical;
+    white-space: normal;
+  `,
+};

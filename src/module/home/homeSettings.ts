@@ -1,4 +1,4 @@
-export const settingsTrending = {
+export const settingsHomeTrending = {
   dots: true,
   infinite: true,
   speed: 500,

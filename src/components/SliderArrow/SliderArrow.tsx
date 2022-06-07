@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { StyledIcon } from "./SliderArrow.style";
+import styled from "styled-components";
 
 interface SliderArrowProps {
   className: string;
@@ -7,6 +7,14 @@ interface SliderArrowProps {
   onClick: any;
   children: ReactNode;
 }
+
+const StyledIcon = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+`;
 
 export const SliderArrow = (props: SliderArrowProps) => {
   const { className, style, onClick, children } = props;
