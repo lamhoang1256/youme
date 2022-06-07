@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import useSWRInfinite from "swr/infinite";
-import { IGenres, IFilters, IExploreCard } from "interfaces/explore";
+import { IGenres, IFilters } from "interfaces/explore";
 import { filterByCategory, getAllGenres } from "apis/configAPI";
-import MovieList from "components/MovieList/MovieList";
+import MovieList from "components/movie/MovieList";
 import Tabs from "components/Tabs/Tabs";
 import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
 import { useTranslation } from "react-i18next";
+import { IMovieCard } from "interfaces/components";
 import ExploreFilter from "./module/ExploreFilter/ExploreFilter";
 import { StyledExplore } from "./explore.style";
 
@@ -28,7 +29,7 @@ const Explore = () => {
   const [selectedTabId, setSelectedTabId] = useState<number>(defaultGenresTab);
   const [allGenres, setAllGenres] = useState<IGenres[]>([]);
   const [filters, setFilters] = useState<IFilters>(initialFilters);
-  const [exploreList, setExploreList] = useState<IExploreCard[]>([]);
+  const [exploreList, setExploreList] = useState<IMovieCard[]>([]);
 
   const fetchGenres = async () => {
     setLoading(true);

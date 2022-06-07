@@ -23,11 +23,3 @@ export interface IGenres {
     items: { name: string; params: string; screeningType: string }[];
   }[];
 }
-
-export interface IExploreCard {
-  coverVerticalUrl: string;
-  domainType: number;
-  id: string;
-  name: string;
-  sort: string;
-}

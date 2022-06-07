@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { IHomeSection } from "interfaces/home";
-import HomeCard from "./HomeCard";
+import MovieCard from "components/movie/MovieCard";
 
 interface HomeListProps {
   homeSection: IHomeSection;
@@ -26,9 +26,20 @@ const HomeList = ({ homeSection }: HomeListProps) => {
     <StyledHomeList>
       <h3 className="label">{homeSection.homeSectionName}</h3>
       <div className="list">
-        {homeSection.recommendContentVOList.slice(0, 14).map((movie) => (
-          <HomeCard key={movie.id} movie={movie} />
-        ))}
+        {homeSection.recommendContentVOList.slice(0, 14).map((card) => {
+          const { jumpAddress, imageUrl, title } = card;
+          const idAndCate = jumpAddress?.split("?id=")[1];
+          const id = idAndCate?.split("&type=")[0];
+          const category = Number(idAndCate?.split("&type=")[1]);
+          if (Number.isNaN(category)) return null;
+          const movie = {
+            coverVerticalUrl: imageUrl,
+            domainType: category,
+            id,
+            title,
+          };
+          return <MovieCard movie={movie} />;
+        })}
       </div>
     </StyledHomeList>
   );

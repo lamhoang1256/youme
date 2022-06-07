@@ -1,11 +1,11 @@
 import { useAppSelector } from "App/store";
 import Breadcrumb from "components/Breadcrumb/Breadcrumb";
 import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
-import MovieList from "components/MovieList/MovieList";
+import MovieList from "components/movie/MovieList";
 import Nothing from "components/Nothing/Nothing";
 import { db } from "firebase-app/firebase-config";
 import { doc, getDoc } from "firebase/firestore";
-import { IMovieList } from "interfaces/components";
+import { IMovieCard } from "interfaces/components";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -17,7 +17,7 @@ const crumbs = [
 const Favorites = () => {
   const { t } = useTranslation();
   const { currentUser } = useAppSelector((state) => state.auth);
-  const [favorites, setFavorites] = useState<IMovieList[]>([]);
+  const [favorites, setFavorites] = useState<IMovieCard[]>([]);
   const [loading, setLoading] = useState(true);
 
   const getFavorites = async () => {

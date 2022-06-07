@@ -3,10 +3,10 @@ import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import { searchWithKeyword } from "apis/configAPI";
-import { IExploreCard } from "interfaces/explore";
 import SearchBar from "pages/Search/module/SearchBar/SearchBar";
 import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
-import MovieList from "components/MovieList/MovieList";
+import MovieList from "components/movie/MovieList";
+import { IMovieCard } from "interfaces/components";
 
 const StyledSearch = styled.div``;
 
@@ -15,7 +15,7 @@ const Search = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get("query");
   const [loading, setLoading] = useState(false);
-  const [movieList, setMovieList] = useState<IExploreCard[]>([]);
+  const [movieList, setMovieList] = useState<IMovieCard[]>([]);
 
   const fetchMovieWithKeyWord = async (keyword: string) => {
     setLoading(true);

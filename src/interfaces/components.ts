@@ -1,8 +1,8 @@
-export interface IMovieList {
+export interface IMovieCard {
   coverVerticalUrl: string;
   domainType: number;
   id: string;
-  name: string;
+  title: string;
 }
 
 export interface IComment {

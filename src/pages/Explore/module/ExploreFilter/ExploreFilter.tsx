@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
-import { IFilters, IExploreCard, IGenres } from "interfaces/explore";
+import { IFilters, IGenres } from "interfaces/explore";
 import { filterByCategory } from "apis/configAPI";
-
+import { IMovieCard } from "interfaces/components";
 import {
   StyledExploreFilter,
   StyledExploreButton,
@@ -13,7 +13,7 @@ export interface ExploreFilterProps {
   filters: IFilters;
   setFilters: React.Dispatch<React.SetStateAction<IFilters>>;
   selectedTabId: number;
-  setExploreList: React.Dispatch<React.SetStateAction<IExploreCard[]>>;
+  setExploreList: React.Dispatch<React.SetStateAction<IMovieCard[]>>;
 }
 
 const ExploreFilter = (props: ExploreFilterProps) => {

@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import IonIcon from "@reacticons/ionicons";
 import styled from "styled-components";
 import Breadcrumb from "components/Breadcrumb/Breadcrumb";
-import MovieList from "components/MovieList/MovieList";
+import MovieList from "components/movie/MovieList";
 import Nothing from "components/Nothing/Nothing";
-import { IMovieList } from "interfaces/components";
+import { IMovieCard } from "interfaces/components";
 import { useTranslation } from "react-i18next";
 
 const StyledHistory = styled.div`
@@ -32,7 +32,7 @@ const crumbs = [
 ];
 
 const History = () => {
-  const [moviesHistory, setMoviesHistory] = useState<IMovieList[]>([]);
+  const [moviesHistory, setMoviesHistory] = useState<IMovieCard[]>([]);
   const { t } = useTranslation();
   const getHistory = () => {
     const historyLocal = JSON.parse(localStorage.getItem("movie-history") || "[]");

@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import { IBanners } from "interfaces/home";
 import { getBanners } from "apis/configAPI";
-import { PUBLIC_IMAGE } from "constants/path";
 import { AnimationSkeleton } from "assets/styles/_mixins";
-import { SliderArrow } from "components/SliderArrow/SliderArrow";
 import Image from "components/image/Image";
+import { PUBLIC_IMAGE } from "constants/path";
+import { SliderArrow } from "components/SliderArrow/SliderArrow";
 
 const StyledBanner = styled.div`
   --border-radius: 14px;
@@ -59,7 +59,6 @@ const StyledBanner = styled.div`
       height: 54vw;
     }
   }
-
   @media screen and (max-width: 767.98px) {
     .banner-loading {
       aspect-ratio: auto 792/445;
@@ -73,7 +72,7 @@ const StyledBanner = styled.div`
   }
 `;
 
-const settingsBanner = {
+const settingsHomeBanner = {
   dots: false,
   infinite: true,
   speed: 500,
@@ -81,12 +80,12 @@ const settingsBanner = {
   slidesToScroll: 1,
   prevArrow: (
     <SliderArrow onClick={undefined} style={undefined} className="">
-      <img src={`${PUBLIC_IMAGE}/arrow-back.svg`} alt="Prev" />
+      <img src={`${PUBLIC_IMAGE}/arrow-back.svg`} alt="prev" />
     </SliderArrow>
   ),
   nextArrow: (
     <SliderArrow onClick={undefined} style={undefined} className="">
-      <img src={`${PUBLIC_IMAGE}/arrow-next.svg`} alt="Next" />
+      <img src={`${PUBLIC_IMAGE}/arrow-next.svg`} alt="next" />
     </SliderArrow>
   ),
 };
@@ -113,7 +112,7 @@ const HomeBanner = () => {
       <StyledBanner>
         {loading && <div className="banner-loading" />}
         {!loading && (
-          <Slider {...settingsBanner}>
+          <Slider {...settingsHomeBanner}>
             {banners.map((banner) => {
               const category = banner.jumpType === "DRAMA" ? 1 : 0;
               const url = `/detail/${banner.jumpParam}?cate=${category}`;

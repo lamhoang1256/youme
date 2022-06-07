@@ -3,13 +3,14 @@ import { Link, useParams } from "react-router-dom";
 import useSWRInfinite from "swr/infinite";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { getAllGenres, getMovieByCategory } from "apis/configAPI";
-import { IExploreCard, IGenres } from "interfaces/explore";
-import MovieList from "components/MovieList/MovieList";
+import { IGenres } from "interfaces/explore";
+import MovieList from "components/movie/MovieList";
+import { IMovieCard } from "interfaces/components";
 import { StyledCategory } from "./category.style";
 
 const Category = () => {
   const id = Number(useParams().id);
-  const [movieList, setMovieList] = useState<IExploreCard[]>([]);
+  const [movieList, setMovieList] = useState<IMovieCard[]>([]);
   const [allGenres, setAllGenres] = useState<IGenres[]>([]);
   const nameCategory = allGenres[0]?.screeningItems
     .find((item) => item.id === 5)

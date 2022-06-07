@@ -17,6 +17,9 @@ const StyledTrendingSkeleton = styled.div`
     height: 19px;
     ${AnimationSkeleton}
   }
+  @media screen and (max-width: 650px) {
+    padding: 0;
+  }
 `;
 
 const HomeTrendingSkeleton = () => {
