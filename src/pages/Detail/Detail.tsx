@@ -2,14 +2,20 @@ import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import { IDetailMovie } from "interfaces/detail";
 import { getMovieDetail } from "apis/configAPI";
+import styled from "styled-components";
 import SideRelated from "components/SideRelated/SideRelated";
 import SkeletonSideRelated from "components/Skeleton/SkeletonSideRelated";
 import Nothing from "components/Nothing/Nothing";
 import Comment from "components/Comment/Comment";
 import TwoColumnLayout from "layouts/TwoColumnLayout/TwoColumnLayout";
-import DetailContent from "./module/DetailContent/DetailContent";
-import DetailSkeleton from "./module/DetailSkeleton/DetailSkeleton";
-import { StyledDetail } from "./detail.style";
+import DetailContent from "../../module/detail/DetailContent";
+import DetailSkeleton from "../../module/detail/DetailSkeleton";
+
+const StyledDetail = styled.div`
+  .notfound {
+    text-align: center;
+  }
+`;
 
 const Detail = () => {
   const id = Number(useParams().id);

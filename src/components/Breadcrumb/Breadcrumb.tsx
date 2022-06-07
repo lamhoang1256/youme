@@ -1,6 +1,27 @@
-import { useTranslation } from "react-i18next";
+import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { StyledBreabcrum } from "./breadcrumb.style";
+import { useTranslation } from "react-i18next";
+
+const StyledBreabcrum = styled.div`
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+  .crumb {
+    list-style: none;
+    font-size: 1.8rem;
+    font-weight: 500;
+    &::after {
+      content: ">";
+      padding-left: 10px;
+    }
+    &:last-child::after {
+      display: none;
+    }
+  }
+  .crumb a {
+    color: var(--white);
+  }
+`;
 
 interface BreadcrumbProps {
   crumbs: {
@@ -18,15 +39,14 @@ const Breadcrumb = ({ crumbs }: BreadcrumbProps) => {
 
   return (
     <StyledBreabcrum>
-      {crumbs.map((crumb, index) => (
-        <li key={crumb.id} className="crumb">
-          {isLastCrumb(index) ? (
-            <span>{t(crumb.label)}</span>
-          ) : (
-            <Link to={crumb.path}>{t(crumb.label)}</Link>
-          )}
-        </li>
-      ))}
+      {crumbs.map((crumb, index) => {
+        const { id, label, path } = crumb;
+        return (
+          <li key={id} className="crumb">
+            {isLastCrumb(index) ? <span>{t(label)}</span> : <Link to={path}>{t(label)}</Link>}
+          </li>
+        );
+      })}
     </StyledBreabcrum>
   );
 };

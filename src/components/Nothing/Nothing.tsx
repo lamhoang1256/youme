@@ -1,6 +1,6 @@
 /* eslint-disable react/require-default-props */
 import { Link } from "react-router-dom";
-import ButtonGradient from "components/Button/ButtonGradient";
+import ButtonGradient from "components/button/ButtonGradient";
 import { useTranslation } from "react-i18next";
 import { StyledNothing } from "./nothing.style";
 

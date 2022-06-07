@@ -38,7 +38,7 @@ const HomeList = ({ homeSection }: HomeListProps) => {
             id,
             title,
           };
-          return <MovieCard movie={movie} />;
+          return <MovieCard movie={movie} key={card.id} />;
         })}
       </div>
     </StyledHomeList>

@@ -11,7 +11,7 @@ const MainLayout = React.lazy(() => import("layouts/MainLayout/MainLayout"));
 const Home = React.lazy(() => import("pages/Home/Home"));
 const SignUp = React.lazy(() => import("draft/Auth/SignUp"));
 const SignIn = React.lazy(() => import("draft/Auth/SignIn"));
-const Detail = React.lazy(() => import("draft/Detail/Detail"));
+const Detail = React.lazy(() => import("pages/Detail/Detail"));
 const Watch = React.lazy(() => import("draft/Watch/Watch"));
 const Explore = React.lazy(() => import("draft/Explore/Explore"));
 const Category = React.lazy(() => import("pages/Category/Category"));
