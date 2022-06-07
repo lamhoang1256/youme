@@ -1,12 +1,20 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import styled from "styled-components";
 import useSWRInfinite from "swr/infinite";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { getAllGenres, getMovieByCategory } from "apis/configAPI";
 import { IGenres } from "interfaces/explore";
 import MovieList from "components/movie/MovieList";
 import { IMovieCard } from "interfaces/components";
-import { StyledCategory } from "./category.style";
+import Breadcrumb from "components/Breadcrumb/Breadcrumb";
+import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
+
+const StyledCategory = styled.section`
+  .category-name {
+    text-transform: uppercase;
+  }
+`;
 
 const Category = () => {
   const id = Number(useParams().id);
@@ -25,9 +33,9 @@ const Category = () => {
     }
   };
 
-  const getKey = (indexPage: any, previousPageData: any) => {
-    if (previousPageData && previousPageData.length === 0) return null;
-    const sort = previousPageData?.data?.searchResults.slice(-1)[0].sort || "";
+  const getKey = (index: any, prevData: any) => {
+    if (prevData && prevData.length === 0) return null;
+    const sort = prevData?.data?.searchResults.slice(-1)[0].sort || "";
     return `${JSON.stringify(id)}sort-${sort}`;
   };
 
@@ -45,31 +53,30 @@ const Category = () => {
 
   useEffect(() => {
     if (!data) return;
-    const newMovieList = data?.reduce(
-      (prevExplore: any, currExplore: any) => [...prevExplore, ...currExplore.data.searchResults],
+    const newData = data?.reduce(
+      (prevData: any, currData: any) => [...prevData, ...currData.data.searchResults],
       [],
     );
-    setMovieList(newMovieList);
+    setMovieList(newData);
   }, [data]);
 
   return (
     <StyledCategory>
       <div className="container">
         {nameCategory && (
-          <div className="category-breadcum">
-            <Link to="/">
-              <h4>Home</h4>
-            </Link>
-            <h4> {">"} </h4>
-            <h4 className="category-name">{nameCategory}</h4>
-          </div>
+          <Breadcrumb
+            crumbs={[
+              { id: 1, label: "Home", path: "/" },
+              { id: 2, label: nameCategory, path: "/" },
+            ]}
+          />
         )}
         {nameCategory && <h3 className="category-name">{nameCategory}</h3>}
         <InfiniteScroll
           dataLength={data?.length || 0}
           next={() => setSize((size) => size + 1)}
           hasMore={!error && data?.slice(-1)[0].data.searchResults.length !== 0}
-          loader={<h4>Loading...</h4>}
+          loader={<LoadingSpinner />}
           endMessage={
             <p style={{ textAlign: "center" }}>
               <b>Yay! You have seen it all</b>
