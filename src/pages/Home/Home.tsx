@@ -28,15 +28,14 @@ const Home = () => {
 
   useEffect(() => {
     if (!data) return;
-    const sectionMovies = data?.reduce((prevData: any, currentData: any) => {
-      const suitableSections = [...currentData.data.recommendItems]?.filter(
+    const newData = data?.reduce((prevData: any, currData: any) => {
+      const validSections = [...currData.data.recommendItems]?.filter(
         (section: any) => section.bannerProportion !== 1 && section.coverType === 1,
       );
-      return [...prevData, ...suitableSections];
+      return [...prevData, ...validSections];
     }, []);
-    setHomeSections(sectionMovies);
+    setHomeSections(newData);
   }, [data]);
-
   useEffect(() => {
     document.title = "Youme";
   }, []);
@@ -49,8 +48,8 @@ const Home = () => {
         {!data && (
           <StyledHomeList>
             <SkeletonTitle />
-            <div className="home-list">
-              {Array(12)
+            <div className="list">
+              {Array(7)
                 .fill(0)
                 .map(() => (
                   <HomeCardSkeleton key={uuidv4()} />

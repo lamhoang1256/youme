@@ -8,13 +8,13 @@ import { useAppDispatch } from "./store";
 import "i18n/i18next";
 
 const MainLayout = React.lazy(() => import("layouts/MainLayout/MainLayout"));
-const Home = React.lazy(() => import("draft/Home/Home"));
+const Home = React.lazy(() => import("pages/Home/Home"));
 const SignUp = React.lazy(() => import("draft/Auth/SignUp"));
 const SignIn = React.lazy(() => import("draft/Auth/SignIn"));
 const Detail = React.lazy(() => import("draft/Detail/Detail"));
 const Watch = React.lazy(() => import("draft/Watch/Watch"));
 const Explore = React.lazy(() => import("draft/Explore/Explore"));
-const Category = React.lazy(() => import("draft/Category/Category"));
+const Category = React.lazy(() => import("pages/Category/Category"));
 const History = React.lazy(() => import("draft/History/History"));
 const Search = React.lazy(() => import("draft/Search/Search"));
 const Favorites = React.lazy(() => import("draft/Favorites/Favorites"));

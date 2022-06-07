@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import { IDetailMovie } from "interfaces/detail";
 import { getMovieDetail } from "apis/configAPI";
-import { StyledWrapperLayout } from "pages/Home/home.style";
 import SideRelated from "components/SideRelated/SideRelated";
 import SkeletonSideRelated from "components/Skeleton/SkeletonSideRelated";
 import Nothing from "components/Nothing/Nothing";
 import Comment from "components/Comment/Comment";
+import TwoColumnLayout from "layouts/TwoColumnLayout/TwoColumnLayout";
 import DetailContent from "./module/DetailContent/DetailContent";
 import DetailSkeleton from "./module/DetailSkeleton/DetailSkeleton";
 import { StyledDetail } from "./detail.style";
@@ -60,8 +60,8 @@ const Detail = () => {
   return (
     <StyledDetail>
       <div className="container">
-        <StyledWrapperLayout>
-          <div className="wrapper-main">
+        <TwoColumnLayout>
+          <div className="main-column">
             {!loading && (
               <>
                 <DetailContent detail={detail} />
@@ -70,11 +70,11 @@ const Detail = () => {
             )}
             {loading && <DetailSkeleton />}
           </div>
-          <div className="wrapper-side">
+          <div className="second-column">
             {!loading && <SideRelated listSuggest={detail.likeList} />}
             {loading && <SkeletonSideRelated />}
           </div>
-        </StyledWrapperLayout>
+        </TwoColumnLayout>
       </div>
     </StyledDetail>
   );

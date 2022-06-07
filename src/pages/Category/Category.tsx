@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import styled from "styled-components";
 import useSWRInfinite from "swr/infinite";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { getAllGenres, getMovieByCategory } from "apis/configAPI";
@@ -9,12 +8,7 @@ import MovieList from "components/movie/MovieList";
 import { IMovieCard } from "interfaces/components";
 import Breadcrumb from "components/Breadcrumb/Breadcrumb";
 import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
-
-const StyledCategory = styled.section`
-  .category-name {
-    text-transform: uppercase;
-  }
-`;
+import { StyledCategory } from "./category.style";
 
 const Category = () => {
   const id = Number(useParams().id);

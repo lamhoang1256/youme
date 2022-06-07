@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
-import { StyledWrapperLayout } from "pages/Home/home.style";
 import { IDetailMovie } from "interfaces/detail";
 import { getWatchMedia } from "apis/configAPI";
 import SideRelated from "components/SideRelated/SideRelated";
@@ -8,6 +7,7 @@ import SkeletonSideRelated from "components/Skeleton/SkeletonSideRelated";
 import { checkEmptyObj } from "helpers/checkEmptyObj";
 import Comment from "components/Comment/Comment";
 import CommentSkeleton from "components/Comment/CommentSkeleton";
+import TwoColumnLayout from "layouts/TwoColumnLayout/TwoColumnLayout";
 import WatchPlayer from "./module/WatchPlayer/WatchPlayer";
 import WatchInfo from "./module/WatchInfo/WatchInfo";
 import WatchAnthology from "./module/WatchAnthology/WatchAnthology";
@@ -78,22 +78,22 @@ const Watch = () => {
     <StyledWatch>
       <div className="container">
         {loading && (
-          <StyledWrapperLayout>
-            <div className="wrapper-main">
+          <TwoColumnLayout>
+            <div className="main-column">
               <WatchPlayerSkeleton />
               <WatchInfoSkeleton />
               <WatchAnthologySkeleton />
               <CommentSkeleton />
             </div>
-            <div className="wrapper-side">
+            <div className="second-column">
               <SkeletonSideRelated />
             </div>
-          </StyledWrapperLayout>
+          </TwoColumnLayout>
         )}
 
         {!loading && (
-          <StyledWrapperLayout>
-            <div className="wrapper-main">
+          <TwoColumnLayout>
+            <div>
               <WatchPlayer
                 subtitles={watch.detailCurrentPlay.subtitlingList}
                 qualities={watch.detailCurrentPlay.qualities}
@@ -109,10 +109,10 @@ const Watch = () => {
               />
               <Comment id={String(id)} />
             </div>
-            <div className="wrapper-side">
+            <div>
               <SideRelated listSuggest={watch.detailMovie.likeList} />
             </div>
-          </StyledWrapperLayout>
+          </TwoColumnLayout>
         )}
       </div>
     </StyledWatch>

@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import { searchWithKeyword } from "apis/configAPI";
-import SearchBar from "pages/Search/module/SearchBar/SearchBar";
+import SearchBar from "draft/Search/module/SearchBar/SearchBar";
 import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
 import MovieList from "components/movie/MovieList";
 import { IMovieCard } from "interfaces/components";
