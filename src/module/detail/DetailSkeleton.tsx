@@ -1,4 +1,4 @@
-import CommentSkeleton from "components/commentTest/CommentSkeleton";
+import CommentSkeleton from "components/comment/CommentSkeleton";
 
 import { AnimationSkeleton } from "assets/styles/_mixins";
 import styled from "styled-components";

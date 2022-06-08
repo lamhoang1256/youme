@@ -12,7 +12,7 @@ import {
   signInWithPopup,
   User,
 } from "firebase/auth";
-import AuthInput from "components/inputText/AuthInput";
+import AuthInput from "components/input/AuthInput";
 import { PUBLIC_IMAGE } from "constants/path";
 import { toastErrorFirebase } from "helpers/toastErrorFirebase";
 import { useAppSelector } from "App/store";

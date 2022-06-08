@@ -4,7 +4,7 @@ import useSWRInfinite from "swr/infinite";
 import { getHome } from "apis/configAPI";
 import InfiniteScroll from "react-infinite-scroll-component";
 import LoadingSpinner from "components/loading/LoadingSpinner";
-import SkeletonTitle from "components/skeletonTest/SkeletonTitle";
+import SkeletonTitle from "components/skeleton/SkeletonTitle";
 import { useEffect, useState } from "react";
 import { IHomeSection } from "interfaces/home";
 import { useTranslation } from "react-i18next";

@@ -1,5 +1,5 @@
 import { AnimationSkeleton } from "assets/styles/_mixins";
-import SkeletonTitle from "components/skeletonTest/SkeletonTitle";
+import SkeletonTitle from "components/skeleton/SkeletonTitle";
 import styled from "styled-components";
 
 const StyledCommentSkeleton = styled.div`

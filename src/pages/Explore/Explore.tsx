@@ -6,7 +6,7 @@ import { IGenres, IFilters } from "interfaces/explore";
 import { filterByCategory, getAllGenres } from "apis/configAPI";
 import { useTranslation } from "react-i18next";
 import MovieList from "components/movie/MovieList";
-import Tabs from "components/tabsTest/Tabs";
+import Tabs from "components/tabs/Tabs";
 import LoadingSpinner from "components/loading/LoadingSpinner";
 import { IMovieCard } from "interfaces/components";
 import EndOfPage from "components/notification/EndOfPage";

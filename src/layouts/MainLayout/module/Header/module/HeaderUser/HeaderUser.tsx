@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { auth } from "firebase-app/firebase-config";
 import { signOut } from "firebase/auth";
 import { useAppSelector } from "App/store";
-import ButtonGradient from "components/buttonTest/ButtonGradient";
+import ButtonGradient from "components/button/ButtonGradient";
 import { PUBLIC_IMAGE } from "constants/path";
 import { StyledHeaderUser } from "./headerUser.style";
 

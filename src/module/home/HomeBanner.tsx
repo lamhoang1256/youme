@@ -7,7 +7,7 @@ import { getBanners } from "apis/configAPI";
 import { AnimationSkeleton } from "assets/styles/_mixins";
 import Image from "components/image/Image";
 import { PUBLIC_IMAGE } from "constants/path";
-import { SliderArrow } from "components/buttonTest/SliderArrow";
+import { SliderArrow } from "components/button/SliderArrow";
 
 const StyledBanner = styled.div`
   --border-radius: 14px;

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import ButtonGradient from "components/buttonTest/ButtonGradient";
+import ButtonGradient from "components/button/ButtonGradient";
 
 export const StyledNothing = styled.div`
   padding-top: 30px;

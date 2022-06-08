@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import IonIcon from "@reacticons/ionicons";
 import styled from "styled-components";
-import Breadcrumb from "components/breadcrumbTest/Breadcrumb";
+import Breadcrumb from "components/breadcrumb/Breadcrumb";
 import MovieList from "components/movie/MovieList";
 import Nothing from "components/notification/Nothing";
 import { IMovieCard } from "interfaces/components";

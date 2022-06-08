@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
-import SkeletonTitle from "components/skeletonTest/SkeletonTitle";
+import SkeletonTitle from "components/skeleton/SkeletonTitle";
 import { AnimationSkeleton } from "assets/styles/_mixins";
 
 export const StyledSideSkeleton = styled.div`
