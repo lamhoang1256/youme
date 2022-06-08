@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import React, { Suspense, useEffect } from "react";
 import { auth, db } from "firebase-app/firebase-config";
 import { onAuthStateChanged } from "firebase/auth";
-import { setCurrentUser } from "pages/Auth/auth.slice";
+import { setCurrentUser } from "App/app.slice";
 import { doc, getDoc } from "firebase/firestore";
 import { useAppDispatch } from "./store";
 import "i18n/i18next";

@@ -40,8 +40,8 @@ const WatchInfo = ({ detailMovie, detailCurrentPlay }: WatchInfoProps) => {
       </Heading>
       <WatchMeta
         areaList={areaList}
-        countCurrEpisode={episodeCount}
-        countFullEpisode={episodeVo?.length}
+        countCurrEpisode={episodeVo?.length}
+        countFullEpisode={episodeCount}
         year={year}
         score={score}
       />

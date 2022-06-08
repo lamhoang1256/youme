@@ -26,7 +26,7 @@
   "Ep": "Tập",
   "EP": "TẬP",
   "Upcoming": "Lịch chiếu",
-  "New episode is updated on": "Tập mới được cập nhật vào thứ",
+  "New episode is updated on": "Tập mới được cập nhật mỗi",
   "every week": "hàng tuần",
   "Comments": "Bình luận",
   "Login to comment": "Đăng nhập để bình luận",
@@ -66,5 +66,12 @@
   "Favorite": "Yêu thích",
   "History": "Lịch sử",
   "Search": "Tìm kiếm",
-  "Keyword": "Từ khóa tìm kiếm"
+  "Keyword": "Từ khóa tìm kiếm",
+  "Monday": "Thứ hai",
+  "Tuesday": "Thứ ba",
+  "Wednesday": "Thứ tư",
+  "Thursday": "Thứ năm",
+  "Friday": "Thứ sáu",
+  "Saturday": "Thứ bảy",
+  "Sunday": "Chủ nhật"
 }

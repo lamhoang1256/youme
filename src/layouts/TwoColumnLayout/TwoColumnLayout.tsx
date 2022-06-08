@@ -16,7 +16,7 @@ const StyledTwoColumnLayout = styled.div`
   }
   @media screen and (max-width: 1023.98px) {
     flex-direction: column;
-    &:nth-child(1) {
+    .second-column {
       width: 100%;
     }
   }

@@ -10,20 +10,20 @@ import { PUBLIC_IMAGE } from "constants/path";
 import { SliderArrow } from "components/button/SliderArrow";
 
 const StyledBanner = styled.div`
-  --border-radius: 14px;
+  --radius: 14px;
   height: 510px;
-  border-radius: var(--border-radius);
+  border-radius: var(--radius);
   background-color: var(--bg-skeleton);
   .banner-loading {
     ${AnimationSkeleton}
     background-size: 100% 100%;
     animation-duration: 4s;
-    border-radius: var(--border-radius);
-    aspect-ratio: auto 1440 / 512;
+    border-radius: var(--radius);
+    height: 100%;
   }
   .slick-list {
     height: 100%;
-    border-radius: var(--border-radius);
+    border-radius: var(--radius);
   }
   .slick-slide > div > div {
     outline: none;
@@ -60,9 +60,6 @@ const StyledBanner = styled.div`
     }
   }
   @media screen and (max-width: 767.98px) {
-    .banner-loading {
-      aspect-ratio: auto 792/445;
-    }
     .slick-prev {
       left: 0;
     }
