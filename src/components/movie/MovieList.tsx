@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import MovieCard from "components/movie/MovieCard";
-import { IMovieCard } from "interfaces/components";
+import { IMovieCard } from "types/components";
 
 interface MovieListProps {
   movieList: IMovieCard[];

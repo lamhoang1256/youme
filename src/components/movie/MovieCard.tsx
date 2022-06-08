@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { resizeImage } from "constants/resizeImage";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { PUBLIC_IMAGE } from "constants/path";
-import { IMovieCard } from "interfaces/components";
+import { IMovieCard } from "types/components";
 import MovieTitle from "./MovieTitle";
 
 interface MovieCardProps {

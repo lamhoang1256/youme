@@ -1,4 +1,4 @@
-import { IFilterByCategory, IMediaParams } from "interfaces/api";
+import { IFilterByCategory, IMediaParams } from "types/api";
 import axiosClient from "./axiosClient";
 
 const URL = process.env.REACT_APP_API;

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import IonIcon from "@reacticons/ionicons";
 import { useTranslation } from "react-i18next";
-import { IMovieCard } from "interfaces/components";
+import { IMovieCard } from "types/components";
 import Breadcrumb from "components/breadcrumb/Breadcrumb";
 import MovieList from "components/movie/MovieList";
 import Nothing from "components/notification/Nothing";

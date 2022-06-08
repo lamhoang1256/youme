@@ -2,7 +2,7 @@ import { useAppSelector } from "App/store";
 import { db } from "firebase-app/firebase-config";
 import { doc, setDoc, Timestamp } from "firebase/firestore";
 import { toastErrorFirebase } from "helpers/toastErrorFirebase";
-import { IComment } from "interfaces/components";
+import { IComment } from "types/components";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";

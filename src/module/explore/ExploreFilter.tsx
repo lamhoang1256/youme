@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
-import { IFilters, IGenres } from "interfaces/explore";
+import { IFilters, IGenres } from "types/explore";
 import { filterByCategory } from "apis/configAPI";
-import { IMovieCard } from "interfaces/components";
+import { IMovieCard } from "types/components";
 import Button from "components/button/Button";
 
 interface ExploreFilterProps {

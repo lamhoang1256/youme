@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { db } from "firebase-app/firebase-config";
 import { doc, getDoc } from "firebase/firestore";
-import { IMovieCard } from "interfaces/components";
+import { IMovieCard } from "types/components";
 import { useAppSelector } from "App/store";
 import Breadcrumb from "components/breadcrumb/Breadcrumb";
 import LoadingSpinner from "components/loading/LoadingSpinner";

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
-import { IDetailMovie } from "interfaces/detail";
+import { IDetailMovie } from "types/detail";
 import { getWatchMedia } from "apis/configAPI";
 import SideRelated from "components/side-related/SideRelated";
 import SkeletonSideRelated from "components/skeleton/SkeletonSideRelated";

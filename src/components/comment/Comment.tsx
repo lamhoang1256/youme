@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "firebase-app/firebase-config";
 import IonIcon from "@reacticons/ionicons";
-import { IComment } from "interfaces/components";
+import { IComment } from "types/components";
 import { useAppSelector } from "App/store";
 import CommentAdd from "./CommentAdd";
 import CommentItem from "./CommentItem";

@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import styled from "styled-components";
 import useSWRInfinite from "swr/infinite";
-import { IGenres, IFilters } from "interfaces/explore";
+import { IGenres, IFilters } from "types/explore";
 import { filterByCategory, getAllGenres } from "apis/configAPI";
 import { useTranslation } from "react-i18next";
 import MovieList from "components/movie/MovieList";
 import Tabs from "components/tabs/Tabs";
 import LoadingSpinner from "components/loading/LoadingSpinner";
-import { IMovieCard } from "interfaces/components";
+import { IMovieCard } from "types/components";
 import EndOfPage from "components/notification/EndOfPage";
 import ExploreFilter from "module/explore/ExploreFilter";
 

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
-import { IDetailMovie } from "interfaces/detail";
-import { IDetailCurrentPlay } from "interfaces/watch";
+import { IDetailMovie } from "types/detail";
+import { IDetailCurrentPlay } from "types/watch";
 import Heading from "components/heading/Heading";
 import WatchMeta from "./WatchMeta";
 import WatchCategory from "./WatchCategory";

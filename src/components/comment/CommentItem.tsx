@@ -2,7 +2,7 @@ import styled from "styled-components";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
 import vi from "javascript-time-ago/locale/vi";
-import { IComment } from "interfaces/components";
+import { IComment } from "types/components";
 
 const language = localStorage.getItem("language");
 if (language === "vi") {

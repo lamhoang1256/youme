@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
-import { IBanners } from "interfaces/home";
+import { IBanners } from "types/home";
 import { getBanners } from "apis/configAPI";
 import { AnimationSkeleton } from "assets/styles/_mixins";
 import Image from "components/image/Image";

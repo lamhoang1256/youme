@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { IDetailMovie } from "interfaces/detail";
+import { IDetailMovie } from "types/detail";
 
 interface WatchAnthologyProps {
   detailMovie: IDetailMovie;

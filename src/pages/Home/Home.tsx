@@ -6,7 +6,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import LoadingSpinner from "components/loading/LoadingSpinner";
 import SkeletonTitle from "components/skeleton/SkeletonTitle";
 import { useEffect, useState } from "react";
-import { IHomeSection } from "interfaces/home";
+import { IHomeSection } from "types/home";
 import { useTranslation } from "react-i18next";
 import HomeBanner from "module/home/HomeBanner";
 import HomeTrending from "module/home/HomeTrending";

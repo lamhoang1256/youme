@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
-import { IDetailMovie } from "interfaces/detail";
+import { IDetailMovie } from "types/detail";
 import { getMovieDetail } from "apis/configAPI";
 import styled from "styled-components";
 import SideRelated from "components/side-related/SideRelated";

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { getLeaderBoard } from "apis/configAPI";
-import { ILeaderBoard } from "interfaces/home";
+import { ILeaderBoard } from "types/home";
 import Image from "components/image/Image";
 import SkeletonTitle from "components/skeleton/SkeletonTitle";
 import { v4 as uuidv4 } from "uuid";

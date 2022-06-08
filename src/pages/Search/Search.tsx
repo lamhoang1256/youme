@@ -6,7 +6,7 @@ import { searchWithKeyword } from "apis/configAPI";
 import SearchBar from "module/search/SearchBar";
 import LoadingSpinner from "components/loading/LoadingSpinner";
 import MovieList from "components/movie/MovieList";
-import { IMovieCard } from "interfaces/components";
+import { IMovieCard } from "types/components";
 import Heading from "components/heading/Heading";
 
 const StyledSearch = styled.div``;

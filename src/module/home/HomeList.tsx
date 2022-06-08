@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { IHomeSection } from "interfaces/home";
+import { IHomeSection } from "types/home";
 import MovieCard from "components/movie/MovieCard";
 
 interface HomeListProps {

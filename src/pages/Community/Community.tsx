@@ -6,7 +6,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { useTranslation } from "react-i18next";
 import { getPreviewVideoMedia } from "apis/configAPI";
 import { PUBLIC_IMAGE } from "constants/path";
-import { ICommunity } from "interfaces/community";
+import { ICommunity } from "types/community";
 import LoadingSpinner from "components/loading/LoadingSpinner";
 import CommunityPlayer from "module/community/CommunityPlayer";
 import DetailDescription from "module/detail/DetailDescription";
