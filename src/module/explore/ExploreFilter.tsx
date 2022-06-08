@@ -15,16 +15,28 @@ interface ExploreFilterProps {
 
 const StyledExploreFilter = styled.div`
   margin-top: 15px;
+  overflow-x: hidden;
+  .genres-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
   .genres {
     color: #fff;
     padding: 5px 10px;
     border-radius: 4px;
   }
-  .genre-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 15px;
+  @media screen and (max-width: 1023.98px) {
+    .genres-list {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x;
+      width: max-content;
+    }
+    .genres {
+      scroll-snap-align: start;
+    }
   }
 `;
 
@@ -51,7 +63,7 @@ const ExploreFilter = (props: ExploreFilterProps) => {
           {selectedTabId === tab.id &&
             allGenres[index].screeningItems.map((field) => (
               // field is all data of 1 row Ex: All regions: American, Japan, Korea...
-              <div className="genre-list" key={uuidv4()}>
+              <div className="genres-list" key={uuidv4()}>
                 {field.items.map((genres) => {
                   const { name, params, screeningType } = genres;
                   const choice = {
