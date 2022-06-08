@@ -1,13 +1,13 @@
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { db } from "firebase-app/firebase-config";
+import { doc, getDoc } from "firebase/firestore";
+import { IMovieCard } from "interfaces/components";
 import { useAppSelector } from "App/store";
 import Breadcrumb from "components/breadcrumb/Breadcrumb";
 import LoadingSpinner from "components/loading/LoadingSpinner";
 import MovieList from "components/movie/MovieList";
 import Nothing from "components/notification/Nothing";
-import { db } from "firebase-app/firebase-config";
-import { doc, getDoc } from "firebase/firestore";
-import { IMovieCard } from "interfaces/components";
-import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
 
 const crumbs = [
   { id: 1, label: "Home", path: "/" },
@@ -20,20 +20,18 @@ const Favorites = () => {
   const [favorites, setFavorites] = useState<IMovieCard[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const getFavorites = async () => {
-    setLoading(true);
-    const colRef = doc(db, "users", currentUser.uid);
-    const data = await getDoc(colRef);
-    setFavorites(data.data()?.favorites);
-    setLoading(false);
-  };
-
   useEffect(() => {
     if (currentUser?.uid) {
+      const getFavorites = async () => {
+        setLoading(true);
+        const colRef = doc(db, "users", currentUser.uid);
+        const data = await getDoc(colRef);
+        setFavorites(data.data()?.favorites);
+        setLoading(false);
+      };
       getFavorites();
     }
   }, [currentUser]);
-
   useEffect(() => {
     document.title = `Youme - ${t("Favorite")}`;
   }, []);

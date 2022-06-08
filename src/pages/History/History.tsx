@@ -1,11 +1,11 @@
+import styled from "styled-components";
 import { useEffect, useState } from "react";
 import IonIcon from "@reacticons/ionicons";
-import styled from "styled-components";
+import { useTranslation } from "react-i18next";
+import { IMovieCard } from "interfaces/components";
 import Breadcrumb from "components/breadcrumb/Breadcrumb";
 import MovieList from "components/movie/MovieList";
 import Nothing from "components/notification/Nothing";
-import { IMovieCard } from "interfaces/components";
-import { useTranslation } from "react-i18next";
 
 const StyledHistory = styled.div`
   .history {
@@ -43,7 +43,6 @@ const History = () => {
     localStorage.setItem("movie-history", "[]");
     getHistory();
   };
-
   useEffect(() => {
     document.title = `Youme - ${t("History")}`;
     getHistory();
