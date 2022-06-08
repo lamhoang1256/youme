@@ -5,14 +5,14 @@ const StyledWatchInfoSkeleton = styled.div`
   margin-top: 25px;
   .skeleton {
     &-name,
-    &-statistics {
+    &-meta {
       margin-bottom: 15px;
       height: 25px;
       width: 405px;
       border-radius: 4px;
       ${AnimationSkeleton}
     }
-    &-statistics {
+    &-meta {
       height: 28px;
       width: 500px;
     }
@@ -36,7 +36,7 @@ const StyledWatchInfoSkeleton = styled.div`
       &-name {
         width: 230px;
       }
-      &-statistics {
+      &-meta {
         width: 280px;
       }
     }
@@ -47,7 +47,7 @@ const WatchInfoSkeleton = () => {
   return (
     <StyledWatchInfoSkeleton>
       <div className="skeleton-name" />
-      <div className="skeleton-statistics" />
+      <div className="skeleton-meta" />
       <div className="skeleton-categories">
         <div className="skeleton-category" />
         <div className="skeleton-category" />

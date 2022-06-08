@@ -12,7 +12,7 @@ const Home = React.lazy(() => import("pages/Home/Home"));
 const SignUp = React.lazy(() => import("pages/Auth/SignUp"));
 const SignIn = React.lazy(() => import("pages/Auth/SignIn"));
 const Detail = React.lazy(() => import("pages/Detail/Detail"));
-const Watch = React.lazy(() => import("draft/Watch/Watch"));
+const Watch = React.lazy(() => import("pages/Watch/Watch"));
 const Explore = React.lazy(() => import("pages/Explore/Explore"));
 const Category = React.lazy(() => import("pages/Category/Category"));
 const History = React.lazy(() => import("pages/History/History"));

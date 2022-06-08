@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
+import styled from "styled-components";
 import { IDetailMovie } from "interfaces/detail";
 import { getWatchMedia } from "apis/configAPI";
 import SideRelated from "components/side-related/SideRelated";
@@ -8,23 +9,34 @@ import { checkEmptyObj } from "helpers/checkEmptyObj";
 import Comment from "components/comment/Comment";
 import CommentSkeleton from "components/comment/CommentSkeleton";
 import TwoColumnLayout from "layouts/TwoColumnLayout/TwoColumnLayout";
-import WatchPlayer from "./module/WatchPlayer/WatchPlayer";
-import WatchInfo from "./module/WatchInfo/WatchInfo";
-import WatchAnthology from "./module/WatchAnthology/WatchAnthology";
-import WatchPlayerSkeleton from "./module/WatchSkeleton/WatchPlayerSkeleton";
-import WatchInfoSkeleton from "./module/WatchSkeleton/WatchInfoSkeleton";
-import WatchAnthologySkeleton from "./module/WatchSkeleton/WatchAnthologySkeleton";
-import { StyledWatch } from "./watch.style";
+import WatchPlayer from "../../module/watch/WatchPlayer";
+import WatchInfo from "../../module/watch/WatchInfo";
+import WatchAnthology from "../../module/watch/WatchAnthology";
+import WatchPlayerSkeleton from "../../module/watch/WatchPlayerSkeleton";
+import WatchInfoSkeleton from "../../module/watch/WatchInfoSkeleton";
+import WatchAnthologySkeleton from "../../module/watch/WatchAnthologySkeleton";
 
 interface IWatch {
   detailMovie: IDetailMovie;
   detailCurrentPlay: any;
 }
 
+const StyledWatch = styled.div`
+  .detail-banner {
+    object-fit: cover;
+    border-radius: 14px;
+  }
+  .detail-categories,
+  .detail-areas {
+    display: flex;
+    gap: 14px;
+  }
+`;
+
 const Watch = () => {
   const id = Number(useParams().id);
   const [searchParams] = useSearchParams();
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState(true);
   const category = Number(searchParams.get("cate"));
   const episode = Number(searchParams.get("ep"));
   const [watch, setWatch] = useState<IWatch>(Object);
@@ -93,7 +105,7 @@ const Watch = () => {
 
         {!loading && (
           <TwoColumnLayout>
-            <div>
+            <div className="main-column">
               <WatchPlayer
                 subtitles={watch.detailCurrentPlay.subtitlingList}
                 qualities={watch.detailCurrentPlay.qualities}
@@ -109,7 +121,7 @@ const Watch = () => {
               />
               <Comment id={String(id)} />
             </div>
-            <div>
+            <div className="second-column">
               <SideRelated listSuggest={watch.detailMovie.likeList} />
             </div>
           </TwoColumnLayout>
