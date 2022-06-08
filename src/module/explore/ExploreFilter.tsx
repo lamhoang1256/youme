@@ -15,7 +15,6 @@ interface ExploreFilterProps {
 
 const StyledExploreFilter = styled.div`
   margin-top: 15px;
-  overflow-x: hidden;
   .genres-list {
     display: flex;
     flex-wrap: wrap;
@@ -28,13 +27,11 @@ const StyledExploreFilter = styled.div`
     border-radius: 4px;
   }
   @media screen and (max-width: 1023.98px) {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x;
     .genres-list {
-      display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x;
       width: max-content;
-    }
-    .genres {
       scroll-snap-align: start;
     }
   }

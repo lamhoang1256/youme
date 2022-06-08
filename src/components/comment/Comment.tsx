@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "firebase-app/firebase-config";
 import IonIcon from "@reacticons/ionicons";
@@ -7,7 +8,30 @@ import { IComment } from "types/components";
 import { useAppSelector } from "App/store";
 import CommentAdd from "./CommentAdd";
 import CommentItem from "./CommentItem";
-import { StyledComment } from "./comment.style";
+
+const StyledComment = styled.div`
+  margin-top: 30px;
+  margin-bottom: 20px;
+  .comment {
+    &-heading {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    &-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 100rem;
+    }
+  }
+  .no-login {
+    margin-top: 10px;
+  }
+  .no-comment {
+    padding-top: 20px;
+    text-align: center;
+  }
+`;
 
 interface CommentProps {
   id: string;
