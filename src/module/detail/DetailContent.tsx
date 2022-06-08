@@ -1,6 +1,6 @@
 import IonIcon from "@reacticons/ionicons";
 import { useAppSelector } from "App/store";
-import Button from "components/button/Button";
+import Button from "components/buttonTest/Button";
 import Heading from "components/heading/Heading";
 import Image from "components/image/Image";
 import TagNormal from "components/tag/TagNormal";

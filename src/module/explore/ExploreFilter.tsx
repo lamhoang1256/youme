@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import { IFilters, IGenres } from "interfaces/explore";
 import { filterByCategory } from "apis/configAPI";
 import { IMovieCard } from "interfaces/components";
-import Button from "components/button/Button";
+import Button from "components/buttonTest/Button";
 
 interface ExploreFilterProps {
   allGenres: IGenres[];

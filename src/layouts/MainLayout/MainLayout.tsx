@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Outlet } from "react-router-dom";
-import ButtonScrollTop from "components/button/ButtonScrollTop";
+import ButtonScrollTop from "components/buttonTest/ButtonScrollTop";
 import Header from "./module/Header/Header";
 import Footer from "./module/Footer/Footer";
 

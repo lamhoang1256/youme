@@ -6,7 +6,7 @@ import { getAllGenres, getMovieByCategory } from "apis/configAPI";
 import { IGenres } from "interfaces/explore";
 import MovieList from "components/movie/MovieList";
 import { IMovieCard } from "interfaces/components";
-import Breadcrumb from "components/breadcrumb/Breadcrumb";
+import Breadcrumb from "components/breadcrumbTest/Breadcrumb";
 import LoadingSpinner from "components/loading/LoadingSpinner";
 import { StyledCategory } from "./category.style";
 

@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { getLeaderBoard } from "apis/configAPI";
 import { ILeaderBoard } from "interfaces/home";
 import Image from "components/image/Image";
-import SkeletonTitle from "components/Skeleton/SkeletonTitle";
+import SkeletonTitle from "components/skeletonTest/SkeletonTitle";
 import { v4 as uuidv4 } from "uuid";
 import { TextClamp } from "assets/styles/_mixins";
 import { settingsHomeTrending } from "./homeSettings";
