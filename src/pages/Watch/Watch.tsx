@@ -5,7 +5,7 @@ import { IDetailMovie } from "types/detail";
 import { getWatchMedia } from "apis/configAPI";
 import SideRelated from "components/side-related/SideRelated";
 import SkeletonSideRelated from "components/skeleton/SkeletonSideRelated";
-import { checkEmptyObj } from "helpers/checkEmptyObj";
+import { checkEmptyObj } from "utils/checkEmptyObj";
 import Comment from "components/comment/Comment";
 import CommentSkeleton from "components/comment/CommentSkeleton";
 import TwoColumnLayout from "layouts/TwoColumnLayout/TwoColumnLayout";

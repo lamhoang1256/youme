@@ -14,7 +14,7 @@ import {
 } from "firebase/auth";
 import AuthInput from "components/input/AuthInput";
 import { PUBLIC_IMAGE } from "constants/path";
-import { toastErrorFirebase } from "helpers/toastErrorFirebase";
+import { toastErrorFirebase } from "utils/toastErrorFirebase";
 import { useAppSelector } from "App/store";
 import { StyledAuth, StyledButtonAuth } from "./auth.style";
 import AuthSuccess from "./AuthSuccess";
