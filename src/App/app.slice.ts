@@ -1,20 +1,20 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from "@reduxjs/toolkit";
 
-export interface AuthState {
+export interface AppState {
   currentUser: any;
   loading: boolean;
   error?: any;
 }
 
-const initialState: AuthState = {
+const initialState: AppState = {
   currentUser: null,
   loading: false,
   error: null,
 };
 
-const authSlice = createSlice({
-  name: "auth",
+const appSlice = createSlice({
+  name: "app",
   initialState,
   reducers: {
     setCurrentUser: (state, action) => {
@@ -26,5 +26,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { setCurrentUser, logout } = authSlice.actions;
-export default authSlice.reducer;
+export const { setCurrentUser, logout } = appSlice.actions;
+export default appSlice.reducer;

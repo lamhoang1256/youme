@@ -4,13 +4,13 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB3XOeB5YuJ75LzFsnxfhQ3U3Px_fj4zfA",
-  authDomain: "mopie-6d385.firebaseapp.com",
-  projectId: "mopie-6d385",
-  storageBucket: "mopie-6d385.appspot.com",
-  messagingSenderId: "897819083495",
-  appId: "1:897819083495:web:98c3a928f2d8e8e59c5842",
-  measurementId: "G-LC992GS3E0",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STRORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
 
 const app = initializeApp(firebaseConfig);
