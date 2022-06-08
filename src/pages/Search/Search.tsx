@@ -4,7 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import { searchWithKeyword } from "apis/configAPI";
 import SearchBar from "module/search/SearchBar";
-import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
+import LoadingSpinner from "components/loading/LoadingSpinner";
 import MovieList from "components/movie/MovieList";
 import { IMovieCard } from "interfaces/components";
 import Heading from "components/heading/Heading";

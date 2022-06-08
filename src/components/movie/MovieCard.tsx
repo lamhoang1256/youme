@@ -54,7 +54,7 @@ const StyledMovieCard = styled.div`
 `;
 
 const MovieCard = ({ movie }: MovieCardProps) => {
-  const { id, domainType, title, coverVerticalUrl } = movie;
+  const { id, domainType, name, coverVerticalUrl } = movie;
   const url = `/detail/${id}?cate=${domainType}`;
   return (
     <StyledMovieCard>
@@ -69,7 +69,7 @@ const MovieCard = ({ movie }: MovieCardProps) => {
           <img src={`${PUBLIC_IMAGE}/play-movie.png`} alt="play" className="card-play" />
         </div>
       </Link>
-      <MovieTitle to={url} title={title} />
+      <MovieTitle to={url} title={name} />
     </StyledMovieCard>
   );
 };

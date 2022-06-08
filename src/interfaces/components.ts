@@ -2,7 +2,7 @@ export interface IMovieCard {
   coverVerticalUrl: string;
   domainType: number;
   id: string;
-  title: string;
+  name: string;
 }
 
 export interface IComment {

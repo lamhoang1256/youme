@@ -6,12 +6,12 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   to?: string;
   height?: string;
   children: React.ReactNode;
-  kind?: "primary" | "secondary";
+  kind?: "primary" | "secondary" | "sea";
 }
 
 interface StyledButtonProps {
   height?: string;
-  kind?: "primary" | "secondary";
+  kind?: "primary" | "secondary" | "sea";
 }
 
 const COLOR = {
@@ -23,6 +23,10 @@ const COLOR = {
     color: #000;
     background: linear-gradient(#c7c7d2, #bcbaba);
   `,
+  sea: css`
+    color: var(--white);
+    background-color: #3d6ef7;
+  `,
 };
 
 const DISABLED = css`
@@ -33,8 +37,7 @@ const DISABLED = css`
 
 const StyledButton = styled.button<StyledButtonProps>`
   cursor: pointer;
-  font-size: 1.7rem;
-  font-weight: 500;
+  font-size: 1.6rem;
   color: var(--white);
   padding: 0 25px;
   height: ${(props) => `${props.height}px`};
@@ -51,14 +54,14 @@ const Button = ({ to, type, children, height, kind, onClick, ...props }: ButtonP
   if (to) {
     return (
       <Link to={to} style={{ display: "block" }}>
-        <StyledButton type={type} height={height} {...props} onClick={onClick}>
+        <StyledButton kind={kind} type={type} height={height} {...props} onClick={onClick}>
           {children}
         </StyledButton>
       </Link>
     );
   }
   return (
-    <StyledButton type={type} height={height} {...props} onClick={onClick}>
+    <StyledButton kind={kind} type={type} height={height} {...props} onClick={onClick}>
       {children}
     </StyledButton>
   );

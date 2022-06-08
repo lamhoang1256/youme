@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import useSWRInfinite from "swr/infinite";
 import { getHome } from "apis/configAPI";
 import InfiniteScroll from "react-infinite-scroll-component";
-import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
+import LoadingSpinner from "components/loading/LoadingSpinner";
 import SkeletonTitle from "components/Skeleton/SkeletonTitle";
 import { useEffect, useState } from "react";
 import { IHomeSection } from "interfaces/home";

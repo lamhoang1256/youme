@@ -1,18 +1,25 @@
+import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
 import { IFilters, IGenres } from "interfaces/explore";
 import { filterByCategory } from "apis/configAPI";
 import { IMovieCard } from "interfaces/components";
-import styled from "styled-components";
+import Button from "components/button/Button";
 
-interface Props {
-  background: string;
+interface ExploreFilterProps {
+  allGenres: IGenres[];
+  filters: IFilters;
+  selectedTabId: number;
+  setFilters: React.Dispatch<React.SetStateAction<IFilters>>;
+  setExploreList: React.Dispatch<React.SetStateAction<IMovieCard[]>>;
 }
 
-export const StyledExploreFilter = styled.div`
+const StyledExploreFilter = styled.div`
   margin-top: 15px;
-`;
-
-export const StyledExploreTabPanel = styled.div`
+  .genres {
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+  }
   .genre-list {
     display: flex;
     flex-wrap: wrap;
@@ -21,24 +28,8 @@ export const StyledExploreTabPanel = styled.div`
   }
 `;
 
-export const StyledExploreButton = styled.button<Props>`
-  background: ${(props) => (props.background === "active" ? "#8a3cff" : "#3d6ef7")};
-  color: #fff;
-  padding: 5px 10px;
-  border-radius: 4px;
-`;
-
-export interface ExploreFilterProps {
-  allGenres: IGenres[];
-  filters: IFilters;
-  setFilters: React.Dispatch<React.SetStateAction<IFilters>>;
-  selectedTabId: number;
-  setExploreList: React.Dispatch<React.SetStateAction<IMovieCard[]>>;
-}
-
 const ExploreFilter = (props: ExploreFilterProps) => {
   const { allGenres, filters, setFilters, selectedTabId, setExploreList } = props;
-
   const fetchFilterByCategory = async (params: IFilters) => {
     try {
       const { data } = await filterByCategory(params);
@@ -54,34 +45,34 @@ const ExploreFilter = (props: ExploreFilterProps) => {
 
   return (
     <StyledExploreFilter>
-      {allGenres.map((genresOneTab, index) => (
-        <StyledExploreTabPanel key={uuidv4()}>
-          {selectedTabId === genresOneTab.id && (
-            <>
-              {allGenres[index].screeningItems.map((genresOneRow) => (
-                <div className="genre-list" key={uuidv4()}>
-                  {genresOneRow.items.map((genres) => {
-                    const { name, params, screeningType } = genres;
-                    const choice = {
-                      [screeningType]: params,
-                      params: genresOneTab.params,
-                    };
-                    return (
-                      <StyledExploreButton
-                        key={uuidv4()}
-                        type="button"
-                        onClick={() => handleSearchByCategory(choice)}
-                        background={filters[screeningType] === params ? "active" : "normal"}
-                      >
-                        {name}
-                      </StyledExploreButton>
-                    );
-                  })}
-                </div>
-              ))}
-            </>
-          )}
-        </StyledExploreTabPanel>
+      {allGenres.map((tab, index) => (
+        // tab is all data of 1 tab panel
+        <div key={uuidv4()}>
+          {selectedTabId === tab.id &&
+            allGenres[index].screeningItems.map((field) => (
+              // field is all data of 1 row Ex: All regions: American, Japan, Korea...
+              <div className="genre-list" key={uuidv4()}>
+                {field.items.map((genres) => {
+                  const { name, params, screeningType } = genres;
+                  const choice = {
+                    [screeningType]: params,
+                    params: tab.params,
+                  };
+                  return (
+                    <Button
+                      key={uuidv4()}
+                      className="genres"
+                      onClick={() => handleSearchByCategory(choice)}
+                      height="35"
+                      kind={filters[screeningType] === params ? "primary" : "sea"}
+                    >
+                      {name}
+                    </Button>
+                  );
+                })}
+              </div>
+            ))}
+        </div>
       ))}
     </StyledExploreFilter>
   );

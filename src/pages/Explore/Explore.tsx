@@ -4,12 +4,13 @@ import styled from "styled-components";
 import useSWRInfinite from "swr/infinite";
 import { IGenres, IFilters } from "interfaces/explore";
 import { filterByCategory, getAllGenres } from "apis/configAPI";
+import { useTranslation } from "react-i18next";
 import MovieList from "components/movie/MovieList";
 import Tabs from "components/Tabs/Tabs";
-import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
-import { useTranslation } from "react-i18next";
+import LoadingSpinner from "components/loading/LoadingSpinner";
 import { IMovieCard } from "interfaces/components";
-import ExploreFilter from "../../module/explore/ExploreFilter";
+import EndOfPage from "components/notification/EndOfPage";
+import ExploreFilter from "module/explore/ExploreFilter";
 
 export const StyledExplore = styled.div`
   .genre-item:first-child {
@@ -53,19 +54,17 @@ const Explore = () => {
       setLoading(false);
     }
   };
-
   const onClickTab = (keyTab: number) => {
     setSelectedTabId(keyTab);
     const genreTab = allGenres.filter((genre) => genre.id === keyTab)[0];
     setFilters({ ...initialFilters, params: genreTab.params });
   };
 
-  const getKey = (indexPage: any, previousPageData: any) => {
-    if (previousPageData && previousPageData.length === 0) return null;
-    const sort = previousPageData?.data?.searchResults.slice(-1)[0].sort || "";
+  const getKey = (index: any, prevData: any) => {
+    if (prevData && prevData.length === 0) return null;
+    const sort = prevData?.data?.searchResults.slice(-1)[0].sort || "";
     return `${JSON.stringify(filters)}sort-${sort}`;
   };
-
   const { data, error, setSize } = useSWRInfinite(
     getKey,
     (key) => filterByCategory({ ...filters, sort: key.split("sort-")[1] }),
@@ -76,11 +75,12 @@ const Explore = () => {
 
   useEffect(() => {
     if (!data) return;
-    const newExploreList = data?.reduce(
-      (prevExplore: any, currExplore: any) => [...prevExplore, ...currExplore.data.searchResults],
+    const newData = data?.reduce(
+      (prevData: any, currData: any) => [...prevData, ...currData.data.searchResults],
       [],
     );
-    setExploreList(newExploreList);
+    setExploreList(newData);
+    console.log(newData);
   }, [data]);
 
   useEffect(() => {
@@ -113,11 +113,7 @@ const Explore = () => {
               next={() => setSize((size) => size + 1)}
               hasMore={!error && data?.slice(-1)[0].data.searchResults.length !== 0}
               loader={<LoadingSpinner />}
-              endMessage={
-                <p style={{ textAlign: "center" }}>
-                  <b>Yay! You have seen it all</b>
-                </p>
-              }
+              endMessage={<EndOfPage />}
             >
               <MovieList movieList={exploreList} />
             </InfiniteScroll>

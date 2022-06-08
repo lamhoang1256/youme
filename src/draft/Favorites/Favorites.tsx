@@ -1,8 +1,8 @@
 import { useAppSelector } from "App/store";
 import Breadcrumb from "components/breadcrumb/Breadcrumb";
-import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
+import LoadingSpinner from "components/loading/LoadingSpinner";
 import MovieList from "components/movie/MovieList";
-import Nothing from "components/Nothing/Nothing";
+import Nothing from "components/notification/Nothing";
 import { db } from "firebase-app/firebase-config";
 import { doc, getDoc } from "firebase/firestore";
 import { IMovieCard } from "interfaces/components";

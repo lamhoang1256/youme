@@ -5,7 +5,7 @@ import { getMovieDetail } from "apis/configAPI";
 import styled from "styled-components";
 import SideRelated from "components/SideRelated/SideRelated";
 import SkeletonSideRelated from "components/Skeleton/SkeletonSideRelated";
-import Nothing from "components/Nothing/Nothing";
+import Nothing from "components/notification/Nothing";
 import Comment from "components/Comment/Comment";
 import TwoColumnLayout from "layouts/TwoColumnLayout/TwoColumnLayout";
 import DetailContent from "../../module/detail/DetailContent";

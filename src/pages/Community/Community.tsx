@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import { getPreviewVideoMedia } from "apis/configAPI";
 import { PUBLIC_IMAGE } from "constants/path";
 import { ICommunity } from "interfaces/community";
-import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
+import LoadingSpinner from "components/loading/LoadingSpinner";
 import CommunityPlayer from "module/community/CommunityPlayer";
 import DetailDescription from "module/detail/DetailDescription";
 import Heading from "components/heading/Heading";

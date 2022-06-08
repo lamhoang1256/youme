@@ -36,7 +36,7 @@ const HomeList = ({ homeSection }: HomeListProps) => {
             coverVerticalUrl: imageUrl,
             domainType: category,
             id,
-            title,
+            name: title,
           };
           return <MovieCard movie={movie} key={card.id} />;
         })}
