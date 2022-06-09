@@ -9,12 +9,13 @@ interface ImageProps {
   height?: string;
   alt?: string;
   className?: string;
+  radius?: number;
 }
 
-const Image = ({ to, url, width, height, alt, className }: ImageProps) => {
+const Image = ({ to, url, width, height, alt, className, radius }: ImageProps) => {
   if (to) {
     return (
-      <Link to={to} style={{ display: "block" }}>
+      <Link to={to} style={{ display: "block", borderRadius: `${radius}px` }}>
         <LazyLoadImage
           className={className}
           src={resizeImage(url, width, height)}
@@ -28,6 +29,7 @@ const Image = ({ to, url, width, height, alt, className }: ImageProps) => {
     <LazyLoadImage
       className={className}
       src={resizeImage(url, width, height)}
+      style={{ borderRadius: `${radius}px` }}
       effect="opacity"
       alt={alt}
     />
@@ -40,6 +42,7 @@ Image.defaultProps = {
   width: "",
   alt: "",
   className: "",
+  radius: 0,
 };
 
 export default Image;

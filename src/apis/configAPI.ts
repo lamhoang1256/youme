@@ -3,6 +3,7 @@ import axiosClient from "./axiosClient";
 
 const URL = process.env.REACT_APP_API;
 const URL_PC = process.env.REACT_APP_API_PC;
+const URL_ARTICLE = process.env.REACT_APP_ARTICLE;
 
 export const getBanners = (params: { size: number }) => {
   const url = `${URL_PC}/homePage/banners`;
@@ -57,6 +58,11 @@ export const searchGetKeyword = (params: { searchKeyWord: string }) => {
 export const searchWithKeyword = (params: { searchKeyWord: string }) => {
   const url = `${URL}/search/v1/searchWithKeyWord`;
   return axiosClient.post(url, { ...params, size: 56, sort: "", searchType: "" });
+};
+
+export const getArticles = (page: number) => {
+  const url = `${URL_ARTICLE}/news/list?page=${page}&size=${8}`;
+  return axiosClient.get(url);
 };
 
 export const getPreviewVideoMedia = async (page: number) => {
