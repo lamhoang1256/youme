@@ -55,7 +55,7 @@ const StyledSearchBar = styled.div`
     left: 0;
     right: 0;
     background-color: var(--dark-color);
-    z-index: var(--zIndex-search-result);
+    z-index: 10;
     border-radius: 8px;
     height: 400px;
     overflow-y: scroll;

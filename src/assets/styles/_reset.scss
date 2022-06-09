@@ -1,11 +1,10 @@
-// Reset SCSS
 html {
   box-sizing: border-box;
 }
 * {
   margin: 0;
   padding: 0;
-  // fix react slick at Popular.tsx
+  // fix react slick at HomeTrending.tsx
   min-height: 0;
   min-width: 0;
 }
@@ -54,4 +53,3 @@ picture {
   display: block;
   max-width: 100%;
 }
-// End Reset SCSS

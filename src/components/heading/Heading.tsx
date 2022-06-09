@@ -14,7 +14,7 @@ const StyledHeading = styled.h2<StyledProps>`
   font-weight: 600;
   font-size: ${(props) => props.fontSize};
   @media screen and (max-width: 767.98px) {
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
 `;
 

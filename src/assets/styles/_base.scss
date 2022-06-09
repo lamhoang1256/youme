@@ -7,6 +7,18 @@ body {
   background-color: var(--dark-color);
   color: #fff;
 }
+.container {
+  width: 100%;
+  max-width: 1470px;
+  padding: 0 15px;
+  margin: 0 auto;
+  @media screen and (max-width: 1023.98px) {
+    padding: 0 20px;
+  }
+  @media screen and (max-width: 767.98px) {
+    padding: 0 10px;
+  }
+}
 .slick-slider {
   height: 100%;
 }

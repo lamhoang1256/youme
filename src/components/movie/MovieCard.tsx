@@ -50,6 +50,9 @@ const StyledMovieCard = styled.div`
       opacity: 1;
       visibility: visible;
     }
+    .card-title {
+      color: var(--primary-color);
+    }
   }
 `;
 
@@ -69,7 +72,7 @@ const MovieCard = ({ movie }: MovieCardProps) => {
           <img src={`${PUBLIC_IMAGE}/play-movie.png`} alt="play" className="card-play" />
         </div>
       </Link>
-      <MovieTitle to={url} title={name} />
+      <MovieTitle to={url} title={name} className="card-title" />
     </StyledMovieCard>
   );
 };

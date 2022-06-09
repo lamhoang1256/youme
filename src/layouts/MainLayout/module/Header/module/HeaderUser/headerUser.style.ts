@@ -7,7 +7,7 @@ export const StyledHeaderUser = styled.div`
     opacity: 0;
     visibility: hidden;
     position: absolute;
-    z-index: var(--zIndex-header-dropdown);
+    z-index: 20;
     top: 130%;
     right: 0;
     background-color: #4c505c;

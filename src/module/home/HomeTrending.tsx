@@ -23,7 +23,7 @@ const StyledTrendingList = styled.div`
     display: none !important;
   }
   .slick-list {
-    z-index: var(--zIndex-popular-list);
+    z-index: 40;
   }
   .slick-slider {
     margin-left: -10px;

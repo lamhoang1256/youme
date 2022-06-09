@@ -22,7 +22,7 @@ export const StyledHeader = styled.header`
         position: fixed;
         inset: 0;
         background-color: rgba(0, 0, 0, 0.8);
-        z-index: var(--zIndex-overplay);
+        z-index: 50;
       }
     }
     @media screen and (max-width: 767.98px) {

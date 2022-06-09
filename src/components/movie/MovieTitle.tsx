@@ -5,6 +5,7 @@ import { TextClamp } from "assets/styles/_mixins";
 interface MovieTitleProps {
   to: string;
   title: string;
+  [x: string]: any;
 }
 
 const StyledMovieTitle = styled(Link)`
@@ -19,8 +20,12 @@ const StyledMovieTitle = styled(Link)`
   }
 `;
 
-const MovieTitle = ({ to, title }: MovieTitleProps) => {
-  return <StyledMovieTitle to={to}>{title}</StyledMovieTitle>;
+const MovieTitle = ({ to, title, ...props }: MovieTitleProps) => {
+  return (
+    <StyledMovieTitle to={to} {...props}>
+      {title}
+    </StyledMovieTitle>
+  );
 };
 
 export default MovieTitle;
