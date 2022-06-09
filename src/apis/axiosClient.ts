@@ -3,7 +3,6 @@ import queryString from "query-string";
 
 const language = localStorage.getItem("language") || "en";
 const axiosClient = axios.create({
-  baseURL: process.env.REACT_APP_URL_API,
   headers: {
     lang: language,
     versioncode: 11,
