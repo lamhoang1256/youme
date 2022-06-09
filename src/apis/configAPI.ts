@@ -65,6 +65,11 @@ export const getArticles = (page: number) => {
   return axiosClient.get(url);
 };
 
+export const getPostDetail = (id: number) => {
+  const url = `${URL_ARTICLE}/news/detail?id=${id}`;
+  return axiosClient.get(url);
+};
+
 export const getPreviewVideoMedia = async (page: number) => {
   try {
     const { data }: any = await axiosClient.get(

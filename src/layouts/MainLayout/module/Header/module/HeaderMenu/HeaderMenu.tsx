@@ -8,7 +8,8 @@ const menuLinks = [
   { id: 1, display: "Explore", path: "/explore" },
   { id: 2, display: "Favorites", path: "/favorites" },
   { id: 3, display: "History", path: "/history" },
-  { id: 4, display: "Community", path: "/community" },
+  { id: 4, display: "News", path: "/articles" },
+  { id: 5, display: "Community", path: "/community" },
 ];
 
 interface HeaderMenuProps {

@@ -20,6 +20,7 @@ const Search = React.lazy(() => import("pages/Search/Search"));
 const Favorites = React.lazy(() => import("pages/Favorites/Favorites"));
 const Community = React.lazy(() => import("pages/Community/Community"));
 const Articles = React.lazy(() => import("pages/Articles/Articles"));
+const PostDetail = React.lazy(() => import("pages/PostDetail/PostDetail"));
 
 const App = () => {
   // check at page load if a user is authenticated
@@ -54,6 +55,7 @@ const App = () => {
             <Route path="/favorites" element={<Favorites />} />
             <Route path="/community" element={<Community />} />
             <Route path="/articles" element={<Articles />} />
+            <Route path="/post/:id" element={<PostDetail />} />
           </Route>
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/sign-in" element={<SignIn />} />

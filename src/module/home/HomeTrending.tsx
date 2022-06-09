@@ -112,9 +112,7 @@ const HomeTrending = () => {
     const fetchTest = async () => {
       try {
         const { data } = await axiosClient.get(
-          "https://web-api.netpop.app/cms/web/pc/news/list?page=0&size=9",
-          // "https://web-api.netpop.app/cms/web/pc/news/list?page=1&size=10",
-          // "https://web-api.netpop.app/cms/web/pc/news/detail?id=599",
+          "https://web-api.netpop.app/cms/web/pc/news/detail?id=599",
         );
         console.log(data);
       } catch (error) {

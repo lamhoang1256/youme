@@ -5,7 +5,7 @@ import LoadingSpinner from "components/loading/LoadingSpinner";
 import useSWRInfinite from "swr/infinite";
 import InfiniteScroll from "react-infinite-scroll-component";
 import styled from "styled-components";
-import PostItem from "module/articles/PostItem";
+import PostItem from "module/post/PostItem";
 
 interface IPostItem {
   coverImg: string;
@@ -54,7 +54,13 @@ const Articles = () => {
               ?.map((post: IPostItem) => {
                 const { id, title, introduction, coverImg } = post;
                 return (
-                  <PostItem key={id} title={title} introduction={introduction} image={coverImg} />
+                  <PostItem
+                    key={id}
+                    id={id}
+                    title={title}
+                    introduction={introduction}
+                    image={coverImg}
+                  />
                 );
               })}
           </div>
