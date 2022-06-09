@@ -94,7 +94,7 @@ const HomeBanner = () => {
     const fetchBanners = async () => {
       setLoading(true);
       try {
-        const { data } = await getBanners({ size: 10 });
+        const { data } = await getBanners({ size: 20 });
         setBanners(data);
         setLoading(false);
       } catch (error) {

@@ -40,13 +40,51 @@ export const getAllGenres = () => {
 };
 
 export const filterByCategory = (params: IFilterByCategory) => {
-  const url = "https://ga-mobile-api.loklok.tv/cms/app/search/v1/search";
+  const url = `${URL}/search/v1/search`;
   return axiosClient.post(url, params);
 };
 
 export const getMovieByCategory = (params: { category: number; sort: string }) => {
-  const url = "https://ga-mobile-api.loklok.tv/cms/app/search/v1/search";
+  const url = `${URL}/search/v1/search`;
   return axiosClient.post(url, { ...params, params: "", size: 14 });
+};
+
+export const searchGetKeyword = (params: { searchKeyWord: string }) => {
+  const url = `${URL}/search/searchLenovo`;
+  return axiosClient.post(url, { ...params, size: 10 });
+};
+
+export const searchWithKeyword = (params: { searchKeyWord: string }) => {
+  const url = `${URL}/search/v1/searchWithKeyWord`;
+  return axiosClient.post(url, { ...params, size: 56, sort: "", searchType: "" });
+};
+
+export const getPreviewVideoMedia = async (page: number) => {
+  try {
+    const { data }: any = await axiosClient.get(
+      `${URL}/recommendPool/getVideoFromRecommondPool?page=${page}`,
+    );
+    const requestMedia = data.map((item: any) => {
+      const { definitionList } = item.mediaInfo;
+      const definition = definitionList[definitionList.length - 1]?.code;
+      return {
+        contentId: item.id,
+        episodeId: item.mediaInfo.id,
+        category: item.category,
+        definition,
+      };
+    });
+    const response: any = await axiosClient.post(`${URL}/media/bathGetplayInfo`, requestMedia);
+    const community = data.map((item: any, index: number) => {
+      return {
+        ...item,
+        mediaInfoUrl: response.data[index],
+      };
+    });
+    return community;
+  } catch (error) {
+    return error;
+  }
 };
 
 export const getWatchMedia = async (params: IMediaParams) => {
@@ -100,45 +138,4 @@ export const getWatchMedia = async (params: IMediaParams) => {
     detailCurrentPlay,
     qualities,
   };
-};
-
-export const searchGetKeyword = (params: { searchKeyWord: string }) => {
-  const url = "https://ga-mobile-api.loklok.tv/cms/app/search/searchLenovo";
-  return axiosClient.post(url, { ...params, size: 10 });
-};
-
-export const searchWithKeyword = (params: { searchKeyWord: string }) => {
-  const url = "https://ga-mobile-api.loklok.tv/cms/app/search/v1/searchWithKeyWord";
-  return axiosClient.post(url, { ...params, size: 56, sort: "", searchType: "" });
-};
-
-export const getPreviewVideoMedia = async (page: number) => {
-  try {
-    const { data }: any = await axiosClient.get(
-      `https://ga-mobile-api.loklok.tv/cms/app/recommendPool/getVideoFromRecommondPool?page=${page}`,
-    );
-    const requestMedia = data.map((item: any) => {
-      const { definitionList } = item.mediaInfo;
-      const definition = definitionList[definitionList.length - 1]?.code;
-      return {
-        contentId: item.id,
-        episodeId: item.mediaInfo.id,
-        category: item.category,
-        definition,
-      };
-    });
-    const response: any = await axiosClient.post(
-      "https://ga-mobile-api.loklok.tv/cms/app/media/bathGetplayInfo",
-      requestMedia,
-    );
-    const community = data.map((item: any, index: number) => {
-      return {
-        ...item,
-        mediaInfoUrl: response.data[index],
-      };
-    });
-    return community;
-  } catch (error) {
-    return error;
-  }
 };
