@@ -1,3 +1,4 @@
+import DetailDescription from "module/detail/DetailDescription";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
@@ -21,10 +22,12 @@ const WatchSummary = ({ introduction }: WatchSummaryProps) => {
   return (
     <StyledWatchSummary>
       <span className="label-small">{t("Summary")} : </span>
-      {showMoreDesc ? introduction : `${introduction.substring(0, 200)}...`}
-      <button type="button" className="show-more" onClick={() => setShowMoreDesc(!showMoreDesc)}>
-        {showMoreDesc ? "Show Less" : "Show More"}
-      </button>
+      <DetailDescription>
+        {showMoreDesc ? introduction : `${introduction.substring(0, 150)}...`}
+        <button type="button" className="show-more" onClick={() => setShowMoreDesc(!showMoreDesc)}>
+          {showMoreDesc ? "Show Less" : "Show More"}
+        </button>
+      </DetailDescription>
     </StyledWatchSummary>
   );
 };

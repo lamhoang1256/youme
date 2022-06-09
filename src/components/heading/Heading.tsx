@@ -13,6 +13,9 @@ interface StyledProps {
 const StyledHeading = styled.h2<StyledProps>`
   font-weight: 600;
   font-size: ${(props) => props.fontSize};
+  @media screen and (max-width: 767.98px) {
+    font-size: 2.2rem;
+  }
 `;
 
 const Heading = ({ className, children, fontSize }: HeadingProps) => {

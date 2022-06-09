@@ -12,6 +12,14 @@ const StyledTabs = styled.div`
   .tab.active {
     background-color: var(--primary-color);
   }
+  @media screen and (max-width: 767.98px) {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    width: 100%;
+    .tab {
+      min-width: fit-content;
+    }
+  }
 `;
 
 interface ITabsProps {

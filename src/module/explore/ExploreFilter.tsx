@@ -27,12 +27,18 @@ const StyledExploreFilter = styled.div`
     border-radius: 4px;
   }
   @media screen and (max-width: 1023.98px) {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x;
     .genres-list {
-      width: max-content;
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      width: 100%;
+    }
+    .genres {
       scroll-snap-align: start;
+      min-width: fit-content;
+      font-size: 1.5rem;
+      padding: 4px 8px;
     }
   }
 `;

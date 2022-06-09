@@ -58,7 +58,7 @@ const StyledDetailContent = styled.div`
   .detail-watch {
     width: 210px;
     border-radius: 40px;
-    background-color: var(--primary-color);
+    font-weight: 600;
   }
   @media screen and (max-width: 767.98px) {
     .detail-header {
@@ -171,7 +171,7 @@ const DetailContent = ({ detail }: DetailContentProps) => {
           <DetailDescription rowLines={4}>{detail?.introduction}</DetailDescription>
           <DetailCategory categories={detail?.tagList} />
           <div className="detail-action">
-            <Button to={url} height="50" className="detail-watch">
+            <Button to={url} height="50" kind="primary" className="detail-watch">
               {t("Watch now")}
             </Button>
             <DetailButton onClick={handleAddFavoriteMovie} isActive={isFavorite}>

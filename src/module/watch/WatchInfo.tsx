@@ -14,7 +14,7 @@ interface WatchInfoProps {
 }
 
 const StyledWatchInfo = styled.div`
-  padding-top: 20px;
+  padding-top: 10px;
   line-height: 1.7;
 `;
 
@@ -35,7 +35,7 @@ const WatchInfo = ({ detailMovie, detailCurrentPlay }: WatchInfoProps) => {
 
   return (
     <StyledWatchInfo>
-      <Heading fontSize="2.2rem">
+      <Heading fontSize="2.3rem">
         {name} - {t("Ep")} {seriesNo}
       </Heading>
       <WatchMeta

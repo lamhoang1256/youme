@@ -21,7 +21,7 @@ const Detail = () => {
   const id = Number(useParams().id);
   const [searchParams] = useSearchParams();
   const category = Number(searchParams.get("cate"));
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState(true);
   const [detail, setDetail] = useState<IDetailMovie>(Object);
 
   const fetchMovieDetail = async () => {
