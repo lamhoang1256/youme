@@ -9,7 +9,7 @@ const StyledPostDetail = styled.div`
     margin: 0 auto;
     max-width: 1000px;
     .tag {
-      margin: 6px 0;
+      margin: 10px 0;
     }
     .tag span {
       font-size: 1.8rem;
