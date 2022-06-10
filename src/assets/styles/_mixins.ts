@@ -31,3 +31,18 @@ export const TextClamp = {
     white-space: normal;
   `,
 };
+
+export const TextGradient = {
+  primary: css`
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    background-image: var(--gradient-primary);
+  `,
+  secondary: css`
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    background-image: var(--gradient-secondary);
+  `,
+};
