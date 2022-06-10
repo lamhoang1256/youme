@@ -1,7 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAppSelector } from "App/store";
-import { PUBLIC_IMAGE } from "constants/path";
 import { StyledHeaderMenu } from "./headerMenu.style";
 
 const menuLinks = [
@@ -24,7 +23,7 @@ const HeaderMenu = ({ showMenu, handleToggleMenu }: HeaderMenuProps) => {
   return (
     <StyledHeaderMenu className={`${showMenu ? "active" : ""}`}>
       <li className="menu-header">
-        <img src={`${PUBLIC_IMAGE}/header-avatar.webp`} alt="avatar" />
+        <img src="/images/header-avatar.webp" alt="avatar" />
         <span>
           {t("Hello")}, {currentUser ? currentUser.username : "Guest"}
         </span>

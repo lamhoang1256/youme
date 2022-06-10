@@ -51,7 +51,6 @@ const PostDetail = () => {
       try {
         const { data } = await getPostDetail(id);
         setPost(data);
-        console.log(data);
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -64,7 +63,7 @@ const PostDetail = () => {
   if (loading) {
     return <LoadingSpinner />;
   }
-  // if post not exist
+  // if post not exist in firebase
   if (!post.id) {
     return (
       <div className="container">

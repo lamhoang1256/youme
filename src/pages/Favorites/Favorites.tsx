@@ -18,7 +18,7 @@ const Favorites = () => {
   const { t } = useTranslation();
   const { currentUser } = useAppSelector((state) => state.auth);
   const [favorites, setFavorites] = useState<IMovieCard[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (currentUser?.uid) {

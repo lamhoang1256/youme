@@ -5,13 +5,12 @@ import { auth } from "firebase-app/firebase-config";
 import { signOut } from "firebase/auth";
 import { useAppSelector } from "App/store";
 import ButtonGradient from "components/button/ButtonGradient";
-import { PUBLIC_IMAGE } from "constants/path";
 import { StyledHeaderUser } from "./headerUser.style";
 
 const HeaderUser = () => {
   const { currentUser } = useAppSelector((state) => state.auth);
   const { t } = useTranslation();
-  const avatar = currentUser?.avatar ? currentUser.avatar : `${PUBLIC_IMAGE}/header-avatar.webp`;
+  const avatar = currentUser?.avatar ? currentUser.avatar : `/images/header-avatar.webp`;
   const username = currentUser?.username ? currentUser?.username : "Guest";
 
   const handleLogout = () => {

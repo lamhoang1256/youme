@@ -10,7 +10,6 @@ import {
   FacebookAuthProvider,
   GoogleAuthProvider,
   signInWithPopup,
-  User,
 } from "firebase/auth";
 import AuthInput from "components/input/AuthInput";
 import { PUBLIC_IMAGE } from "constants/path";
@@ -18,6 +17,7 @@ import { toastErrorFirebase } from "utils/toastErrorFirebase";
 import { useAppSelector } from "App/store";
 import { StyledAuth, StyledButtonAuth } from "./auth.style";
 import AuthSuccess from "./AuthSuccess";
+import { createProfileUser } from "./auth.action";
 
 const StyledSignUp = styled.div`
   .signup {
@@ -59,7 +59,7 @@ const SignUp = () => {
         username,
         email,
         createdAt: serverTimestamp(),
-        avatar: `${PUBLIC_IMAGE}/header-avatar.png`,
+        avatar: `${PUBLIC_IMAGE}/header-avatar.webp`,
         favorites: [],
       });
       toast.success(t("Sign Up Success"));
@@ -69,46 +69,32 @@ const SignUp = () => {
     }
   };
 
-  const createProfileUser = (user: User) => {
-    setDoc(doc(db, "users", user.uid), {
-      uid: user.uid,
-      username: user.displayName,
-      email: user.email,
-      createdAt: serverTimestamp(),
-      avatar: user.photoURL,
-      favorites: [],
-    });
-  };
-
   const signUpWithGoogle = async () => {
-    const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        const { user } = result;
-        console.log(user);
-        if (!user) return;
-        createProfileUser(user);
-        toast.success(t("Success Login with Google"));
-        redirectHome();
-      })
-      .catch((error) => {
-        toastErrorFirebase(error.message);
-      });
+    try {
+      const provider = new GoogleAuthProvider();
+      const response = await signInWithPopup(auth, provider);
+      const { user } = response;
+      if (!user) return;
+      createProfileUser(user);
+      toast.success(t("Success Login with Google"));
+      redirectHome();
+    } catch (error: any) {
+      toastErrorFirebase(error.message);
+    }
   };
 
   const signUpWithFacebook = async () => {
-    const provider = new FacebookAuthProvider();
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        const { user } = result;
-        if (!user) return;
-        createProfileUser(user);
-        toast.success(t("Success Login with Facebook"));
-        redirectHome();
-      })
-      .catch((error) => {
-        toastErrorFirebase(error.message);
-      });
+    try {
+      const provider = new FacebookAuthProvider();
+      const response = await signInWithPopup(auth, provider);
+      const { user } = response;
+      if (!user) return;
+      createProfileUser(user);
+      toast.success(t("Success Login with Facebook"));
+      redirectHome();
+    } catch (error: any) {
+      toastErrorFirebase(error.message);
+    }
   };
 
   useEffect(() => {

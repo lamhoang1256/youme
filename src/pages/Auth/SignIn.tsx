@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -16,6 +17,7 @@ import { useAppSelector } from "App/store";
 import { PUBLIC_IMAGE } from "constants/path";
 import { StyledAuth, StyledButtonAuth } from "./auth.style";
 import AuthSuccess from "./AuthSuccess";
+import { createProfileUser } from "./auth.action";
 
 const StyledSignIn = styled.div``;
 
@@ -43,27 +45,32 @@ const SignIn = () => {
   };
 
   const signInWithGoogle = async () => {
-    const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider)
-      .then(() => {
-        toast.success(t("Success Login with Google"));
-        redirectHome();
-      })
-      .catch((error) => {
-        toast.error(error.message);
-      });
+    try {
+      const provider = new GoogleAuthProvider();
+      const response: any = await signInWithPopup(auth, provider);
+      const { user } = response;
+      if (response._tokenResponse.isNewUser) {
+        createProfileUser(user);
+      }
+      toast.success(t("Success Login with Google"));
+    } catch (error: any) {
+      toast.error(error.message);
+    }
   };
 
   const signInWithFacebook = async () => {
     const provider = new FacebookAuthProvider();
-    signInWithPopup(auth, provider)
-      .then(() => {
-        toast.success(t("Success Login with Facebook"));
-        redirectHome();
-      })
-      .catch((error) => {
-        toast.error(error.message);
-      });
+    try {
+      const response: any = await signInWithPopup(auth, provider);
+      const { user } = response;
+      if (response._tokenResponse.isNewUser) {
+        createProfileUser(user);
+      }
+      toast.success(t("Success Login with Facebook"));
+      redirectHome();
+    } catch (error: any) {
+      toast.error(error.message);
+    }
   };
 
   useEffect(() => {

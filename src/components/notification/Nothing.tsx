@@ -18,17 +18,19 @@ export const StyledNothing = styled.div`
     height: 100px;
   }
   .heading {
-    font-size: 2.8rem;
-    font-weight: 800;
+    font-size: 2.6rem;
+    font-weight: 700;
     ${TextGradient.primary}
   }
   .description {
     font-size: 1.8rem;
     color: #c4c1ea;
+    font-weight: 500;
   }
   .button {
-    padding: 12px 40px;
-    background-image: linear-gradient(to right top, #fc6c8f, #ffb86c);
+    padding: 10px 30px;
+    font-size: 1.6rem;
+    background-image: var(--gradient-secondary);
   }
   @media screen and (max-width: 767.98px) {
     .heading {
@@ -48,7 +50,6 @@ const Nothing = ({ titleButton, heading, description, redirect }: NothingProps) 
   const { t } = useTranslation();
   return (
     <StyledNothing>
-      {/* <img src={image} alt="nothing" /> */}
       <h3 className="heading">{t(heading)}</h3>
       <span className="description">{t(description)}</span>
       <Link to={redirect}>

@@ -1,8 +1,8 @@
-import ButtonGradient from "components/button/ButtonGradient";
-import { PUBLIC_IMAGE } from "constants/path";
-import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { PUBLIC_IMAGE } from "constants/path";
+import { useTranslation } from "react-i18next";
+import ButtonGradient from "components/button/ButtonGradient";
 
 const StyledAuthSuccess = styled.div`
   display: flex;

@@ -1,8 +1,8 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import Image from "components/image/Image";
 import DetailDescription from "module/detail/DetailDescription";
 import { TextClamp } from "assets/styles/_mixins";
-import { Link } from "react-router-dom";
 
 interface PostItemProps {
   image: string;
@@ -28,6 +28,10 @@ const StyledPostItem = styled.div`
     margin-top: 10px;
     line-height: 1.45;
     ${TextClamp.multilines(2)}
+    transition: all 0.25s linear;
+    &:hover {
+      color: var(--primary-color);
+    }
   }
 `;
 
@@ -35,7 +39,7 @@ const PostItem = ({ image, title, introduction, id }: PostItemProps) => {
   return (
     <StyledPostItem>
       <div className="post-image">
-        <Image url={image} width="500" height="282" alt="post" />
+        <Image url={image} width="500" height="282" alt="post" to={`/post/${id}`} />
       </div>
       <div className="post-content">
         <Link to={`/post/${id}`}>
