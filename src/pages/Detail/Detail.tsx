@@ -54,7 +54,6 @@ const Detail = () => {
   if (!detail) {
     return (
       <Nothing
-        image={`${process.env.REACT_APP_PUBLIC}/images/not-found-404.png`}
         heading="This Movie Doesn't Exist Right Now!"
         description="The movie is currently corrupted or does not exist, please try again"
         titleButton="Return Home"

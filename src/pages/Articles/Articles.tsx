@@ -39,13 +39,15 @@ const Articles = () => {
     document.title = `Youme - ${t("Articles")}`;
   }, []);
 
+  console.log("data", data?.slice(-1)?.[0]?.data?.list?.length);
+
   return (
     <StyledArticles>
       <div className="container">
         <InfiniteScroll
           dataLength={data?.length || 0}
           next={() => setSize((prev: number) => prev + 1)}
-          hasMore={!error && data?.slice(-1)[0].data.list.length !== 0}
+          hasMore={!error && data?.slice(-1)?.[0]?.data?.list?.length !== 0}
           loader={<LoadingSpinner />}
         >
           <div className="articles-list">

@@ -1,10 +1,11 @@
 import styled from "styled-components";
-import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import ButtonGradient from "components/button/ButtonGradient";
+import { TextGradient } from "assets/styles/_mixins";
 
 export const StyledNothing = styled.div`
-  padding-top: 30px;
+  padding-top: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,15 +18,13 @@ export const StyledNothing = styled.div`
     height: 100px;
   }
   .heading {
-    font-size: 2.6rem;
-    color: transparent;
-    background-clip: text;
-    -webkit-background-clip: text;
-    background-image: linear-gradient(270deg, #c042ff, #8a3cff);
+    font-size: 2.8rem;
     font-weight: 800;
+    ${TextGradient.primary}
   }
   .description {
     font-size: 1.8rem;
+    color: #f6eafb;
   }
   .button {
     padding: 12px 40px;
@@ -43,14 +42,13 @@ interface NothingProps {
   heading: string;
   description: string;
   redirect: string;
-  image: string;
 }
 
-const Nothing = ({ titleButton, heading, description, redirect, image }: NothingProps) => {
+const Nothing = ({ titleButton, heading, description, redirect }: NothingProps) => {
   const { t } = useTranslation();
   return (
     <StyledNothing>
-      <img src={image} alt="nothing" />
+      {/* <img src={image} alt="nothing" /> */}
       <h3 className="heading">{t(heading)}</h3>
       <span className="description">{t(description)}</span>
       <Link to={redirect}>

@@ -61,7 +61,6 @@ const History = () => {
           <MovieList movieList={moviesHistory} />
         ) : (
           <Nothing
-            image={`${process.env.REACT_APP_PUBLIC}/images/history.png`}
             heading="No History Yet!"
             description="Let's start exploring Youme"
             titleButton="Explore"

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { getPostDetail } from "apis/configAPI";
+import Nothing from "components/notification/Nothing";
 import LoadingSpinner from "components/loading/LoadingSpinner";
 
 const StyledPostDetail = styled.div`
@@ -65,7 +66,16 @@ const PostDetail = () => {
   }
   // if post not exist
   if (!post.id) {
-    return <div className="container">Post not valid</div>;
+    return (
+      <div className="container">
+        <Nothing
+          heading="Article not found"
+          description="The knowledge base article could not be found"
+          titleButton="Go News"
+          redirect="/articles"
+        />
+      </div>
+    );
   }
 
   return (

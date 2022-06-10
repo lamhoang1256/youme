@@ -52,7 +52,6 @@ const Favorites = () => {
         <MovieList movieList={favorites} />
       ) : (
         <Nothing
-          image={`${process.env.REACT_APP_PUBLIC}/images/favorites.png`}
           heading="No Movies Added!"
           description="There are no items in your favourite"
           titleButton="Add more"
