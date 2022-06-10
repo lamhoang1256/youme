@@ -9,7 +9,6 @@ import Image from "components/image/Image";
 import SkeletonTitle from "components/skeleton/SkeletonTitle";
 import { v4 as uuidv4 } from "uuid";
 import { TextClamp } from "assets/styles/_mixins";
-import axiosClient from "apis/axiosClient";
 import { settingsHomeTrending } from "./homeSettings";
 import HomeTrendingSkeleton from "./HomeTrendingSkeleton";
 
@@ -108,18 +107,6 @@ const HomeTrending = () => {
       }
     };
     fetchTrendingSide();
-
-    const fetchTest = async () => {
-      try {
-        const { data } = await axiosClient.get(
-          "https://web-api.netpop.app/cms/web/pc/news/detail?id=599",
-        );
-        console.log(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchTest();
   }, []);
 
   return (

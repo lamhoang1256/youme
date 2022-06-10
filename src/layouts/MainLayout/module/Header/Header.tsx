@@ -17,11 +17,7 @@ const Header = () => {
       <div className="header container">
         <div className="header-container">
           <Link to="/" className="header-logo">
-            <img
-              src={`${process.env.REACT_APP_PUBLIC}/images/header-logo.png`}
-              alt="logo"
-              className="logo-img"
-            />
+            <img src="/images/header-logo.png" alt="logo" className="logo-img" />
           </Link>
           <HeaderMenu showMenu={showMenu} handleToggleMenu={handleToggleMenu} />
           <StyledHeaderActions>

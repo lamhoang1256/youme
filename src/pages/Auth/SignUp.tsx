@@ -85,6 +85,7 @@ const SignUp = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         const { user } = result;
+        console.log(user);
         if (!user) return;
         createProfileUser(user);
         toast.success(t("Success Login with Google"));

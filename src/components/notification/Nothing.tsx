@@ -24,7 +24,7 @@ export const StyledNothing = styled.div`
   }
   .description {
     font-size: 1.8rem;
-    color: #f6eafb;
+    color: #c4c1ea;
   }
   .button {
     padding: 12px 40px;

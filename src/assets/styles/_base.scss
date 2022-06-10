@@ -24,4 +24,5 @@ body {
 }
 .lazy-load-image-background {
   display: block !important;
+  object-fit: cover;
 }
