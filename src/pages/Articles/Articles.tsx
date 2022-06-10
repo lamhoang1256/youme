@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { getArticles } from "apis/configAPI";
-import LoadingSpinner from "components/loading/LoadingSpinner";
+import styled from "styled-components";
 import useSWRInfinite from "swr/infinite";
 import InfiniteScroll from "react-infinite-scroll-component";
-import styled from "styled-components";
+import { getArticles } from "apis/configAPI";
+import LoadingSpinner from "components/loading/LoadingSpinner";
 import PostItem from "module/post/PostItem";
 
 interface IPostItem {
@@ -26,10 +26,10 @@ const StyledArticles = styled.div`
 
 const Articles = () => {
   const { t } = useTranslation();
-  const getKey = (index: number) => `wow-${index || 0}`;
+  const getKey = (index: number) => `articles-${index || 0}`;
   const { data, error, setSize } = useSWRInfinite(
     getKey,
-    (key) => getArticles(Number(key.split("wow-").slice(-1)[0])),
+    (key) => getArticles(Number(key.split("articles-").slice(-1)[0])),
     {
       revalidateFirstPage: false,
     },
@@ -38,8 +38,6 @@ const Articles = () => {
   useEffect(() => {
     document.title = `Youme - ${t("Articles")}`;
   }, []);
-
-  console.log("data", data?.slice(-1)?.[0]?.data?.list?.length);
 
   return (
     <StyledArticles>

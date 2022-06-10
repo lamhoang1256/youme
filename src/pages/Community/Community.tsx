@@ -8,17 +8,17 @@ import { getPreviewVideoMedia } from "apis/configAPI";
 import { PUBLIC_IMAGE } from "constants/path";
 import { ICommunity } from "types/community";
 import LoadingSpinner from "components/loading/LoadingSpinner";
+import Heading from "components/heading/Heading";
 import CommunityPlayer from "module/community/CommunityPlayer";
 import DetailDescription from "module/detail/DetailDescription";
-import Heading from "components/heading/Heading";
 import { StyledCommunity } from "./community.style";
 
 const Community = () => {
   const { t } = useTranslation();
-  const getKey = (index: number) => `wow-${index || 0}`;
+  const getKey = (index: number) => `community-${index || 0}`;
   const { data, error, setSize } = useSWRInfinite(
     getKey,
-    (key) => getPreviewVideoMedia(Number(key.split("wow-").slice(-1)[0])),
+    (key) => getPreviewVideoMedia(Number(key.split("community-").slice(-1)[0])),
     {
       revalidateFirstPage: false,
     },
@@ -39,7 +39,7 @@ const Community = () => {
             loader={<LoadingSpinner />}
           >
             {data
-              ?.reduce((acc, current) => [...acc, ...current], [])
+              ?.reduce((prev, curr) => [...prev, ...curr], [])
               ?.map((community: ICommunity) => {
                 const { id, refList, upInfo, introduction, likeCount, mediaInfoUrl } = community;
                 const category = refList?.[0]?.category;
