@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { getPostDetail } from "apis/configAPI";
-import Nothing from "components/notification/Nothing";
+import ResultNotFound from "components/notification/ResultNotFound";
 import LoadingSpinner from "components/loading/LoadingSpinner";
 
 const StyledPostDetail = styled.div`
@@ -67,7 +67,7 @@ const PostDetail = () => {
   if (!post.id) {
     return (
       <div className="container">
-        <Nothing
+        <ResultNotFound
           heading="Article not found"
           description="The knowledge base article could not be found"
           titleButton="Go News"

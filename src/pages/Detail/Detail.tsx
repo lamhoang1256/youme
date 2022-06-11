@@ -5,7 +5,7 @@ import { getMovieDetail } from "apis/configAPI";
 import styled from "styled-components";
 import SideRelated from "components/side-related/SideRelated";
 import SkeletonSideRelated from "components/skeleton/SkeletonSideRelated";
-import Nothing from "components/notification/Nothing";
+import ResultNotFound from "components/notification/ResultNotFound";
 import Comment from "components/comment/Comment";
 import TwoColumnLayout from "layouts/TwoColumnLayout/TwoColumnLayout";
 import DetailContent from "../../module/detail/DetailContent";
@@ -53,7 +53,7 @@ const Detail = () => {
 
   if (!detail) {
     return (
-      <Nothing
+      <ResultNotFound
         heading="This Movie Doesn't Exist Right Now!"
         description="The movie is currently corrupted or does not exist, please try again"
         titleButton="Return Home"

@@ -1,3 +1,4 @@
+import LabelNormal from "components/label/LabelNormal";
 import DetailDescription from "module/detail/DetailDescription";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -8,7 +9,7 @@ interface WatchSummaryProps {
 }
 
 const StyledWatchSummary = styled.div`
-  .show-more {
+  .btn-toggle {
     padding-left: 10px;
     background-color: transparent;
     color: var(--primary-color);
@@ -18,13 +19,16 @@ const StyledWatchSummary = styled.div`
 const WatchSummary = ({ introduction }: WatchSummaryProps) => {
   const { t } = useTranslation();
   const [showMoreDesc, setShowMoreDesc] = useState(false);
+  const toggleButtonRead = () => {
+    setShowMoreDesc(!showMoreDesc);
+  };
 
   return (
     <StyledWatchSummary>
-      <span className="label-small">{t("Summary")} : </span>
       <DetailDescription>
+        <LabelNormal>{t("Summary")} :</LabelNormal>
         {showMoreDesc ? introduction : `${introduction.substring(0, 150)}...`}
-        <button type="button" className="show-more" onClick={() => setShowMoreDesc(!showMoreDesc)}>
+        <button type="button" className="btn-toggle" onClick={toggleButtonRead}>
           {showMoreDesc ? "Show Less" : "Show More"}
         </button>
       </DetailDescription>

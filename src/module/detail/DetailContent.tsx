@@ -3,7 +3,7 @@ import { useAppSelector } from "App/store";
 import Button from "components/button/Button";
 import Heading from "components/heading/Heading";
 import Image from "components/image/Image";
-import TagNormal from "components/tag/TagNormal";
+import LabelNormal from "components/label/LabelNormal";
 import { db } from "firebase-app/firebase-config";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { IDetailMovie } from "types/detail";
@@ -185,7 +185,7 @@ const DetailContent = ({ detail }: DetailContentProps) => {
       </div>
       <div className="detail-overview">
         <DetailDescription lineHeight={1.9}>
-          <TagNormal>{t("Summary")} : </TagNormal>
+          <LabelNormal>{t("Summary")} : </LabelNormal>
           {detail?.introduction}
         </DetailDescription>
         <Image

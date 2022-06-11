@@ -7,7 +7,7 @@ import { useAppSelector } from "App/store";
 import Breadcrumb from "components/breadcrumb/Breadcrumb";
 import LoadingSpinner from "components/loading/LoadingSpinner";
 import MovieList from "components/movie/MovieList";
-import Nothing from "components/notification/Nothing";
+import ResultNotFound from "components/notification/ResultNotFound";
 
 const crumbs = [
   { id: 1, label: "Home", path: "/" },
@@ -51,7 +51,7 @@ const Favorites = () => {
       {favorites.length > 0 ? (
         <MovieList movieList={favorites} />
       ) : (
-        <Nothing
+        <ResultNotFound
           heading="No Movies Added!"
           description="There are no items in your favourite"
           titleButton="Add more"

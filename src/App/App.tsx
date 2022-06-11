@@ -24,7 +24,7 @@ const PostDetail = React.lazy(() => import("pages/PostDetail/PostDetail"));
 const NotFound = React.lazy(() => import("pages/NotFound/NotFound"));
 
 const App = () => {
-  // check at page load if a user is authenticated
+  // check at page load if a user is authenticated will store information to redux
   const dispatch = useAppDispatch();
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (userAuth) => {

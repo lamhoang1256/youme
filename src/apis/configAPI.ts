@@ -122,7 +122,7 @@ export const getWatchMedia = async (params: IMediaParams) => {
     paramsGetUrlsMedia.map((paramsMedia: IMediaParams) => getWatchAPI(paramsMedia)),
   );
   const qualities = quanlitiesFetch.map((quality) => quality.data);
-  // bring subtitle of Vietnamese to first element of array to when watch media player will set Vietnamese is default sub
+  // set Vietnamese is default subtitle
   const subtitlesFirstVN = [...detailCurrentPlay.subtitlingList].reduce(
     (prevSub: any, currentSub: any) => {
       if (currentSub.languageAbbr === "vi") {

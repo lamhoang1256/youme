@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { daysOfWeek } from "constants/daysOfWeek";
+import LabelNormal from "components/label/LabelNormal";
 
 interface WatchUpcomingProps {
   updatePeriod: string;
@@ -14,7 +15,7 @@ const WatchUpcomingRender = ({ children }: { children: React.ReactNode }) => {
   const { t } = useTranslation();
   return (
     <StyledWatchUpcoming>
-      <span className="label-small">{t("Upcoming")}:</span>
+      <LabelNormal>{t("Upcoming")} :</LabelNormal>
       {t("New episode is updated on")}
       {children}
       {t("every week")}

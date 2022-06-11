@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { IMovieCard } from "types/components";
 import Breadcrumb from "components/breadcrumb/Breadcrumb";
 import MovieList from "components/movie/MovieList";
-import Nothing from "components/notification/Nothing";
+import ResultNotFound from "components/notification/ResultNotFound";
 
 const StyledHistory = styled.div`
   .history {
@@ -60,7 +60,7 @@ const History = () => {
         {moviesHistory?.length > 0 ? (
           <MovieList movieList={moviesHistory} />
         ) : (
-          <Nothing
+          <ResultNotFound
             heading="No History Yet!"
             description="Let's start exploring Youme"
             titleButton="Explore"

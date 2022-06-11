@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import ButtonGradient from "components/button/ButtonGradient";
 import { TextGradient } from "assets/styles/_mixins";
 
-export const StyledNothing = styled.div`
+export const StyledResultNotFound = styled.div`
   padding-top: 50px;
   display: flex;
   flex-direction: column;
@@ -37,24 +37,24 @@ export const StyledNothing = styled.div`
   }
 `;
 
-interface NothingProps {
+interface ResultNotFoundProps {
   titleButton: string;
   heading: string;
   description: string;
   to: string;
 }
 
-const Nothing = ({ titleButton, heading, description, to }: NothingProps) => {
+const ResultNotFound = ({ titleButton, heading, description, to }: ResultNotFoundProps) => {
   const { t } = useTranslation();
   return (
-    <StyledNothing>
+    <StyledResultNotFound>
       <h3 className="heading">{t(heading)}</h3>
       <span className="description">{t(description)}</span>
       <ButtonGradient to={to} className="button" kind="secondary">
         {t(titleButton)}
       </ButtonGradient>
-    </StyledNothing>
+    </StyledResultNotFound>
   );
 };
 
-export default Nothing;
+export default ResultNotFound;
