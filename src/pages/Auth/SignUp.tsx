@@ -15,9 +15,12 @@ import AuthInput from "components/input/AuthInput";
 import { PUBLIC_IMAGE } from "constants/path";
 import { toastErrorFirebase } from "utils/toastErrorFirebase";
 import { useAppSelector } from "App/store";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { StyledAuth, StyledButtonAuth } from "./auth.style";
 import AuthSuccess from "./AuthSuccess";
 import { createProfileUser } from "./auth.action";
+import { schemaYupSignUp } from "./auth.scheme";
 
 const StyledSignUp = styled.div`
   .signup {
@@ -33,40 +36,42 @@ const StyledSignUp = styled.div`
 `;
 
 const SignUp = () => {
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schemaYupSignUp),
+  });
   const { currentUser } = useAppSelector((state) => state.auth);
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [showOption, setShowOption] = useState(true);
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [repeatPassword, setRepeatPassword] = useState("");
-
   const redirectHome = (timeDelay = 500) => {
     setTimeout(() => navigate("/"), timeDelay);
   };
 
-  const signUpWithEmail = async () => {
-    if (password !== repeatPassword) {
-      toast.error(t("Password and repeat password not same!"));
-      return;
-    }
-    try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      if (!auth.currentUser) return;
-      await setDoc(doc(db, "users", auth.currentUser.uid), {
-        uid: auth.currentUser.uid,
-        username,
-        email,
-        createdAt: serverTimestamp(),
-        avatar: `${PUBLIC_IMAGE}/header-avatar.webp`,
-        favorites: [],
-      });
-      toast.success(t("Sign Up Success"));
-      redirectHome();
-    } catch (error: any) {
-      toastErrorFirebase(t(error.message));
-    }
+  const handleSignUpWithEmail = (values: any) => {
+    const { username, email, password } = values;
+    const signUpWithEmail = async () => {
+      try {
+        await createUserWithEmailAndPassword(auth, email, password);
+        if (!auth.currentUser) return;
+        await setDoc(doc(db, "users", auth.currentUser.uid), {
+          uid: auth.currentUser.uid,
+          username,
+          email,
+          createdAt: serverTimestamp(),
+          avatar: `${PUBLIC_IMAGE}/header-avatar.webp`,
+          favorites: [],
+        });
+        toast.success(t("Sign Up Success"));
+        redirectHome();
+      } catch (error: any) {
+        toastErrorFirebase(t(error.message));
+      }
+    };
+    signUpWithEmail();
   };
 
   const signUpWithGoogle = async () => {
@@ -142,7 +147,7 @@ const SignUp = () => {
                   </div>
                 </>
               ) : (
-                <>
+                <form onSubmit={handleSubmit(handleSignUpWithEmail)}>
                   <div className="signup-header">
                     <h2>{t("Sign Up with Email")}</h2>
                     <button
@@ -155,38 +160,42 @@ const SignUp = () => {
                   </div>
                   <div className="auth-main">
                     <AuthInput
+                      name="username"
+                      control={control}
                       label="Username"
                       type="text"
                       placeholder={t("Username")}
-                      onChange={(e: any) => setUsername(e.target.value)}
+                      error={errors.username}
                     />
                     <AuthInput
+                      name="email"
+                      control={control}
                       label="Email"
                       type="email"
                       placeholder="Email"
-                      onChange={(e: any) => setEmail(e.target.value)}
+                      error={errors.email}
                     />
                     <AuthInput
+                      name="password"
+                      control={control}
                       label="Password"
                       type="password"
-                      placeholder={t("Min 6 characters")}
-                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder={t("Min 8 characters")}
+                      error={errors.password}
                     />
                     <AuthInput
+                      name="repeatPassword"
+                      control={control}
                       label={t("Re-type Password")}
                       type="password"
-                      placeholder={t("Min 6 characters")}
-                      onChange={(e) => setRepeatPassword(e.target.value)}
+                      placeholder={t("Min 8 characters")}
+                      error={errors.repeatPassword}
                     />
-                    <StyledButtonAuth
-                      type="button"
-                      className="auth-primary"
-                      onClick={signUpWithEmail}
-                    >
+                    <StyledButtonAuth type="submit" className="auth-primary">
                       {t("Sign Up")}
                     </StyledButtonAuth>
                   </div>
-                </>
+                </form>
               )}
               <div className="auth-no-acount">
                 {t("Have an account?")} <Link to="/sign-in">{t("Sign In Here")}</Link>

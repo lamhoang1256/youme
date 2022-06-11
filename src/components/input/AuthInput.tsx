@@ -1,6 +1,8 @@
 import { InputHTMLAttributes } from "react";
-import { useTranslation } from "react-i18next";
 import styled from "styled-components";
+import { Control, FieldValues, useController } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import LabelError from "components/label/LabelError";
 
 const StyledAuthInput = styled.div`
   input {
@@ -20,14 +22,24 @@ const StyledAuthInput = styled.div`
 
 interface AuthInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
+  name: string;
+  control: Control<FieldValues, any>;
+  error: any;
 }
 
-const AuthInput = ({ label, ...otherProps }: AuthInputProps) => {
+const AuthInput = ({ name, control, label, error, ...otherProps }: AuthInputProps) => {
   const { t } = useTranslation();
+  const { field } = useController({
+    control,
+    name,
+    defaultValue: "",
+  });
+
   return (
     <StyledAuthInput>
       <span>{t(label)}</span>
-      <input {...otherProps} />
+      <input {...otherProps} {...field} />
+      <LabelError>{t(error?.message)}</LabelError>
     </StyledAuthInput>
   );
 };

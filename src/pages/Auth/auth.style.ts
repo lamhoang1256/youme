@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const StyledButtonAuth = styled.button`
   position: relative;
-
   width: 100%;
   margin-top: 12px;
   padding: 12px;
@@ -57,7 +56,7 @@ export const StyledAuth = styled.div`
       font-weight: 700;
       border-radius: 6px;
       border: 1px solid #8a3cff;
-      background-image: linear-gradient(270deg, #c042ff, #8a3cff);
+      background-image: var(--gradient-primary);
     }
     &-other {
       margin: 14px 0;

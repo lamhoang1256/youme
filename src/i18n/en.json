@@ -76,5 +76,16 @@
   "Thursday": "Thursday",
   "Friday": "Friday",
   "Saturday": "Saturday",
-  "Sunday": "Sunday"
+  "Sunday": "Sunday",
+  "Please enter your username": "Please enter your username",
+  "Please enter valid email address": "Please enter valid email address",
+  "Please enter your email address": "Please enter your email address",
+  "Password must be at least 8 characters": "Password must be at least 8 characters",
+  "Password must have at least 1 uppercase, 1 lowercase, 1 special character": "Password must have at least 1 uppercase, 1 lowercase, 1 special character",
+  "Please enter your password": "Please enter your password",
+  "Please enter re-password": "Please enter re-password",
+  "Min 8 characters": "Min 8 characters",
+  "Article not found": "Article not found",
+  "The knowledge base article could not be found": "The knowledge base article could not be found",
+  "Go News": "Go News"
 }

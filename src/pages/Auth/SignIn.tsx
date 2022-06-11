@@ -1,7 +1,8 @@
 /* eslint-disable no-underscore-dangle */
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useForm } from "react-hook-form";
 import {
   FacebookAuthProvider,
   GoogleAuthProvider,
@@ -12,36 +13,43 @@ import { auth } from "firebase-app/firebase-config";
 import AuthInput from "components/input/AuthInput";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
-import { toastErrorFirebase } from "utils/toastErrorFirebase";
 import { useAppSelector } from "App/store";
 import { PUBLIC_IMAGE } from "constants/path";
+import { toastErrorFirebase } from "utils/toastErrorFirebase";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { StyledAuth, StyledButtonAuth } from "./auth.style";
 import AuthSuccess from "./AuthSuccess";
 import { createProfileUser } from "./auth.action";
+import { schemaYupSignIn } from "./auth.scheme";
 
 const StyledSignIn = styled.div``;
 
 const SignIn = () => {
   const { currentUser } = useAppSelector((state) => state.auth);
   const { t } = useTranslation();
-  const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
-  const redirectHome = (timeDelay = 500) => {
-    setTimeout(() => navigate("/"), timeDelay);
-  };
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schemaYupSignIn),
+  });
 
-  const signInWithEmail = async () => {
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      toast.success(t("Success Sign In"));
-      redirectHome();
-    } catch (error: any) {
-      if (error.message.includes("wrong-password"))
-        toast.error(t("It seems your password was wrong"));
-      else toastErrorFirebase(error.message);
-    }
+  const handleSignInWithEmail = (values: any) => {
+    const { email, password } = values;
+    const signInWithEmail = async () => {
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        toast.success(t("Success Sign In"));
+        // redirectHome();
+      } catch (error: any) {
+        if (error.message.includes("wrong-password"))
+          toast.error(t("It seems your password was wrong"));
+        else toastErrorFirebase(error.message);
+      }
+    };
+    signInWithEmail();
   };
 
   const signInWithGoogle = async () => {
@@ -67,7 +75,7 @@ const SignIn = () => {
         createProfileUser(user);
       }
       toast.success(t("Success Login with Facebook"));
-      redirectHome();
+      // redirectHome();
     } catch (error: any) {
       toast.error(error.message);
     }
@@ -85,27 +93,27 @@ const SignIn = () => {
             {currentUser ? (
               <AuthSuccess />
             ) : (
-              <div>
+              <form onSubmit={handleSubmit(handleSignInWithEmail)}>
                 <h2>Welcome to Youme</h2>
                 <span className="auth-label">{t("SignIn to continue")}</span>
                 <div className="auth-main">
                   <AuthInput
+                    name="email"
                     label="Email"
                     type="text"
                     placeholder="Email"
-                    onChange={(e: any) => setEmail(e.target.value)}
+                    control={control}
+                    error={errors.email}
                   />
                   <AuthInput
+                    name="password"
                     label={t("Password")}
                     type="password"
                     placeholder={t("Password")}
-                    onChange={(e) => setPassword(e.target.value)}
+                    control={control}
+                    error={errors.password}
                   />
-                  <StyledButtonAuth
-                    type="button"
-                    className="auth-primary"
-                    onClick={signInWithEmail}
-                  >
+                  <StyledButtonAuth type="submit" className="auth-primary">
                     {t("Sign In")}
                   </StyledButtonAuth>
                   <div className="auth-other">
@@ -131,7 +139,7 @@ const SignIn = () => {
                 <div className="auth-no-acount">
                   {t("Do not have an account?")} <Link to="/sign-up">{t("Sign Up Here")}</Link>
                 </div>
-              </div>
+              </form>
             )}
           </div>
         </div>
