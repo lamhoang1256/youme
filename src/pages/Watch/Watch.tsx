@@ -79,11 +79,11 @@ const Watch = () => {
   }, [watch]);
 
   useEffect(() => {
-    if (!watch?.detailMovie?.name) {
-      document.title = `Youme`;
+    if (watch?.detailMovie?.name) {
+      document.title = `Youme: ${watch.detailMovie.name}`;
       return;
     }
-    document.title = `Youme: ${watch.detailMovie.name}`;
+    document.title = `Youme`;
   }, [watch]);
 
   return (

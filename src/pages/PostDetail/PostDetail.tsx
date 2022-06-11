@@ -42,8 +42,8 @@ interface IPostDetail {
 
 const PostDetail = () => {
   const id = Number(useParams().id);
-  const [post, setPost] = useState<IPostDetail>(Object);
   const [loading, setLoading] = useState(true);
+  const [post, setPost] = useState<IPostDetail>(Object);
 
   useEffect(() => {
     const fetchPostDetail = async () => {
@@ -53,12 +53,19 @@ const PostDetail = () => {
         setPost(data);
         setLoading(false);
       } catch (error) {
-        console.log(error);
         setLoading(false);
       }
     };
     fetchPostDetail();
   }, []);
+
+  useEffect(() => {
+    if (post.title) {
+      document.title = `Youme - ${post.title}`;
+      return;
+    }
+    document.title = `Youme - Tin tức`;
+  }, [post]);
 
   if (loading) {
     return <LoadingSpinner />;

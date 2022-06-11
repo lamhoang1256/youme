@@ -1,4 +1,3 @@
-// import { AnimationSkeleton } from "assets/styles/_mixins";
 import styled from "styled-components";
 
 const StyledWatchPlayerSkeleton = styled.div`
@@ -20,7 +19,7 @@ const StyledWatchPlayerSkeleton = styled.div`
 const WatchPlayerSkeleton = () => {
   return (
     <StyledWatchPlayerSkeleton>
-      <img src={`${process.env.REACT_APP_PUBLIC}/images/spinner.gif`} alt="Spinner" />
+      <img src="/images/spinner.gif" alt="Spinner" />
     </StyledWatchPlayerSkeleton>
   );
 };

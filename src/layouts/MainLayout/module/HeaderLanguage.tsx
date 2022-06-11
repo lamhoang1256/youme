@@ -8,7 +8,7 @@ const StyledHeaderLanguage = styled.div`
   .language {
     &-switcher {
       background-color: transparent;
-      font-size: 2.4rem;
+      font-size: 2.45rem;
       color: var(--white);
     }
     &-list {
@@ -17,7 +17,7 @@ const StyledHeaderLanguage = styled.div`
       right: 0;
       border-radius: 4px;
       padding: 10px;
-      background-color: #0d0d0d;
+      background-color: #361466;
       z-index: 100;
     }
     &-item {

@@ -3,6 +3,19 @@ import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAppSelector } from "App/store";
 
+const menuLinks = [
+  { id: 1, display: "Explore", path: "/explore" },
+  { id: 2, display: "Favorites", path: "/favorites" },
+  { id: 3, display: "History", path: "/history" },
+  { id: 4, display: "News", path: "/articles" },
+  { id: 5, display: "Community", path: "/community" },
+];
+
+interface HeaderMenuProps {
+  showMenu: boolean;
+  handleToggleMenu: () => void;
+}
+
 const StyledHeaderMenu = styled.ul`
   display: flex;
   align-items: center;
@@ -80,19 +93,6 @@ const StyledHeaderMenu = styled.ul`
   }
 `;
 
-const menuLinks = [
-  { id: 1, display: "Explore", path: "/explore" },
-  { id: 2, display: "Favorites", path: "/favorites" },
-  { id: 3, display: "History", path: "/history" },
-  { id: 4, display: "News", path: "/articles" },
-  { id: 5, display: "Community", path: "/community" },
-];
-
-interface HeaderMenuProps {
-  showMenu: boolean;
-  handleToggleMenu: () => void;
-}
-
 const HeaderMenu = ({ showMenu, handleToggleMenu }: HeaderMenuProps) => {
   const { t } = useTranslation();
   const { currentUser } = useAppSelector((state) => state.auth);
@@ -102,7 +102,7 @@ const HeaderMenu = ({ showMenu, handleToggleMenu }: HeaderMenuProps) => {
       <li className="menu-header">
         <img src="/images/header-avatar.webp" alt="avatar" />
         <span>
-          {t("Hello")}, {currentUser ? currentUser.username : "Guest"}
+          {t("Hello")}, {currentUser ? currentUser.username : t("Guest")}
         </span>
       </li>
       {menuLinks.map((link) => (

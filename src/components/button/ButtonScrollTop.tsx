@@ -12,7 +12,6 @@ const StyledButtonScrollTop = styled.button`
   }
 `;
 
-const URL_PUBLIC_IMG = `${process.env.REACT_APP_PUBLIC}/images`;
 const ButtonScrollTop = () => {
   const [showTopBtn, setShowTopBtn] = useState(false);
   useEffect(() => {
@@ -34,7 +33,7 @@ const ButtonScrollTop = () => {
     <StyledButtonScrollTop>
       {showTopBtn && (
         <button type="button" onClick={goToTop}>
-          <img src={`${URL_PUBLIC_IMG}/arrow-back.svg`} alt="Go Top" />
+          <img src="images/arrow-back.svg" alt="Go Top" />
         </button>
       )}
     </StyledButtonScrollTop>

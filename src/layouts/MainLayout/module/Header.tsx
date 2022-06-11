@@ -8,27 +8,30 @@ import HeaderUser from "./HeaderUser";
 
 const StyledHeader = styled.header`
   --header-height: 100px;
-  .header {
-    &-container {
-      position: relative;
-      height: var(--header-height);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+  .header-content {
+    position: relative;
+    height: var(--header-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .header-logo {
+    height: 40px;
+  }
+  @media screen and (max-width: 1023.98px) {
+    .header-overplay {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 50;
     }
-    .logo-img {
-      height: 40px;
+    .header-logo {
+      height: 35px;
     }
-    @media screen and (max-width: 1023.98px) {
-      &-container.show-search {
-        margin-bottom: calc(var(--header-height) / 100 * 70);
-      }
-      &-overplay {
-        position: fixed;
-        inset: 0;
-        background-color: rgba(0, 0, 0, 0.8);
-        z-index: 50;
-      }
+  }
+  @media screen and (max-width: 767.98px) {
+    .header-logo {
+      height: 30px;
     }
   }
 `;
@@ -36,20 +39,19 @@ const StyledHeaderActions = styled.div`
   display: flex;
   align-items: center;
   gap: 30px;
-  .header {
-    &-auth {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-    }
-    &-search {
-      display: block;
-    }
+  .header-auth {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  .header-search {
+    display: block;
   }
   @media screen and (max-width: 1023.98px) {
     gap: 20px;
+    align-items: flex-end;
   }
   @media screen and (max-width: 767.98px) {
     gap: 14px;
@@ -73,27 +75,27 @@ const Header = () => {
 
   return (
     <StyledHeader>
-      <div className="header container">
-        <div className="header-container">
-          <Link to="/" className="header-logo">
-            <img src="/images/header-logo.png" alt="logo" className="logo-img" />
-          </Link>
-          <HeaderMenu showMenu={showMenu} handleToggleMenu={handleToggleMenu} />
-          <StyledHeaderActions>
-            <HeaderLanguage />
-            <Link to="/search">
-              <StyledHeaderButton className="header-search">
-                <IonIcon name="search-outline" />
-              </StyledHeaderButton>
-            </Link>
-            <StyledHeaderButton onClick={handleToggleMenu}>
-              <IonIcon name="reorder-four-outline" />
+      <div className="header-content container">
+        <Link to="/">
+          <img src="/images/header-logo.png" alt="logo" className="header-logo" />
+        </Link>
+        <HeaderMenu showMenu={showMenu} handleToggleMenu={handleToggleMenu} />
+        <StyledHeaderActions>
+          <HeaderLanguage />
+          <Link to="/search">
+            <StyledHeaderButton className="header-search">
+              <IonIcon name="search-outline" />
             </StyledHeaderButton>
-            <HeaderUser />
-          </StyledHeaderActions>
-        </div>
+          </Link>
+          <StyledHeaderButton onClick={handleToggleMenu}>
+            <IonIcon name="reorder-four-outline" />
+          </StyledHeaderButton>
+          <HeaderUser />
+        </StyledHeaderActions>
       </div>
-      {showMenu && <switch className="header-overplay" onClick={handleToggleMenu} />}
+      {showMenu && (
+        <div className="header-overplay" onClick={handleToggleMenu} aria-hidden="true" />
+      )}
     </StyledHeader>
   );
 };
