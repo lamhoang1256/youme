@@ -14,7 +14,6 @@ import AuthInput from "components/input/AuthInput";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { useAppSelector } from "App/store";
-import { PUBLIC_IMAGE } from "constants/path";
 import { toastErrorFirebase } from "utils/toastErrorFirebase";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { StyledAuth, StyledButtonAuth } from "./auth.style";
@@ -124,7 +123,7 @@ const SignIn = () => {
                     className="auth-facebook"
                     onClick={signInWithFacebook}
                   >
-                    <img src={`${PUBLIC_IMAGE}/auth-facebook.png`} alt="facebook" />
+                    <img src="images/auth-facebook.png" alt="facebook" />
                     {t("Sign In with Facebook")}
                   </StyledButtonAuth>
                   <StyledButtonAuth
@@ -132,7 +131,7 @@ const SignIn = () => {
                     className="auth-google"
                     onClick={signInWithGoogle}
                   >
-                    <img src={`${PUBLIC_IMAGE}/auth-google.png`} alt="google" />
+                    <img src="images/auth-google.png" alt="google" />
                     {t("Sign In with Google")}
                   </StyledButtonAuth>
                 </div>

@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { resizeImage } from "constants/resizeImage";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { PUBLIC_IMAGE } from "constants/path";
 import { IMovieCard } from "types/components";
 import MovieTitle from "./MovieTitle";
 
@@ -69,7 +68,7 @@ const MovieCard = ({ movie }: MovieCardProps) => {
             effect="opacity"
             className="card-poster"
           />
-          <img src={`${PUBLIC_IMAGE}/play-movie.png`} alt="play" className="card-play" />
+          <img src="images/play-movie.png" alt="play" className="card-play" />
         </div>
       </Link>
       <MovieTitle to={url} title={name} className="card-title" />

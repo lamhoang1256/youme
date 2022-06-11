@@ -5,7 +5,6 @@ import useSWRInfinite from "swr/infinite";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useTranslation } from "react-i18next";
 import { getPreviewVideoMedia } from "apis/configAPI";
-import { PUBLIC_IMAGE } from "constants/path";
 import { ICommunity } from "types/community";
 import LoadingSpinner from "components/loading/LoadingSpinner";
 import Heading from "components/heading/Heading";
@@ -58,7 +57,7 @@ const Community = () => {
                       <div className="actions">
                         <div className="action">
                           <div className="icon">
-                            <img src={`${PUBLIC_IMAGE}/heart.svg`} alt="heart" />
+                            <img src="images/heart.svg" alt="heart" />
                           </div>
                           <span>{likeCount}</span>
                         </div>

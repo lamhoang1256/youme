@@ -12,7 +12,6 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import AuthInput from "components/input/AuthInput";
-import { PUBLIC_IMAGE } from "constants/path";
 import { toastErrorFirebase } from "utils/toastErrorFirebase";
 import { useAppSelector } from "App/store";
 import { useForm } from "react-hook-form";
@@ -62,7 +61,7 @@ const SignUp = () => {
           username,
           email,
           createdAt: serverTimestamp(),
-          avatar: `${PUBLIC_IMAGE}/header-avatar.webp`,
+          avatar: `images/header-avatar.webp`,
           favorites: [],
         });
         toast.success(t("Sign Up Success"));
@@ -125,15 +124,14 @@ const SignUp = () => {
                       className="auth-primary"
                       onClick={() => setShowOption(false)}
                     >
-                      <img src={`${PUBLIC_IMAGE}/auth-email.png`} alt="email" />{" "}
-                      {t("Sign Up with Email")}
+                      <img src="images/auth-email.png" alt="email" /> {t("Sign Up with Email")}
                     </StyledButtonAuth>
                     <StyledButtonAuth
                       type="button"
                       className="auth-facebook"
                       onClick={signUpWithFacebook}
                     >
-                      <img src={`${PUBLIC_IMAGE}/auth-facebook.png`} alt="facebook" />
+                      <img src="images/auth-facebook.png" alt="facebook" />
                       {t("Sign Up with Facebook")}
                     </StyledButtonAuth>
                     <StyledButtonAuth
@@ -141,7 +139,7 @@ const SignUp = () => {
                       className="auth-google"
                       onClick={signUpWithGoogle}
                     >
-                      <img src={`${PUBLIC_IMAGE}/auth-google.png`} alt="google" />
+                      <img src="images/auth-google.png" alt="google" />
                       {t("Sign Up with Google")}
                     </StyledButtonAuth>
                   </div>

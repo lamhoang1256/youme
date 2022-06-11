@@ -6,7 +6,6 @@ import { IBanners } from "types/home";
 import { getBanners } from "apis/configAPI";
 import { AnimationSkeleton } from "assets/styles/_mixins";
 import Image from "components/image/Image";
-import { PUBLIC_IMAGE } from "constants/path";
 import { SliderArrow } from "components/button/SliderArrow";
 
 const StyledBanner = styled.div`
@@ -77,12 +76,12 @@ const settingsHomeBanner = {
   slidesToScroll: 1,
   prevArrow: (
     <SliderArrow onClick={undefined} style={undefined} className="">
-      <img src={`${PUBLIC_IMAGE}/arrow-back.svg`} alt="prev" />
+      <img src="images/arrow-back.svg" alt="prev" />
     </SliderArrow>
   ),
   nextArrow: (
     <SliderArrow onClick={undefined} style={undefined} className="">
-      <img src={`${PUBLIC_IMAGE}/arrow-next.svg`} alt="next" />
+      <img src="images/arrow-next.svg" alt="next" />
     </SliderArrow>
   ),
 };
