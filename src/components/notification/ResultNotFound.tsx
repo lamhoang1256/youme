@@ -23,7 +23,7 @@ export const StyledResultNotFound = styled.div`
   }
   .description {
     font-size: 1.8rem;
-    color: #c4c1ea;
+    color: var(--gray-color);
     font-weight: 500;
   }
   .button {

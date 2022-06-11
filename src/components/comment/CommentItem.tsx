@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import styled from "styled-components";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
@@ -23,13 +24,15 @@ const StyledCommentItem = styled.div`
     &-main {
       flex: 1;
     }
-    &-header {
-      display: flex;
-      gap: 10px;
-      align-items: center;
+    &-name {
+      font-size: 1.8rem;
+      color: #eee;
     }
     &-time {
-      color: #eee;
+      display: block;
+      margin: 4px 0 6px;
+      color: var(--gray-color);
+      font-size: 1.4rem;
     }
     &-content {
       margin-top: 5px;
@@ -45,10 +48,8 @@ const CommentItem = ({ comment }: CommentItemProps) => {
     <StyledCommentItem>
       <img className="comment-avatar" src={avatar} alt="avatar" />
       <div className="comment-main">
-        <div className="comment-header">
-          <h3 className="comment-name">{username}</h3>
-          <span className="comment-time">{timeAgo.format(createdAt.seconds * 1000)}</span>
-        </div>
+        <h3 className="comment-name">{username}</h3>
+        <span className="comment-time">{timeAgo.format(createdAt.seconds * 1000)}</span>
         <p className="comment-content">{content}</p>
       </div>
     </StyledCommentItem>

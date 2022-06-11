@@ -33,7 +33,7 @@ const ButtonScrollTop = () => {
     <StyledButtonScrollTop>
       {showTopBtn && (
         <button type="button" onClick={goToTop}>
-          <img src="images/arrow-back.svg" alt="Go Top" />
+          <img src="/images/arrow-back.svg" alt="Go Top" />
         </button>
       )}
     </StyledButtonScrollTop>

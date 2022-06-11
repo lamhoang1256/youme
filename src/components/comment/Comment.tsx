@@ -1,13 +1,17 @@
+import IonIcon from "@reacticons/ionicons";
+import { useAppSelector } from "App/store";
+import { db } from "firebase-app/firebase-config";
+import { collection, onSnapshot, orderBy, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "firebase-app/firebase-config";
-import IonIcon from "@reacticons/ionicons";
 import { IComment } from "types/components";
-import { useAppSelector } from "App/store";
 import CommentAdd from "./CommentAdd";
-import CommentItem from "./CommentItem";
+import CommentList from "./CommentList";
+
+interface CommentProps {
+  id: string;
+}
 
 const StyledComment = styled.div`
   margin-top: 30px;
@@ -19,8 +23,8 @@ const StyledComment = styled.div`
       gap: 8px;
     }
     &-avatar {
-      width: 40px;
-      height: 40px;
+      width: 50px;
+      height: 50px;
       border-radius: 100rem;
     }
   }
@@ -33,10 +37,6 @@ const StyledComment = styled.div`
   }
 `;
 
-interface CommentProps {
-  id: string;
-}
-
 const Comment = ({ id }: CommentProps) => {
   const { t } = useTranslation();
   const { currentUser } = useAppSelector((state) => state.auth);
@@ -44,9 +44,18 @@ const Comment = ({ id }: CommentProps) => {
 
   const fetchCommentList = async () => {
     try {
-      const commentsRef = doc(db, "comments", id);
-      const data = await getDoc(commentsRef);
-      if (data.data()) setComments(data.data()?.comments);
+      const colRef = collection(db, "comments");
+      const queryRef = query(colRef, where("movieId", "==", id), orderBy("createdAt", "desc"));
+      onSnapshot(queryRef, (snapshot) => {
+        const results: any = [];
+        snapshot.forEach((doc: any) => {
+          results.push({
+            uid: doc.id,
+            ...doc.data(),
+          });
+        });
+        setComments(results);
+      });
     } catch (error) {
       console.log(error);
     }
@@ -61,18 +70,9 @@ const Comment = ({ id }: CommentProps) => {
       <h3 className="comment-heading">
         <IonIcon name="chatbubbles-outline" /> {t("Comments")} ({comments?.length})
       </h3>
-      {currentUser ? (
-        <CommentAdd comments={comments} fetchCommentList={fetchCommentList} id={id} />
-      ) : (
-        <div className="no-login">{t("Login to comment")}</div>
-      )}
-      <div className="comment-list">
-        {comments.length > 0 ? (
-          comments.map((comment: IComment) => <CommentItem key={comment.uid} comment={comment} />)
-        ) : (
-          <div className="no-comment">{t("No one has commented")}</div>
-        )}
-      </div>
+      {currentUser && <CommentAdd id={id} />}
+      {!currentUser && <div className="no-login">{t("Login to comment")}</div>}
+      <CommentList comments={comments} />
     </StyledComment>
   );
 };

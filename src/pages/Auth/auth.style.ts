@@ -47,7 +47,7 @@ export const StyledAuth = styled.div`
     }
     &-label {
       display: block;
-      color: #c4c1ea;
+      color: var(--gray-color);
       font-size: 1.4rem;
       margin: 8px 0;
     }
