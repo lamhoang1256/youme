@@ -64,7 +64,7 @@ const History = () => {
             heading="No History Yet!"
             description="Let's start exploring Youme"
             titleButton="Explore"
-            redirect="/explore"
+            to="/explore"
           />
         )}
       </div>

@@ -5,21 +5,21 @@ import { useTranslation } from "react-i18next";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { auth, db } from "firebase-app/firebase-config";
 import styled from "styled-components";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import {
   createUserWithEmailAndPassword,
   FacebookAuthProvider,
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
+import { useAppSelector } from "App/store";
 import AuthInput from "components/input/AuthInput";
 import { toastErrorFirebase } from "utils/toastErrorFirebase";
-import { useAppSelector } from "App/store";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { schemaYupSignUp } from "./auth.scheme";
+import { createProfileUser } from "./auth.action";
 import { StyledAuth, StyledButtonAuth } from "./auth.style";
 import AuthSuccess from "./AuthSuccess";
-import { createProfileUser } from "./auth.action";
-import { schemaYupSignUp } from "./auth.scheme";
 
 const StyledSignUp = styled.div`
   .signup {
@@ -35,6 +35,9 @@ const StyledSignUp = styled.div`
 `;
 
 const SignUp = () => {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { currentUser } = useAppSelector((state) => state.auth);
   const {
     handleSubmit,
     control,
@@ -42,10 +45,8 @@ const SignUp = () => {
   } = useForm({
     resolver: yupResolver(schemaYupSignUp),
   });
-  const { currentUser } = useAppSelector((state) => state.auth);
-  const { t } = useTranslation();
-  const navigate = useNavigate();
   const [showOption, setShowOption] = useState(true);
+
   const redirectHome = (timeDelay = 500) => {
     setTimeout(() => navigate("/"), timeDelay);
   };

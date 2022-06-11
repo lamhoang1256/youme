@@ -55,7 +55,7 @@ const Favorites = () => {
           heading="No Movies Added!"
           description="There are no items in your favourite"
           titleButton="Add more"
-          redirect="/explore"
+          to="/explore"
         />
       )}
     </div>

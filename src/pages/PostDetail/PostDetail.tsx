@@ -71,7 +71,7 @@ const PostDetail = () => {
           heading="Article not found"
           description="The knowledge base article could not be found"
           titleButton="Go News"
-          redirect="/articles"
+          to="/articles"
         />
       </div>
     );

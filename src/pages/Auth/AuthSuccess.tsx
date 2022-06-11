@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import ButtonGradient from "components/button/ButtonGradient";
@@ -9,7 +8,7 @@ const StyledAuthSuccess = styled.div`
   justify-content: center;
   flex-direction: column;
   gap: 20px;
-  .success-image {
+  .image {
     margin: 0 auto;
     height: 120px;
   }
@@ -19,11 +18,11 @@ const AuthSuccess = () => {
   const { t } = useTranslation();
   return (
     <StyledAuthSuccess>
-      <img src="images/success-check.png" alt="success" className="success-image" />
-      <h2 className="success--heading">{t("You are logged in")}</h2>
-      <Link to="/">
-        <ButtonGradient className="secondary">{t("Return Home")}</ButtonGradient>
-      </Link>
+      <img src="images/success-check.png" alt="success" className="image" />
+      <h2>{t("You are logged in")}</h2>
+      <ButtonGradient to="/" kind="secondary">
+        {t("Return Home")}
+      </ButtonGradient>
     </StyledAuthSuccess>
   );
 };

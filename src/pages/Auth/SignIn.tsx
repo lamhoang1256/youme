@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import {
@@ -10,23 +10,23 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { auth } from "firebase-app/firebase-config";
-import AuthInput from "components/input/AuthInput";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { useAppSelector } from "App/store";
-import { toastErrorFirebase } from "utils/toastErrorFirebase";
 import { yupResolver } from "@hookform/resolvers/yup";
+import AuthInput from "components/input/AuthInput";
+import { toastErrorFirebase } from "utils/toastErrorFirebase";
 import { StyledAuth, StyledButtonAuth } from "./auth.style";
-import AuthSuccess from "./AuthSuccess";
 import { createProfileUser } from "./auth.action";
 import { schemaYupSignIn } from "./auth.scheme";
+import AuthSuccess from "./AuthSuccess";
 
 const StyledSignIn = styled.div``;
 
 const SignIn = () => {
-  const { currentUser } = useAppSelector((state) => state.auth);
   const { t } = useTranslation();
-
+  const navigate = useNavigate();
+  const { currentUser } = useAppSelector((state) => state.auth);
   const {
     handleSubmit,
     control,
@@ -35,13 +35,17 @@ const SignIn = () => {
     resolver: yupResolver(schemaYupSignIn),
   });
 
+  const redirectHome = (timeDelay = 500) => {
+    setTimeout(() => navigate("/"), timeDelay);
+  };
+
   const handleSignInWithEmail = (values: any) => {
     const { email, password } = values;
     const signInWithEmail = async () => {
       try {
         await signInWithEmailAndPassword(auth, email, password);
         toast.success(t("Success Sign In"));
-        // redirectHome();
+        redirectHome();
       } catch (error: any) {
         if (error.message.includes("wrong-password"))
           toast.error(t("It seems your password was wrong"));
@@ -60,6 +64,7 @@ const SignIn = () => {
         createProfileUser(user);
       }
       toast.success(t("Success Login with Google"));
+      redirectHome();
     } catch (error: any) {
       toast.error(error.message);
     }
@@ -74,14 +79,14 @@ const SignIn = () => {
         createProfileUser(user);
       }
       toast.success(t("Success Login with Facebook"));
-      // redirectHome();
+      redirectHome();
     } catch (error: any) {
       toast.error(error.message);
     }
   };
 
   useEffect(() => {
-    document.title = t("Sign In Page");
+    document.title = t("Youme - Sign In");
   }, []);
 
   return (

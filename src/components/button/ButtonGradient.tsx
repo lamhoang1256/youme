@@ -1,7 +1,27 @@
 import { ButtonHTMLAttributes, ReactNode } from "react";
-import styled from "styled-components";
+import { Link } from "react-router-dom";
+import styled, { css } from "styled-components";
 
-const StyledButtonGradient = styled.button`
+interface ButtonGradientProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  children: ReactNode;
+  to?: string;
+  kind?: "primary" | "secondary";
+}
+
+interface StyledButtonProps {
+  kind?: "primary" | "secondary";
+}
+
+const GRADIENT = {
+  primary: css`
+    background-image: var(--gradient-primary);
+  `,
+  secondary: css`
+    background-image: var(--gradient-secondary);
+  `,
+};
+
+const StyledButtonGradient = styled.button<StyledButtonProps>`
   position: relative;
   font-size: 1.8rem;
   padding: 8px 20px;
@@ -9,12 +29,7 @@ const StyledButtonGradient = styled.button`
   color: #fff;
   isolation: isolate;
   overflow: hidden;
-  &.primary {
-    background-image: var(--gradient-primary);
-  }
-  &.secondary {
-    background-image: var(--gradient-secondary);
-  }
+  ${(props) => props.kind && GRADIENT[props.kind]}
   &::before {
     content: "";
     position: absolute;
@@ -37,16 +52,26 @@ const StyledButtonGradient = styled.button`
   }
 `;
 
-interface ButtonGradientProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: ReactNode;
-}
-
-const ButtonGradient = ({ children, ...otherProps }: ButtonGradientProps) => {
+const ButtonGradient = ({ children, to, kind, ...otherProps }: ButtonGradientProps) => {
+  if (to) {
+    return (
+      <Link to={to} style={{ display: "block" }}>
+        <StyledButtonGradient type="button" {...otherProps} kind={kind}>
+          {children}
+        </StyledButtonGradient>
+      </Link>
+    );
+  }
   return (
-    <StyledButtonGradient type="button" {...otherProps}>
+    <StyledButtonGradient type="button" {...otherProps} kind={kind}>
       {children}
     </StyledButtonGradient>
   );
+};
+
+ButtonGradient.defaultProps = {
+  to: "",
+  kind: "",
 };
 
 export default ButtonGradient;

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import ButtonGradient from "components/button/ButtonGradient";
 import { TextGradient } from "assets/styles/_mixins";
@@ -30,7 +29,6 @@ export const StyledNothing = styled.div`
   .button {
     padding: 10px 30px;
     font-size: 1.6rem;
-    background-image: var(--gradient-secondary);
   }
   @media screen and (max-width: 767.98px) {
     .heading {
@@ -43,18 +41,18 @@ interface NothingProps {
   titleButton: string;
   heading: string;
   description: string;
-  redirect: string;
+  to: string;
 }
 
-const Nothing = ({ titleButton, heading, description, redirect }: NothingProps) => {
+const Nothing = ({ titleButton, heading, description, to }: NothingProps) => {
   const { t } = useTranslation();
   return (
     <StyledNothing>
       <h3 className="heading">{t(heading)}</h3>
       <span className="description">{t(description)}</span>
-      <Link to={redirect}>
-        <ButtonGradient className="button">{t(titleButton)}</ButtonGradient>
-      </Link>
+      <ButtonGradient to={to} className="button" kind="secondary">
+        {t(titleButton)}
+      </ButtonGradient>
     </StyledNothing>
   );
 };
