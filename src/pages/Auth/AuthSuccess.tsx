@@ -12,8 +12,7 @@ const StyledAuthSuccess = styled.div`
   gap: 20px;
   .success-image {
     margin: 0 auto;
-    width: 70px;
-    height: 70px;
+    height: 120px;
   }
 `;
 
