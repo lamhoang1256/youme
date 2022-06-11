@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { IComment } from "types/components";
-import CommentAdd from "./CommentAdd";
+import CommentAddNew from "./CommentAddNew";
 import CommentList from "./CommentList";
 
 interface CommentProps {
@@ -42,26 +42,25 @@ const Comment = ({ id }: CommentProps) => {
   const { currentUser } = useAppSelector((state) => state.auth);
   const [comments, setComments] = useState<IComment[]>([]);
 
-  const fetchCommentList = async () => {
-    try {
-      const colRef = collection(db, "comments");
-      const queryRef = query(colRef, where("movieId", "==", id), orderBy("createdAt", "desc"));
-      onSnapshot(queryRef, (snapshot) => {
-        const results: any = [];
-        snapshot.forEach((doc: any) => {
-          results.push({
-            uid: doc.id,
-            ...doc.data(),
-          });
-        });
-        setComments(results);
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
+    const fetchCommentList = async () => {
+      try {
+        const colRef = collection(db, "comments");
+        const queryRef = query(colRef, where("movieId", "==", id), orderBy("createdAt", "desc"));
+        onSnapshot(queryRef, (snapshot) => {
+          const results: any = [];
+          snapshot.forEach((doc: any) => {
+            results.push({
+              uid: doc.id,
+              ...doc.data(),
+            });
+          });
+          setComments(results);
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
     fetchCommentList();
   }, []);
 
@@ -70,7 +69,7 @@ const Comment = ({ id }: CommentProps) => {
       <h3 className="comment-heading">
         <IonIcon name="chatbubbles-outline" /> {t("Comments")} ({comments?.length})
       </h3>
-      {currentUser && <CommentAdd id={id} />}
+      {currentUser && <CommentAddNew id={id} />}
       {!currentUser && <div className="no-login">{t("Login to comment")}</div>}
       <CommentList comments={comments} />
     </StyledComment>

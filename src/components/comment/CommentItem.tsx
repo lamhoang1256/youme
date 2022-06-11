@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import styled from "styled-components";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
@@ -20,23 +19,21 @@ const StyledCommentItem = styled.div`
   margin-top: 20px;
   display: flex;
   gap: 14px;
-  .comment {
-    &-main {
-      flex: 1;
-    }
-    &-name {
-      font-size: 1.8rem;
-      color: #eee;
-    }
-    &-time {
-      display: block;
-      margin: 4px 0 6px;
-      color: var(--gray-color);
-      font-size: 1.4rem;
-    }
-    &-content {
-      margin-top: 5px;
-    }
+  .comment-main {
+    flex: 1;
+  }
+  .comment-name {
+    font-size: 1.8rem;
+    color: #eee;
+  }
+  .comment-time {
+    display: block;
+    margin: 4px 0 6px;
+    color: var(--gray-color);
+    font-size: 1.4rem;
+  }
+  .comment-content {
+    margin-top: 5px;
   }
 `;
 
@@ -44,6 +41,7 @@ const CommentItem = ({ comment }: CommentItemProps) => {
   const { avatar, username, createdAt, content } = comment;
   const timeAgo = new TimeAgo("en-US");
 
+  if (!createdAt) return null;
   return (
     <StyledCommentItem>
       <img className="comment-avatar" src={avatar} alt="avatar" />

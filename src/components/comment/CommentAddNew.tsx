@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import styled from "styled-components";
 import { toastErrorFirebase } from "utils/toastError";
 
-const StyledCommentAdd = styled.form`
+const StyledCommentAddNew = styled.form`
   display: flex;
   gap: 14px;
   .comment {
@@ -50,11 +50,11 @@ const StyledCommentAdd = styled.form`
   }
 `;
 
-interface CommentAddProps {
+interface CommentAddNewProps {
   id: string;
 }
 
-const CommentAdd = ({ id }: CommentAddProps) => {
+const CommentAddNew = ({ id }: CommentAddNewProps) => {
   const { t } = useTranslation();
   const { currentUser } = useAppSelector((state) => state.auth);
   const [commentValue, setCommentValue] = useState("");
@@ -95,7 +95,7 @@ const CommentAdd = ({ id }: CommentAddProps) => {
   useEffect(resizeTextArea, [commentValue]);
 
   return (
-    <StyledCommentAdd onSubmit={handleAddNewComment} method="POST">
+    <StyledCommentAddNew onSubmit={handleAddNewComment} method="POST">
       <div className="comment-post">
         <img className="comment-avatar" src={currentUser.avatar} alt="avatar" />
         <textarea
@@ -113,8 +113,8 @@ const CommentAdd = ({ id }: CommentAddProps) => {
       <button type="submit" className="comment-button">
         {t("Post")}
       </button>
-    </StyledCommentAdd>
+    </StyledCommentAddNew>
   );
 };
 
-export default CommentAdd;
+export default CommentAddNew;

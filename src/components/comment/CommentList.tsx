@@ -1,38 +1,41 @@
-import Button from "components/button/Button";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { IComment } from "types/components";
 import CommentItem from "./CommentItem";
 
-const StyledCommentList = styled.div``;
-const COMMENT_PER_PAGE = 2;
+const StyledCommentList = styled.div`
+  .show-all {
+    color: var(--gray-color);
+    margin-top: 14px;
+    background-color: transparent;
+    font-weight: 600;
+  }
+`;
+const COMMENT_PER_PAGE = 4;
 
 const CommentList = ({ comments }: { comments: IComment[] }) => {
   const { t } = useTranslation();
   const [countVisibleComment, setCountVisibleComment] = useState(COMMENT_PER_PAGE);
-  const [isShowButton, setIsShowButton] = useState(true);
-
   const handleShowAllComment = () => {
-    setCountVisibleComment(comments.length - 1);
-    setIsShowButton(false);
+    setCountVisibleComment(comments.length);
   };
 
+  if (comments.length === 0)
+    return (
+      <StyledCommentList>
+        <div className="no-comment">{t("No one has commented")}</div>
+      </StyledCommentList>
+    );
   return (
     <StyledCommentList>
-      {comments.length > 0 ? (
-        <>
-          {comments.slice(0, countVisibleComment).map((comment: IComment) => (
-            <CommentItem key={comment.uid} comment={comment} />
-          ))}
-          {isShowButton && (
-            <Button kind="primary" onClick={handleShowAllComment}>
-              Show more
-            </Button>
-          )}
-        </>
-      ) : (
-        <div className="no-comment">{t("No one has commented")}</div>
+      {comments.slice(0, countVisibleComment).map((comment: IComment) => (
+        <CommentItem key={comment.uid} comment={comment} />
+      ))}
+      {countVisibleComment < comments.length && (
+        <button type="button" onClick={handleShowAllComment} className="show-all">
+          {t("Show all comments")}
+        </button>
       )}
     </StyledCommentList>
   );
