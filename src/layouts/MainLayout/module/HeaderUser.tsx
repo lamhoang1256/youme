@@ -63,6 +63,13 @@ const StyledHeaderUser = styled.div`
     opacity: 1;
     visibility: visible;
   }
+  .btn-auth {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
 `;
 
 const HeaderUser = () => {
@@ -89,12 +96,12 @@ const HeaderUser = () => {
         <ul className="user-list">
           <li className="user-item">
             {currentUser ? (
-              <ButtonGradient kind="secondary" onClick={handleLogout}>
+              <ButtonGradient kind="secondary" onClick={handleLogout} className="btn-auth">
                 <IonIcon name="log-out-outline" />
                 <span>{t("Logout")}</span>
               </ButtonGradient>
             ) : (
-              <ButtonGradient to="/sign-in" kind="primary">
+              <ButtonGradient to="/sign-in" kind="primary" className="btn-auth">
                 {t("Sign In")}
               </ButtonGradient>
             )}
