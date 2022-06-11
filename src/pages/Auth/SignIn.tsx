@@ -15,7 +15,7 @@ import { useTranslation } from "react-i18next";
 import { useAppSelector } from "App/store";
 import { yupResolver } from "@hookform/resolvers/yup";
 import AuthInput from "components/input/AuthInput";
-import { toastErrorFirebase } from "utils/toastErrorFirebase";
+import { toastErrorFirebase } from "utils/toastError";
 import { StyledAuth, StyledButtonAuth } from "./auth.style";
 import { createProfileUser } from "./auth.action";
 import { schemaYupSignIn } from "./auth.scheme";

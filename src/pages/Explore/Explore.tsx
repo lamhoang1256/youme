@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import useSWRInfinite from "swr/infinite";
 import { IGenres, IFilters } from "types/explore";
 import { filterByCategory, getAllGenres } from "apis/configAPI";
-import { useTranslation } from "react-i18next";
 import MovieList from "components/movie/MovieList";
 import Tabs from "components/tabs/Tabs";
 import LoadingSpinner from "components/loading/LoadingSpinner";
@@ -12,16 +12,7 @@ import { IMovieCard } from "types/components";
 import EndOfPage from "components/notification/EndOfPage";
 import ExploreFilter from "module/explore/ExploreFilter";
 
-export const StyledExplore = styled.div`
-  .genre-item:first-child {
-    background-color: red;
-  }
-  .loading-spinner {
-    margin: 20px auto;
-    width: 40px;
-  }
-`;
-
+const StyledExplore = styled.div``;
 const defaultGenresTab = 2;
 const initialFilters = {
   area: "",
@@ -37,7 +28,7 @@ const initialFilters = {
 const Explore = () => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
-  const [selectedTabId, setSelectedTabId] = useState<number>(defaultGenresTab);
+  const [selectedTabId, setSelectedTabId] = useState(defaultGenresTab);
   const [allGenres, setAllGenres] = useState<IGenres[]>([]);
   const [filters, setFilters] = useState<IFilters>(initialFilters);
   const [exploreList, setExploreList] = useState<IMovieCard[]>([]);
@@ -62,12 +53,12 @@ const Explore = () => {
 
   const getKey = (index: any, prevData: any) => {
     if (prevData && prevData.length === 0) return null;
-    const sort = prevData?.data?.searchResults.slice(-1)[0].sort || "";
-    return `${JSON.stringify(filters)}sort-${sort}`;
+    const sort = prevData?.slice(-1)?.[0]?.sort || "";
+    return `${JSON.stringify(filters)}explore-${sort}`;
   };
   const { data, error, setSize } = useSWRInfinite(
     getKey,
-    (key) => filterByCategory({ ...filters, sort: key.split("sort-")[1] }),
+    (key) => filterByCategory({ ...filters, sort: key.split("explore-")[1] }),
     {
       revalidateFirstPage: false,
     },
@@ -75,12 +66,8 @@ const Explore = () => {
 
   useEffect(() => {
     if (!data) return;
-    const newData = data?.reduce(
-      (prevData: any, currData: any) => [...prevData, ...currData.data.searchResults],
-      [],
-    );
+    const newData = data?.reduce((prevData: any, currData: any) => [...prevData, ...currData], []);
     setExploreList(newData);
-    console.log(newData);
   }, [data]);
 
   useEffect(() => {
@@ -104,14 +91,13 @@ const Explore = () => {
             filters={filters}
             setFilters={setFilters}
             selectedTabId={selectedTabId}
-            setExploreList={setExploreList}
           />
           {/* All movie has been filtered */}
           {exploreList.length > 0 && (
             <InfiniteScroll
               dataLength={data?.length || 0}
               next={() => setSize((size) => size + 1)}
-              hasMore={!error && data?.slice(-1)[0].data.searchResults.length !== 0}
+              hasMore={!error && data?.slice(-1)?.[0]?.length !== 0}
               loader={<LoadingSpinner />}
               endMessage={<EndOfPage />}
             >

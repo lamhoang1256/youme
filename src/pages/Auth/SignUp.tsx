@@ -15,7 +15,7 @@ import {
 } from "firebase/auth";
 import { useAppSelector } from "App/store";
 import AuthInput from "components/input/AuthInput";
-import { toastErrorFirebase } from "utils/toastErrorFirebase";
+import { toastErrorFirebase } from "utils/toastError";
 import { schemaYupSignUp } from "./auth.scheme";
 import { createProfileUser } from "./auth.action";
 import { StyledAuth, StyledButtonAuth } from "./auth.style";

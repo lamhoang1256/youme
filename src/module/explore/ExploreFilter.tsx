@@ -2,15 +2,14 @@ import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
 import { IFilters, IGenres } from "types/explore";
 import { filterByCategory } from "apis/configAPI";
-import { IMovieCard } from "types/components";
 import Button from "components/button/Button";
+import { toastError } from "utils/toastError";
 
 interface ExploreFilterProps {
   allGenres: IGenres[];
   filters: IFilters;
   selectedTabId: number;
   setFilters: React.Dispatch<React.SetStateAction<IFilters>>;
-  setExploreList: React.Dispatch<React.SetStateAction<IMovieCard[]>>;
 }
 
 const StyledExploreFilter = styled.div`
@@ -44,13 +43,12 @@ const StyledExploreFilter = styled.div`
 `;
 
 const ExploreFilter = (props: ExploreFilterProps) => {
-  const { allGenres, filters, setFilters, selectedTabId, setExploreList } = props;
+  const { allGenres, filters, setFilters, selectedTabId } = props;
   const fetchFilterByCategory = async (params: IFilters) => {
     try {
-      const { data } = await filterByCategory(params);
-      setExploreList(data.searchResults);
-    } catch (error) {
-      console.log(error);
+      await filterByCategory(params);
+    } catch (error: any) {
+      toastError(error.message);
     }
   };
   const handleSearchByCategory = (category: any) => {

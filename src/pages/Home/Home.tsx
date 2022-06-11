@@ -28,11 +28,11 @@ const Home = () => {
 
   useEffect(() => {
     if (!data) return;
-    const newData = data?.reduce((prevData: any, currData: any) => {
-      const validSections = [...currData.data.recommendItems]?.filter(
+    const newData = data?.reduce((prevCache: any, currentCache: any) => {
+      const validSections = [...currentCache]?.filter(
         (section: any) => section.bannerProportion !== 1 && section.coverType === 1,
       );
-      return [...prevData, ...validSections];
+      return [...prevCache, ...validSections];
     }, []);
     setHomeSections(newData);
   }, [data]);
@@ -61,7 +61,7 @@ const Home = () => {
           <InfiniteScroll
             dataLength={data?.length || 0}
             next={() => setSize((size) => size + 1)}
-            hasMore={!error && data?.slice(-1)?.[0]?.data?.recommendItems?.length !== 0}
+            hasMore={!error && data?.slice(-1)?.[0]?.length !== 0}
             loader={<LoadingSpinner />}
             endMessage={
               <Link to="/explore">

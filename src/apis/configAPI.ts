@@ -15,9 +15,10 @@ export const getLeaderBoard = () => {
   return axiosClient.get(url);
 };
 
-export const getHome = (params: { page: number }) => {
+export const getHome = async (params: { page: number }) => {
   const url = `${URL}/homePage/getHome`;
-  return axiosClient.get(url, { params });
+  const { data } = await axiosClient.get(url, { params });
+  return data.recommendItems;
 };
 
 export const getMovieDetail = (params: { category: number; id: number }) => {
@@ -40,9 +41,10 @@ export const getAllGenres = () => {
   return axiosClient.get(url);
 };
 
-export const filterByCategory = (params: IFilterByCategory) => {
+export const filterByCategory = async (params: IFilterByCategory) => {
   const url = `${URL}/search/v1/search`;
-  return axiosClient.post(url, params);
+  const { data } = await axiosClient.post(url, params);
+  return data.searchResults;
 };
 
 export const getMovieByCategory = (params: { category: number; sort: string }) => {

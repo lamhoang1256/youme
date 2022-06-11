@@ -1,15 +1,11 @@
 import { useEffect } from "react";
-import IonIcon from "@reacticons/ionicons";
-import { Link } from "react-router-dom";
 import useSWRInfinite from "swr/infinite";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useTranslation } from "react-i18next";
 import { getPreviewVideoMedia } from "apis/configAPI";
 import { ICommunity } from "types/community";
 import LoadingSpinner from "components/loading/LoadingSpinner";
-import Heading from "components/heading/Heading";
-import CommunityPlayer from "module/community/CommunityPlayer";
-import DetailDescription from "module/detail/DetailDescription";
+import CommunityCard from "module/community/CommunityCard";
 import { StyledCommunity } from "./community.style";
 
 const Community = () => {
@@ -22,7 +18,6 @@ const Community = () => {
       revalidateFirstPage: false,
     },
   );
-
   useEffect(() => {
     document.title = `Youme - ${t("Community")}`;
   }, []);
@@ -38,41 +33,10 @@ const Community = () => {
             loader={<LoadingSpinner />}
           >
             {data
-              ?.reduce((prev, curr) => [...prev, ...curr], [])
-              ?.map((community: ICommunity) => {
-                const { id, refList, upInfo, introduction, likeCount, mediaInfoUrl } = community;
-                const category = refList?.[0]?.category;
-                const idMovie = refList?.[0]?.id;
-                const url = `/detail/${idMovie}?cate=${category}`;
-                return (
-                  <div className="card" key={id}>
-                    <div className="header">
-                      <img src={upInfo?.upImgUrl} className="avatar" alt="avatar" />
-                      <div className="overview">
-                        <Heading>{upInfo?.upName}</Heading>
-                        <DetailDescription rowLines={2} lineHeight={1.3}>
-                          {introduction}
-                        </DetailDescription>
-                      </div>
-                      <div className="actions">
-                        <div className="action">
-                          <div className="icon">
-                            <img src="images/heart.svg" alt="heart" />
-                          </div>
-                          <span>{likeCount}</span>
-                        </div>
-                        <div className="action">
-                          <Link to={url} className="icon">
-                            <IonIcon name="open-outline" />
-                          </Link>
-                          <span>Open</span>
-                        </div>
-                      </div>
-                    </div>
-                    <CommunityPlayer mediaUrl={mediaInfoUrl.mediaUrl} />
-                  </div>
-                );
-              })}
+              ?.reduce((prevCache, currentCache) => [...prevCache, ...currentCache], [])
+              ?.map((community: ICommunity) => (
+                <CommunityCard community={community} key={community.id} />
+              ))}
           </InfiniteScroll>
         </div>
       </div>
