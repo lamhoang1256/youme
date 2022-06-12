@@ -70,13 +70,17 @@ const StyledHeaderUser = styled.div`
     justify-content: center;
     gap: 8px;
   }
+  @media screen and (max-width: 767.98px) {
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+    }
+  }
 `;
 
 const HeaderUser = () => {
   const { t } = useTranslation();
   const { currentUser } = useAppSelector((state) => state.auth);
-  const avatar = currentUser?.avatar ? currentUser.avatar : `/images/header-avatar.webp`;
-  const username = currentUser?.username ? currentUser?.username : "Guest";
 
   const handleLogout = () => {
     signOut(auth);
@@ -84,27 +88,21 @@ const HeaderUser = () => {
 
   return (
     <StyledHeaderUser>
-      <img src={avatar} alt="avatar" className="user-avatar" />
+      <img src={currentUser?.avatar} alt="avatar" className="user-avatar" />
       <div className="user">
         <div className="user-header">
-          <img src={avatar} alt="avatar" className="user-avatar" />
+          <img src={currentUser?.avatar} alt="avatar" className="user-avatar" />
           <div className="user-info">
-            <span className="user-username">{username}</span>
+            <span className="user-username">{currentUser?.username}</span>
             <span>{t("User")}</span>
           </div>
         </div>
         <ul className="user-list">
           <li className="user-item">
-            {currentUser ? (
-              <ButtonGradient kind="secondary" onClick={handleLogout} className="btn-auth">
-                <IonIcon name="log-out-outline" />
-                <span>{t("Logout")}</span>
-              </ButtonGradient>
-            ) : (
-              <ButtonGradient to="/sign-in" kind="primary" className="btn-auth">
-                {t("Sign In")}
-              </ButtonGradient>
-            )}
+            <ButtonGradient kind="secondary" onClick={handleLogout} className="btn-auth">
+              <IonIcon name="log-out-outline" />
+              <span>{t("Logout")}</span>
+            </ButtonGradient>
           </li>
         </ul>
       </div>

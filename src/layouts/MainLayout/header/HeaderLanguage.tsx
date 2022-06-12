@@ -5,29 +5,26 @@ import { useOnClickOutside } from "hooks/useClickOutside";
 
 const StyledHeaderLanguage = styled.div`
   position: relative;
-  .language {
-    &-switcher {
-      background-color: transparent;
-      font-size: 2.45rem;
-      color: var(--white);
-    }
-    &-list {
-      position: absolute;
-      top: 120%;
-      right: 0;
-      border-radius: 4px;
-      padding: 10px;
-      background-color: #361466;
-      z-index: 100;
-    }
-    &-item {
-      button {
-        font-weight: 600;
-        padding: 8px 10px;
-        color: var(--white);
-        background-color: transparent;
-      }
-    }
+  .language-switcher {
+    display: flex;
+    background-color: transparent;
+    font-size: 2.45rem;
+    color: var(--white);
+  }
+  .language-list {
+    position: absolute;
+    top: 120%;
+    right: 0;
+    border-radius: 4px;
+    padding: 10px;
+    background-color: #361466;
+    z-index: 100;
+  }
+  .language-item button {
+    font-weight: 600;
+    padding: 8px 10px;
+    color: var(--white);
+    background-color: transparent;
   }
 `;
 

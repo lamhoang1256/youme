@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { getLeaderBoard } from "apis/configAPI";
 import { ILeaderBoard } from "types/home";
-import Image from "components/image/Image";
+import ImageResize from "components/image/ImageResize";
 import SkeletonTitle from "components/skeleton/SkeletonTitle";
 import { v4 as uuidv4 } from "uuid";
 import { TextClamp } from "assets/styles/_mixins";
@@ -129,7 +129,7 @@ const HomeTrending = () => {
             if (Number.isNaN(id) || Number.isNaN(domainType)) return null;
             return (
               <StyledTrendingCard key={id}>
-                <Image
+                <ImageResize
                   to={url}
                   className="trending-thumbnail"
                   url={cover}

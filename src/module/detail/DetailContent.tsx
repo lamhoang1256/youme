@@ -2,7 +2,7 @@ import IonIcon from "@reacticons/ionicons";
 import { useAppSelector } from "App/store";
 import Button from "components/button/Button";
 import Heading from "components/heading/Heading";
-import Image from "components/image/Image";
+import ImageResize from "components/image/ImageResize";
 import LabelNormal from "components/label/LabelNormal";
 import { db } from "firebase-app/firebase-config";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
@@ -153,7 +153,7 @@ const DetailContent = ({ detail }: DetailContentProps) => {
   return (
     <StyledDetailContent>
       <div className="detail-header">
-        <Image
+        <ImageResize
           url={detail?.coverVerticalUrl}
           width="220"
           height="310"
@@ -188,7 +188,7 @@ const DetailContent = ({ detail }: DetailContentProps) => {
           <LabelNormal>{t("Summary")} : </LabelNormal>
           {detail?.introduction}
         </DetailDescription>
-        <Image
+        <ImageResize
           url={detail?.coverHorizontalUrl}
           width="750"
           alt="thumbnail"

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import Image from "components/image/Image";
+import ImageResize from "components/image/ImageResize";
 import DetailDescription from "module/detail/DetailDescription";
 import { TextClamp } from "assets/styles/_mixins";
 
@@ -39,7 +39,7 @@ const PostItem = ({ image, title, introduction, id }: PostItemProps) => {
   return (
     <StyledPostItem>
       <div className="post-image">
-        <Image url={image} width="500" height="282" alt="post" to={`/post/${id}`} />
+        <ImageResize url={image} width="500" height="282" alt="post" to={`/post/${id}`} />
       </div>
       <div className="post-content">
         <Link to={`/post/${id}`}>

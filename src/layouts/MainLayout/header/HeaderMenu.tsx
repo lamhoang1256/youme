@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAppSelector } from "App/store";
+import { useHeaderContext } from "./header-context";
 
 const menuLinks = [
   { id: 1, display: "Explore", path: "/explore" },
@@ -11,10 +12,10 @@ const menuLinks = [
   { id: 5, display: "Community", path: "/community" },
 ];
 
-interface HeaderMenuProps {
-  showMenu: boolean;
-  handleToggleMenu: () => void;
-}
+// interface HeaderMenuProps {
+//   showMenu: boolean;
+//   handleToggleMenu: () => void;
+// }
 
 const StyledHeaderMenu = styled.ul`
   display: flex;
@@ -93,9 +94,10 @@ const StyledHeaderMenu = styled.ul`
   }
 `;
 
-const HeaderMenu = ({ showMenu, handleToggleMenu }: HeaderMenuProps) => {
+const HeaderMenu = () => {
   const { t } = useTranslation();
   const { currentUser } = useAppSelector((state) => state.auth);
+  const { showMenu, handleToggleMenu } = useHeaderContext();
 
   return (
     <StyledHeaderMenu className={`${showMenu ? "active" : ""}`}>

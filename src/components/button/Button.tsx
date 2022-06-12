@@ -6,12 +6,12 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   to?: string;
   height?: string;
   children: React.ReactNode;
-  kind?: "primary" | "secondary" | "sea";
+  kind?: "primary" | "normal" | "sea";
 }
 
 interface StyledButtonProps {
   height?: string;
-  kind?: "primary" | "secondary" | "sea";
+  kind?: "primary" | "normal" | "sea";
 }
 
 const COLOR = {
@@ -19,9 +19,9 @@ const COLOR = {
     color: #fff;
     background-color: var(--primary-color);
   `,
-  secondary: css`
+  normal: css`
     color: #000;
-    background: linear-gradient(#c7c7d2, #bcbaba);
+    background-color: #bcbaba;
   `,
   sea: css`
     color: var(--white);
@@ -68,7 +68,7 @@ const Button = ({ to, type, children, height, kind, onClick, ...props }: ButtonP
 };
 
 Button.defaultProps = {
-  kind: "secondary",
+  kind: "normal",
   height: "66px",
   to: "",
 };

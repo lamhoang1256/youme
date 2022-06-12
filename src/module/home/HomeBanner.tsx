@@ -5,7 +5,7 @@ import Slider from "react-slick";
 import { IBanners } from "types/home";
 import { getBanners } from "apis/configAPI";
 import { AnimationSkeleton } from "assets/styles/_mixins";
-import Image from "components/image/Image";
+import ImageResize from "components/image/ImageResize";
 import { SliderArrow } from "components/button/SliderArrow";
 
 const StyledBanner = styled.div`
@@ -114,7 +114,7 @@ const HomeBanner = () => {
               const url = `/detail/${banner.jumpParam}?cate=${category}`;
               return (
                 <Link to={url} key={banner.id}>
-                  <Image
+                  <ImageResize
                     className="banner-image"
                     to={url}
                     url={`${banner.imgUrl}?imageMogr2/format/webp/format/webp`}
