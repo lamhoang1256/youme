@@ -9,8 +9,8 @@ import "i18n/i18next";
 
 const MainLayout = React.lazy(() => import("layouts/MainLayout/MainLayout"));
 const Home = React.lazy(() => import("pages/Home/Home"));
-const SignUp = React.lazy(() => import("pages/Auth/SignUp"));
-const SignIn = React.lazy(() => import("pages/Auth/SignIn"));
+const SignUp = React.lazy(() => import("pages/Authentication/SignUp"));
+const SignIn = React.lazy(() => import("pages/Authentication/SignIn"));
 const Detail = React.lazy(() => import("pages/Detail/Detail"));
 const Watch = React.lazy(() => import("pages/Watch/Watch"));
 const Explore = React.lazy(() => import("pages/Explore/Explore"));

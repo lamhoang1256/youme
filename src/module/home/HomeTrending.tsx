@@ -69,6 +69,9 @@ const StyledTrendingList = styled.div`
 const StyledTrendingCard = styled.div`
   height: 100%;
   padding: 0 10px;
+  &:hover .trending-title {
+    color: var(--primary-color);
+  }
   .trending-thumbnail {
     width: 100%;
     border-radius: 8px;
@@ -82,6 +85,7 @@ const StyledTrendingCard = styled.div`
     ${TextClamp.multilines(2)}
     color: var(--white);
     font-weight: 500;
+    transition: all 0.25s linear;
   }
   @media screen and (max-width: 767.98px) {
     width: 100%;

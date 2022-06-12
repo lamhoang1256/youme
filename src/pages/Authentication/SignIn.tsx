@@ -14,8 +14,11 @@ import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { useAppSelector } from "App/store";
 import { yupResolver } from "@hookform/resolvers/yup";
-import AuthInput from "components/input/AuthInput";
+import Input from "components/input/Input";
 import { toastErrorFirebase } from "utils/toastError";
+import Field from "components/field/Field";
+import ErrorMessage from "components/notification/ErrorMessage";
+import Label from "components/label/Label";
 import { StyledAuth, StyledButtonAuth } from "./auth.style";
 import { createProfileUser } from "./auth.action";
 import { schemaYupSignIn } from "./auth.scheme";
@@ -101,22 +104,21 @@ const SignIn = () => {
                 <h2>Welcome to Youme</h2>
                 <span className="auth-label">{t("SignIn to continue")}</span>
                 <div className="auth-main">
-                  <AuthInput
-                    name="email"
-                    label="Email"
-                    type="text"
-                    placeholder="Email"
-                    control={control}
-                    error={errors.email}
-                  />
-                  <AuthInput
-                    name="password"
-                    label={t("Password")}
-                    type="password"
-                    placeholder={t("Password")}
-                    control={control}
-                    error={errors.password}
-                  />
+                  <Field>
+                    <Label htmlFor="email">Email</Label>
+                    <Input name="email" type="text" placeholder="Email" control={control} />
+                    <ErrorMessage>{errors.email?.message}</ErrorMessage>
+                  </Field>
+                  <Field>
+                    <Label htmlFor="password">Password</Label>
+                    <Input
+                      name="password"
+                      type="password"
+                      placeholder={t("Password")}
+                      control={control}
+                    />
+                    <ErrorMessage>{errors.password?.message}</ErrorMessage>
+                  </Field>
                   <StyledButtonAuth type="submit" className="auth-primary">
                     {t("Sign In")}
                   </StyledButtonAuth>
@@ -140,7 +142,7 @@ const SignIn = () => {
                     {t("Sign In with Google")}
                   </StyledButtonAuth>
                 </div>
-                <div className="auth-no-acount">
+                <div className="already-account">
                   {t("Do not have an account?")} <Link to="/sign-up">{t("Sign Up Here")}</Link>
                 </div>
               </form>

@@ -14,23 +14,24 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { useAppSelector } from "App/store";
-import AuthInput from "components/input/AuthInput";
+import Input from "components/input/Input";
 import { toastErrorFirebase } from "utils/toastError";
+import Field from "components/field/Field";
+import Label from "components/label/Label";
+import ErrorMessage from "components/notification/ErrorMessage";
 import { schemaYupSignUp } from "./auth.scheme";
 import { createProfileUser } from "./auth.action";
 import { StyledAuth, StyledButtonAuth } from "./auth.style";
 import AuthSuccess from "./AuthSuccess";
 
 const StyledSignUp = styled.div`
-  .signup {
-    &-header {
-      display: flex;
-      justify-content: space-between;
-    }
-    &-back {
-      background-color: transparent;
-      color: #fff;
-    }
+  .signup-header {
+    display: flex;
+    justify-content: space-between;
+  }
+  .signup-back {
+    background-color: transparent;
+    color: #fff;
   }
 `;
 
@@ -158,45 +159,48 @@ const SignUp = () => {
                     </button>
                   </div>
                   <div className="auth-main">
-                    <AuthInput
-                      name="username"
-                      control={control}
-                      label="Username"
-                      type="text"
-                      placeholder={t("Username")}
-                      error={errors.username}
-                    />
-                    <AuthInput
-                      name="email"
-                      control={control}
-                      label="Email"
-                      type="email"
-                      placeholder="Email"
-                      error={errors.email}
-                    />
-                    <AuthInput
-                      name="password"
-                      control={control}
-                      label="Password"
-                      type="password"
-                      placeholder={t("Min 8 characters")}
-                      error={errors.password}
-                    />
-                    <AuthInput
-                      name="repeatPassword"
-                      control={control}
-                      label={t("Re-type Password")}
-                      type="password"
-                      placeholder={t("Min 8 characters")}
-                      error={errors.repeatPassword}
-                    />
+                    <Field>
+                      <Label htmlFor="username">Username</Label>
+                      <Input
+                        name="username"
+                        control={control}
+                        type="text"
+                        placeholder={t("Username")}
+                      />
+                      <ErrorMessage>{errors.username?.message}</ErrorMessage>
+                    </Field>
+                    <Field>
+                      <Label htmlFor="email">Email</Label>
+                      <Input name="email" control={control} type="email" placeholder="Email" />
+                      <ErrorMessage>{errors.email?.message}</ErrorMessage>
+                    </Field>
+                    <Field>
+                      <Label htmlFor="password">Password</Label>
+                      <Input
+                        name="password"
+                        control={control}
+                        type="password"
+                        placeholder={t("Min 8 characters")}
+                      />
+                      <ErrorMessage>{errors.password?.message}</ErrorMessage>
+                    </Field>
+                    <Field>
+                      <Label htmlFor="repeatPassword">Re-password</Label>
+                      <Input
+                        name="repeatPassword"
+                        control={control}
+                        type="password"
+                        placeholder={t("Min 8 characters")}
+                      />
+                      <ErrorMessage>{errors.repeatPassword?.message}</ErrorMessage>
+                    </Field>
                     <StyledButtonAuth type="submit" className="auth-primary">
                       {t("Sign Up")}
                     </StyledButtonAuth>
                   </div>
                 </form>
               )}
-              <div className="auth-no-acount">
+              <div className="already-account">
                 {t("Have an account?")} <Link to="/sign-in">{t("Sign In Here")}</Link>
               </div>
             </div>

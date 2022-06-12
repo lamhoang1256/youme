@@ -1,8 +1,8 @@
-import LabelNormal from "components/label/LabelNormal";
-import DetailDescription from "module/detail/DetailDescription";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
+import DetailDescription from "module/detail/DetailDescription";
+import Tag from "components/tag/Tag";
 
 interface WatchSummaryProps {
   introduction: string;
@@ -26,7 +26,7 @@ const WatchSummary = ({ introduction }: WatchSummaryProps) => {
   return (
     <StyledWatchSummary>
       <DetailDescription>
-        <LabelNormal>{t("Summary")} :</LabelNormal>
+        <Tag>{t("Summary")} :</Tag>
         {showMoreDesc ? introduction : `${introduction.substring(0, 150)}...`}
         <button type="button" className="btn-toggle" onClick={toggleButtonRead}>
           {showMoreDesc ? "Show Less" : "Show More"}

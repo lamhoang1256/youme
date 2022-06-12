@@ -1,17 +1,17 @@
-import IonIcon from "@reacticons/ionicons";
-import { useAppSelector } from "App/store";
-import Button from "components/button/Button";
-import Heading from "components/heading/Heading";
-import ImageResize from "components/image/ImageResize";
-import LabelNormal from "components/label/LabelNormal";
-import { db } from "firebase-app/firebase-config";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { IDetailMovie } from "types/detail";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import styled from "styled-components";
+import { db } from "firebase-app/firebase-config";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import IonIcon from "@reacticons/ionicons";
+import { useAppSelector } from "App/store";
+import { IDetailMovie } from "types/detail";
 import { IMovieCard } from "types/components";
+import Button from "components/button/Button";
+import Heading from "components/heading/Heading";
+import ImageResize from "components/image/ImageResize";
+import Tag from "components/tag/Tag";
 import DetailButton from "./DetailButton";
 import DetailCategory from "./DetailCategory";
 import DetailDescription from "./DetailDescription";
@@ -200,7 +200,7 @@ const DetailContent = ({ detail }: DetailContentProps) => {
       </div>
       <div className="detail-overview">
         <DetailDescription lineHeight={1.9}>
-          <LabelNormal>{t("Summary")} : </LabelNormal>
+          <Tag>{t("Summary")} : </Tag>
           {detail?.introduction}
         </DetailDescription>
         <ImageResize
