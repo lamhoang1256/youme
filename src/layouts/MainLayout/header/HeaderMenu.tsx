@@ -12,11 +12,6 @@ const menuLinks = [
   { id: 5, display: "Community", path: "/community" },
 ];
 
-// interface HeaderMenuProps {
-//   showMenu: boolean;
-//   handleToggleMenu: () => void;
-// }
-
 const StyledHeaderMenu = styled.ul`
   display: flex;
   align-items: center;
@@ -47,24 +42,26 @@ const StyledHeaderMenu = styled.ul`
     font-size: 1.7rem;
     font-weight: 600;
     &::after {
-      opacity: 0;
-      visibility: hidden;
-      position: absolute;
       content: "";
+      position: absolute;
       bottom: -10px;
-      left: 0;
-      right: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      transition: width 0.5s ease;
       height: 3px;
-      transition: all 0.25s linear;
-      border-radius: 10px;
       background-color: var(--primary-color);
     }
     &.active::after {
-      opacity: 1;
-      visibility: visible;
+      width: 100%;
+    }
+    &:hover {
+      color: var(--primary-color);
+      &::after {
+        width: 100%;
+      }
     }
   }
-
   @media screen and (max-width: 1023.98px) {
     position: fixed;
     width: 300px;

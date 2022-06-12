@@ -56,9 +56,16 @@ const StyledDetailContent = styled.div`
     gap: 14px;
   }
   .detail-watch {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
     width: 210px;
     border-radius: 40px;
     font-weight: 600;
+    span {
+      font-size: 2.2rem;
+    }
   }
   @media screen and (max-width: 767.98px) {
     .detail-header {
@@ -87,6 +94,7 @@ const DetailContent = ({ detail }: DetailContentProps) => {
   const { currentUser } = useAppSelector((state) => state.auth);
   const [favorites, setFavorites] = useState<IMovieCard[]>([]);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [hasCopied, setHasCopied] = useState(false);
   const url = `/watch/${detail?.id}?cate=${detail?.category}`;
 
   const getFavoritesFromDB = async () => {
@@ -146,6 +154,12 @@ const DetailContent = ({ detail }: DetailContentProps) => {
     }
   };
 
+  const handleCopyClipboard = () => {
+    navigator.clipboard.writeText(window.location.href);
+    setHasCopied(true);
+    toast.success(t("Copied link to clipboard"));
+  };
+
   useEffect(() => {
     updateStatusFavorite();
   }, [currentUser]);
@@ -172,12 +186,13 @@ const DetailContent = ({ detail }: DetailContentProps) => {
           <DetailCategory categories={detail?.tagList} />
           <div className="detail-action">
             <Button to={url} height="50" kind="primary" className="detail-watch">
+              <IonIcon name="play" />
               {t("Watch now")}
             </Button>
             <DetailButton onClick={handleAddFavoriteMovie} isActive={isFavorite}>
               <IonIcon name="heart" />
             </DetailButton>
-            <DetailButton isActive={false}>
+            <DetailButton isActive={hasCopied} onClick={handleCopyClipboard}>
               <IonIcon name="share-social-outline" />
             </DetailButton>
           </div>

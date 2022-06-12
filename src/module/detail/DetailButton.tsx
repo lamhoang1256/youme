@@ -17,7 +17,7 @@ const StyledDetailButton = styled.button<StyledProps>`
   width: 50px;
   height: 50px;
   border-radius: 100rem;
-  border: 1px solid gray;
+  border: 1px solid var(--gray-color);
   background-color: transparent;
   ${(props) =>
     props.isActive
@@ -26,7 +26,7 @@ const StyledDetailButton = styled.button<StyledProps>`
           color: #e96565;
         `
       : css`
-          color: #aea7a7;
+          color: var(--gray-color);
         `};
 `;
 
