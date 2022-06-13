@@ -68,7 +68,7 @@ const Footer = () => {
           </div>
           <div className="footer-column footer-routes">
             <div className="footer-column footer-boxed">
-              <h3>Information</h3>
+              <h3>Navigation</h3>
               <ul>
                 {menuLinksFooter.map((link) => (
                   <Link to={link.path}>{link.display}</Link>

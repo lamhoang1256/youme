@@ -10,6 +10,7 @@ export const GlobalStyle = createGlobalStyle`
     --darker-color:#210e37;
     --bg-load-image: #191a1f;
     --bg-skeleton: #656871;
+    --height-header:100px;
     --max-width-container: 1500px;
     --gradient-primary:linear-gradient(270deg, #c042ff, #8a3cff);
     --gradient-secondary:linear-gradient(to right top, #fc6c8f, #ffb86c);

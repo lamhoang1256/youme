@@ -20,7 +20,7 @@ export const StyledButtonAuth = styled.button`
 
 export const StyledAuth = styled.div`
   .auth {
-    height: 100vh;
+    min-height: 100vh;
     margin: 0 auto;
     display: flex;
     justify-content: center;
@@ -91,6 +91,7 @@ export const StyledAuth = styled.div`
   @media screen and (max-width: 767.98px) {
     .auth-container {
       max-width: 100%;
+      padding: 40px 20px;
     }
   }
 `;

@@ -10,7 +10,7 @@ import HeaderMenu from "./HeaderMenu";
 
 const StyledHeader = styled.header`
   .header-content {
-    height: 100px;
+    height: var(--height-header);
     position: relative;
     display: flex;
     justify-content: space-between;

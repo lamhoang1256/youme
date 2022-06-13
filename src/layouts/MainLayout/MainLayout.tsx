@@ -11,6 +11,7 @@ const StyledMainLayout = styled.div`
   justify-content: space-between;
   main {
     flex: 1;
+    min-height: calc(100vh - var(--height-header));
   }
 `;
 
