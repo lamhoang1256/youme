@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
+import styled from "styled-components";
 import { useParams, useSearchParams } from "react-router-dom";
 import { IDetailMovie } from "types/detail";
 import { getMovieDetail } from "apis/configAPI";
-import styled from "styled-components";
 import SideRelated from "components/side-related/SideRelated";
 import SkeletonSideRelated from "components/skeleton/SkeletonSideRelated";
 import ResultNotFound from "components/notification/ResultNotFound";
 import Comment from "components/comment/Comment";
 import TwoColumnLayout from "layouts/TwoColumnLayout/TwoColumnLayout";
-import DetailContent from "../../module/detail/DetailContent";
-import DetailSkeleton from "../../module/detail/DetailSkeleton";
+import DetailContent from "module/detail/DetailContent";
+import DetailSkeleton from "module/detail/DetailSkeleton";
 
 const StyledDetail = styled.div`
   .notfound {

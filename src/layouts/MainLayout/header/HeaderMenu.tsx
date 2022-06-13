@@ -2,15 +2,8 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAppSelector } from "App/store";
+import { menuLinksHeader } from "constants/routesLinks";
 import { useHeaderContext } from "./header-context";
-
-const menuLinks = [
-  { id: 1, display: "Explore", path: "/explore" },
-  { id: 2, display: "Favorites", path: "/favorites" },
-  { id: 3, display: "History", path: "/history" },
-  { id: 4, display: "News", path: "/articles" },
-  { id: 5, display: "Community", path: "/community" },
-];
 
 const StyledHeaderMenu = styled.ul`
   display: flex;
@@ -104,7 +97,7 @@ const HeaderMenu = () => {
           {t("Hello")}, {currentUser ? currentUser.username : t("Guest")}
         </span>
       </li>
-      {menuLinks.map((link) => (
+      {menuLinksHeader.map((link) => (
         <li className="menu-item" key={link.id}>
           <NavLink to={link.path} className="menu-link" onClick={handleToggleMenu}>
             {t(link.display)}

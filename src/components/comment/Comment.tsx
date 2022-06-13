@@ -16,22 +16,21 @@ interface CommentProps {
 const StyledComment = styled.div`
   margin-top: 30px;
   margin-bottom: 20px;
-  .comment {
-    &-heading {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    &-avatar {
-      width: 50px;
-      height: 50px;
-      border-radius: 100rem;
-    }
+  .comment-heading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .comment-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 100rem;
   }
   .no-login {
     margin-top: 10px;
   }
   .no-comment {
+    color: var(--gray-color);
     padding-top: 20px;
     text-align: center;
   }
@@ -63,6 +62,8 @@ const Comment = ({ id }: CommentProps) => {
     };
     fetchCommentList();
   }, []);
+
+  console.log(comments);
 
   return (
     <StyledComment>

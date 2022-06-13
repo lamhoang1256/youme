@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
 import { IFilters, IGenres } from "types/explore";
 import { filterByCategory } from "apis/configAPI";
-import Button from "components/button/Button";
 import { toastError } from "utils/toastError";
+import Button from "components/button/Button";
 
 interface ExploreFilterProps {
   allGenres: IGenres[];

@@ -11,9 +11,9 @@ import LoadingSpinner from "components/loading/LoadingSpinner";
 import { IMovieCard } from "types/components";
 import EndOfPage from "components/notification/EndOfPage";
 import ExploreFilter from "module/explore/ExploreFilter";
+import { useSearchParams } from "react-router-dom";
 
 const StyledExplore = styled.div``;
-const defaultGenresTab = 2;
 const initialFilters = {
   area: "",
   category: "",
@@ -27,6 +27,9 @@ const initialFilters = {
 
 const Explore = () => {
   const { t } = useTranslation();
+  const [searchParams] = useSearchParams();
+  const type = Number(searchParams.get("type"));
+  const defaultGenresTab = type || 2;
   const [loading, setLoading] = useState(true);
   const [selectedTabId, setSelectedTabId] = useState(defaultGenresTab);
   const [allGenres, setAllGenres] = useState<IGenres[]>([]);
