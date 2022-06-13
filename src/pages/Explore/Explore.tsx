@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
-import useSWRInfinite from "swr/infinite";
 import { IGenres, IFilters } from "types/explore";
-import { filterByCategory, getAllGenres } from "apis/configAPI";
+import { getAllGenres } from "apis/configAPI";
 import MovieList from "components/movie/MovieList";
 import Tabs from "components/tabs/Tabs";
 import LoadingSpinner from "components/loading/LoadingSpinner";
 import { IMovieCard } from "types/components";
 import EndOfPage from "components/notification/EndOfPage";
 import ExploreFilter from "module/explore/ExploreFilter";
-import { useSearchParams } from "react-router-dom";
+import { useFetchExplore } from "hooks/useFetchExplore";
 
 const StyledExplore = styled.div``;
 const initialFilters = {
@@ -48,28 +48,17 @@ const Explore = () => {
       setLoading(false);
     }
   };
+
   const onClickTab = (keyTab: number) => {
     setSelectedTabId(keyTab);
     const genreTab = allGenres.filter((genre) => genre.id === keyTab)[0];
     setFilters({ ...initialFilters, params: genreTab.params });
   };
-
-  const getKey = (index: any, prevData: any) => {
-    if (prevData && prevData.length === 0) return null;
-    const sort = prevData?.slice(-1)?.[0]?.sort || "";
-    return `${JSON.stringify(filters)}explore-${sort}`;
-  };
-  const { data, error, setSize } = useSWRInfinite(
-    getKey,
-    (key) => filterByCategory({ ...filters, sort: key.split("explore-")[1] }),
-    {
-      revalidateFirstPage: false,
-    },
-  );
+  const { data, setSize, error } = useFetchExplore(filters);
 
   useEffect(() => {
     if (!data) return;
-    const newData = data?.reduce((prevData: any, currData: any) => [...prevData, ...currData], []);
+    const newData = data?.reduce((prevList: any, newList: any) => [...prevList, ...newList], []);
     setExploreList(newData);
   }, [data]);
 

@@ -85,7 +85,7 @@ export const StyledAuth = styled.div`
     padding-top: 20px;
     text-align: center;
     a {
-      color: #3d6ef7;
+      color: var(--blue-color);
     }
   }
   @media screen and (max-width: 767.98px) {

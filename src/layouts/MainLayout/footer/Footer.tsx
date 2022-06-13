@@ -1,5 +1,6 @@
 import Image from "components/image/Image";
 import { categoryLinks, menuLinksFooter } from "constants/routesLinks";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -20,6 +21,11 @@ const StyledFooter = styled.div`
     display: flex;
     flex-direction: column;
     gap: 14px;
+    font-size: 1.75rem;
+    color: var(--gray-color);
+    h3 {
+      color: var(--white);
+    }
   }
   .footer-routes {
     flex-direction: row;
@@ -30,16 +36,23 @@ const StyledFooter = styled.div`
     gap: 14px;
     a {
       color: var(--gray-color);
-      font-size: 1.7rem;
     }
+  }
+  .footer-purpose {
+    color: var(--gray-color);
+  }
+  .footer-author {
+    color: #20e6b9;
+    font-weight: 600;
   }
   .footer-bottom {
     border-top: 1px solid rgba(81, 95, 130, 0.32);
     padding-top: 30px;
     text-align: center;
     a {
-      color: #3d6ef7;
+      color: var(--blue-color);
       font-size: 1.65rem;
+      font-weight: 600;
     }
   }
   @media screen and (max-width: 1023.98px) {
@@ -57,29 +70,41 @@ const StyledFooter = styled.div`
 `;
 
 const Footer = () => {
+  const { t } = useTranslation();
   return (
     <StyledFooter>
       <div className="container">
         <div className="footer-content">
           <div className="footer-column">
             <Image to="/" url="/images/header-logo.png" alt="logo" className="footer-logo" />
-            <p>Web xem phim giải trí</p>
-            <span>Web designer: Nguyen Hoang Lam</span>
+            <p className="footer-purpose">
+              {t("The website is for research, study and entertainment purposes only")}
+            </p>
+            <span>
+              Web designer:{" "}
+              <a href="https://github.com/lamhoang1256" className="footer-author">
+                Nguyen Hoang Lam
+              </a>
+            </span>
           </div>
           <div className="footer-column footer-routes">
             <div className="footer-column footer-boxed">
-              <h3>Navigation</h3>
+              <h3>{t("Navigation")}</h3>
               <ul>
                 {menuLinksFooter.map((link) => (
-                  <Link to={link.path}>{link.display}</Link>
+                  <Link to={link.path} key={link.id}>
+                    {t(link.display)}
+                  </Link>
                 ))}
               </ul>
             </div>
             <div className="footer-column footer-boxed">
-              <h3>Categories</h3>
+              <h3>{t("Categories")}</h3>
               <ul>
                 {categoryLinks.map((link) => (
-                  <Link to={`/explore?type=${link.type}`}>{link.display}</Link>
+                  <Link to={`/explore?type=${link.type}`} key={link.type}>
+                    {t(link.display)}
+                  </Link>
                 ))}
               </ul>
             </div>

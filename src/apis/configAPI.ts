@@ -62,9 +62,10 @@ export const searchWithKeyword = (params: { searchKeyWord: string }) => {
   return axiosClient.post(url, { ...params, size: 56, sort: "", searchType: "" });
 };
 
-export const getArticles = (page: number) => {
+export const getArticles = async (page: number) => {
   const url = `${URL_ARTICLE}/news/list?page=${page}&size=${8}`;
-  return axiosClient.get(url);
+  const { data } = await axiosClient.get(url);
+  return data;
 };
 
 export const getPostDetail = (id: number) => {

@@ -25,7 +25,7 @@ const COLOR = {
   `,
   sea: css`
     color: var(--white);
-    background-color: #3d6ef7;
+    background-color: var(--blue-color);
   `,
 };
 

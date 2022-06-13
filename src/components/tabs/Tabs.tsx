@@ -4,7 +4,7 @@ const StyledTabs = styled.div`
   display: flex;
   gap: 10px;
   .tab {
-    background-color: #3d6ef7;
+    background-color: var(--blue-color);
     color: var(--white);
     padding: 8px 10px;
     border-radius: 4px;
