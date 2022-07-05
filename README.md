@@ -1,6 +1,5 @@
-
 # Youme
-AdFree Movie / Anime Watching Website Using ReactJS
+A Website To Watch Movies, Animes And TV Shows Using ReactJS
 
 ## Live demo
 ```
@@ -23,14 +22,15 @@ Cache Image Proxy: https://images.weserv.nl
 ```
 ## Main technology used
 
+- Firebase (authentication, comment)
 - React, Styled Components
-- Firebase (Authentication, Comment)
 - Redux, Redux Toolkit (State management)
 - Axios, SWR (Data fetching)
 - React Slick (Slider)
 - React Hook Form , Yup (Validation)
-- React-hls-player, react-tuby (Media video player)
-- Other: i18n, react-intersection-observer, react-router-dom, uuid, react-lazy-load-image-component,react-toastify, javascript-time-ago, query-string,...
+- React-toastify (Message UI)
+- React-hls-player, react-tuby (Video player)
+- Other: i18n, react-intersection-observer, react-router-dom, uuid, react-lazy-load-image-component, javascript-time-ago, query-string
 
 ## Features
 
@@ -38,20 +38,24 @@ Cache Image Proxy: https://images.weserv.nl
 - Suggested movies
 - Top searches
 - Search by name
-- Filter by region, categories, periods, year,...
+- Filter by region, categories, periods
 - Discovery feature (Short videos like tiktok)
 - Watch history
-- Save your favorite movie
 - Read post about movie news
 - Comments (require authentication using google, facebook)
+- Switch language (Vietnamese - English)
 
 ## Environment Variables
 
 ```
 REACT_APP_PUBLIC = http://localhost:3000 (or Link vercel)
+
+# See: https://documenter.getpostman.com/view/18986031/UVXdNeFD
 REACT_APP_API = https://ga-mobile-api.loklok.tv/cms/app
 REACT_APP_API_PC = https://ga-mobile-api.loklok.tv/cms/web/pc
 REACT_APP_ARTICLE = https://web-api.netpop.app/cms/web/pc
+
+# See: https://github.com/hoanglam1309a/SRTtoVTT
 REACT_APP_SRT_TO_VTT = https://convert-srt-to-vtt.vercel.app
 
 # See: https://firebase.google.com
@@ -62,7 +66,6 @@ REACT_APP_FIREBASE_STRORAGE_BUCKET=
 REACT_APP_FIREBASE_MESSAGING_SENDER_ID=
 REACT_APP_FIREBASE_APP_ID=
 REACT_APP_FIREBASE_MEASUREMENT_ID =
-```
 
 ## Screenshots
 
