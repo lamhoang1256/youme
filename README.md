@@ -1,5 +1,5 @@
 # Youme
-A Website To Watch Movies, Animes And TV Shows Using ReactJS
+A Website To Watch Movie, Anime And TV Show Using ReactJS
 
 ## Live demo
 ```
