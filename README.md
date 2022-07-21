@@ -2,9 +2,8 @@
 A Website To Watch Movie, Anime And TV Show Using ReactJS
 
 ## Live demo
-```
+
 Official website: https://youme.vercel.app
-```
 
 ## Author
 - Nguyễn Hoàng Lâm ( [@lamhoang1256](https://github.com/lamhoang1256) )
