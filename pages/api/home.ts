@@ -16,7 +16,8 @@ const getHomePageApi = async (req: NextApiRequest, res: NextApiResponse) => {
     params: { page },
   });
   const data = source.data.data.recommendItems.filter(
-    (section: IHomeSection) => section.homeSectionType !== "BLOCK_GROUP"
+    ({ homeSectionType, homeSectionName }: IHomeSection) =>
+      homeSectionType !== "BLOCK_GROUP" && homeSectionName !== ""
   );
   const response = {
     message: "Get home successfully !",

@@ -21,14 +21,13 @@ const getBannerApi = async (req: NextApiRequest, res: NextApiResponse) => {
     return responseError(error, res);
   }
   const source: IResponseBanner[] = (
-    await axios.get("https://ga-mobile-api.loklok.tv/cms/web/pc/homePage/banners?size=20", {
+    await axios.get("https://ga-mobile-api.loklok.tv/cms/web/pc/homePage/banners", {
       headers: {
         lang: "en",
-        versioncode: "11",
-        clienttype: "ios_jike_default",
       },
     })
   ).data.data;
+  console.log("source: ", source);
   const banners = await Promise.all(
     source.map(async (movie) => {
       const params = { id: movie.jumpParam, category: movie.jumpType === "DRAMA" ? "1" : "0" };
