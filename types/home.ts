@@ -32,3 +32,10 @@ export interface IHomeSection {
   refId?: any;
   refRedirectUrl: string;
 }
+
+export interface ILeaderBoard {
+  cover: string;
+  domainType: number;
+  id: string;
+  title: string;
+}

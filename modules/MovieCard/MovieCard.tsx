@@ -23,7 +23,9 @@ const MovieCard = ({ id, domainType, title, coverVerticalUrl }: IMovieCard) => {
           </picture>
         </a>
       </Link>
-      <MovieTitle href={href} title={title} className={styles.movieCardTitle} />
+      <MovieTitle href={href} className={styles.movieCardTitle}>
+        {title}
+      </MovieTitle>
     </div>
   );
 };

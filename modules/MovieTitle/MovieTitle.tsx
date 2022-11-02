@@ -3,23 +3,21 @@ import classNames from "utils/classNames";
 import styles from "./movieTitle.module.scss";
 import { AnchorHTMLAttributes } from "react";
 
-interface MovieTitleProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
-  title: string;
-}
+interface MovieTitleProps extends AnchorHTMLAttributes<HTMLAnchorElement> {}
 
-const MovieTitle = ({ href, title, className, ...props }: MovieTitleProps) => {
+const MovieTitle = ({ href, children, className, ...props }: MovieTitleProps) => {
   if (href) {
     return (
       <Link href={href}>
         <a className={classNames(styles.movieTitle, className)} {...props}>
-          {title}
+          {children}
         </a>
       </Link>
     );
   }
   return (
     <span className={classNames(styles.movieTitle, className)} {...props}>
-      {title}
+      {children}
     </span>
   );
 };

@@ -15,13 +15,17 @@ const getHomePageApi = async (req: NextApiRequest, res: NextApiResponse) => {
   const source = await axiosClient.get("homePage/getHome", {
     params: { page },
   });
-  const data = source.data.data.recommendItems.filter(
+  const sections = source.data.data.recommendItems.filter(
     ({ homeSectionType, homeSectionName }: IHomeSection) =>
       homeSectionType !== "BLOCK_GROUP" && homeSectionName !== ""
   );
+  const trendings = (await axiosClient.get("search/v1/searchLeaderboard")).data.data.list;
   const response = {
-    message: "Get home successfully !",
-    data,
+    message: "Get home successfully!",
+    data: {
+      trendings,
+      sections,
+    },
   };
   responseSuccess(res, response);
 };

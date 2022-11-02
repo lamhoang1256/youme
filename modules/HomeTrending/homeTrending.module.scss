@@ -1,0 +1,16 @@
+.homeTrending {
+  margin-top: 30px;
+}
+.homeTrendingHeading {
+  margin-bottom: 14px;
+}
+.homeTrendingItem {
+  width: 270px !important;
+}
+.homeTrendingThumbnail {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+  aspect-ratio: auto 792 / 445;
+  background-color: var(--bg-load-image);
+}

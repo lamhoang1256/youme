@@ -9,7 +9,7 @@ interface HomeListProps {
 const HomeSection = ({ homeSection }: HomeListProps) => {
   return (
     <div className={styles.homeSection}>
-      <h3 className={styles.homeSectionLabel}>{homeSection.homeSectionName}</h3>
+      <h3 className={styles.homeSectionHeading}>{homeSection.homeSectionName}</h3>
       <div className={styles.homeSectionList}>
         {homeSection.recommendContentVOList.slice(0, 12).map((section) => {
           const arrayIdAndCate = section.jumpAddress?.split("?id=")[1];
