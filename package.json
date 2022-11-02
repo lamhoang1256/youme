@@ -1,0 +1,32 @@
+{
+  "name": "cinemax",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "next": "12.3.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-hls-player": "^3.0.7",
+    "react-lazy-load-image-component": "^1.5.5",
+    "react-tuby": "^0.1.24",
+    "sass": "^1.54.9",
+    "swiper": "^8.4.2"
+  },
+  "devDependencies": {
+    "@types/node": "18.7.18",
+    "@types/react": "18.0.20",
+    "@types/react-dom": "18.0.6",
+    "@types/react-lazy-load-image-component": "^1.5.2",
+    "autoprefixer": "^10.4.11",
+    "eslint": "8.23.1",
+    "eslint-config-next": "12.3.0",
+    "typescript": "4.8.3"
+  }
+}
