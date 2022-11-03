@@ -110,3 +110,30 @@ export interface IMovieDetails {
   updateInfo?: any;
   year: number;
 }
+
+export interface IMovieSuggest {
+  areaList: [
+    {
+      id: number;
+      name: string;
+    }
+  ];
+  areaNameList: string[];
+  category: number;
+  coverHorizontalUrl: string;
+  coverVerticalUrl: string;
+  drameTypeVo?: any;
+  id: string;
+  name: string;
+  score: number;
+  tagList: [
+    {
+      id: number;
+      name: string;
+    }
+  ];
+  tagNameList: string[];
+  upImgUrl: string;
+  upName: string;
+  year: number;
+}

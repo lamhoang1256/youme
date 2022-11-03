@@ -18,6 +18,59 @@ html {
   --gradient-primary: linear-gradient(270deg, #c042ff, #8a3cff);
   --gradient-secondary: linear-gradient(to right top, #fc6c8f, #ffb86c);
 }
+// Reset SCSS
+html {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+picture {
+  margin: 0;
+}
+ul,
+ol {
+  list-style: none;
+}
+input,
+textarea,
+select,
+button {
+  outline: none;
+  font-size: 14px;
+  font: inherit;
+}
+input {
+  line-height: normal;
+}
+label,
+button {
+  cursor: pointer;
+}
+a {
+  text-decoration: none;
+}
+img,
+picture {
+  display: block;
+  max-width: 100%;
+}
+// End Reset SCSS
 body {
   font-family: "Montserrat", sans-serif;
   font-size: 1.6rem;
@@ -41,4 +94,21 @@ body {
 }
 .lazy-load-image-background {
   display: block !important;
+}
+.layout {
+  display: flex;
+  gap: 30px;
+  margin-top: 20px !important;
+  @media screen and (max-width: 1023.98px) {
+    flex-direction: column;
+  }
+}
+.main {
+  flex: 1;
+}
+.sidebar {
+  width: 310px;
+  @media screen and (max-width: 1023.98px) {
+    width: 100%;
+  }
 }

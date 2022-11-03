@@ -7,7 +7,7 @@ const nextConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, "styles")],
   },
-  images: { domains: ["images.weserv.nl"] },
+  images: { domains: ["images.weserv.nl", "img.netpop.app"] },
 };
 
 module.exports = nextConfig;

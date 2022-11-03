@@ -10,9 +10,11 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
+    "classnames": "^2.3.2",
     "next": "12.3.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-toastify": "^9.1.0",
     "sass": "^1.54.9",
     "swiper": "^8.4.4"
   },
