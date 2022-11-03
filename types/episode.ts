@@ -1,12 +1,10 @@
 export interface IQuality {
-  code: string;
-  description: string;
-  fullDescription: string;
+  quality: number;
+  url: string;
 }
-
 export interface ISubtitle {
   language: string;
-  languageAbbr: string;
+  lang: string;
   url: string;
   translateType: number;
 }

@@ -23,7 +23,7 @@ const getEpisodeApi = async (req: NextApiRequest, res: NextApiResponse) => {
     return responseError(error, res);
   }
   const { definitionList, subtitlingList } = movieDetails.episodeVo[episode];
-  const convertQualityTextToNumber = (qualityList: IQuality[]) => {
+  const convertQualityTextToNumber = (qualityList: any[]) => {
     return qualityList
       .map((url, index) => ({
         quality: Number(definitionList[index].description.toLowerCase().replace("p", "")),
@@ -41,9 +41,7 @@ const getEpisodeApi = async (req: NextApiRequest, res: NextApiResponse) => {
     return await axiosClient.get("media/previewInfo", { params });
   };
   const sources = await Promise.all(
-    definitionList.map(
-      async (quality: IQuality) => (await getEpisode(quality.code)).data.data.mediaUrl
-    )
+    definitionList.map(async (quality: any) => (await getEpisode(quality.code)).data.data.mediaUrl)
   );
   const data = {
     ...movieDetails,
