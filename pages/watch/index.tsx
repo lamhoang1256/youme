@@ -10,9 +10,11 @@ import styles from "styles/watch.module.scss";
 import { WatchCategory } from "modules/WatchCategory";
 import { WatchSummary } from "modules/WatchSummary";
 import { WatchAnthology } from "modules/WatchAnthology";
+import { MovieCard } from "modules/MovieCard";
+import { MovieList } from "modules/MovieList";
 
 interface WatchPageProps {
-  data: IEpisode;
+  data: any;
 }
 
 const WatchPage = ({ data }: WatchPageProps) => {
@@ -20,25 +22,37 @@ const WatchPage = ({ data }: WatchPageProps) => {
   const playerRef = useRef<HTMLVideoElement>(null);
   return (
     <div className="container">
-      <div className="layout">
-        <div className="main">
+      <div className={styles.box}>
+        <div className={styles.box1}>
           <MediaPlayer playerRef={playerRef} qualities={data.sources} subtitles={data.subtitles} />
           <h1 className={styles.heading}>{data.name}</h1>
           <WatchMeta
             areaList={data.areaList}
-            countCurrEpisode={data.episodeVo}
+            countCurrEpisode={data.currentEpisode}
             countFullEpisode={data.episodeCount}
             year={data.year}
             score={data.score}
           />
           <WatchCategory categories={data.tagList} />
           <WatchSummary introduction={data.introduction} />
-          {/* <WatchAnthology detailMovie={data} detailCurrentPlay={data} /> */}
         </div>
-        <div className="sidebar">
-          <MovieSuggest listSuggest={data.likeList} />
+        <div className={styles.box2}>
+          <WatchAnthology detailMovie={data} />
         </div>
       </div>
+      <MovieList heading="You may like">
+        {data.likeList.map((movie: any) => {
+          return (
+            <MovieCard
+              key={movie.id}
+              id={movie.id}
+              title={movie.name}
+              coverVerticalUrl={movie.coverVerticalUrl}
+              domainType={movie.category}
+            />
+          );
+        })}
+      </MovieList>
     </div>
   );
 };

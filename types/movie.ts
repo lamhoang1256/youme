@@ -20,6 +20,25 @@ export interface IBanner {
   episodeCount: string;
 }
 
+export interface IEpisodeVo {
+  id: number;
+  definitionList: {
+    code: string;
+    description: string;
+    fullDescription: string;
+  }[];
+  name: string;
+  nameJson: string;
+  resourceType: number;
+  seriesNo: number;
+  subtitlingList: {
+    language: string;
+    languageAbbr: string;
+    subtitlingUrl: string;
+    translateType: number;
+  }[];
+}
+
 export interface IMovieDetails {
   aliasName: string;
   areaNameList: string[];
@@ -40,24 +59,7 @@ export interface IMovieDetails {
     seasonID: string;
     seasonName: string;
   };
-  episodeVo: {
-    id: number;
-    definitionList: {
-      code: string;
-      description: string;
-      fullDescription: string;
-    }[];
-    name: string;
-    nameJson: string;
-    resourceType: number;
-    seriesNo: number;
-    subtitlingList: {
-      language: string;
-      languageAbbr: string;
-      subtitlingUrl: string;
-      translateType: number;
-    }[];
-  }[];
+  episodeVo: IEpisodeVo[];
   id: string;
   introduction: string;
   likeList: {

@@ -15,3 +15,10 @@ export interface IFilterByCategory {
   subtitles?: string;
   year?: string;
 }
+
+export interface IApiSubtitle {
+  language: string;
+  languageAbbr: string;
+  subtitlingUrl: string;
+  translateType: number;
+}

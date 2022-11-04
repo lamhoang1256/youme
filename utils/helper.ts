@@ -1,6 +1,6 @@
 import { ISubtitle } from "types";
 
-export const sortSubtitle = (subtitles: ISubtitle[]) => {
+export const sortSubtitle = (subtitles: any[]) => {
   return subtitles
     .map((sub: any) => ({
       language: `${sub.language}${sub.translateType ? " (Auto)" : ""}`,

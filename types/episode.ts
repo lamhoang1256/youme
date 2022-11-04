@@ -1,4 +1,4 @@
-import { IMovieSuggest } from "./movie";
+import { IEpisodeVo, IMovieSuggest } from "./movie";
 
 export interface IQuality {
   quality: number;
@@ -10,7 +10,6 @@ export interface ISubtitle {
   url: string;
   translateType: number;
 }
-
 export interface IEpisode {
   aliasName: string;
   areaList: {
@@ -20,6 +19,7 @@ export interface IEpisode {
   areaNameList: string[];
   category: number;
   collect: boolean;
+  currentEpisode: number;
   contentTagResourceList: [];
   coverHorizontalUrl: string;
   coverHorizontalUrlJson: string;
@@ -38,7 +38,7 @@ export interface IEpisode {
     seasonID: string;
     seasonName: string;
   };
-  episodeVo: 16;
+  episodeVo: IEpisodeVo[];
   id: string;
   introduction: string;
   likeList: IMovieSuggest[];

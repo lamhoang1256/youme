@@ -5,6 +5,7 @@ import { Player } from "react-tuby";
 import "react-tuby/css/main.css";
 import { IQuality, ISubtitle } from "types";
 import dynamic from "next/dynamic";
+import styles from "./mediaPlayer.module.scss";
 
 interface MediaPlayerProps {
   playerRef: React.RefObject<HTMLVideoElement>;

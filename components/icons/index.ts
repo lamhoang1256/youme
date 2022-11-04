@@ -1,3 +1,4 @@
 import IconStar from "./IconStar";
+import IconPlay from "./IconPlay";
 
-export { IconStar };
+export { IconStar, IconPlay };

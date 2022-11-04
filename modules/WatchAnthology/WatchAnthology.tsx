@@ -1,24 +1,25 @@
+import { IconPlay } from "components/icons";
 import { CustomLink } from "components/link";
-import { IMovieDetails } from "types";
+import { PATH } from "constants/path";
+import { useRouter } from "next/router";
+import { IEpisode, IMovieDetails } from "types";
 import styles from "./watchAnthology.module.scss";
 
 interface WatchAnthologyProps {
-  detailMovie: any;
-  detailCurrentPlay: any;
+  detailMovie: IEpisode;
 }
 
-const WatchAnthology = ({ detailMovie, detailCurrentPlay }: WatchAnthologyProps) => {
-  console.log("detailMovie: ", detailMovie);
+const WatchAnthology = ({ detailMovie }: WatchAnthologyProps) => {
+  const router = useRouter();
+  const { episode = detailMovie.episodeVo[0].id } = router.query;
   return (
     <div className={styles.anthology}>
       {detailMovie.episodeVo.map(({ seriesNo, id }: any) => {
-        const href = `/watch/${detailMovie.id}?cate=${detailMovie.category}&ep=${id}`;
-        const active = seriesNo === detailCurrentPlay.seriesNo ? "is-active" : undefined;
+        const href = `${PATH.watch}/${detailMovie.category}/${detailMovie.id}/${id}`;
+        const active = id === Number(episode);
         return (
           <CustomLink href={href} key={id}>
-            <button className={active} type="button">
-              {seriesNo}
-            </button>
+            <button>{active ? <IconPlay fill="#8a3cff" /> : seriesNo}</button>
           </CustomLink>
         );
       })}

@@ -2,8 +2,8 @@ import { IconStar } from "components/icons";
 import styles from "./watchMeta.module.scss";
 
 interface WatchMetaProps {
-  countFullEpisode: number;
-  countCurrEpisode: number;
+  episodeCount: number;
+  currentEpisode: number;
   score: number;
   year: number;
   areaList: {
@@ -12,13 +12,7 @@ interface WatchMetaProps {
   }[];
 }
 
-const WatchMeta = ({
-  countFullEpisode,
-  countCurrEpisode,
-  score,
-  areaList,
-  year,
-}: WatchMetaProps) => {
+const WatchMeta = ({ episodeCount, currentEpisode, score, areaList, year }: WatchMetaProps) => {
   return (
     <div className={styles.meta}>
       <li>
@@ -30,9 +24,9 @@ const WatchMeta = ({
           <span key={area.id}>{area.name}</span>
         ))}
       </li>
-      {countCurrEpisode && (
+      {currentEpisode && (
         <li>
-          Ep {countCurrEpisode}/ {countFullEpisode}
+          Ep {currentEpisode}/ {episodeCount}
         </li>
       )}
       <li>{year}</li>
