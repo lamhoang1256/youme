@@ -1,3 +1,5 @@
+import { IMovieSuggest } from "./movie";
+
 export interface IQuality {
   quality: number;
   url: string;
@@ -39,31 +41,7 @@ export interface IEpisode {
   episodeVo: 16;
   id: string;
   introduction: string;
-  likeList: {
-    areaList: {
-      id: number;
-      name: string;
-    }[];
-    areaNameList: string[];
-    category: number;
-    coverHorizontalUrl: string;
-    coverVerticalUrl: string;
-    drameTypeVo: {
-      drameName: string;
-      drameType: string;
-    };
-    id: string;
-    name: string;
-    score: number;
-    tagList: {
-      id: number;
-      name: string;
-    }[];
-    tagNameList: string[];
-    upImgUrl: string;
-    upName: string;
-    year: number;
-  }[];
+  likeList: IMovieSuggest[];
   name: string;
   nameJson: string;
   refList: [];
@@ -98,9 +76,5 @@ export interface IEpisode {
     quality: number;
     url: string;
   }[];
-  subtitles: {
-    language: string;
-    lang: string;
-    url: string;
-  }[];
+  subtitles: ISubtitle[];
 }

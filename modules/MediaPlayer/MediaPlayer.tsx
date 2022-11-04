@@ -13,7 +13,6 @@ interface MediaPlayerProps {
 }
 
 const MediaPlayer = ({ subtitles, qualities }: MediaPlayerProps) => {
-  if (!ReactHlsPlayer) return null;
   return (
     <Player src={qualities} subtitles={subtitles}>
       {(ref, props) => <ReactHlsPlayer playerRef={ref} {...props} autoPlay />}

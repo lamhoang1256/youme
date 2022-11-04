@@ -22,6 +22,7 @@ const getEpisodeApi = async (req: NextApiRequest, res: NextApiResponse) => {
     const error = new ApiError(STATUS.NOT_FOUND, "Not found movie");
     return responseError(error, res);
   }
+  console.log("movieDetails: ", movieDetails);
   const { definitionList, subtitlingList } = movieDetails.episodeVo[episode];
   const convertQualityTextToNumber = (qualityList: any[]) => {
     return qualityList
