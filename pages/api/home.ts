@@ -1,30 +1,34 @@
 import { STATUS } from "constants/status";
 import type { NextApiRequest, NextApiResponse } from "next";
+import { PATH_API } from "services";
 import axiosClient from "services/axiosClient";
-import { IHomeSection } from "types";
+import { IHomeTrending, IResponseHome } from "types";
 import catchAsync from "utils/catch-async";
 import { ApiError, responseError, responseSuccess } from "utils/response";
 
 const getHomePageApi = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method, query } = req;
-  const { page = 0 } = query;
+  const { page = 1 } = query;
   if (method !== "GET") {
     const error = new ApiError(STATUS.METHOD_NOT_ALLOWED, "Method not allowed");
     return responseError(error, res);
   }
-  const source = await axiosClient.get("homePage/getHome", {
-    params: { page },
-  });
-  const sections = source.data.data.recommendItems.filter(
-    ({ homeSectionType, homeSectionName }: IHomeSection) =>
-      homeSectionType !== "BLOCK_GROUP" && homeSectionName !== ""
+  const {
+    page: currentPage,
+    recommendItems,
+    searchKeyWord,
+  }: IResponseHome = (await axiosClient(PATH_API.home, { params: { page } })).data.data;
+  const homeSections = recommendItems.filter(
+    (section) => section.homeSectionType !== "BLOCK_GROUP" && section.homeSectionName !== ""
   );
-  const trendings = (await axiosClient.get("search/v1/searchLeaderboard")).data.data.list;
+  const trendings: IHomeTrending[] = (await axiosClient.get(PATH_API.trending)).data.data.list;
   const response = {
     message: "Get home successfully!",
     data: {
+      page: currentPage,
+      searchKeyWord,
       trendings,
-      sections,
+      homeSections,
     },
   };
   responseSuccess(res, response);

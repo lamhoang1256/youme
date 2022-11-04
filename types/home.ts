@@ -1,13 +1,11 @@
-export interface IBanners {
-  id: number;
-  imgUrl: string;
-  isNeedLogin: boolean;
-  jumpParam: string;
-  jumpType: string;
+export interface IHomeTrending {
+  cover: string;
+  domainType: number;
+  id: string;
   title: string;
 }
 
-export interface IPopular {
+export interface IHomePopular {
   category: number;
   contentType: string;
   id: number;
@@ -22,20 +20,26 @@ export interface IPopular {
 }
 
 export interface IHomeSection {
-  bannerProportion?: any;
+  bannerProportion?: number | null;
   blockGroupNum?: any;
   coverType?: any;
   homeSectionId: number;
   homeSectionName: string;
   homeSectionType: string;
-  recommendContentVOList: IPopular[];
+  recommendContentVOList: IHomePopular[];
   refId?: any;
   refRedirectUrl: string;
 }
 
 export interface ILeaderBoard {
+  id: string;
   cover: string;
   domainType: number;
-  id: string;
   title: string;
+}
+
+export interface IResponseHome {
+  page: number;
+  recommendItems: IHomeSection[];
+  searchKeyWord: string;
 }

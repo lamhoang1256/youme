@@ -7,14 +7,14 @@ import { IHomeSection, ILeaderBoard } from "types";
 
 interface HomePageProps {
   trendings: ILeaderBoard[];
-  sections: IHomeSection[];
+  homeSections: IHomeSection[];
 }
 
-const HomePage = ({ trendings, sections }: HomePageProps) => {
+const HomePage = ({ trendings, homeSections }: HomePageProps) => {
   return (
     <div className="container">
       <HomeTrending trendings={trendings} />
-      {sections.map((homeSection: any) => (
+      {homeSections.map((homeSection: any) => (
         <HomeSection key={homeSection.homeSectionId} homeSection={homeSection} />
       ))}
     </div>
@@ -22,12 +22,12 @@ const HomePage = ({ trendings, sections }: HomePageProps) => {
 };
 
 export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
-  const { trendings, sections } = (await axios.get(`${server}/api/home`, { params: query })).data
-    .data;
+  const { trendings, homeSections } = (await axios.get(`${server}/api/home`, { params: query }))
+    .data.data;
   return {
     props: {
       trendings,
-      sections,
+      homeSections,
     },
   };
 };

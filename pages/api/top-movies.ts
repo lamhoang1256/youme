@@ -1,7 +1,6 @@
 import { STATUS } from "constants/status";
 import type { NextApiRequest, NextApiResponse } from "next";
 import axiosClient from "services/axiosClient";
-import { ITopMovie } from "types";
 import catchAsync from "utils/catch-async";
 import { ApiError, responseError, responseSuccess } from "utils/response";
 

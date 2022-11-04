@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import type { AppProps } from "next/app";
 import { ToastContainer } from "react-toastify";
+import "../styles/reset.scss";
 import "../styles/globals.scss";
 import "react-toastify/dist/ReactToastify.css";
 import "swiper/css";
