@@ -5,6 +5,7 @@ import { resizeImage } from "constants/global";
 import { MovieTitle } from "modules/MovieTitle";
 import { ILeaderBoard } from "types";
 import styles from "./homeTrending.module.scss";
+import { PATH } from "constants/path";
 
 interface HomeTrendingProps {
   trendings: ILeaderBoard[];
@@ -12,8 +13,8 @@ interface HomeTrendingProps {
 
 const HomeTrending = ({ trendings }: HomeTrendingProps) => {
   return (
-    <div className={styles.homeTrending}>
-      <h3 className={styles.homeTrendingHeading}>Top Trending</h3>
+    <div className={styles.section}>
+      <h3 className={styles.heading}>Top Trending</h3>
       <Swiper
         loop
         slidesPerView="auto"
@@ -24,17 +25,17 @@ const HomeTrending = ({ trendings }: HomeTrendingProps) => {
       >
         {trendings.map((trending) => {
           const { id, domainType, cover, title } = trending;
-          const href = `/detail/${id}?cate=${domainType}`;
+          const href = `${PATH.detail}/${domainType}/${id}`;
           if (Number.isNaN(id) || Number.isNaN(domainType)) return null;
           return (
-            <SwiperSlide className={styles.homeTrendingItem} key={id}>
-              <div className={styles.homeTrendingItem}>
+            <SwiperSlide className={styles.item} key={id}>
+              <div className={styles.item}>
                 <Image
                   alt={title}
                   width={270}
                   height={152}
                   src={resizeImage(cover, 270, 152)}
-                  className={styles.homeTrendingThumbnail}
+                  className={styles.thumbnail}
                 />
                 <MovieTitle href={href}>{title}</MovieTitle>
               </div>

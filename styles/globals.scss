@@ -3,8 +3,6 @@ html {
   font-size: 62.5%;
 }
 :root {
-  --white: #fff;
-  --black: #000;
   --primary-color: #8a3cff;
   --dark-color: #1b1b1b;
   --gray-color: #c4c1ea;
@@ -35,12 +33,6 @@ body {
   @media screen and (max-width: 767.98px) {
     padding: 0 15px;
   }
-}
-.slick-slider {
-  height: 100%;
-}
-.lazy-load-image-background {
-  display: block !important;
 }
 .layout {
   display: flex;

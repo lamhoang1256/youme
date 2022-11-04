@@ -2,17 +2,14 @@ import axios from "axios";
 import { server } from "configs/server";
 import { MovieDetails } from "modules/MovieDetails";
 import { MovieSuggest } from "modules/MovieSuggest";
-import { GetServerSidePropsContext } from "next";
+import { GetStaticPaths, GetStaticPropsContext } from "next";
 import { IMovieDetails } from "types";
-
-// http://localhost:3000/api/movie?category=0&id=10377
 
 interface MovieDetailsPageProps {
   data: IMovieDetails;
 }
 
 const MovieDetailsPage = ({ data }: MovieDetailsPageProps) => {
-  console.log("data: ", data);
   return (
     <div className="container">
       <div className="layout">
@@ -26,15 +23,32 @@ const MovieDetailsPage = ({ data }: MovieDetailsPageProps) => {
     </div>
   );
 };
-export async function getServerSideProps({ query }: GetServerSidePropsContext) {
+
+export const getStaticPaths: GetStaticPaths = () => {
+  return {
+    paths: [],
+    fallback: "blocking",
+  };
+};
+
+export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
+  const id = params?.id as string;
+  const category = params?.category as string;
   try {
-    const { data } = (await axios.get(`${server}/api/movie`, { params: query })).data;
+    const { data } = await axios.get(`${server}/api/movie`, {
+      params: { id, category },
+    });
     return {
-      props: { data },
+      props: { data: data.data },
+      revalidate: 300,
     };
   } catch (error) {
-    console.log("error: ", error);
+    return {
+      props: {},
+      revalidate: 60,
+      notFound: true,
+    };
   }
-}
+};
 
 export default MovieDetailsPage;

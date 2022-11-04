@@ -1,7 +1,6 @@
 import { MovieCard } from "modules/MovieCard";
 import { MovieList } from "modules/MovieList";
 import { IHomeSection } from "types/home";
-import styles from "./homeSection.module.scss";
 
 interface HomeListProps {
   homeSection: IHomeSection;

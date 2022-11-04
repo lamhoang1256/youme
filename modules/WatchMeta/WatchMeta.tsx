@@ -16,7 +16,7 @@ const WatchMeta = ({ episodeCount, currentEpisode, score, areaList, year }: Watc
   return (
     <div className={styles.meta}>
       <li>
-        <IconStar fill="#fff" width={16} height={16} />
+        <IconStar fill="#e8b647" width={16} height={16} />
         {score}
       </li>
       <li className={styles.areas}>
