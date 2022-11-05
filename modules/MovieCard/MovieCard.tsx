@@ -7,7 +7,7 @@ import { IMovieCard } from "types/components";
 import styles from "./movieCard.module.scss";
 
 const MovieCard = ({ id, domainType, title, coverVerticalUrl }: IMovieCard) => {
-  const href = `${PATH.watch}/${domainType}/${id}`;
+  const href = `${PATH.detail}/${domainType}/${id}`;
   return (
     <div className={styles.movieCard}>
       <CustomLink href={href} className={styles.movieCardMedia}>

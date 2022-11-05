@@ -1,7 +1,9 @@
 import axios from "axios";
 import { server } from "configs/server";
+import { LayoutHome } from "layouts/LayoutHome";
+import { MovieCard } from "modules/MovieCard";
 import { MovieDetails } from "modules/MovieDetails";
-import { MovieSuggest } from "modules/MovieSuggest";
+import { MovieList } from "modules/MovieList";
 import { GetStaticPaths, GetStaticPropsContext } from "next";
 import { IMovieDetails } from "types";
 
@@ -10,17 +12,24 @@ interface MovieDetailsPageProps {
 }
 
 const MovieDetailsPage = ({ data }: MovieDetailsPageProps) => {
+  console.log("data: ", data);
   return (
-    <div className="container">
-      <div className="layout">
-        <div className="main">
-          <MovieDetails details={data} />
-        </div>
-        <div className="sidebar">
-          <MovieSuggest listSuggest={data.likeList} />
-        </div>
+    <LayoutHome>
+      <div className="container">
+        <MovieDetails details={data} />
+        <MovieList heading="You may like">
+          {data.likeList.map((movie) => (
+            <MovieCard
+              key={movie.id}
+              id={movie.id}
+              title={movie.name}
+              coverVerticalUrl={movie.coverVerticalUrl}
+              domainType={movie.category}
+            />
+          ))}
+        </MovieList>
       </div>
-    </div>
+    </LayoutHome>
   );
 };
 

@@ -1,4 +1,8 @@
 import { IconStar } from "components/icons";
+import { CustomLink } from "components/link";
+import { PATH } from "constants/path";
+import { Cast } from "modules/Cast";
+import { CastList } from "modules/CastList";
 import Image from "next/image";
 import Link from "next/link";
 import { IMovieDetails } from "types";
@@ -26,18 +30,25 @@ const MovieDetails = ({ details }: MovieDetailsProps) => {
           <div className={styles.categories}>
             <h4>Categories: </h4>
             {details.tagList.map((category) => (
-              <Link href={`/category/${category.id}`} key={category.id}>
-                <a className={styles.category}>{category.name}</a>
-              </Link>
+              <CustomLink
+                href={`/category/${category.id}`}
+                key={category.id}
+                className={styles.category}
+              >
+                {category.name}
+              </CustomLink>
             ))}
           </div>
           <div>
-            <button type="button" className={styles.watchNow}>
-              Watch Now
-            </button>
+            <CustomLink href={`${PATH.watch}/${details.category}/${details.id}`}>
+              <button type="button" className={styles.watchNow}>
+                Watch Now
+              </button>
+            </CustomLink>
           </div>
         </div>
       </div>
+      {details.starList.length > 0 && <CastList starList={details.starList} />}
       <div className={styles.description}>{details.introduction}</div>
       <div className={styles.thumbnail}>
         <Image height={400} width={750} alt={details.name} src={details.coverHorizontalUrl} />

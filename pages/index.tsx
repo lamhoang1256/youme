@@ -1,5 +1,6 @@
 import axios from "axios";
 import { server } from "configs/server";
+import { LayoutHome } from "layouts/LayoutHome";
 import { HomeSection } from "modules/HomeSection";
 import { HomeTrending } from "modules/HomeTrending";
 import { GetServerSidePropsContext } from "next";
@@ -12,12 +13,14 @@ interface HomePageProps {
 
 const HomePage = ({ trendings, homeSections }: HomePageProps) => {
   return (
-    <div className="container">
-      <HomeTrending trendings={trendings} />
-      {homeSections.map((homeSection: any) => (
-        <HomeSection key={homeSection.homeSectionId} homeSection={homeSection} />
-      ))}
-    </div>
+    <LayoutHome>
+      <div className="container">
+        <HomeTrending trendings={trendings} />
+        {homeSections.map((homeSection: any) => (
+          <HomeSection key={homeSection.homeSectionId} homeSection={homeSection} />
+        ))}
+      </div>
+    </LayoutHome>
   );
 };
 

@@ -14,7 +14,7 @@ interface WatchMetaProps {
 
 const WatchMeta = ({ episodeCount, currentEpisode, score, areaList, year }: WatchMetaProps) => {
   return (
-    <div className={styles.meta}>
+    <ul className={styles.meta}>
       <li>
         <IconStar fill="#e8b647" width={16} height={16} />
         {score}
@@ -30,7 +30,7 @@ const WatchMeta = ({ episodeCount, currentEpisode, score, areaList, year }: Watc
         </li>
       )}
       <li>{year}</li>
-    </div>
+    </ul>
   );
 };
 

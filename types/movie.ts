@@ -39,6 +39,14 @@ export interface IEpisodeVo {
   }[];
 }
 
+export interface ICast {
+  image: string;
+  localName: string;
+  role: string;
+  roleName: string;
+  starId: number;
+}
+
 export interface IMovieDetails {
   aliasName: string;
   areaNameList: string[];
@@ -103,7 +111,7 @@ export interface IMovieDetails {
   reserved: boolean;
   score: number;
   showSetName: boolean;
-  starList: [];
+  starList: ICast[];
   tagList: { id: number; name: string }[];
   length: number;
   tagNameList: string[];

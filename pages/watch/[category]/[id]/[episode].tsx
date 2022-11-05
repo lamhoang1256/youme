@@ -11,6 +11,7 @@ import { WatchMeta } from "modules/WatchMeta";
 import { WatchSummary } from "modules/WatchSummary";
 import { IEpisode } from "types";
 import styles from "styles/watch.module.scss";
+import { LayoutHome } from "layouts/LayoutHome";
 
 interface WatchPageProps {
   data: IEpisode;
@@ -19,37 +20,43 @@ interface WatchPageProps {
 const WatchPage = ({ data }: WatchPageProps) => {
   const playerRef = useRef<HTMLVideoElement>(null);
   return (
-    <div className="container">
-      <div className={styles.box}>
-        <div className={styles.box1}>
-          <MediaPlayer playerRef={playerRef} qualities={data.sources} subtitles={data.subtitles} />
-          <h1 className={styles.heading}>{data.name}</h1>
-          <WatchMeta
-            areaList={data.areaList}
-            currentEpisode={data.episodeVo.length}
-            episodeCount={data.episodeCount}
-            year={data.year}
-            score={data.score}
-          />
-          <WatchCategory categories={data.tagList} />
-          <WatchSummary introduction={data.introduction} />
+    <LayoutHome>
+      <div className="container">
+        <div className={styles.box}>
+          <div className={styles.box1}>
+            <MediaPlayer
+              playerRef={playerRef}
+              qualities={data.sources}
+              subtitles={data.subtitles}
+            />
+            <h1 className={styles.heading}>{data.name}</h1>
+            <WatchMeta
+              areaList={data.areaList}
+              currentEpisode={data.episodeVo.length}
+              episodeCount={data.episodeCount}
+              year={data.year}
+              score={data.score}
+            />
+            <WatchCategory categories={data.tagList} />
+            <WatchSummary introduction={data.introduction} />
+          </div>
+          <div className={styles.box2}>
+            <WatchAnthology detailMovie={data} />
+          </div>
         </div>
-        <div className={styles.box2}>
-          <WatchAnthology detailMovie={data} />
-        </div>
+        <MovieList heading="You may like">
+          {data.likeList.map((movie) => (
+            <MovieCard
+              id={movie.id}
+              key={movie.id}
+              title={movie.name}
+              coverVerticalUrl={movie.coverVerticalUrl}
+              domainType={movie.category}
+            />
+          ))}
+        </MovieList>
       </div>
-      <MovieList heading="You may like">
-        {data.likeList.map((movie) => (
-          <MovieCard
-            key={movie.id}
-            id={movie.id}
-            title={movie.name}
-            coverVerticalUrl={movie.coverVerticalUrl}
-            domainType={movie.category}
-          />
-        ))}
-      </MovieList>
-    </div>
+    </LayoutHome>
   );
 };
 
