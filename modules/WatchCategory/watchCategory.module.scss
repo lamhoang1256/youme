@@ -1,0 +1,18 @@
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 20px;
+  margin: 14px 0;
+}
+.category {
+  height: 31px;
+  line-height: 31px;
+  padding: 0 12px;
+  background-color: #434b5a;
+  color: white;
+  border-radius: 14px;
+  transition: all 0.25s linear;
+}
+.category:hover {
+  background-color: var(--primary-color);
+}

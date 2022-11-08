@@ -1,0 +1,19 @@
+.heading {
+  margin-top: 14px;
+  font-size: 2.3rem;
+}
+.box {
+  display: flex;
+  gap: 20px;
+  padding-top: 30px;
+  @media screen and (max-width: 1023.98px) {
+    flex-direction: column;
+  }
+}
+.box1 {
+  width: 100%;
+  max-width: 860px;
+}
+.box2 {
+  flex: 1;
+}

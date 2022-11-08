@@ -1,0 +1,35 @@
+.movieCard {
+  max-width: 190px;
+  transition: all 0.25s linear;
+  &:hover .movieCardPoster {
+    filter: brightness(0.4);
+  }
+  &:hover .movieCardPlay {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+.movieCardMedia {
+  position: relative;
+  background-color: var(--bg-load-image);
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  transition: all 0.25s linear;
+  object-fit: cover;
+}
+.movieCardPoster {
+  height: 100%;
+}
+.movieCardPlay {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  transition: all 0.25s linear;
+}
